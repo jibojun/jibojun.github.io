@@ -102,20 +102,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Bojun Ji&#39;s notes">
-<meta property="og:url" content="http://yoursite.com/archives/2017/12/index.html">
+  <meta name="description" content="List接口，被AbstractList抽象类实现，ArrayList类似于数组，继承AbstractList且实现了List接口。 public class ArrayList extends AbstractList        implements List, RandomAccess, Cloneable, java.io.Serializable 它是一个会自动扩容的数组结构，默认大小">
+<meta name="keywords" content="List">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ArrayList实现原理以及与Vector区别">
+<meta property="og:url" content="http://yoursite.com/2018/02/06/ArrayList实现原理以及与Vector区别/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
+<meta property="og:description" content="List接口，被AbstractList抽象类实现，ArrayList类似于数组，继承AbstractList且实现了List接口。 public class ArrayList extends AbstractList        implements List, RandomAccess, Cloneable, java.io.Serializable 它是一个会自动扩容的数组结构，默认大小">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-05-05T18:47:53.001Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bojun Ji&#39;s notes">
+<meta name="twitter:title" content="ArrayList实现原理以及与Vector区别">
+<meta name="twitter:description" content="List接口，被AbstractList抽象类实现，ArrayList类似于数组，继承AbstractList且实现了List接口。 public class ArrayList extends AbstractList        implements List, RandomAccess, Cloneable, java.io.Serializable 它是一个会自动扩容的数组结构，默认大小">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2017/12/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/02/06/ArrayList实现原理以及与Vector区别/"/>
 
 
 
@@ -125,7 +130,7 @@
   };
 </script>
 
-  <title>Archive | Bojun Ji's notes</title>
+  <title>ArrayList实现原理以及与Vector区别 | Bojun Ji's notes</title>
   
 
 
@@ -172,7 +177,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -220,7 +225,7 @@
         
         
           
-          <li class="menu-item menu-item-archives menu-item-active">
+          <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
   </li>
@@ -253,134 +258,280 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      
-      <span class="archive-page-counter">
-        
-        
-        
-          
-        
-        Um..! 9 posts in total. Keep on posting.
-      </span>
-      
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2017">2017</h1>
-          </div>
-        
-        
-
-        
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/06/ArrayList实现原理以及与Vector区别/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bojun Ji's notes">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2017/12/26/StringBuilder和StringBuffer对比/" itemprop="url">
-              
-                <span itemprop="name">StringBuilder和StringBuffer对比</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">ArrayList实现原理以及与Vector区别
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-26T23:47:44+08:00"
-              content="2017-12-26" >
-          12-26
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
 
-    </header>
-  </article>
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
 
+              
+                
+              
+
+              <time title="Created: 2018-02-06 01:49:31" itemprop="dateCreated datePublished" datetime="2018-02-06T01:49:31+08:00">2018-02-06</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-05-06 02:47:53" itemprop="dateModified" datetime="2018-05-06T02:47:53+08:00">2018-05-06</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java集合类/" itemprop="url" rel="index"><span itemprop="name">Java集合类</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/12/24/Hashmap存储结构实现原理(JDK1.7及以前)/" itemprop="url">
-              
-                <span itemprop="name">Hashmap存储结构实现原理（JDK1.7及以前）</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-24T23:47:44+08:00"
-              content="2017-12-24" >
-          12-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
+      
+        <p>List接口，被AbstractList抽象类实现，ArrayList类似于数组，继承AbstractList且实现了List接口。</p>
+<p>public class ArrayList<e> extends AbstractList<e><br>        implements List<e>, RandomAccess, Cloneable, java.io.Serializable</e></e></e></p>
+<p>它是一个会自动扩容的数组结构，默认大小10。特点是能根据下标快速获取元素，和LinkedList比根据下标查询更改元素更方便，同时靠add方法在数组末尾插入元素也快，但是按下标插入删除元素需要前后移动则代价较大。</p>
+<pre><code>   /**
+     * Default initial capacity.
+     */ 
+private static final int DEFAULT_CAPACITY = 10;
+
+/**
+     * The array buffer into which the elements of the ArrayList are stored.
+     * The capacity of the ArrayList is the length of this array buffer. Any
+     * empty ArrayList with elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA
+     * will be expanded to DEFAULT_CAPACITY when the first element is added.
+     */  
+transient Object[] elementData; // non-private to simplify nested class access    
+</code></pre><p>和HashMap不同，并没有为了缓解哈希冲突的负载因子，只是在数组大小不够用时进行扩容。扩容逻辑是新建1.5大小的数组，然后将元素移动至新数组。</p>
+<p>ArrayList和Vector主要区别在于ArrayList的add，remove等写方法并没有加锁，不是线程安全的，需要外部保证。<br>同时，vector的扩容逻辑会扩展为2倍大小，ArrayList只会扩容1.5倍，具有节约空间的优势。</p>
+<pre><code>private void ensureExplicitCapacity(int minCapacity) {
+        modCount++;
+    // overflow-conscious code
+    if (minCapacity - elementData.length &gt; 0)
+        grow(minCapacity);
+}
+
+/**
+     * Increases the capacity to ensure that it can hold at least the
+     * number of elements specified by the minimum capacity argument.
+     *
+     * @param minCapacity the desired minimum capacity
+     */
+
+private void grow(int minCapacity) {
+    // overflow-conscious code
+    int oldCapacity = elementData.length;
+
+    //扩展为1.5倍
+    int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);
+
+    //仍然不够用则直接扩展为当前需求大小
+    if (newCapacity - minCapacity &lt; 0)
+        newCapacity = minCapacity;
+    if (newCapacity - MAX_ARRAY_SIZE &gt; 0)
+        newCapacity = hugeCapacity(minCapacity);
+    // minCapacity is usually close to size, so this is a win:
+    elementData = Arrays.copyOf(elementData, newCapacity);
+}
+
+private static int hugeCapacity(int minCapacity) {
+    if (minCapacity &lt; 0) // overflow
+        throw new OutOfMemoryError();
+    return (minCapacity &gt; MAX_ARRAY_SIZE) ?
+        Integer.MAX_VALUE :
+        MAX_ARRAY_SIZE;
+}
+</code></pre><p>扩容最大大小为INT最大值-8。超出这个值在hugeCapacity方法中也会给到int最大值。</p>
+<pre><code>/**
+ * The maximum size of array to allocate.
+ * Some VMs reserve some header words in an array.
+ * Attempts to allocate larger arrays may result in
+ * OutOfMemoryError: Requested array size exceeds VM limit
+ */
+private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;    
+</code></pre>
+      
     </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/List/" rel="tag"># List</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/08/HashMap扩容原理/" rel="next" title="HashMap扩容原理">
+                <i class="fa fa-chevron-left"></i> HashMap扩容原理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/03/CAS操作和乐观锁思想/" rel="prev" title="CAS操作和乐观锁思想">
+                CAS操作和乐观锁思想 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -641,6 +792,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
 
   
 
