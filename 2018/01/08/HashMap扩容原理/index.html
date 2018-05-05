@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.2.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.2.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="HashMap底层使用一个数组存储元素。根据key的hashcode确定数组中位置，1.7及以前用拉链法形成单链表解决单链表，1.8中在冲突严重（多个元素hashcode相同）时会用红黑树增加性能。 根据默认无参构造方法，数组大小为16。负载因子为0.75。 /** Constructs an empty HashMap with the default initial capacity (16">
+<meta name="keywords" content="Map">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HashMap扩容原理">
+<meta property="og:url" content="http://yoursite.com/2018/01/08/HashMap扩容原理/index.html">
+<meta property="og:site_name" content="Bojun Ji&#39;s notes">
+<meta property="og:description" content="HashMap底层使用一个数组存储元素。根据key的hashcode确定数组中位置，1.7及以前用拉链法形成单链表解决单链表，1.8中在冲突严重（多个元素hashcode相同）时会用红黑树增加性能。 根据默认无参构造方法，数组大小为16。负载因子为0.75。 /** Constructs an empty HashMap with the default initial capacity (16">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-05-03T13:50:54.380Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HashMap扩容原理">
+<meta name="twitter:description" content="HashMap底层使用一个数组存储元素。根据key的hashcode确定数组中位置，1.7及以前用拉链法形成单链表解决单链表，1.8中在冲突严重（多个元素hashcode相同）时会用红黑树增加性能。 根据默认无参构造方法，数组大小为16。负载因子为0.75。 /** Constructs an empty HashMap with the default initial capacity (16">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/08/HashMap扩容原理/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>HashMap扩容原理 | Bojun Ji's notes</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Bojun Ji's notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">仅做个人笔记用途！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/08/HashMap扩容原理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bojun Ji's notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">HashMap扩容原理
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-01-08 21:26:58" itemprop="dateCreated datePublished" datetime="2018-01-08T21:26:58+08:00">2018-01-08</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-05-03 21:50:54" itemprop="dateModified" datetime="2018-05-03T21:50:54+08:00">2018-05-03</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java集合类/" itemprop="url" rel="index"><span itemprop="name">Java集合类</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ol>
+<li>HashMap底层使用一个数组存储元素。根据key的hashcode确定数组中位置，1.7及以前用拉链法形成单链表解决单链表，1.8中在冲突严重（多个元素hashcode相同）时会用红黑树增加性能。</li>
+<li>根据默认无参构造方法，数组大小为16。负载因子为0.75。<br> /**<ul>
+<li>Constructs an empty <tt>HashMap</tt> with the default initial capacity</li>
+<li>(16) and the default load factor (0.75).<br>*/<br>public HashMap() {<br> this.loadFactor = DEFAULT_LOAD_FACTOR; // all other fields defaulted<br>}</li>
+</ul>
+</li>
+<li><p>另外有2个重载的构造方法可以指定初始大小或者同时指定初始大小和负载因子。还有一个构造方法可以直接传入一张现有MAP构造一个一样的对象。<br> /**</p>
+<ul>
+<li>Constructs an empty <tt>HashMap</tt> with the specified initial</li>
+<li>capacity and load factor.<br>*</li>
+<li>@param  initialCapacity the initial capacity</li>
+<li>@param  loadFactor      the load factor</li>
+<li>@throws IllegalArgumentException if the initial capacity is negative</li>
+<li><p>or the load factor is nonpositive<br>*/<br>public HashMap(int initialCapacity, float loadFactor) {<br>if (initialCapacity &lt; 0)<br>throw new IllegalArgumentException(“Illegal initial capacity: “ +</p>
+<pre><code>initialCapacity);
+</code></pre><p>if (initialCapacity &gt; MAXIMUM_CAPACITY)<br>initialCapacity = MAXIMUM_CAPACITY;<br>if (loadFactor &lt;= 0 || Float.isNaN(loadFactor))<br>throw new IllegalArgumentException(“Illegal load factor: “ +</p>
+<pre><code>loadFactor);
+</code></pre><p>this.loadFactor = loadFactor;<br>this.threshold = tableSizeFor(initialCapacity);<br>}</p>
+<p>/**</p>
+</li>
+<li>Constructs an empty <tt>HashMap</tt> with the specified initial</li>
+<li>capacity and the default load factor (0.75).<br>*</li>
+<li>@param  initialCapacity the initial capacity.</li>
+<li><p>@throws IllegalArgumentException if the initial capacity is negative.<br>*/<br>public HashMap(int initialCapacity) {<br> this(initialCapacity, DEFAULT_LOAD_FACTOR);<br>}</p>
+<p>/**</p>
+</li>
+<li>Constructs a new <tt>HashMap</tt> with the same mappings as the</li>
+<li>specified <tt>Map</tt>.  The <tt>HashMap</tt> is created with</li>
+<li>default load factor (0.75) and an initial capacity sufficient to</li>
+<li>hold the mappings in the specified <tt>Map</tt>.<br>*</li>
+<li>@param   m the map whose mappings are to be placed in this map</li>
+<li>@throws  NullPointerException if the specified map is null<br>*/<br>public HashMap(Map&lt;? extends K, ? extends V&gt; m) {<br> this.loadFactor = DEFAULT_LOAD_FACTOR;<br> putMapEntries(m, false);<br>}</li>
+</ul>
+</li>
+<li><p>数组大小不够存放元素时，会调用resize()方法进行扩容。即生成更大的数组取代原数组。扩容时机为元素个数达到数组长度<em>负载因子（阈值）时。<br> 以默认值举例，16</em>0.75=12，表示第13个元素时，hashmap就会扩容为32个。目的是减少hash冲突，如果到第16个元素再扩容，就可能有的桶<br> 内不止一个元素（哈希冲突，形成单链表或者红黑树），用小于1的负载因子可以减少哈希冲突几率。</p>
+<p> final V putVal(int hash, K key, V value, boolean onlyIfAbsent,  </p>
+<pre><code>       boolean evict) {  
+Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;  
+if ((tab = table) == null || (n = tab.length) == 0)  
+    n = (tab = resize()).length;  
+if ((p = tab[i = (n - 1) &amp; hash]) == null)  
+    tab[i] = newNode(hash, key, value, null);  
+else {  
+    ...  
+}  
+++modCount;  
+if (++size &gt; threshold)  
+    resize();  
+afterNodeInsertion(evict);  
+return null;  
+</code></pre><p> }  </p>
+</li>
+<li><p>resize()方法会生成一个2倍大小新数组，用transfer()放入原数组元素，并且计算新的位置，较为消耗性能。</p>
+</li>
+</ol>
+<pre><code>/**
+ * Initializes or doubles table size.  If null, allocates in
+ * accord with initial capacity target held in field threshold.
+ * Otherwise, because we are using power-of-two expansion, the
+ * elements from each bin must either stay at same index, or move
+ * with a power of two offset in the new table.
+ *
+ * @return the table
+ */
+final Node&lt;K,V&gt;[] resize() {  
+    Node&lt;K,V&gt;[] oldTab = table;  
+    int oldCap = (oldTab == null) ? 0 : oldTab.length;  
+    int oldThr = threshold;  
+    int newCap, newThr = 0;  
+    if (oldCap &gt; 0) {  
+        if (oldCap &gt;= MAXIMUM_CAPACITY) {  
+            threshold = Integer.MAX_VALUE;  
+            return oldTab;  
+        }  
+        else if ((newCap = oldCap &lt;&lt; 1) &lt; MAXIMUM_CAPACITY &amp;&amp;  
+                 oldCap &gt;= DEFAULT_INITIAL_CAPACITY)  
+            newThr = oldThr &lt;&lt; 1; // double threshold  
+    }  
+    else if (oldThr &gt; 0) // initial capacity was placed in threshold  
+        newCap = oldThr;  
+    else {               // zero initial threshold signifies using defaults  
+        newCap = DEFAULT_INITIAL_CAPACITY;  
+        newThr = (int)(DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);  
+    }  
+    if (newThr == 0) {  
+        float ft = (float)newCap * loadFactor;  
+        newThr = (newCap &lt; MAXIMUM_CAPACITY &amp;&amp; ft &lt; (float)MAXIMUM_CAPACITY ?  
+                  (int)ft : Integer.MAX_VALUE);  
+    }  
+    threshold = newThr;  
+    @SuppressWarnings({&quot;rawtypes&quot;,&quot;unchecked&quot;})  
+        Node&lt;K,V&gt;[] newTab = (Node&lt;K,V&gt;[])new Node[newCap];  
+    table = newTab;  
+    if (oldTab != null) {  
+        for (int j = 0; j &lt; oldCap; ++j) {  
+            Node&lt;K,V&gt; e;  
+            if ((e = oldTab[j]) != null) {  
+                oldTab[j] = null;  
+                if (e.next == null)  
+                    newTab[e.hash &amp; (newCap - 1)] = e;  
+                else if (e instanceof TreeNode)  
+                    ((TreeNode&lt;K,V&gt;)e).split(this, newTab, j, oldCap);  
+                else { // preserve order  
+                    Node&lt;K,V&gt; loHead = null, loTail = null;  
+                    Node&lt;K,V&gt; hiHead = null, hiTail = null;  
+                    Node&lt;K,V&gt; next;  
+                    do {  
+                        next = e.next;  
+
+                        //判断hash值第n+1位是否为0
+                        if ((e.hash &amp; oldCap) == 0) {  
+                            if (loTail == null)  
+                                loHead = e;  
+                            else  
+                                loTail.next = e;  
+                            loTail = e;  
+                        }  
+                        else {  
+                            if (hiTail == null)  
+                                hiHead = e;  
+                            else  
+                                hiTail.next = e;  
+                            hiTail = e;  
+                        }  
+                    } while ((e = next) != null);  
+                    if (loTail != null) {  
+                        loTail.next = null;  
+                        newTab[j] = loHead;  
+                    }  
+                    if (hiTail != null) {  
+                        hiTail.next = null;  
+                        newTab[j + oldCap] = hiHead;  
+                    }  
+                }  
+            }  
+        }  
+    }  
+    return newTab;  
+}  
+</code></pre>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Map/" rel="tag"># Map</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/02/volatile关键字语义（JDK1-5及以后）/" rel="next" title="volatile关键字（JDK1.5及以后）">
+                <i class="fa fa-chevron-left"></i> volatile关键字（JDK1.5及以后）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/03/CAS操作和乐观锁思想/" rel="prev" title="CAS操作和乐观锁思想">
+                CAS操作和乐观锁思想 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.2.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="Total Visitors">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="Total Views">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.2.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.2.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.2.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
