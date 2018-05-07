@@ -102,20 +102,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Bojun Ji&#39;s notes">
-<meta property="og:url" content="http://yoursite.com/tags/List/index.html">
+  <meta name="description" content="Redis作为分布式缓存，或者KV数据库。与MemCached比有几个明显区别： 1.MC VALUE只有一种数据类型String, Redis有5种：String, List, Hash, Set, ZSet2.MC String容量最大1M，Redis最大1G。3.MC没有持久化方式，Redis有2种持久化方式（1.RDB，子进程异步按照时间间隔写入临时文件，成功后替换，半持久化。2.AOF，">
+<meta name="keywords" content="Redis,分布式缓存">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis五种数据类型">
+<meta property="og:url" content="http://yoursite.com/2018/05/02/redis五种数据类型/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
+<meta property="og:description" content="Redis作为分布式缓存，或者KV数据库。与MemCached比有几个明显区别： 1.MC VALUE只有一种数据类型String, Redis有5种：String, List, Hash, Set, ZSet2.MC String容量最大1M，Redis最大1G。3.MC没有持久化方式，Redis有2种持久化方式（1.RDB，子进程异步按照时间间隔写入临时文件，成功后替换，半持久化。2.AOF，">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-05-07T16:58:26.834Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bojun Ji&#39;s notes">
+<meta name="twitter:title" content="redis五种数据类型">
+<meta name="twitter:description" content="Redis作为分布式缓存，或者KV数据库。与MemCached比有几个明显区别： 1.MC VALUE只有一种数据类型String, Redis有5种：String, List, Hash, Set, ZSet2.MC String容量最大1M，Redis最大1G。3.MC没有持久化方式，Redis有2种持久化方式（1.RDB，子进程异步按照时间间隔写入临时文件，成功后替换，半持久化。2.AOF，">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/List/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/02/redis五种数据类型/"/>
 
 
 
@@ -125,7 +130,7 @@
   };
 </script>
 
-  <title>Tag: List | Bojun Ji's notes</title>
+  <title>redis五种数据类型 | Bojun Ji's notes</title>
   
 
 
@@ -172,7 +177,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -253,75 +258,220 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>List<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/02/redis五种数据类型/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bojun Ji's notes">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/02/06/ArrayList实现原理以及与Vector区别/" itemprop="url">
-              
-                <span itemprop="name">ArrayList实现原理以及与Vector区别</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">redis五种数据类型
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-02-06T01:49:31+08:00"
-              content="2018-02-06" >
-          02-06
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
 
-    </header>
-  </article>
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-05-02 00:24:17" itemprop="dateCreated datePublished" datetime="2018-05-02T00:24:17+08:00">2018-05-02</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-05-08 00:58:26" itemprop="dateModified" datetime="2018-05-08T00:58:26+08:00">2018-05-08</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Redis作为分布式缓存，或者KV数据库。与MemCached比有几个明显区别：</p>
+<p>1.MC VALUE只有一种数据类型String, Redis有5种：String, List, Hash, Set, ZSet<br>2.MC String容量最大1M，Redis最大1G。<br>3.MC没有持久化方式，Redis有2种持久化方式（1.RDB，子进程异步按照时间间隔写入临时文件，成功后替换，半持久化。2.AOF，每一次写操作或者每一秒都同步都写入AOF文件，全持久化）</p>
+<p>Redis五种数据类型：</p>
+<p>String:字符串，也可以是数字，最大1G。<br>List:列表（内部是双向链表），可在某些多值场景下使用，例如省份，城市，用户关注列表等。也可用来实现简单的生产消费队列。<br>Set:不能有重复元素，和List比在不重复需求下选用。内部实现和JAVA HASHSET类似，把Set的Value当做key存到HashMap里。<br>ZSet:Set加强版，不能重复且排序。加入元素按分数排序且插入有序。<br>Hash:哈希表。适用场景：用户信息缓存，用户ID作为KEY，用户信息有多条，每条的名称例如生日，电话作为哈希表的KEY，它的值作为VALUE。这样是一种一对多关系，一个用户对应多种信息。用Hash存有效避免了数据冗余或者序列化反序列化的麻烦</p>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Redis/" rel="tag"># Redis</a>
+          
+            <a href="/tags/分布式缓存/" rel="tag"># 分布式缓存</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/18/GuavaCache和ehcache的简单对比/" rel="next" title="GuavaCache和ehcache的简单对比">
+                <i class="fa fa-chevron-left"></i> GuavaCache和ehcache的简单对比
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -594,6 +744,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
 
   
 

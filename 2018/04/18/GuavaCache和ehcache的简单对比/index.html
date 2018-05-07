@@ -102,20 +102,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Bojun Ji&#39;s notes">
-<meta property="og:url" content="http://yoursite.com/tags/List/index.html">
+  <meta name="description" content="Spring cache可以选用多种缓存解决方案，EhCache和Guava cache都是其中选择。 EhCache支持本地硬盘持久化，两级缓存（JVM+磁盘）无容量问题，Guava cache没有持久化数据功能 EhCache可以通过配置网络协议例如RMI进行同一APP集群不同机器之间数据同步（例如RMI，举例：3台APP SERVER集群负载均衡，其中一台SERVER中缓存改动，则会同步更">
+<meta name="keywords" content="Guava,本地缓存">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GuavaCache和ehcache的简单对比">
+<meta property="og:url" content="http://yoursite.com/2018/04/18/GuavaCache和ehcache的简单对比/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
+<meta property="og:description" content="Spring cache可以选用多种缓存解决方案，EhCache和Guava cache都是其中选择。 EhCache支持本地硬盘持久化，两级缓存（JVM+磁盘）无容量问题，Guava cache没有持久化数据功能 EhCache可以通过配置网络协议例如RMI进行同一APP集群不同机器之间数据同步（例如RMI，举例：3台APP SERVER集群负载均衡，其中一台SERVER中缓存改动，则会同步更">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-05-07T16:58:40.962Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bojun Ji&#39;s notes">
+<meta name="twitter:title" content="GuavaCache和ehcache的简单对比">
+<meta name="twitter:description" content="Spring cache可以选用多种缓存解决方案，EhCache和Guava cache都是其中选择。 EhCache支持本地硬盘持久化，两级缓存（JVM+磁盘）无容量问题，Guava cache没有持久化数据功能 EhCache可以通过配置网络协议例如RMI进行同一APP集群不同机器之间数据同步（例如RMI，举例：3台APP SERVER集群负载均衡，其中一台SERVER中缓存改动，则会同步更">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/List/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/18/GuavaCache和ehcache的简单对比/"/>
 
 
 
@@ -125,7 +130,7 @@
   };
 </script>
 
-  <title>Tag: List | Bojun Ji's notes</title>
+  <title>GuavaCache和ehcache的简单对比 | Bojun Ji's notes</title>
   
 
 
@@ -172,7 +177,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -253,75 +258,227 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>List<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/18/GuavaCache和ehcache的简单对比/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bojun Ji's notes">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/02/06/ArrayList实现原理以及与Vector区别/" itemprop="url">
-              
-                <span itemprop="name">ArrayList实现原理以及与Vector区别</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">GuavaCache和ehcache的简单对比
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-02-06T01:49:31+08:00"
-              content="2018-02-06" >
-          02-06
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
 
-    </header>
-  </article>
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-04-18 00:24:43" itemprop="dateCreated datePublished" datetime="2018-04-18T00:24:43+08:00">2018-04-18</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-05-08 00:58:40" itemprop="dateModified" datetime="2018-05-08T00:58:40+08:00">2018-05-08</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Guava/" itemprop="url" rel="index"><span itemprop="name">Guava</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ol>
+<li>Spring cache可以选用多种缓存解决方案，EhCache和Guava cache都是其中选择。</li>
+<li>EhCache支持本地硬盘持久化，两级缓存（JVM+磁盘）无容量问题，Guava cache没有持久化数据功能</li>
+<li>EhCache可以通过配置网络协议例如RMI进行同一APP集群不同机器之间数据同步（例如RMI，举例：3台APP SERVER集群负载均衡，其中一台SERVER中缓存改动，则会同步更新到其他两台，带有一定网络消耗，但保证了分布式缓存的一致性）。Guava cache没有集群同步功能。</li>
+</ol>
+<p>EhCache适用场景：<br>    1.大容量需要保证持久性的数据。<br>    2.负载均衡集群环境下需要多机器同步来保证缓存一致性（如有两级缓存，第二级使用redis分布式缓存保证了强一致性，第一级JVM缓存在集群环境中有时也可以不做同步。）</p>
+<p>Guava cache场景：<br>    1.它不会启动新的线程，轻量级，适用于非大量需要持久化数据，可与分布式缓存一起使用作为第一级缓存，查询命中则返回，否则查询第二级分布式缓存再写入JVM缓存。</p>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Guava/" rel="tag"># Guava</a>
+          
+            <a href="/tags/本地缓存/" rel="tag"># 本地缓存</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/03/自旋锁以及不可重入时死锁问题/" rel="next" title="自旋锁以及不可重入时死锁问题">
+                <i class="fa fa-chevron-left"></i> 自旋锁以及不可重入时死锁问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/02/redis五种数据类型/" rel="prev" title="redis五种数据类型">
+                redis五种数据类型 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -594,6 +751,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
 
   
 
