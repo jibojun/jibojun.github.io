@@ -102,20 +102,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Bojun Ji&#39;s notes">
-<meta property="og:url" content="http://yoursite.com/tags/List/index.html">
+  <meta name="description" content="共同点：    1.两个注释在支持注解注入情况下，都可以用来装配BEAN，直接写在    成员变量上或者变量的SET方法上。效果都是一个bean类中，有成员是    别的类，通过这两个装载都可以靠SPRING IOC依赖注入，解耦。 支持注解注入（注册4个bean post processer）： &amp;lt;context:annotation-config/&amp;gt;   也可以配置扫描包路径，加入">
+<meta name="keywords" content="Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring @Autowired 和 @Resource对比">
+<meta property="og:url" content="http://yoursite.com/2018/03/09/Spring-Autowired-和-Resource对比/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
+<meta property="og:description" content="共同点：    1.两个注释在支持注解注入情况下，都可以用来装配BEAN，直接写在    成员变量上或者变量的SET方法上。效果都是一个bean类中，有成员是    别的类，通过这两个装载都可以靠SPRING IOC依赖注入，解耦。 支持注解注入（注册4个bean post processer）： &amp;lt;context:annotation-config/&amp;gt;   也可以配置扫描包路径，加入">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-05-09T16:18:51.871Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bojun Ji&#39;s notes">
+<meta name="twitter:title" content="Spring @Autowired 和 @Resource对比">
+<meta name="twitter:description" content="共同点：    1.两个注释在支持注解注入情况下，都可以用来装配BEAN，直接写在    成员变量上或者变量的SET方法上。效果都是一个bean类中，有成员是    别的类，通过这两个装载都可以靠SPRING IOC依赖注入，解耦。 支持注解注入（注册4个bean post processer）： &amp;lt;context:annotation-config/&amp;gt;   也可以配置扫描包路径，加入">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/List/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/09/Spring-Autowired-和-Resource对比/"/>
 
 
 
@@ -125,7 +130,7 @@
   };
 </script>
 
-  <title>Tag: List | Bojun Ji's notes</title>
+  <title>Spring @Autowired 和 @Resource对比 | Bojun Ji's notes</title>
   
 
 
@@ -172,7 +177,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -253,75 +258,235 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>List<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/09/Spring-Autowired-和-Resource对比/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bojun Ji's notes">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/02/06/ArrayList实现原理以及与Vector区别/" itemprop="url">
-              
-                <span itemprop="name">ArrayList实现原理以及与Vector区别</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Spring @Autowired 和 @Resource对比
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-02-06T01:49:31+08:00"
-              content="2018-02-06" >
-          02-06
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
 
-    </header>
-  </article>
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
 
+              
+                
+              
+
+              <time title="Created: 2018-03-09 23:55:29" itemprop="dateCreated datePublished" datetime="2018-03-09T23:55:29+08:00">2018-03-09</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-05-10 00:18:51" itemprop="dateModified" datetime="2018-05-10T00:18:51+08:00">2018-05-10</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>共同点：<br>    1.两个注释在支持注解注入情况下，都可以用来装配BEAN，直接写在    成员变量上或者变量的SET方法上。效果都是一个bean类中，有成员是<br>    别的类，通过这两个装载都可以靠SPRING IOC依赖注入，解耦。</p>
+<pre><code>支持注解注入（注册4个bean post processer）：
+&lt;context:annotation-config/&gt; 
+
+也可以配置扫描包路径，加入controller,service,dao层的包，也    达到了这个效果：
+&lt;context:component-scan base-package=”XX.XX”/&gt; 
+</code></pre><p>不同点：<br>    1.@Resource是JDK1.6支持的注释（javax.annotation）而    @Autowired是Spring支持的    注释<br>    2.@Resource默认是ByName装载，有name和type属性。不指定属性    时候，默认按照name在context里查询，找不到再按type查。指定    name属性就只按名称找，找到则抛出异常。如果指定type属性则按    type找，找不到或者    一下子找到多个这种类型的，则异常。<br>    @Autowired默认ByType装载，对象必须存在(不存在则    BeanCreationException)，required为false时候才能存在null    值。要ByName的话需要使用@Qualifier指定name。</p>
+<pre><code>例子：
+@Resource(name=&quot;service&quot;)    
+private IService service;
+
+@Resource(type=&quot;IService&quot;)    
+private IService service;
+
+@Autowired(required=false) 
+@Qualifier(&quot;service&quot;)    
+private IService service;
+</code></pre>
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Spring/" rel="tag"># Spring</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/09/打破双亲委托模型方法/" rel="next" title="打破双亲委托模型方法">
+                <i class="fa fa-chevron-left"></i> 打破双亲委托模型方法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/03/自旋锁以及不可重入时死锁问题/" rel="prev" title="自旋锁以及不可重入时死锁问题">
+                自旋锁以及不可重入时死锁问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -600,6 +765,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
 
   
 
