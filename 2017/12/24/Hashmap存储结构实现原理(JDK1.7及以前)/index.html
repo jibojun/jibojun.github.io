@@ -110,7 +110,7 @@
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
 <meta property="og:description" content="Map接口，被AbstractMap抽象类实现，HashMap继承自AbstratMap且实现Map接口。 public class HashMap&amp;lt;K,V&amp;gt; extends AbstractMap&amp;lt;K,V&amp;gt;    implements Map&amp;lt;K,V&amp;gt;, Cloneable, Serializable Map接口可见定义了一个Entry接口： /**  * A">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-03T14:01:52.731Z">
+<meta property="og:updated_time" content="2018-05-10T16:02:38.012Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hashmap存储结构实现原理（JDK1.7及以前）">
 <meta name="twitter:description" content="Map接口，被AbstractMap抽象类实现，HashMap继承自AbstratMap且实现Map接口。 public class HashMap&amp;lt;K,V&amp;gt; extends AbstractMap&amp;lt;K,V&amp;gt;    implements Map&amp;lt;K,V&amp;gt;, Cloneable, Serializable Map接口可见定义了一个Entry接口： /**  * A">
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-05-03 22:01:52" itemprop="dateModified" datetime="2018-05-03T22:01:52+08:00">2018-05-03</time>
+                <time title="Modified: 2018-05-11 00:02:38" itemprop="dateModified" datetime="2018-05-11T00:02:38+08:00">2018-05-11</time>
               
             
           </span>
@@ -464,15 +464,8 @@ static class Node&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
         return false;
     }
 }
-
-
-查看Node的成员变量以及PUT方法可以得知：Hashmap放入元素时会先通过KEY计算HASHCODE并且2次加工（JDK8因为用了红黑树处理冲突能力加强所以2次处理较简单，高16位异或）来确定在TABLE数组中的位置，
-新加的KEY对应的INDEX位置在TABLE时已经有值时，调用EQUALS方法比较，想等的话确定为同一个KEY，则替换原来值，相当于一个更新操作。
-如果EQUALS不等则说明不是同一个KEY，是2个KEY得HASH值相同，即为哈希冲突，MODCOUNT+1结构改变，调用方法将这个节点加入此位置前一节点NEXT中。
-即拉链法处理哈希冲突，哈希值相同不同NODE会在数组中处于同一个位置，形成一张单链表。
-
-
-/**
+</code></pre><p>查看Node的成员变量以及PUT方法可以得知：Hashmap放入元素时会先通过KEY计算HASHCODE并且2次加工（JDK8因为用了红黑树处理冲突能力加强所以2次处理较简单，高16位异或）来确定在TABLE数组中的位置，<br>新加的KEY对应的INDEX位置在TABLE时已经有值时，调用EQUALS方法比较，相等的话确定为同一个KEY，则替换原来值，相当于一个更新操作。<br>如果EQUALS不等则说明不是同一个KEY，是2个KEY得HASH值相同，即为哈希冲突，MODCOUNT+1结构改变，调用方法将这个节点加入此位置前一节点NEXT中。<br>即拉链法处理哈希冲突，哈希值相同不同NODE会在数组中处于同一个位置，形成一张单链表。</p>
+<pre><code>/**
  * Associates the specified value with the specified key in this map.
  * If the map previously contained a mapping for the key, the old
  * value is replaced.
@@ -607,7 +600,7 @@ public V put(K key, V value) {
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

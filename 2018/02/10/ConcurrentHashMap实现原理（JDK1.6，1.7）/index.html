@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="CAS操作：    1.CAS（Compare and swap）比较和替换是设计并发算法时用到的一种技术。比较和替换是使用一个期望值和一个变量的当前值进行比较，        如果当前变量的值与我们期望的值相等，就使用一个新值替换当前变量的值。    2.显而易见，CAS需要内存位置（V）、预期原值（A）和新值(B)这些参数，并且需要先进行读取操作，然后比较读取值和待写入值，想等则">
-<meta name="keywords" content="Java并发编程">
+  <meta name="description" content="ConcurrentHashMap首次出现于JDK1.5的java.util.current，是并发包中的类，用了新出的Lock实现了相对于HashTable(对HashMap写方法加sychronized实现线程安全封装)性能更加优化的线程安全HashMap。 JDK6，7的主要思想是分段锁（JDK8做了很大改动，没有用分段锁思想，底层和8的Hashmap一样用链表+红黑树，CAS算法重新实现）">
+<meta name="keywords" content="Java并发编程,Map">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CAS操作和乐观锁思想">
-<meta property="og:url" content="http://yoursite.com/2018/03/03/CAS操作和乐观锁思想/index.html">
+<meta property="og:title" content="ConcurrentHashMap实现原理（JDK1.6，1.7）">
+<meta property="og:url" content="http://yoursite.com/2018/02/10/ConcurrentHashMap实现原理（JDK1.6，1.7）/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="CAS操作：    1.CAS（Compare and swap）比较和替换是设计并发算法时用到的一种技术。比较和替换是使用一个期望值和一个变量的当前值进行比较，        如果当前变量的值与我们期望的值相等，就使用一个新值替换当前变量的值。    2.显而易见，CAS需要内存位置（V）、预期原值（A）和新值(B)这些参数，并且需要先进行读取操作，然后比较读取值和待写入值，想等则">
+<meta property="og:description" content="ConcurrentHashMap首次出现于JDK1.5的java.util.current，是并发包中的类，用了新出的Lock实现了相对于HashTable(对HashMap写方法加sychronized实现线程安全封装)性能更加优化的线程安全HashMap。 JDK6，7的主要思想是分段锁（JDK8做了很大改动，没有用分段锁思想，底层和8的Hashmap一样用链表+红黑树，CAS算法重新实现）">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-02T14:31:02.656Z">
+<meta property="og:updated_time" content="2018-05-10T16:01:04.628Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CAS操作和乐观锁思想">
-<meta name="twitter:description" content="CAS操作：    1.CAS（Compare and swap）比较和替换是设计并发算法时用到的一种技术。比较和替换是使用一个期望值和一个变量的当前值进行比较，        如果当前变量的值与我们期望的值相等，就使用一个新值替换当前变量的值。    2.显而易见，CAS需要内存位置（V）、预期原值（A）和新值(B)这些参数，并且需要先进行读取操作，然后比较读取值和待写入值，想等则">
+<meta name="twitter:title" content="ConcurrentHashMap实现原理（JDK1.6，1.7）">
+<meta name="twitter:description" content="ConcurrentHashMap首次出现于JDK1.5的java.util.current，是并发包中的类，用了新出的Lock实现了相对于HashTable(对HashMap写方法加sychronized实现线程安全封装)性能更加优化的线程安全HashMap。 JDK6，7的主要思想是分段锁（JDK8做了很大改动，没有用分段锁思想，底层和8的Hashmap一样用链表+红黑树，CAS算法重新实现）">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/03/CAS操作和乐观锁思想/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/02/10/ConcurrentHashMap实现原理（JDK1.6，1.7）/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>CAS操作和乐观锁思想 | Bojun Ji's notes</title>
+  <title>ConcurrentHashMap实现原理（JDK1.6，1.7） | Bojun Ji's notes</title>
   
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/03/CAS操作和乐观锁思想/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/10/ConcurrentHashMap实现原理（JDK1.6，1.7）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -295,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">CAS操作和乐观锁思想
+          <h1 class="post-title" itemprop="name headline">ConcurrentHashMap实现原理（JDK1.6，1.7）
               
             
           </h1>
@@ -320,7 +320,7 @@
                 
               
 
-              <time title="Created: 2018-03-03 22:08:13" itemprop="dateCreated datePublished" datetime="2018-03-03T22:08:13+08:00">2018-03-03</time>
+              <time title="Created: 2018-02-10 21:51:57" itemprop="dateCreated datePublished" datetime="2018-02-10T21:51:57+08:00">2018-02-10</time>
             
 
             
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-05-02 22:31:02" itemprop="dateModified" datetime="2018-05-02T22:31:02+08:00">2018-05-02</time>
+                <time title="Modified: 2018-05-11 00:01:04" itemprop="dateModified" datetime="2018-05-11T00:01:04+08:00">2018-05-11</time>
               
             
           </span>
@@ -354,7 +354,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java并发编程/" itemprop="url" rel="index"><span itemprop="name">Java并发编程</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java集合类/" itemprop="url" rel="index"><span itemprop="name">Java集合类</span></a></span>
 
                 
                 
@@ -396,32 +396,43 @@
       
 
       
-        <p>CAS操作：<br>    1.CAS（Compare and swap）比较和替换是设计并发算法时用到的一种技术。比较和替换是使用一个期望值和一个变量的当前值进行比较，<br>        如果当前变量的值与我们期望的值相等，就使用一个新值替换当前变量的值。<br>    2.显而易见，CAS需要内存位置（V）、预期原值（A）和新值(B)这些参数，并且需要先进行读取操作，然后比较读取值和待写入值，想等则<br>        做一个写入操作。在多线程环境下，如果CAS不能作为一个原子操作则会导致问题。<br>    3.现在CPU内部已经执行原子的CAS操作（JNI unsafe中compareAndSwapInt方法）。JDK1.5后，java.util.concurrent（J.U.C）.atomic包中的一些原子类可以用来使用CPU中的这些功能，<br>        同时弥补volatile关键字不能保证原子性的问题。</p>
-<pre><code>例如AtomicInteger, 自增操作(getAndIncrement)就是一个自旋CAS,int变量是volatile的，具有可见性,底层用CAS比较数值，成功则返回当前值，失败则不停自旋重试：
-public class AtomicInteger extends Number implements java.io.Serializable {  
-
-    private volatile int value;  
-
-    public final int get() {  
-        return value;  
-    }  
-
-    public final int getAndIncrement() {  
-        for (;;) {  
-            int current = get();  
-            int next = current + 1;  
-            if (compareAndSet(current, next))  
-                return current;  
-        }  
-    }  
-
-    public final boolean compareAndSet(int expect, int update) {  
-        return unsafe.compareAndSwapInt(this, valueOffset, expect, update);  
-    }  
+        <p>ConcurrentHashMap首次出现于JDK1.5的java.util.current，是并发包中的类，用了新出的Lock实现了相对于HashTable(对HashMap写方法加sychronized实现线程安全封装)性能更加优化的线程安全HashMap。</p>
+<p>JDK6，7的主要思想是分段锁（JDK8做了很大改动，没有用分段锁思想，底层和8的Hashmap一样用链表+红黑树，CAS算法重新实现），HashMap底层是Node数组，每次加锁会锁住整个数组也是整个map。而ConcurrentHashMap会有segment数组，segment同时继承了ReentrantLock,HashEntry是具体的数据节点。<br>这样其实存储主体是segment数组，里面再维护HashEntry数组。这样每次写操作例如put,remove只会锁定一个segment。<br>同时 entry的value和next引用都被加了volatile保证多线程时候的可见性。</p>
+<p>final Segment&lt;K,V&gt;[] segments;</p>
+<p>static class Segment&lt;K,V&gt; extends ReentrantLock implements Serializable</p>
+<p>static final class HashEntry&lt;K,V&gt; {<br>        final int hash;<br>        final K key;<br>        volatile V value;<br>        volatile HashEntry&lt;K,V&gt; next;</p>
+<p>并发度可以理解为其中不对锁进行竞争的最大线程数，因为写操作只会锁对应的segment数组，所以其实并发度就是segment的数量，默认是16.同时通过构造函数自定义时，如果不是2的倍数，会取大于这个的2次幂作为segment数组长度，例如33实际会被取64.</p>
+<p>/**</p>
+<pre><code> * The default initial table capacity.  Must be a power of 2
+ * (i.e., at least 1) and at most MAXIMUM_CAPACITY.
+ */
+private static final int DEFAULT_CAPACITY = 16;
+</code></pre><p>创建segment时，JDK1.7做了改动，除了原始的第一个segment其余后面的是lazy loading，在put时通过计算key定位到setment，如果是null则会调用方法对他初始化。</p>
+<p>对于容量不够时的扩容操作，和HashMap的resize类似，也是2倍。元素新的位置为原位置或者原位置索引i+原segment数组长度。</p>
+<p>private void rehash(HashEntry&lt;K,V&gt; node) {<br>           HashEntry&lt;K,V&gt;[] oldTable = table;<br>           int oldCapacity = oldTable.length;<br>           int newCapacity = oldCapacity &lt;&lt; 1;<br>           threshold = (int)(newCapacity * loadFactor);<br>           HashEntry&lt;K,V&gt;[] newTable =<br>               (HashEntry&lt;K,V&gt;[]) new HashEntry[newCapacity];<br>           int sizeMask = newCapacity - 1;<br>           for (int i = 0; i &lt; oldCapacity ; i++) {<br>               HashEntry&lt;K,V&gt; e = oldTable[i];<br>               if (e != null) {<br>                   HashEntry&lt;K,V&gt; next = e.next;<br>                   int idx = e.hash &amp; sizeMask;<br>                   if (next == null)   //  Single node on list<br>                       newTable[idx] = e;<br>                   else { // Reuse consecutive sequence at same slot<br>                       HashEntry&lt;K,V&gt; lastRun = e;<br>                       int lastIdx = idx;<br>                       for (HashEntry&lt;K,V&gt; last = next;<br>                            last != null;<br>                            last = last.next) {<br>                           int k = last.hash &amp; sizeMask;<br>                           if (k != lastIdx) {<br>                               lastIdx = k;<br>                               lastRun = last;<br>                           }<br>                       }<br>                       newTable[lastIdx] = lastRun;<br>                       // Clone remaining nodes<br>                       for (HashEntry&lt;K,V&gt; p = e; p != lastRun; p = p.next) {<br>                           V v = p.value;<br>                           int h = p.hash;<br>                           int k = h &amp; sizeMask;<br>                           HashEntry&lt;K,V&gt; n = newTable[k];<br>                           newTable[k] = new HashEntry&lt;K,V&gt;(h, p.key, v, n);<br>                       }<br>                   }<br>               }<br>           }<br>           int nodeIndex = node.hash &amp; sizeMask; // add the new node<br>           node.setNext(newTable[nodeIndex]);<br>           newTable[nodeIndex] = node;<br>           table = newTable;<br>       }</p>
+<p>get读方法上没有加锁，可以并发读取，性能很高。但是是弱一致性的，同时迭代器entrySet,keySet,values也是弱一致性的(遍历底层数组时，如果同时有别的线程在做写操作，不会抛ConcurrentModificationException)。</p>
+<p>如果我们线程一put一个元素，并不能保证线程二get方法读取立即可见，可能获取的是过时数据。<br>因为get没有锁，只用了JNI里的getObjectVolatile原子读操作，获得相应数组中index，遍历链表找到需要的元素。这个过程中因为没有加锁，如果同时其他线程修改链表结构数据（put和get在同时进行），可能取出的数据是过时的，没有达到强一致性。</p>
+<p>get方法，弱一致：<br>V get(Object key, int hash) {<br>    if (count != 0) { // read-volatile<br>        HashEntry e = getFirst(hash);<br>        while (e != null) {<br>            if (e.hash == hash &amp;&amp; key.equals(e.key)) {<br>                V v = e.value;<br>                if (v != null)<br>                    return v;<br>                return readValueUnderLock(e); // recheck<br>            }<br>            e = e.next;<br>        }<br>    }<br>    return null;<br>}</p>
+<p>HashIterator中方法，iterator.next()的底层方法，无锁，如果有别的线程改动，不会抛exception，弱一致：<br>final void advance() {<br>    if (nextEntry != null &amp;&amp; (nextEntry = nextEntry.next) != null)<br>        return;</p>
+<pre><code>while (nextTableIndex &gt;= 0) {
+    if ( (nextEntry = currentTable[nextTableIndex--]) != null)
+        return;
 }
-</code></pre><p>乐观锁思想：<br>与悲观锁思想相对（总认为资源不安全，先取锁再访问的保守策略思想，例如RDBMS中查询时加S锁或者X锁，是数据处理的最终保证）。<br>乐观锁假定数据不会有冲突，所以只在最终写操作提交更新时候检查，假设发生了冲突，则返回错误信息，让用户应用程序决定如何处理。</p>
-<p>乐观锁=提交时冲突检查+数据更新</p>
-<p>根据以上，CAS操作其实可以被认为是乐观锁的一种实现方式，当多个线程尝试对同一个数据进行写操作时，利用CAS对比读取的值和预期值，同一时间只有一个线程可以成功，<br>失败的线程可以自旋，直到成功为止。CAS的读取比较类似于乐观锁最终写时候的冲突检查，CAS对比成功后的写入对应乐观锁的数据更新。以上JUC中的ATOMIC类就是一种典型<br>实现。</p>
+
+while (nextSegmentIndex &gt;= 0) {
+    Segment&lt;K,V&gt; seg = segments[nextSegmentIndex--];
+    if (seg.count != 0) {
+        currentTable = seg.table;
+        for (int j = currentTable.length - 1; j &gt;= 0; --j) {
+            if ( (nextEntry = currentTable[j]) != null) {
+                nextTableIndex = j - 1;
+                return;
+            }
+        }
+    }
+}
+</code></pre><p>}</p>
+<p>弱一致性是为了减少锁，提升效率的一种平衡。<br>在实际使用中，如果为了不加锁而读数据准确，或许应该确保在put,remove之类写操作完成后，才进行get和迭代器等读操作，避免ConcurrentHashMap中多个线程读写同时进行。</p>
 
       
     </div>
@@ -444,6 +455,8 @@ public class AtomicInteger extends Number implements java.io.Serializable {
           
             <a href="/tags/Java并发编程/" rel="tag"># Java并发编程</a>
           
+            <a href="/tags/Map/" rel="tag"># Map</a>
+          
         </div>
       
 
@@ -455,8 +468,8 @@ public class AtomicInteger extends Number implements java.io.Serializable {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/10/ConcurrentHashMap实现原理（JDK1.6，1.7）/" rel="next" title="ConcurrentHashMap实现原理（JDK1.6，1.7）">
-                <i class="fa fa-chevron-left"></i> ConcurrentHashMap实现原理（JDK1.6，1.7）
+              <a href="/2018/02/06/ArrayList实现原理以及与Vector区别/" rel="next" title="ArrayList实现原理以及与Vector区别">
+                <i class="fa fa-chevron-left"></i> ArrayList实现原理以及与Vector区别
               </a>
             
           </div>
@@ -465,8 +478,8 @@ public class AtomicInteger extends Number implements java.io.Serializable {
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/05/CAS ABA问题以及版本控制方法实现乐观锁/" rel="prev" title="CAS ABA问题以及版本控制方法实现乐观锁">
-                CAS ABA问题以及版本控制方法实现乐观锁 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/03/CAS操作和乐观锁思想/" rel="prev" title="CAS操作和乐观锁思想">
+                CAS操作和乐观锁思想 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
