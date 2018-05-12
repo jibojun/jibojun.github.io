@@ -102,20 +102,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Bojun Ji&#39;s notes">
-<meta property="og:url" content="http://yoursite.com/categories/JVM/index.html">
+  <meta name="description" content="JDK1.5-1.7中，ConcurrentHashMap主要思想都是分段锁，默认16个分段（segment），既并发度1。写操作put,remove,clear会加锁，但一般情况下只会加在数据所在的segment上，不影响别的。 有一种情况会导致所有segment被锁，segment里有count变量（volatile）存自己分段有多少个元素，简单来说所有分段数组的count字段相加就是整个ma">
+<meta name="keywords" content="Map,Java并发编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ConcurrentHashMap的size方法和Segment全锁场景">
+<meta property="og:url" content="http://yoursite.com/2018/02/13/ConcurrentHashMap的size方法和Segment全锁场景/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
+<meta property="og:description" content="JDK1.5-1.7中，ConcurrentHashMap主要思想都是分段锁，默认16个分段（segment），既并发度1。写操作put,remove,clear会加锁，但一般情况下只会加在数据所在的segment上，不影响别的。 有一种情况会导致所有segment被锁，segment里有count变量（volatile）存自己分段有多少个元素，简单来说所有分段数组的count字段相加就是整个ma">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-05-12T19:27:26.148Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bojun Ji&#39;s notes">
+<meta name="twitter:title" content="ConcurrentHashMap的size方法和Segment全锁场景">
+<meta name="twitter:description" content="JDK1.5-1.7中，ConcurrentHashMap主要思想都是分段锁，默认16个分段（segment），既并发度1。写操作put,remove,clear会加锁，但一般情况下只会加在数据所在的segment上，不影响别的。 有一种情况会导致所有segment被锁，segment里有count变量（volatile）存自己分段有多少个元素，简单来说所有分段数组的count字段相加就是整个ma">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/JVM/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/02/13/ConcurrentHashMap的size方法和Segment全锁场景/"/>
 
 
 
@@ -125,7 +130,7 @@
   };
 </script>
 
-  <title>Category: JVM | Bojun Ji's notes</title>
+  <title>ConcurrentHashMap的size方法和Segment全锁场景 | Bojun Ji's notes</title>
   
 
 
@@ -172,7 +177,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -253,132 +258,253 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block category">
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>JVM<small>Category</small>
-        </h1>
-      </div>
-
-      
-        
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/13/ConcurrentHashMap的size方法和Segment全锁场景/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bojun Ji's notes">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/03/09/打破双亲委托模型方法/" itemprop="url">
-              
-                <span itemprop="name">打破双亲委托模型方法</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">ConcurrentHashMap的size方法和Segment全锁场景
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-09T00:15:12+08:00"
-              content="2018-03-09" >
-          03-09
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
 
-    </header>
-  </article>
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-02-13 02:32:13" itemprop="dateCreated datePublished" datetime="2018-02-13T02:32:13+08:00">2018-02-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-05-13 03:27:26" itemprop="dateModified" datetime="2018-05-13T03:27:26+08:00">2018-05-13</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java集合类/" itemprop="url" rel="index"><span itemprop="name">Java集合类</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/08/Java类加载和双亲委托模型/" itemprop="url">
-              
-                <span itemprop="name">Java类加载和双亲委托模型</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-08T23:30:47+08:00"
-              content="2018-03-08" >
-          03-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/01/02/volatile关键字语义（JDK1-5及以后）/" itemprop="url">
-              
-                <span itemprop="name">volatile关键字（JDK1.5及以后）</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-02T21:39:09+08:00"
-              content="2018-01-02" >
-          01-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+        <p>JDK1.5-1.7中，ConcurrentHashMap主要思想都是分段锁，默认16个分段（segment），既并发度1。写操作put,remove,clear会加锁，但一般情况下只会加在数据所在的segment上，不影响别的。</p>
+<p>有一种情况会导致所有segment被锁，segment里有count变量（volatile）存自己分段有多少个元素，简单来说所有分段数组的count字段相加就是整个map的size了，但是这是2个操作，拿count（读取时候如果有别的线程改因为volatile会得知）和相加，读取时没有问题，但做加法时候，如果别的线程往里增删元素，则会不准。</p>
+<p>保险的办法就是加锁，size方法执行时候不能做写操作，但这样做法类似HashTable，效率偏低。</p>
+<p>ConcurrentHashMap计算size主要逻辑就是：<br>    1.连续两次循环读取每个分段个数和相加操作。<br>    2.Segment里有另一个变量modCount，如果有put,remove,clear    执行，则会加1。<br>    3.通过modCount相加结果比较前后两次计算结果是否相同，不同则认    为有修改发生大小发生了变化，那就加锁住所有segment。最后完成再    一个个解锁。</p>
+<p>所以如果size方法上述计算过程中出现了大小变化，在这个场景中，最终ConcurrentHashMap会加锁锁住所有Segment。</p>
+<pre><code>try {
+    for (;;) {
+        if (retries++ == RETRIES_BEFORE_LOCK) {
+            for (int j = 0; j &lt; segments.length; ++j)
+                ensureSegment(j).lock(); // force creation
+        }
+        sum = 0L;
+        size = 0;
+        overflow = false;
+        for (int j = 0; j &lt; segments.length; ++j) {
+            Segment&lt;K,V&gt; seg = segmentAt(segments, j);
+            if (seg != null) {
+                sum += seg.modCount;
+                int c = seg.count;
+                if (c &lt; 0 || (size += c) &lt; 0)
+                    overflow = true;
+            }
+        }
+        if (sum == last)
+            break;
+        last = sum;
+    }
+} finally {
+    if (retries &gt; RETRIES_BEFORE_LOCK) {
+        for (int j = 0; j &lt; segments.length; ++j)
+            segmentAt(segments, j).unlock();
+    }
+}
+</code></pre>
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Map/" rel="tag"># Map</a>
+          
+            <a href="/tags/Java并发编程/" rel="tag"># Java并发编程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/10/ConcurrentHashMap实现原理（JDK1.6，1.7）/" rel="next" title="ConcurrentHashMap实现原理（JDK1.6，1.7）">
+                <i class="fa fa-chevron-left"></i> ConcurrentHashMap实现原理（JDK1.6，1.7）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/03/CAS操作和乐观锁思想/" rel="prev" title="CAS操作和乐观锁思想">
+                CAS操作和乐观锁思想 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -657,6 +783,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
 
   
 
