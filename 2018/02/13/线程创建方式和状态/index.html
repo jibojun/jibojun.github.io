@@ -110,7 +110,7 @@
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
 <meta property="og:description" content="继承Thread类(实现了Runnable接口)，在run()方法中写线程业务逻辑。start（）方法启动线程，调用run（）方法是当前线程执行，不会起新线程异步执行。 实现Runnable接口（将实现接口的类实例传入Thread构造方法或者直接用匿名内部类），同样在run()中写逻辑，start（）方法启动。  例子，匿名类： new Thread(new Runnable() {">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-13T16:28:29.553Z">
+<meta property="og:updated_time" content="2018-05-13T16:34:35.832Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线程三种创建方式">
 <meta name="twitter:description" content="继承Thread类(实现了Runnable接口)，在run()方法中写线程业务逻辑。start（）方法启动线程，调用run（）方法是当前线程执行，不会起新线程异步执行。 实现Runnable接口（将实现接口的类实例传入Thread构造方法或者直接用匿名内部类），同样在run()中写逻辑，start（）方法启动。  例子，匿名类： new Thread(new Runnable() {">
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-05-14 00:28:29" itemprop="dateModified" datetime="2018-05-14T00:28:29+08:00">2018-05-14</time>
+                <time title="Modified: 2018-05-14 00:34:35" itemprop="dateModified" datetime="2018-05-14T00:34:35+08:00">2018-05-14</time>
               
             
           </span>
@@ -432,7 +432,7 @@
 </code></pre><ol>
 <li>call()方法有返回值，而且是泛型的。</li>
 <li>配合ExecutorService线程池用，submit(）方法一般用来提交Runnable或者Callable。</li>
-<li>Callable可以配合JUC中的Furture接口或者FurtureTask类里的get方法来获取线程执行完的返回结果。</li>
+<li>Callable可以配合JUC中的Future接口或者FutureTask类里的get方法来获取线程执行完的返回结果。</li>
 <li>适用于一些异步计算业务场景，新起线程提交给线程池，调用get方法时阻塞，直到拿到执行完的结果。</li>
 </ol>
 
