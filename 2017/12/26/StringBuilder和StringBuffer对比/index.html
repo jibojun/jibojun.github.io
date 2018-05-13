@@ -110,7 +110,7 @@
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
 <meta property="og:description" content="共同点：    都继承自AbstractStringBuilder，都用CHAR数组作为存储结构。和String比是变长的因为数组没有加FINAL，核心是APPEND方法，适用于拼接字符串经常变化的场景。    不传大小的话默认都是16。APPEND时候会有ensureCapacityInternal先来确保数组长度够用。 继承自同一个抽象类：     public final class Str">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-01T17:05:32.673Z">
+<meta property="og:updated_time" content="2018-05-13T10:29:54.374Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="StringBuilder和StringBuffer对比">
 <meta name="twitter:description" content="共同点：    都继承自AbstractStringBuilder，都用CHAR数组作为存储结构。和String比是变长的因为数组没有加FINAL，核心是APPEND方法，适用于拼接字符串经常变化的场景。    不传大小的话默认都是16。APPEND时候会有ensureCapacityInternal先来确保数组长度够用。 继承自同一个抽象类：     public final class Str">
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-05-02 01:05:32" itemprop="dateModified" datetime="2018-05-02T01:05:32+08:00">2018-05-02</time>
+                <time title="Modified: 2018-05-13 18:29:54" itemprop="dateModified" datetime="2018-05-13T18:29:54+08:00">2018-05-13</time>
               
             
           </span>
@@ -397,15 +397,14 @@
 
       
         <p>共同点：<br>    都继承自AbstractStringBuilder，都用CHAR数组作为存储结构。和String比是变长的因为数组没有加FINAL，核心是APPEND方法，适用于拼接字符串经常变化的场景。<br>    不传大小的话默认都是16。APPEND时候会有ensureCapacityInternal先来确保数组长度够用。</p>
-<pre><code>继承自同一个抽象类：
-    public final class StringBuilder
+<p>继承自同一个抽象类：</p>
+<pre><code>    public final class StringBuilder
 extends AbstractStringBuilder
 
  public final class StringBuffer
 extends AbstractStringBuilder
-
-存储结构是一个CHAR数组：
-/**
+</code></pre><p>存储结构是一个CHAR数组：</p>
+<pre><code>/**
  * The value is used for character storage.
  */
 char[] value;
@@ -423,9 +422,8 @@ int count;
 public StringBuffer() {
     super(16);
 }
-
-核心方法APPEND，在尾部接入String,接收OBJECT和STRING，OBJECT则调用String.valueOf方法转为String再调用String的APPEND方法：
-/**
+</code></pre><p>核心方法APPEND，在尾部接入String,接收OBJECT和STRING，OBJECT则调用String.valueOf方法转为String再调用String的APPEND方法：</p>
+<pre><code>/**
  * Appends the string representation of the {@code Object} argument.
  * &lt;p&gt;
  * The overall effect is exactly as if the argument were converted
@@ -471,9 +469,8 @@ public AbstractStringBuilder append(String str) {
     count += len;
     return this;
 }
-
-数组扩展策略（JDK1.8），2倍长度再+2新建数组替换，所以和String不同，非final的数组只有在容量不够时被替换，和HASHMAP,ARRAYLIST直接扩展成2倍大小数组不同：
-private void ensureCapacityInternal(int minimumCapacity) {
+</code></pre><p>数组扩展策略（JDK1.8），2倍长度再+2新建数组替换，所以和String不同，非final的数组只有在容量不够时被替换，和HASHMAP,ARRAYLIST直接扩展成2倍大小数组不同：</p>
+<pre><code>private void ensureCapacityInternal(int minimumCapacity) {
     // overflow-conscious code
     if (minimumCapacity - value.length &gt; 0) {
         value = Arrays.copyOf(value,
@@ -513,8 +510,16 @@ private int hugeCapacity(int minCapacity) {
     return (minCapacity &gt; MAX_ARRAY_SIZE)
         ? minCapacity : MAX_ARRAY_SIZE;
 }
-</code></pre><p>不同点：<br>    StringBuffer加了SYCHRONIZED保证了线程安全，StringBuilder不是线程安全的。需要根据是否线程安全来选用这两个类。<br>        StringBuffer:<br>            @Override<br>            public synchronized StringBuffer append(Object obj) {<br>                toStringCache = null;<br>                super.append(String.valueOf(obj));<br>                return this;<br>            }</p>
-<pre><code>    @Override
+</code></pre><p>不同点：<br>    StringBuffer加了SYCHRONIZED保证了线程安全，StringBuilder不是线程安全的。需要根据是否线程安全来选用这两个类。</p>
+<pre><code>StringBuffer:
+    @Override
+    public synchronized StringBuffer append(Object obj) {
+        toStringCache = null;
+        super.append(String.valueOf(obj));
+        return this;
+    }
+
+    @Override
     public synchronized StringBuffer append(String str) {
         toStringCache = null;
         super.append(str);
@@ -641,7 +646,7 @@ StringBuilder:
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

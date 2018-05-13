@@ -102,20 +102,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Bojun Ji&#39;s notes">
-<meta property="og:url" content="http://yoursite.com/tags/Java并发编程/index.html">
+  <meta name="description" content="可重入性：线程1获取实例a的锁，进入里面A（）方法执行，并未释放锁时候可以再次获得锁进入方法。同线程未放锁前再次尝试获取锁则会死锁，这可以理解为不可重入。 自旋锁靠循环不停执行，直到拿到锁，不释放CPU时间片资源(不进入内核态等待，而是停留用户态自旋)，有减少线程上下文切换，高响应的作用。但是如果同一个线程连续两次lock就会死锁。 改造成可重入自旋锁需要加入lockCount变量记录重入次数。初">
+<meta name="keywords" content="Java并发编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自旋锁的可重入改造">
+<meta property="og:url" content="http://yoursite.com/2018/04/05/自旋锁的可重入改造/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
+<meta property="og:description" content="可重入性：线程1获取实例a的锁，进入里面A（）方法执行，并未释放锁时候可以再次获得锁进入方法。同线程未放锁前再次尝试获取锁则会死锁，这可以理解为不可重入。 自旋锁靠循环不停执行，直到拿到锁，不释放CPU时间片资源(不进入内核态等待，而是停留用户态自旋)，有减少线程上下文切换，高响应的作用。但是如果同一个线程连续两次lock就会死锁。 改造成可重入自旋锁需要加入lockCount变量记录重入次数。初">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-05-13T10:27:35.012Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bojun Ji&#39;s notes">
+<meta name="twitter:title" content="自旋锁的可重入改造">
+<meta name="twitter:description" content="可重入性：线程1获取实例a的锁，进入里面A（）方法执行，并未释放锁时候可以再次获得锁进入方法。同线程未放锁前再次尝试获取锁则会死锁，这可以理解为不可重入。 自旋锁靠循环不停执行，直到拿到锁，不释放CPU时间片资源(不进入内核态等待，而是停留用户态自旋)，有减少线程上下文切换，高响应的作用。但是如果同一个线程连续两次lock就会死锁。 改造成可重入自旋锁需要加入lockCount变量记录重入次数。初">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/Java并发编程/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/05/自旋锁的可重入改造/"/>
 
 
 
@@ -125,7 +130,7 @@
   };
 </script>
 
-  <title>Tag: Java并发编程 | Bojun Ji's notes</title>
+  <title>自旋锁的可重入改造 | Bojun Ji's notes</title>
   
 
 
@@ -172,7 +177,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -253,243 +258,291 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block tag">
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Java并发编程<small>Tag</small>
-        </h1>
-      </div>
-
-      
-        
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/05/自旋锁的可重入改造/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bojun Ji's notes">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/04/05/自旋锁的可重入改造/" itemprop="url">
-              
-                <span itemprop="name">自旋锁的可重入改造</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">自旋锁的可重入改造
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-05T16:45:10+08:00"
-              content="2018-04-05" >
-          04-05
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
 
-    </header>
-  </article>
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-04-05 16:45:10" itemprop="dateCreated datePublished" datetime="2018-04-05T16:45:10+08:00">2018-04-05</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-05-13 18:27:35" itemprop="dateModified" datetime="2018-05-13T18:27:35+08:00">2018-05-13</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java并发编程/" itemprop="url" rel="index"><span itemprop="name">Java并发编程</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/03/自旋锁以及不可重入时死锁问题/" itemprop="url">
-              
-                <span itemprop="name">自旋锁以及不可重入时死锁问题</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-03T22:45:10+08:00"
-              content="2018-04-03" >
-          04-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
+        <p>可重入性：线程1获取实例a的锁，进入里面A（）方法执行，并未释放锁时候可以再次获得锁进入方法。同线程未放锁前再次尝试获取锁则会死锁，这可以理解为不可重入。</p>
+<p>自旋锁靠循环不停执行，直到拿到锁，不释放CPU时间片资源(不进入内核态等待，而是停留用户态自旋)，有减少线程上下文切换，高响应的作用。但是如果同一个线程连续两次lock就会死锁。</p>
+<p>改造成可重入自旋锁需要加入lockCount变量记录重入次数。初始值是0。每次重入lock加一，每次unlock-1。</p>
+<p>例子：</p>
+<pre><code>package concurrency;
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+import java.util.concurrent.atomic.AtomicReference;
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/05/CAS ABA问题以及版本控制方法实现乐观锁/" itemprop="url">
-              
-                <span itemprop="name">CAS ABA问题以及版本控制方法实现乐观锁</span>
-              
-            </a>
-        
-      </h2>
+public class ReentrantSpinLock {
+    //持有资源的线程
+    private AtomicReference owner =new AtomicReference&lt;&gt;();
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-05T22:40:43+08:00"
-              content="2018-03-05" >
-          03-05
-        </time>
-      </div>
+    //记录进重次数
+    private int rentrantCount=0;
 
-    </header>
-  </article>
+    //锁
+    public void lock(){
+        Thread current = Thread.currentThread();
+        if(current==owner.get()){
+            rentrantCount++;
+            System.out.println(current.getName() + &quot;&apos;s reenter count is: &quot;+rentrantCount+&quot; now&quot;);
+            return;
+        }
+        //循环自旋，不释放CPU资源，直到获取锁为止
+        while(!owner .compareAndSet(null, current)){
+            System.out.println(current.getName()+ &quot; is waiting for lock release&quot;);
+        }
+    }
 
+    //解锁
+    public void unlock (){
+        Thread current = Thread.currentThread();
+        if(current==owner.get()){
+            if(rentrantCount!=0) {
+                rentrantCount--;
+                System.out.println(current.getName() + &quot;&apos;s reenter count is: &quot;+rentrantCount+&quot; now&quot;);
+            }else {
+                //CAS,预期值;当前线程，目标值:null,放锁
+                owner.compareAndSet(current, null);
+                System.out.println(current.getName() + &quot;&apos;s lock is released&quot;);
+            }
+        }
 
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/03/CAS操作和乐观锁思想/" itemprop="url">
-              
-                <span itemprop="name">CAS操作和乐观锁思想</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-03T22:08:13+08:00"
-              content="2018-03-03" >
-          03-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/02/13/ConcurrentHashMap的size方法和Segment全锁场景/" itemprop="url">
-              
-                <span itemprop="name">ConcurrentHashMap的size方法和Segment全锁场景</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-02-13T02:32:13+08:00"
-              content="2018-02-13" >
-          02-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/02/10/ConcurrentHashMap实现原理（JDK1.6，1.7）/" itemprop="url">
-              
-                <span itemprop="name">ConcurrentHashMap实现原理（JDK1.6，1.7）</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-02-10T21:51:57+08:00"
-              content="2018-02-10" >
-          02-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/01/02/volatile关键字语义（JDK1-5及以后）/" itemprop="url">
-              
-                <span itemprop="name">volatile关键字（JDK1.5及以后）</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-02T21:39:09+08:00"
-              content="2018-01-02" >
-          01-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+    }
+    public static void main(String[] args) {
+        new Thread(new Runnable() {
+            public void run() {
+                ReentrantSpinLock l=new ReentrantSpinLock();
+                try {
+                    System.out.println(&quot;lock 1 time&quot;);
+                    l.lock();
+                    System.out.println(&quot;lock 2 times&quot;);
+                    l.lock();
+                }catch(Exception e){
+                    System.out.println(e.toString());
+                }finally {
+                    System.out.println(&quot;unlock 1 time&quot;);
+                    l.unlock();
+                    System.out.println(&quot;unlock 2 times&quot;);
+                    l.unlock();
+                }
+            }
+        }).start();
+    }
+}
+</code></pre><p>例子输出：</p>
+<pre><code>lock 1 time
+lock 2 times
+Thread-0&apos;s reenter count is: 1 now
+unlock 1 time
+Thread-0&apos;s reenter count is: 0 now
+unlock 2 times
+Thread-0&apos;s lock is released
+</code></pre>
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java并发编程/" rel="tag"># Java并发编程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/03/自旋锁以及不可重入时死锁问题/" rel="next" title="自旋锁以及不可重入时死锁问题">
+                <i class="fa fa-chevron-left"></i> 自旋锁以及不可重入时死锁问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/18/GuavaCache和ehcache的简单对比/" rel="prev" title="GuavaCache和ehcache的简单对比">
+                GuavaCache和ehcache的简单对比 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -768,6 +821,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
 
   
 

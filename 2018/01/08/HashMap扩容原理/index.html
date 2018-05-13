@@ -102,18 +102,18 @@
 
 
 
-  <meta name="description" content="HashMap底层使用一个数组存储元素。根据key的hashcode确定数组中位置，1.7及以前用拉链法形成单链表解决单链表，1.8中在冲突严重（多个元素hashcode相同）时会用红黑树增加性能。 根据默认无参构造方法，数组大小为16。负载因子为0.75。 /** Constructs an empty HashMap with the default initial capacity (16">
+  <meta name="description" content="HashMap底层使用一个数组存储元素。根据key的hashcode确定数组中位置，1.7及以前用拉链法形成单链表解决单链表，1.8中在冲突严重（多个元素hashcode相同）时会用红黑树增加性能。 根据默认无参构造方法，数组大小为16。负载因子为0.75。  /**  Constructs an empty HashMap with the default initial capacity (">
 <meta name="keywords" content="Map">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HashMap扩容原理">
 <meta property="og:url" content="http://yoursite.com/2018/01/08/HashMap扩容原理/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="HashMap底层使用一个数组存储元素。根据key的hashcode确定数组中位置，1.7及以前用拉链法形成单链表解决单链表，1.8中在冲突严重（多个元素hashcode相同）时会用红黑树增加性能。 根据默认无参构造方法，数组大小为16。负载因子为0.75。 /** Constructs an empty HashMap with the default initial capacity (16">
+<meta property="og:description" content="HashMap底层使用一个数组存储元素。根据key的hashcode确定数组中位置，1.7及以前用拉链法形成单链表解决单链表，1.8中在冲突严重（多个元素hashcode相同）时会用红黑树增加性能。 根据默认无参构造方法，数组大小为16。负载因子为0.75。  /**  Constructs an empty HashMap with the default initial capacity (">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-03T13:50:54.380Z">
+<meta property="og:updated_time" content="2018-05-13T10:33:26.895Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HashMap扩容原理">
-<meta name="twitter:description" content="HashMap底层使用一个数组存储元素。根据key的hashcode确定数组中位置，1.7及以前用拉链法形成单链表解决单链表，1.8中在冲突严重（多个元素hashcode相同）时会用红黑树增加性能。 根据默认无参构造方法，数组大小为16。负载因子为0.75。 /** Constructs an empty HashMap with the default initial capacity (16">
+<meta name="twitter:description" content="HashMap底层使用一个数组存储元素。根据key的hashcode确定数组中位置，1.7及以前用拉链法形成单链表解决单链表，1.8中在冲突严重（多个元素hashcode相同）时会用红黑树增加性能。 根据默认无参构造方法，数组大小为16。负载因子为0.75。  /**  Constructs an empty HashMap with the default initial capacity (">
 
 
 
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-05-03 21:50:54" itemprop="dateModified" datetime="2018-05-03T21:50:54+08:00">2018-05-03</time>
+                <time title="Modified: 2018-05-13 18:33:26" itemprop="dateModified" datetime="2018-05-13T18:33:26+08:00">2018-05-13</time>
               
             
           </span>
@@ -398,57 +398,79 @@
       
         <ol>
 <li>HashMap底层使用一个数组存储元素。根据key的hashcode确定数组中位置，1.7及以前用拉链法形成单链表解决单链表，1.8中在冲突严重（多个元素hashcode相同）时会用红黑树增加性能。</li>
-<li>根据默认无参构造方法，数组大小为16。负载因子为0.75。<br> /**<ul>
+<li><p>根据默认无参构造方法，数组大小为16。负载因子为0.75。</p>
+<p> /**</p>
+<ul>
 <li>Constructs an empty <tt>HashMap</tt> with the default initial capacity</li>
 <li>(16) and the default load factor (0.75).<br>*/<br>public HashMap() {<br> this.loadFactor = DEFAULT_LOAD_FACTOR; // all other fields defaulted<br>}</li>
 </ul>
 </li>
-<li><p>另外有2个重载的构造方法可以指定初始大小或者同时指定初始大小和负载因子。还有一个构造方法可以直接传入一张现有MAP构造一个一样的对象。<br> /**</p>
-<ul>
-<li>Constructs an empty <tt>HashMap</tt> with the specified initial</li>
-<li>capacity and load factor.<br>*</li>
-<li>@param  initialCapacity the initial capacity</li>
-<li>@param  loadFactor      the load factor</li>
-<li>@throws IllegalArgumentException if the initial capacity is negative</li>
-<li><p>or the load factor is nonpositive<br>*/<br>public HashMap(int initialCapacity, float loadFactor) {<br>if (initialCapacity &lt; 0)<br>throw new IllegalArgumentException(“Illegal initial capacity: “ +</p>
-<pre><code>initialCapacity);
-</code></pre><p>if (initialCapacity &gt; MAXIMUM_CAPACITY)<br>initialCapacity = MAXIMUM_CAPACITY;<br>if (loadFactor &lt;= 0 || Float.isNaN(loadFactor))<br>throw new IllegalArgumentException(“Illegal load factor: “ +</p>
-<pre><code>loadFactor);
-</code></pre><p>this.loadFactor = loadFactor;<br>this.threshold = tableSizeFor(initialCapacity);<br>}</p>
-<p>/**</p>
-</li>
-<li>Constructs an empty <tt>HashMap</tt> with the specified initial</li>
-<li>capacity and the default load factor (0.75).<br>*</li>
-<li>@param  initialCapacity the initial capacity.</li>
-<li><p>@throws IllegalArgumentException if the initial capacity is negative.<br>*/<br>public HashMap(int initialCapacity) {<br> this(initialCapacity, DEFAULT_LOAD_FACTOR);<br>}</p>
-<p>/**</p>
-</li>
-<li>Constructs a new <tt>HashMap</tt> with the same mappings as the</li>
-<li>specified <tt>Map</tt>.  The <tt>HashMap</tt> is created with</li>
-<li>default load factor (0.75) and an initial capacity sufficient to</li>
-<li>hold the mappings in the specified <tt>Map</tt>.<br>*</li>
-<li>@param   m the map whose mappings are to be placed in this map</li>
-<li>@throws  NullPointerException if the specified map is null<br>*/<br>public HashMap(Map&lt;? extends K, ? extends V&gt; m) {<br> this.loadFactor = DEFAULT_LOAD_FACTOR;<br> putMapEntries(m, false);<br>}</li>
-</ul>
-</li>
+<li><p>另外有2个重载的构造方法可以指定初始大小或者同时指定初始大小和负载因子。还有一个构造方法可以直接传入一张现有MAP构造一个一样的对象。</p>
+<pre><code>/**
+ * Constructs an empty &lt;tt&gt;HashMap&lt;/tt&gt; with the specified initial
+ * capacity and load factor.
+ *
+ * @param  initialCapacity the initial capacity
+ * @param  loadFactor      the load factor
+ * @throws IllegalArgumentException if the initial capacity is negative
+ *         or the load factor is nonpositive
+ */
+public HashMap(int initialCapacity, float loadFactor) {
+    if (initialCapacity &lt; 0)
+        throw new IllegalArgumentException(&quot;Illegal initial capacity: &quot; +
+                                           initialCapacity);
+    if (initialCapacity &gt; MAXIMUM_CAPACITY)
+        initialCapacity = MAXIMUM_CAPACITY;
+    if (loadFactor &lt;= 0 || Float.isNaN(loadFactor))
+        throw new IllegalArgumentException(&quot;Illegal load factor: &quot; +
+                                           loadFactor);
+    this.loadFactor = loadFactor;
+    this.threshold = tableSizeFor(initialCapacity);
+}
+
+/**
+ * Constructs an empty &lt;tt&gt;HashMap&lt;/tt&gt; with the specified initial
+ * capacity and the default load factor (0.75).
+ *
+ * @param  initialCapacity the initial capacity.
+ * @throws IllegalArgumentException if the initial capacity is negative.
+ */
+public HashMap(int initialCapacity) {
+    this(initialCapacity, DEFAULT_LOAD_FACTOR);
+}
+
+/**
+ * Constructs a new &lt;tt&gt;HashMap&lt;/tt&gt; with the same mappings as the
+ * specified &lt;tt&gt;Map&lt;/tt&gt;.  The &lt;tt&gt;HashMap&lt;/tt&gt; is created with
+ * default load factor (0.75) and an initial capacity sufficient to
+ * hold the mappings in the specified &lt;tt&gt;Map&lt;/tt&gt;.
+ *
+ * @param   m the map whose mappings are to be placed in this map
+ * @throws  NullPointerException if the specified map is null
+ */
+public HashMap(Map&lt;? extends K, ? extends V&gt; m) {
+    this.loadFactor = DEFAULT_LOAD_FACTOR;
+    putMapEntries(m, false);
+}
+</code></pre></li>
 <li><p>数组大小不够存放元素时，会调用resize()方法进行扩容。即生成更大的数组取代原数组。扩容时机为元素个数达到数组长度<em>负载因子（阈值）时。<br> 以默认值举例，16</em>0.75=12，表示第13个元素时，hashmap就会扩容为32个。目的是减少hash冲突，如果到第16个元素再扩容，就可能有的桶<br> 内不止一个元素（哈希冲突，形成单链表或者红黑树），用小于1的负载因子可以减少哈希冲突几率。</p>
-<p> final V putVal(int hash, K key, V value, boolean onlyIfAbsent,  </p>
-<pre><code>       boolean evict) {  
-Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;  
-if ((tab = table) == null || (n = tab.length) == 0)  
-    n = (tab = resize()).length;  
-if ((p = tab[i = (n - 1) &amp; hash]) == null)  
-    tab[i] = newNode(hash, key, value, null);  
-else {  
-    ...  
+<pre><code>final V putVal(int hash, K key, V value, boolean onlyIfAbsent,  
+           boolean evict) {  
+    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;  
+    if ((tab = table) == null || (n = tab.length) == 0)  
+        n = (tab = resize()).length;  
+    if ((p = tab[i = (n - 1) &amp; hash]) == null)  
+        tab[i] = newNode(hash, key, value, null);  
+    else {  
+        ...  
+    }  
+    ++modCount;  
+    if (++size &gt; threshold)  
+        resize();  
+    afterNodeInsertion(evict);  
+    return null;  
 }  
-++modCount;  
-if (++size &gt; threshold)  
-    resize();  
-afterNodeInsertion(evict);  
-return null;  
-</code></pre><p> }  </p>
-</li>
+</code></pre></li>
 <li><p>resize()方法会生成一个2倍大小新数组，用transfer()放入原数组元素，并且计算新的位置，较为消耗性能。</p>
 </li>
 </ol>
@@ -646,7 +668,7 @@ final Node&lt;K,V&gt;[] resize() {
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

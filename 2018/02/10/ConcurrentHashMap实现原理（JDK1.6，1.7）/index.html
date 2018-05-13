@@ -103,14 +103,14 @@
 
 
   <meta name="description" content="Hashmap不是线程安全的，而且多线程情况下用put方法放元素会导致死循环且CPU使用率升高。HashTable可以当做它的线程安全实现作用于多线程情况下。而ConcurrentHashMap首次出现于JDK1.5的java.util.current，是并发包中的类，用了新出的Lock实现了相对于HashTable(对HashMap写方法加sychronized实现线程安全封装)性能更加优化的线">
-<meta name="keywords" content="Map,Java并发编程">
+<meta name="keywords" content="Java并发编程,Map">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ConcurrentHashMap实现原理（JDK1.6，1.7）">
 <meta property="og:url" content="http://yoursite.com/2018/02/10/ConcurrentHashMap实现原理（JDK1.6，1.7）/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
 <meta property="og:description" content="Hashmap不是线程安全的，而且多线程情况下用put方法放元素会导致死循环且CPU使用率升高。HashTable可以当做它的线程安全实现作用于多线程情况下。而ConcurrentHashMap首次出现于JDK1.5的java.util.current，是并发包中的类，用了新出的Lock实现了相对于HashTable(对HashMap写方法加sychronized实现线程安全封装)性能更加优化的线">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-12T19:02:03.582Z">
+<meta property="og:updated_time" content="2018-05-13T10:31:15.079Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ConcurrentHashMap实现原理（JDK1.6，1.7）">
 <meta name="twitter:description" content="Hashmap不是线程安全的，而且多线程情况下用put方法放元素会导致死循环且CPU使用率升高。HashTable可以当做它的线程安全实现作用于多线程情况下。而ConcurrentHashMap首次出现于JDK1.5的java.util.current，是并发包中的类，用了新出的Lock实现了相对于HashTable(对HashMap写方法加sychronized实现线程安全封装)性能更加优化的线">
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-05-13 03:02:03" itemprop="dateModified" datetime="2018-05-13T03:02:03+08:00">2018-05-13</time>
+                <time title="Modified: 2018-05-13 18:31:15" itemprop="dateModified" datetime="2018-05-13T18:31:15+08:00">2018-05-13</time>
               
             
           </span>
@@ -398,23 +398,76 @@
       
         <p>Hashmap不是线程安全的，而且多线程情况下用put方法放元素会导致死循环且CPU使用率升高。HashTable可以当做它的线程安全实现作用于多线程情况下。<br>而ConcurrentHashMap首次出现于JDK1.5的java.util.current，是并发包中的类，用了新出的Lock实现了相对于HashTable(对HashMap写方法加sychronized实现线程安全封装)性能更加优化的线程安全HashMap。</p>
 <p>JDK6，7的主要思想是分段锁（JDK8做了很大改动，没有用分段锁思想，底层和8的Hashmap一样用链表+红黑树，CAS算法重新实现），HashMap底层是Node数组，每次加锁会锁住整个数组也是整个map。而ConcurrentHashMap会有segment数组，segment同时继承了ReentrantLock,HashEntry是具体的数据节点。<br>这样其实存储主体是segment数组，里面再维护HashEntry数组。这样每次写操作例如put,remove只会锁定一个segment。<br>同时 entry的value和next引用都被加了volatile保证多线程时候的可见性。</p>
-<p>final Segment&lt;K,V&gt;[] segments;</p>
-<p>static class Segment&lt;K,V&gt; extends ReentrantLock implements Serializable</p>
-<p>static final class HashEntry&lt;K,V&gt; {<br>        final int hash;<br>        final K key;<br>        volatile V value;<br>        volatile HashEntry&lt;K,V&gt; next;</p>
-<p>并发度可以理解为其中不对锁进行竞争的最大线程数，因为写操作只会锁对应的segment数组，所以其实并发度就是segment的数量，默认是16.同时通过构造函数自定义时，如果不是2的倍数，会取大于这个的2次幂作为segment数组长度，例如33实际会被取64.</p>
-<p>/**</p>
-<pre><code> * The default initial table capacity.  Must be a power of 2
- * (i.e., at least 1) and at most MAXIMUM_CAPACITY.
- */
-private static final int DEFAULT_CAPACITY = 16;
+<pre><code>final Segment&lt;K,V&gt;[] segments;
+
+static class Segment&lt;K,V&gt; extends ReentrantLock implements Serializable
+
+static final class HashEntry&lt;K,V&gt; {
+        final int hash;
+        final K key;
+        volatile V value;
+        volatile HashEntry&lt;K,V&gt; next;
+</code></pre><p>并发度可以理解为其中不对锁进行竞争的最大线程数，因为写操作只会锁对应的segment数组，所以其实并发度就是segment的数量，默认是16.同时通过构造函数自定义时，如果不是2的倍数，会取大于这个的2次幂作为segment数组长度，例如33实际会被取64.</p>
+<pre><code>/**
+     * The default initial table capacity.  Must be a power of 2
+     * (i.e., at least 1) and at most MAXIMUM_CAPACITY.
+     */
+    private static final int DEFAULT_CAPACITY = 16;
 </code></pre><p>创建segment时，JDK1.7做了改动，除了原始的第一个segment其余后面的是lazy loading，在put时通过计算key定位到setment，如果是null则会调用方法对他初始化。</p>
 <p>对于容量不够时的扩容操作，和HashMap的resize类似，也是2倍。元素新的位置为原位置或者原位置索引i+原segment数组长度，同时因为是分段数组，segment里会存负载因子。</p>
-<p>private void rehash(HashEntry&lt;K,V&gt; node) {<br>           HashEntry&lt;K,V&gt;[] oldTable = table;<br>           int oldCapacity = oldTable.length;<br>           int newCapacity = oldCapacity &lt;&lt; 1;<br>           threshold = (int)(newCapacity * loadFactor);<br>           HashEntry&lt;K,V&gt;[] newTable =<br>               (HashEntry&lt;K,V&gt;[]) new HashEntry[newCapacity];<br>           int sizeMask = newCapacity - 1;<br>           for (int i = 0; i &lt; oldCapacity ; i++) {<br>               HashEntry&lt;K,V&gt; e = oldTable[i];<br>               if (e != null) {<br>                   HashEntry&lt;K,V&gt; next = e.next;<br>                   int idx = e.hash &amp; sizeMask;<br>                   if (next == null)   //  Single node on list<br>                       newTable[idx] = e;<br>                   else { // Reuse consecutive sequence at same slot<br>                       HashEntry&lt;K,V&gt; lastRun = e;<br>                       int lastIdx = idx;<br>                       for (HashEntry&lt;K,V&gt; last = next;<br>                            last != null;<br>                            last = last.next) {<br>                           int k = last.hash &amp; sizeMask;<br>                           if (k != lastIdx) {<br>                               lastIdx = k;<br>                               lastRun = last;<br>                           }<br>                       }<br>                       newTable[lastIdx] = lastRun;<br>                       // Clone remaining nodes<br>                       for (HashEntry&lt;K,V&gt; p = e; p != lastRun; p = p.next) {<br>                           V v = p.value;<br>                           int h = p.hash;<br>                           int k = h &amp; sizeMask;<br>                           HashEntry&lt;K,V&gt; n = newTable[k];<br>                           newTable[k] = new HashEntry&lt;K,V&gt;(h, p.key, v, n);<br>                       }<br>                   }<br>               }<br>           }<br>           int nodeIndex = node.hash &amp; sizeMask; // add the new node<br>           node.setNext(newTable[nodeIndex]);<br>           newTable[nodeIndex] = node;<br>           table = newTable;<br>       }</p>
-<p>get读方法上没有加锁，而是靠读取的变量（例如HashEntry里的value，Segment里的count）上加的volatile保证多了多线程的可见性（一个线用put程改了这个变量值其他线程立马知道）可以并发读取，性能很高。但是是弱一致性的，同时迭代器entrySet,keySet,values也是弱一致性的(遍历底层数组时，如果同时有别的线程在做写操作，不会抛ConcurrentModificationException)。</p>
+<pre><code>private void rehash(HashEntry&lt;K,V&gt; node) {
+           HashEntry&lt;K,V&gt;[] oldTable = table;
+           int oldCapacity = oldTable.length;
+           int newCapacity = oldCapacity &lt;&lt; 1;
+           threshold = (int)(newCapacity * loadFactor);
+           HashEntry&lt;K,V&gt;[] newTable =
+               (HashEntry&lt;K,V&gt;[]) new HashEntry[newCapacity];
+           int sizeMask = newCapacity - 1;
+           for (int i = 0; i &lt; oldCapacity ; i++) {
+               HashEntry&lt;K,V&gt; e = oldTable[i];
+               if (e != null) {
+                   HashEntry&lt;K,V&gt; next = e.next;
+                   int idx = e.hash &amp; sizeMask;
+                   if (next == null)   //  Single node on list
+                       newTable[idx] = e;
+                   else { // Reuse consecutive sequence at same slot
+                       HashEntry&lt;K,V&gt; lastRun = e;
+                       int lastIdx = idx;
+                       for (HashEntry&lt;K,V&gt; last = next;
+                            last != null;
+                            last = last.next) {
+                           int k = last.hash &amp; sizeMask;
+                           if (k != lastIdx) {
+                               lastIdx = k;
+                               lastRun = last;
+                           }
+                       }
+                       newTable[lastIdx] = lastRun;
+                       // Clone remaining nodes
+                       for (HashEntry&lt;K,V&gt; p = e; p != lastRun; p = p.next) {
+                           V v = p.value;
+                           int h = p.hash;
+                           int k = h &amp; sizeMask;
+                           HashEntry&lt;K,V&gt; n = newTable[k];
+                           newTable[k] = new HashEntry&lt;K,V&gt;(h, p.key, v, n);
+                       }
+                   }
+               }
+           }
+           int nodeIndex = node.hash &amp; sizeMask; // add the new node
+           node.setNext(newTable[nodeIndex]);
+           newTable[nodeIndex] = node;
+           table = newTable;
+       }
+</code></pre><p>get读方法上没有加锁，而是靠读取的变量（例如HashEntry里的value，Segment里的count）上加的volatile保证多了多线程的可见性（一个线用put程改了这个变量值其他线程立马知道）可以并发读取，性能很高。但是是弱一致性的，同时迭代器entrySet,keySet,values也是弱一致性的(遍历底层数组时，如果同时有别的线程在做写操作，不会抛ConcurrentModificationException)。</p>
 <p>volatile可以保证如果多线程情况下put修改一个原来元素会被立马可见（happens before，volatile变量写先于读），无过期数据。但是如果我们线程一put一个新元素，并不能保证线程二get方法读取立即可见，所以是弱一致性（put加锁，get不加锁，一读一写两个线程，put加元素但未执行count前get先执行了，没有形成happens befor关系）。</p>
-<p>get方法，弱一致，应该只有像HashTable一样读取时候也加锁禁止put写才能保证强一致性：<br>V get(Object key, int hash) {<br>    if (count != 0) { // read-volatile<br>        HashEntry e = getFirst(hash);<br>        while (e != null) {<br>            if (e.hash == hash &amp;&amp; key.equals(e.key)) {<br>                V v = e.value;<br>                if (v != null)<br>                    return v;<br>                return readValueUnderLock(e); // recheck<br>            }<br>            e = e.next;<br>        }<br>    }<br>    return null;<br>}</p>
-<p>HashIterator中方法，iterator.next()的底层方法，无锁，如果有别的线程改动，不会抛exception，弱一致：<br>final void advance() {<br>    if (nextEntry != null &amp;&amp; (nextEntry = nextEntry.next) != null)<br>        return;</p>
-<pre><code>while (nextTableIndex &gt;= 0) {
+<p>get方法，弱一致，应该只有像HashTable一样读取时候也加锁禁止put写才能保证强一致性：<br>    V get(Object key, int hash) {<br>        if (count != 0) { // read-volatile<br>            HashEntry e = getFirst(hash);<br>            while (e != null) {<br>                if (e.hash == hash &amp;&amp; key.equals(e.key)) {<br>                    V v = e.value;<br>                    if (v != null)<br>                        return v;<br>                    return readValueUnderLock(e); // recheck<br>                }<br>                e = e.next;<br>            }<br>        }<br>        return null;<br>    }</p>
+<p>HashIterator中方法，iterator.next()的底层方法，无锁，如果有别的线程改动，不会抛exception，弱一致：</p>
+<pre><code>final void advance() {
+    if (nextEntry != null &amp;&amp; (nextEntry = nextEntry.next) != null)
+        return;
+
+while (nextTableIndex &gt;= 0) {
     if ( (nextEntry = currentTable[nextTableIndex--]) != null)
         return;
 }
@@ -453,9 +506,9 @@ while (nextSegmentIndex &gt;= 0) {
       
         <div class="post-tags">
           
-            <a href="/tags/Map/" rel="tag"># Map</a>
-          
             <a href="/tags/Java并发编程/" rel="tag"># Java并发编程</a>
+          
+            <a href="/tags/Map/" rel="tag"># Map</a>
           
         </div>
       
@@ -545,7 +598,7 @@ while (nextSegmentIndex &gt;= 0) {
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

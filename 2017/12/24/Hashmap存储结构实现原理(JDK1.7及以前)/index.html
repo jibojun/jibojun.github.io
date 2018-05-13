@@ -110,7 +110,7 @@
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
 <meta property="og:description" content="Map接口，被AbstractMap抽象类实现，HashMap继承自AbstratMap且实现Map接口。 public class HashMap&amp;lt;K,V&amp;gt; extends AbstractMap&amp;lt;K,V&amp;gt;    implements Map&amp;lt;K,V&amp;gt;, Cloneable, Serializable Map接口可见定义了一个Entry接口： /**  * A">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-10T16:02:38.012Z">
+<meta property="og:updated_time" content="2018-05-13T10:31:55.237Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hashmap存储结构实现原理（JDK1.7及以前）">
 <meta name="twitter:description" content="Map接口，被AbstractMap抽象类实现，HashMap继承自AbstratMap且实现Map接口。 public class HashMap&amp;lt;K,V&amp;gt; extends AbstractMap&amp;lt;K,V&amp;gt;    implements Map&amp;lt;K,V&amp;gt;, Cloneable, Serializable Map接口可见定义了一个Entry接口： /**  * A">
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-05-11 00:02:38" itemprop="dateModified" datetime="2018-05-11T00:02:38+08:00">2018-05-11</time>
+                <time title="Modified: 2018-05-13 18:31:55" itemprop="dateModified" datetime="2018-05-13T18:31:55+08:00">2018-05-13</time>
               
             
           </span>
@@ -414,15 +414,17 @@
  */
 interface Entry&lt;K,V&gt; 
 </code></pre><p>HashMap中有Node实现了Entry,并且具有NODE数组成员变量TABLE作为具体的存储结构。</p>
-<p>数组：<br>    /**</p>
-<pre><code> * The table, initialized on first use, and resized as
+<p>数组：</p>
+<pre><code>/**
+ * The table, initialized on first use, and resized as
  * necessary. When allocated, length is always a power of two.
  * (We also tolerate length zero in some operations to allow
  * bootstrapping mechanics that are currently not needed.)
  */
 transient Node&lt;K,V&gt;[] table;
-</code></pre><p>具体节点类：<br>    /**</p>
-<pre><code> * Basic hash bin node, used for most entries.  (See below for
+</code></pre><p>具体节点类：</p>
+<pre><code>/**
+ * Basic hash bin node, used for most entries.  (See below for
  * TreeNode subclass, and in LinkedHashMap for its Entry subclass.)
  */
 static class Node&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
@@ -600,7 +602,7 @@ public V put(K key, V value) {
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

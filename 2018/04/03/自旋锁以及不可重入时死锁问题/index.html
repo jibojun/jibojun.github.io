@@ -110,7 +110,7 @@
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
 <meta property="og:description" content="自旋锁：    自旋锁是让当前线程不停地的在循环体内执行，当循环条件被其他线程改变时 当前线程才能进入临界区最终获取资源。是多线程时锁的一种实现方式。 CPU上下文切换以及消耗：    CPU时间片是线程执行需要获取的资源之一。    当CPU从执行一个线程切换到执行另外一个线程的时候，它需要先存储当前线程的本地的数据，程序指针等内容，然后加载另一个线程的本地数据，程序指针等，    最后才开始执">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-03T15:01:16.102Z">
+<meta property="og:updated_time" content="2018-05-13T10:28:40.150Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自旋锁以及不可重入时死锁问题">
 <meta name="twitter:description" content="自旋锁：    自旋锁是让当前线程不停地的在循环体内执行，当循环条件被其他线程改变时 当前线程才能进入临界区最终获取资源。是多线程时锁的一种实现方式。 CPU上下文切换以及消耗：    CPU时间片是线程执行需要获取的资源之一。    当CPU从执行一个线程切换到执行另外一个线程的时候，它需要先存储当前线程的本地的数据，程序指针等内容，然后加载另一个线程的本地数据，程序指针等，    最后才开始执">
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-05-03 23:01:16" itemprop="dateModified" datetime="2018-05-03T23:01:16+08:00">2018-05-03</time>
+                <time title="Modified: 2018-05-13 18:28:40" itemprop="dateModified" datetime="2018-05-13T18:28:40+08:00">2018-05-13</time>
               
             
           </span>
@@ -400,45 +400,63 @@
 <p>CPU上下文切换以及消耗：<br>    CPU时间片是线程执行需要获取的资源之一。<br>    当CPU从执行一个线程切换到执行另外一个线程的时候，它需要先存储当前线程的本地的数据，程序指针等内容，然后加载另一个线程的本地数据，程序指针等，<br>    最后才开始执行。这种切换称为“上下文切换”(“context switch”)。CPU会在一个上下文中执行一个线程，然后切换到另外一个上下文中执行另外一个线程。<br>    CPU上下文切换会带来较大的消耗，并不廉价。</p>
 <p>自旋锁的意义和优点：<br>    因为自旋锁的核心是如果不能获取资源则不停循环，所以当前线程在循环中，并没有释放CPU资源，不会产生CPU上下文切换，具有极强的响应速度。</p>
 <p>缺点和适用场景：<br>    因为线程不释放资源而不停循环，在线程数量很大时候，性能下降明显，每个线程都占用CPU时间都需要执行。所以适用于固定线程数目，竞争不激烈时。<br>    如果只是简单的不可重入（可重入锁可以理解为一个线程获取锁后，未放锁时候可以再次获取，synchronized, reentrantlock都是可重入锁）的自旋锁，<br>    单个线程中2次获取锁，则会死锁（第二次获取锁时CAS发现读取的值不是null而是它自己，所以不停循环）。</p>
-<p>例子，不可重入的自旋锁：<br>public class SpinLock {<br>    //持有资源的线程<br>    private AtomicReference<thread> owner =new AtomicReference&lt;&gt;();</thread></p>
-<pre><code>//锁
-public void lock(){
-    Thread current = Thread.currentThread();
-    //循环自旋，不释放CPU资源，直到获取锁为止
-    while(!owner .compareAndSet(null, current)){
-        System.out.println(current.getName()+ &quot; is waiting for lock release&quot;);
-    }
-}
+<p>例子，不可重入的自旋锁：</p>
+<pre><code>public class SpinLock {
+    //持有资源的线程
+    private AtomicReference&lt;Thread&gt; owner =new AtomicReference&lt;&gt;();
 
-//解锁
-public void unlock (){
-    Thread current = Thread.currentThread();
-    //CAS,预期值;当前线程，目标值:null,放锁
-    owner .compareAndSet(current, null);
-    System.out.println(current.getName()+ &quot;&apos;s lock is released&quot;);
-}
-
-public static void main(String[] args) {
-    new Thread(new Runnable() {
-        public void run() {
-            SpinLock l=new SpinLock();
-            try {
-                l.lock();
-                System.out.println(&quot;lock 1 time&quot;);
-                l.lock();
-                System.out.println(&quot;lock 2 times&quot;);
-            }catch(Exception e){
-                System.out.println(e.toString());
-            }finally {
-                l.unlock();
-                System.out.println(&quot;unlock 1 time&quot;);
-            }
+    //锁
+    public void lock(){
+        Thread current = Thread.currentThread();
+        //循环自旋，不释放CPU资源，直到获取锁为止
+        while(!owner .compareAndSet(null, current)){
+            System.out.println(current.getName()+ &quot; is waiting for lock release&quot;);
         }
-    }).start();
-}
-</code></pre><p>}</p>
-<p>死锁输出, thread-0第二次尝试获取锁时候因为CAS操作的读取值为它自己，而不是null，无法获取锁，一直不停循环：<br>lock 1 time<br>Thread-0 is waiting for lock release<br>Thread-0 is waiting for lock release<br>Thread-0 is waiting for lock release<br>Thread-0 is waiting for lock release<br>Thread-0 is waiting for lock release<br>Thread-0 is waiting for lock release<br>Thread-0 is waiting for lock release<br>Thread-0 is waiting for lock release<br>Thread-0 is waiting for lock release<br>Thread-0 is waiting for lock release<br>Thread-0 is waiting for lock release<br>……</p>
+    }
 
+    //解锁
+    public void unlock (){
+        Thread current = Thread.currentThread();
+        //CAS,预期值;当前线程，目标值:null,放锁
+        owner .compareAndSet(current, null);
+        System.out.println(current.getName()+ &quot;&apos;s lock is released&quot;);
+    }
+
+    public static void main(String[] args) {
+        new Thread(new Runnable() {
+            public void run() {
+                SpinLock l=new SpinLock();
+                try {
+                    l.lock();
+                    System.out.println(&quot;lock 1 time&quot;);
+                    l.lock();
+                    System.out.println(&quot;lock 2 times&quot;);
+                }catch(Exception e){
+                    System.out.println(e.toString());
+                }finally {
+                    l.unlock();
+                    System.out.println(&quot;unlock 1 time&quot;);
+                }
+            }
+        }).start();
+    }
+
+}
+</code></pre><p>死锁输出, thread-0第二次尝试获取锁时候因为CAS操作的读取值为它自己，而不是null，无法获取锁，一直不停循环：</p>
+<pre><code>lock 1 time
+Thread-0 is waiting for lock release
+Thread-0 is waiting for lock release
+Thread-0 is waiting for lock release
+Thread-0 is waiting for lock release
+Thread-0 is waiting for lock release
+Thread-0 is waiting for lock release
+Thread-0 is waiting for lock release
+Thread-0 is waiting for lock release
+Thread-0 is waiting for lock release
+Thread-0 is waiting for lock release
+Thread-0 is waiting for lock release
+......
+</code></pre>
       
     </div>
 
@@ -481,8 +499,8 @@ public static void main(String[] args) {
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/04/18/GuavaCache和ehcache的简单对比/" rel="prev" title="GuavaCache和ehcache的简单对比">
-                GuavaCache和ehcache的简单对比 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/04/05/自旋锁的可重入改造/" rel="prev" title="自旋锁的可重入改造">
+                自旋锁的可重入改造 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -548,7 +566,7 @@ public static void main(String[] args) {
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
