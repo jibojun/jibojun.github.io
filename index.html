@@ -1868,7 +1868,7 @@ C++实现与JVM一体。加载核心类。例如%JAVA_HOME%/jre/    lib（rt.jar
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/13/ConcurrentHashMap的size方法和Segment全锁场景/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/13/线程创建方式和状态/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -1887,8 +1887,8 @@ C++实现与JVM一体。加载核心类。例如%JAVA_HOME%/jre/    lib（rt.jar
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/13/ConcurrentHashMap的size方法和Segment全锁场景/" itemprop="url">
-                  ConcurrentHashMap的size方法和Segment全锁场景
+                <a class="post-title-link" href="/2018/02/13/线程创建方式和状态/" itemprop="url">
+                  线程三种创建方式
                 </a>
               
             
@@ -1914,7 +1914,7 @@ C++实现与JVM一体。加载核心类。例如%JAVA_HOME%/jre/    lib（rt.jar
                 
               
 
-              <time title="Created: 2018-02-13 02:32:13" itemprop="dateCreated datePublished" datetime="2018-02-13T02:32:13+08:00">2018-02-13</time>
+              <time title="Created: 2018-02-13 22:57:55" itemprop="dateCreated datePublished" datetime="2018-02-13T22:57:55+08:00">2018-02-13</time>
             
 
             
@@ -1931,7 +1931,7 @@ C++实现与JVM一体。加载核心类。例如%JAVA_HOME%/jre/    lib（rt.jar
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-05-13 03:27:26" itemprop="dateModified" datetime="2018-05-13T03:27:26+08:00">2018-05-13</time>
+                <time title="Modified: 2018-05-14 00:28:29" itemprop="dateModified" datetime="2018-05-14T00:28:29+08:00">2018-05-14</time>
               
             
           </span>
@@ -1948,7 +1948,7 @@ C++实现与JVM一体。加载核心类。例如%JAVA_HOME%/jre/    lib（rt.jar
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java集合类/" itemprop="url" rel="index"><span itemprop="name">Java集合类</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java并发编程/" itemprop="url" rel="index"><span itemprop="name">Java并发编程</span></a></span>
 
                 
                 
@@ -1984,12 +1984,13 @@ C++实现与JVM一体。加载核心类。例如%JAVA_HOME%/jre/    lib（rt.jar
       
         
           
-          JDK1.5-1.7中，ConcurrentHashMap主要思想都是分段锁，默认16个分段（segment），既并发度1。写操作put,remove,clear会加锁，但一般情况下只会加在数据所在的segment上，不影响别的。
-有一种情况会导致所有segment被锁，segment里有count
+          
+继承Thread类(实现了Runnable接口)，在run()方法中写线程业务逻辑。start（）方法启动线程，调用run（）方法是当前线程执行，不会起新线程异步执行。
+实现Runnable接口（将实现接口的类实例传入Thread构造方法或者直接用匿名内部类），同样在run()中写逻辑，start
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/13/ConcurrentHashMap的size方法和Segment全锁场景/#more" rel="contents">
+            <a class="btn" href="/2018/02/13/线程创建方式和状态/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -2077,7 +2078,7 @@ C++实现与JVM一体。加载核心类。例如%JAVA_HOME%/jre/    lib（rt.jar
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-count">18</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

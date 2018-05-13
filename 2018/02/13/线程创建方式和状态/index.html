@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="Volatile关键字在1.5后得到了语义加强。作为关键字加在变量前面可以保证线程间可见性和避免代码重排性的目的，达到加锁之外的轻量级同步效果。 可见性：    1.JVM中堆区存放共享数据。    2.JVM中栈区是线程独有的，每个线程栈会有各自的本地内存，并不共享。    3.多线程环境下，对于同一变量，如果线程1修改了值而没有立即更新至主存，线程2没有及时知晓变量值变化，仍使用老的缓存值进行">
-<meta name="keywords" content="Java并发编程,JVM">
+  <meta name="description" content="继承Thread类(实现了Runnable接口)，在run()方法中写线程业务逻辑。start（）方法启动线程，调用run（）方法是当前线程执行，不会起新线程异步执行。 实现Runnable接口（将实现接口的类实例传入Thread构造方法或者直接用匿名内部类），同样在run()中写逻辑，start（）方法启动。  例子，匿名类： new Thread(new Runnable() {">
+<meta name="keywords" content="Java并发编程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="volatile关键字（JDK1.5及以后）">
-<meta property="og:url" content="http://yoursite.com/2018/01/02/volatile关键字语义（JDK1-5及以后）/index.html">
+<meta property="og:title" content="线程三种创建方式">
+<meta property="og:url" content="http://yoursite.com/2018/02/13/线程创建方式和状态/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="Volatile关键字在1.5后得到了语义加强。作为关键字加在变量前面可以保证线程间可见性和避免代码重排性的目的，达到加锁之外的轻量级同步效果。 可见性：    1.JVM中堆区存放共享数据。    2.JVM中栈区是线程独有的，每个线程栈会有各自的本地内存，并不共享。    3.多线程环境下，对于同一变量，如果线程1修改了值而没有立即更新至主存，线程2没有及时知晓变量值变化，仍使用老的缓存值进行">
+<meta property="og:description" content="继承Thread类(实现了Runnable接口)，在run()方法中写线程业务逻辑。start（）方法启动线程，调用run（）方法是当前线程执行，不会起新线程异步执行。 实现Runnable接口（将实现接口的类实例传入Thread构造方法或者直接用匿名内部类），同样在run()中写逻辑，start（）方法启动。  例子，匿名类： new Thread(new Runnable() {">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-13T10:30:17.075Z">
+<meta property="og:updated_time" content="2018-05-13T16:28:29.553Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="volatile关键字（JDK1.5及以后）">
-<meta name="twitter:description" content="Volatile关键字在1.5后得到了语义加强。作为关键字加在变量前面可以保证线程间可见性和避免代码重排性的目的，达到加锁之外的轻量级同步效果。 可见性：    1.JVM中堆区存放共享数据。    2.JVM中栈区是线程独有的，每个线程栈会有各自的本地内存，并不共享。    3.多线程环境下，对于同一变量，如果线程1修改了值而没有立即更新至主存，线程2没有及时知晓变量值变化，仍使用老的缓存值进行">
+<meta name="twitter:title" content="线程三种创建方式">
+<meta name="twitter:description" content="继承Thread类(实现了Runnable接口)，在run()方法中写线程业务逻辑。start（）方法启动线程，调用run（）方法是当前线程执行，不会起新线程异步执行。 实现Runnable接口（将实现接口的类实例传入Thread构造方法或者直接用匿名内部类），同样在run()中写逻辑，start（）方法启动。  例子，匿名类： new Thread(new Runnable() {">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/01/02/volatile关键字语义（JDK1-5及以后）/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/02/13/线程创建方式和状态/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>volatile关键字（JDK1.5及以后） | Bojun Ji's notes</title>
+  <title>线程三种创建方式 | Bojun Ji's notes</title>
   
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/volatile关键字语义（JDK1-5及以后）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/13/线程创建方式和状态/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -295,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">volatile关键字（JDK1.5及以后）
+          <h1 class="post-title" itemprop="name headline">线程三种创建方式
               
             
           </h1>
@@ -320,7 +320,7 @@
                 
               
 
-              <time title="Created: 2018-01-02 21:39:09" itemprop="dateCreated datePublished" datetime="2018-01-02T21:39:09+08:00">2018-01-02</time>
+              <time title="Created: 2018-02-13 22:57:55" itemprop="dateCreated datePublished" datetime="2018-02-13T22:57:55+08:00">2018-02-13</time>
             
 
             
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-05-13 18:30:17" itemprop="dateModified" datetime="2018-05-13T18:30:17+08:00">2018-05-13</time>
+                <time title="Modified: 2018-05-14 00:28:29" itemprop="dateModified" datetime="2018-05-14T00:28:29+08:00">2018-05-14</time>
               
             
           </span>
@@ -354,7 +354,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JVM/" itemprop="url" rel="index"><span itemprop="name">JVM</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java并发编程/" itemprop="url" rel="index"><span itemprop="name">Java并发编程</span></a></span>
 
                 
                 
@@ -396,32 +396,45 @@
       
 
       
-        <p>Volatile关键字在1.5后得到了语义加强。作为关键字加在变量前面可以保证线程间可见性和避免代码重排性的目的，达到加锁之外的轻量级同步效果。</p>
-<p>可见性：<br>    1.JVM中堆区存放共享数据。<br>    2.JVM中栈区是线程独有的，每个线程栈会有各自的本地内存，并不共享。<br>    3.多线程环境下，对于同一变量，如果线程1修改了值而没有立即更新至主存，线程2没有及时知晓变量值变化，仍使用老的缓存值进行处理，则会导致问题。<br>    4.对于加了volatile的变量，如果线程1改变了值会被强制立即写入堆内存，同时可以迫使其它线程中对于此变量的本地栈内存作废，转而去堆区读取最新的值。从而达到每次对于变量改动都对所有线程可见的目的。</p>
-<p>重排序（有序性）：<br>    1.重排序主要有两种：编译器优化重排序，处理器指令重排序。代码经过重排序才能到最终的指令序列。<br>    2.有数据依赖的代码并不会被重排序：<br>        例如：<br>        int a=1;<br>        a=a+3;<br>        代码行2依赖于行1的a值，先读取a的值进行操作再写入内存。具有数据依赖性。<br>    3.重排序并不会对单线程环境造成任何影响。但多线程情况下则会有问题。synchronized和lock加锁使一段代码在同一时刻只有一个线程执行，等于顺序执行同步代码，可以保证有序性。<br>    4.JMM具备一些先天的“有序性”，即不需要通过任何手段就能够得到保证的有序性，这个通常也称为 happens-before 原则。如果两个操作的执行次序无法从happens-before原则推导出来，<br>        那么它们就不能保证它们的有序性，虚拟机可以随意地对它们进行重排序。</p>
-<pre><code>happens-before原则（先行发生原则）：
-
-程序次序规则：一个线程内，按照代码顺序，书写在前面的操作先行发生于书写在后面的操作
-
-锁定规则：一个unLock操作先行发生于后面对同一个锁额lock操作
-
-volatile变量规则：对一个变量的写操作先行发生于后面对这个变量的读操作
-
-传递规则：如果操作A先行发生于操作B，而操作B又先行发生于操作C，则可以得出操作A先行发生于操作C
-
-线程启动规则：Thread对象的start()方法先行发生于此线程的每个一个动作
-
-线程中断规则：对线程interrupt()方法的调用先行发生于被中断线程的代码检测到中断事件的发生
-
-线程终结规则：线程中所有的操作都先行发生于线程的终止检测，我们可以通过Thread.join()方法结束、Thread.isAlive()的返回值手段检测到线程已经终止执行
-
-对象终结规则：一个对象的初始化完成先行发生于他的finalize()方法的开始
-
-8条原则取自《深入理解Java虚拟机》。
-
-前4条规则是happends-before的核心。
-</code></pre><p>   5.volatile加在变量前除了可见性，第二层语义则是禁止指令重排序从而在JMM happens-before原则之外彻底保证有序性。</p>
-<p>原子性：<br>volatile并没有办法保证原子性，所以对于例如自增，自减这种内存的一读一写操作，在多线程下会有问题。 JDK 1.5后CONCURRENT包中有Atomic类可以保证原子性，通过Synchronized和Lock对资源加锁也可以保证原子性（同一时刻只有一个<br>线程执行同步代码块）。</p>
+        <ol>
+<li>继承Thread类(实现了Runnable接口)，在run()方法中写线程业务逻辑。start（）方法启动线程，调用run（）方法是当前线程执行，不会起新线程异步执行。</li>
+<li>实现Runnable接口（将实现接口的类实例传入Thread构造方法或者直接用匿名内部类），同样在run()中写逻辑，start（）方法启动。</li>
+</ol>
+<p>例子，匿名类：</p>
+<pre><code>new Thread(new Runnable() {
+            public void run() {
+                System.out.println(&quot;do something&quot;);
+            }
+        }).start();
+</code></pre><p>比较：</p>
+<p>共同点：</p>
+<ol>
+<li>两者都是无返回值的，run()方法是void的。</li>
+<li>线程的启动顺序是固定的按代码，而具体执行顺序是不固定的，由JVM和OS决定。</li>
+</ol>
+<p>不同点：</p>
+<ol>
+<li>Thread因为是类，不能多继承。Runnable是接口，可以多个类实现它</li>
+<li>Runnable和Callable可以作为task传入Executor线程池，更加方便管理。</li>
+</ol>
+<p>组合使用：</p>
+<p>Thread的子类可以传入不同实现了Runnable接口类实例。</p>
+<p>可以看出run()方法是void的，如果线程做的事情是需要返回值的，就可以靠Callable接口，这是1.5 JUC中新增加的，十分类似，逻辑写在call()方法里。</p>
+<pre><code>public interface Callable&lt;V&gt; {
+    /**
+     * Computes a result, or throws an exception if unable to do so.
+     *
+     * @return computed result
+     * @throws Exception if unable to compute a result
+     */
+    V call() throws Exception;
+}
+</code></pre><ol>
+<li>call()方法有返回值，而且是泛型的。</li>
+<li>配合ExecutorService线程池用，submit(）方法一般用来提交Runnable或者Callable。</li>
+<li>Callable可以配合JUC中的Furture接口或者FurtureTask类里的get方法来获取线程执行完的返回结果。</li>
+<li>适用于一些异步计算业务场景，新起线程提交给线程池，调用get方法时阻塞，直到拿到执行完的结果。</li>
+</ol>
 
       
     </div>
@@ -444,8 +457,6 @@ volatile变量规则：对一个变量的写操作先行发生于后面对这个
           
             <a href="/tags/Java并发编程/" rel="tag"># Java并发编程</a>
           
-            <a href="/tags/JVM/" rel="tag"># JVM</a>
-          
         </div>
       
 
@@ -457,8 +468,8 @@ volatile变量规则：对一个变量的写操作先行发生于后面对这个
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/01/HashSet底层原理/" rel="next" title="HashSet底层原理">
-                <i class="fa fa-chevron-left"></i> HashSet底层原理
+              <a href="/2018/02/13/ConcurrentHashMap的size方法和Segment全锁场景/" rel="next" title="ConcurrentHashMap的size方法和Segment全锁场景">
+                <i class="fa fa-chevron-left"></i> ConcurrentHashMap的size方法和Segment全锁场景
               </a>
             
           </div>
@@ -467,8 +478,8 @@ volatile变量规则：对一个变量的写操作先行发生于后面对这个
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/01/08/HashMap扩容原理/" rel="prev" title="HashMap扩容原理">
-                HashMap扩容原理 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/03/CAS操作和乐观锁思想/" rel="prev" title="CAS操作和乐观锁思想">
+                CAS操作和乐观锁思想 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
