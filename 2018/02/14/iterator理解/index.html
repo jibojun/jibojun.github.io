@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="JDK1.5-1.7中，ConcurrentHashMap主要思想都是分段锁，默认16个分段（segment），既并发度1。写操作put,remove,clear会加锁，但一般情况下只会加在数据所在的segment上，不影响别的。 有一种情况会导致所有segment被锁，segment里有count变量（volatile）存自己分段有多少个元素，简单来说所有分段数组的count字段相加就是整个ma">
-<meta name="keywords" content="Java并发编程,Map">
+  <meta name="description" content="iterator是JAVA中的迭代器，用来做集合遍历。有以下一些特点：  iterator是一个对象 iterator遍历是单向的，因为是轻量级迭代器，为了别的功能例如list双向遍历，还有别的迭代器例如ListIterator next()获取下一个元素，hasNext(）看是否还有元素，remove()删除元素并且返回 Collection接口实现了Iterable接口 每个集合类都有自己的i">
+<meta name="keywords" content="遍历,Java集合类">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ConcurrentHashMap的size方法和Segment全锁场景">
-<meta property="og:url" content="http://yoursite.com/2018/02/13/ConcurrentHashMap的size方法和Segment全锁场景/index.html">
+<meta property="og:title" content="iterator理解">
+<meta property="og:url" content="http://yoursite.com/2018/02/14/iterator理解/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="JDK1.5-1.7中，ConcurrentHashMap主要思想都是分段锁，默认16个分段（segment），既并发度1。写操作put,remove,clear会加锁，但一般情况下只会加在数据所在的segment上，不影响别的。 有一种情况会导致所有segment被锁，segment里有count变量（volatile）存自己分段有多少个元素，简单来说所有分段数组的count字段相加就是整个ma">
+<meta property="og:description" content="iterator是JAVA中的迭代器，用来做集合遍历。有以下一些特点：  iterator是一个对象 iterator遍历是单向的，因为是轻量级迭代器，为了别的功能例如list双向遍历，还有别的迭代器例如ListIterator next()获取下一个元素，hasNext(）看是否还有元素，remove()删除元素并且返回 Collection接口实现了Iterable接口 每个集合类都有自己的i">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-12T19:27:26.148Z">
+<meta property="og:updated_time" content="2018-05-14T14:33:03.330Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ConcurrentHashMap的size方法和Segment全锁场景">
-<meta name="twitter:description" content="JDK1.5-1.7中，ConcurrentHashMap主要思想都是分段锁，默认16个分段（segment），既并发度1。写操作put,remove,clear会加锁，但一般情况下只会加在数据所在的segment上，不影响别的。 有一种情况会导致所有segment被锁，segment里有count变量（volatile）存自己分段有多少个元素，简单来说所有分段数组的count字段相加就是整个ma">
+<meta name="twitter:title" content="iterator理解">
+<meta name="twitter:description" content="iterator是JAVA中的迭代器，用来做集合遍历。有以下一些特点：  iterator是一个对象 iterator遍历是单向的，因为是轻量级迭代器，为了别的功能例如list双向遍历，还有别的迭代器例如ListIterator next()获取下一个元素，hasNext(）看是否还有元素，remove()删除元素并且返回 Collection接口实现了Iterable接口 每个集合类都有自己的i">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/02/13/ConcurrentHashMap的size方法和Segment全锁场景/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/02/14/iterator理解/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>ConcurrentHashMap的size方法和Segment全锁场景 | Bojun Ji's notes</title>
+  <title>iterator理解 | Bojun Ji's notes</title>
   
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/13/ConcurrentHashMap的size方法和Segment全锁场景/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/14/iterator理解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -295,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">ConcurrentHashMap的size方法和Segment全锁场景
+          <h1 class="post-title" itemprop="name headline">iterator理解
               
             
           </h1>
@@ -320,7 +320,7 @@
                 
               
 
-              <time title="Created: 2018-02-13 02:32:13" itemprop="dateCreated datePublished" datetime="2018-02-13T02:32:13+08:00">2018-02-13</time>
+              <time title="Created: 2018-02-14 21:23:37" itemprop="dateCreated datePublished" datetime="2018-02-14T21:23:37+08:00">2018-02-14</time>
             
 
             
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-05-13 03:27:26" itemprop="dateModified" datetime="2018-05-13T03:27:26+08:00">2018-05-13</time>
+                <time title="Modified: 2018-05-14 22:33:03" itemprop="dateModified" datetime="2018-05-14T22:33:03+08:00">2018-05-14</time>
               
             
           </span>
@@ -354,7 +354,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java集合类/" itemprop="url" rel="index"><span itemprop="name">Java集合类</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaCore/" itemprop="url" rel="index"><span itemprop="name">JavaCore</span></a></span>
 
                 
                 
@@ -396,37 +396,284 @@
       
 
       
-        <p>JDK1.5-1.7中，ConcurrentHashMap主要思想都是分段锁，默认16个分段（segment），既并发度1。写操作put,remove,clear会加锁，但一般情况下只会加在数据所在的segment上，不影响别的。</p>
-<p>有一种情况会导致所有segment被锁，segment里有count变量（volatile）存自己分段有多少个元素，简单来说所有分段数组的count字段相加就是整个map的size了，但是这是2个操作，拿count（读取时候如果有别的线程改因为volatile会得知）和相加，读取时没有问题，但做加法时候，如果别的线程往里增删元素，则会不准。</p>
-<p>保险的办法就是加锁，size方法执行时候不能做写操作，但这样做法类似HashTable，效率偏低。</p>
-<p>ConcurrentHashMap计算size主要逻辑就是：<br>    1.连续两次循环读取每个分段个数和相加操作。<br>    2.Segment里有另一个变量modCount，如果有put,remove,clear    执行，则会加1。<br>    3.通过modCount相加结果比较前后两次计算结果是否相同，不同则认    为有修改发生大小发生了变化，那就加锁住所有segment。最后完成再    一个个解锁。</p>
-<p>所以如果size方法上述计算过程中出现了大小变化，在这个场景中，最终ConcurrentHashMap会加锁锁住所有Segment。</p>
-<pre><code>try {
-    for (;;) {
-        if (retries++ == RETRIES_BEFORE_LOCK) {
-            for (int j = 0; j &lt; segments.length; ++j)
-                ensureSegment(j).lock(); // force creation
-        }
-        sum = 0L;
-        size = 0;
-        overflow = false;
-        for (int j = 0; j &lt; segments.length; ++j) {
-            Segment&lt;K,V&gt; seg = segmentAt(segments, j);
-            if (seg != null) {
-                sum += seg.modCount;
-                int c = seg.count;
-                if (c &lt; 0 || (size += c) &lt; 0)
-                    overflow = true;
-            }
-        }
-        if (sum == last)
-            break;
-        last = sum;
+        <p>iterator是JAVA中的迭代器，用来做集合遍历。有以下一些特点：</p>
+<ol>
+<li>iterator是一个对象</li>
+<li>iterator遍历是单向的，因为是轻量级迭代器，为了别的功能例如list双向遍历，还有别的迭代器例如ListIterator</li>
+<li>next()获取下一个元素，hasNext(）看是否还有元素，remove()删除元素并且返回</li>
+<li>Collection接口实现了Iterable接口</li>
+<li>每个集合类都有自己的iterator实现，里面有hasNext,next,remove的逻辑，但是这些iterator都实现了Iterator接口，使用时直接调用相应集合的方法不需要关注是哪类。</li>
+</ol>
+<p>应用例子：</p>
+<pre><code>import java.util.*;
+
+public class IteratorDemo {
+    private static List&lt;String&gt; l=new LinkedList();
+    private static Map&lt;Integer,String&gt; m=new LinkedHashMap();
+    private static Set&lt;String&gt; s=new TreeSet();
+
+
+    static{
+        l.add(&quot;lv1&quot;);
+        l.add(&quot;lv2&quot;);
+        l.add(&quot;lv3&quot;);
+
+        m.put(1,&quot;name&quot;);
+        m.put(2,&quot;address&quot;);
+        m.put(3,&quot;number&quot;);
+
+        s.add(&quot;sv1&quot;);
+        s.add(&quot;sv2&quot;);
+        s.add(&quot;sv3&quot;);
     }
-} finally {
-    if (retries &gt; RETRIES_BEFORE_LOCK) {
-        for (int j = 0; j &lt; segments.length; ++j)
-            segmentAt(segments, j).unlock();
+
+    public static void main(String[] args) {
+        Iterator i1=l.iterator();
+        System.out.println(&quot;list values are as below:&quot;);
+        while(i1.hasNext()) {
+            System.out.print(i1.next() + &quot; &quot;);
+            System.out.println();
+        }
+
+        Iterator i2=m.entrySet().iterator();
+        System.out.println(&quot;map keys,values are as below:&quot;);
+        while(i2.hasNext()) {
+            Map.Entry e=(Map.Entry)i2.next();
+            Object key=e.getKey();
+            Object value=e.getValue();
+            System.out.print(&quot;{&quot;+key + &quot;,&quot;+value+&quot;}&quot;);
+            System.out.println();
+        }
+
+        Iterator i3=s.iterator();
+        System.out.println(&quot;set values are as below:&quot;);
+        while(i3.hasNext()) {
+            System.out.print(i3.next() + &quot; &quot;);
+            System.out.println();
+        }
+
+    }
+}
+</code></pre><p>输出例子：</p>
+<pre><code>list values are as below:
+lv1 
+lv2 
+lv3 
+map keys,values are as below:
+{1,name}
+{2,address}
+{3,number}
+set values are as below:
+sv1 
+sv2 
+sv3 
+</code></pre><p>Iterator原理和注意点：</p>
+<ol>
+<li>每种集合类都有自己iterator的实现（内部类），但都实现了Iterator接口，使用时不需要关注</li>
+<li>不允许遍历期间新增或者移除元素</li>
+<li>如果改变则会抛出ConcurrentModificationException（    RuntimeException）</li>
+<li>iterator中同样有modCount变量来确认是否修改（修改则+1,和ConcurrentHashMap的size方法中modCount作用类似） </li>
+<li>移除元素的话要用iterator里面的remove方法</li>
+<li>不能变动的是整个集合对象（新增删除元素，除非用iterator的remove），但是可以改集合内的值</li>
+</ol>
+<p>Arraylist实现的iterator例子（利用游标，必要处检查modCount确保每改变）：</p>
+<pre><code>/**
+ * An optimized version of AbstractList.Itr
+ */
+private class Itr implements Iterator&lt;E&gt; {
+    int cursor;       // index of next element to return
+    int lastRet = -1; // index of last element returned; -1 if no such
+    int expectedModCount = modCount;
+
+    Itr() {}
+
+    public boolean hasNext() {
+        return cursor != size;
+    }
+
+    @SuppressWarnings(&quot;unchecked&quot;)
+    public E next() {
+        checkForComodification();
+        int i = cursor;
+        if (i &gt;= size)
+            throw new NoSuchElementException();
+        Object[] elementData = ArrayList.this.elementData;
+        if (i &gt;= elementData.length)
+            throw new ConcurrentModificationException();
+        cursor = i + 1;
+        return (E) elementData[lastRet = i];
+    }
+
+    public void remove() {
+        if (lastRet &lt; 0)
+            throw new IllegalStateException();
+        checkForComodification();
+
+        try {
+            ArrayList.this.remove(lastRet);
+            cursor = lastRet;
+            lastRet = -1;
+            expectedModCount = modCount;
+        } catch (IndexOutOfBoundsException ex) {
+            throw new ConcurrentModificationException();
+        }
+    }
+
+    @Override
+    @SuppressWarnings(&quot;unchecked&quot;)
+    public void forEachRemaining(Consumer&lt;? super E&gt; consumer) {
+        Objects.requireNonNull(consumer);
+        final int size = ArrayList.this.size;
+        int i = cursor;
+        if (i &gt;= size) {
+            return;
+        }
+        final Object[] elementData = ArrayList.this.elementData;
+        if (i &gt;= elementData.length) {
+            throw new ConcurrentModificationException();
+        }
+        while (i != size &amp;&amp; modCount == expectedModCount) {
+            consumer.accept((E) elementData[i++]);
+        }
+        // update once at end of iteration to reduce heap write traffic
+        cursor = i;
+        lastRet = i - 1;
+        checkForComodification();
+    }
+
+    final void checkForComodification() {
+        if (modCount != expectedModCount)
+            throw new ConcurrentModificationException();
+    }
+}
+</code></pre><p>遍历时改动集合对象例子：</p>
+<pre><code>import java.util.*;
+
+public class IteratorModify {
+    private static List&lt;String&gt; l=new LinkedList();
+
+
+    static{
+        for(int i=0;i&lt;100000;i++){
+            l.add(&quot;lv&quot;+i);
+        }
+    }
+
+    public static void main(String[] args) {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Iterator i1=l.iterator();
+                System.out.println(&quot;list values are as below:&quot;);
+                while(i1.hasNext()) {
+                    l.add(&quot;modify&quot;);
+                    System.out.print(i1.next() + &quot; &quot;);
+                    System.out.println();
+                }
+            }
+        }).start();
+    }
+}
+</code></pre><p>Exception:</p>
+<pre><code>list values are as below:
+Exception in thread &quot;Thread-0&quot; java.util.ConcurrentModificationException
+    at java.util.LinkedList$ListItr.checkForComodification(LinkedList.java:966)
+    at java.util.LinkedList$ListItr.next(LinkedList.java:888)
+    at loop.IteratorModify$1.run(IteratorModify.java:24)
+    at java.lang.Thread.run(Thread.java:748)
+</code></pre><p>改集合对象里面的值，这个操作是可以的：</p>
+<pre><code>new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Iterator i1=l.iterator();
+                System.out.println(&quot;list values are as below:&quot;);
+                while(i1.hasNext()) {
+                    String tmp=(String) i1.next();
+                    tmp+=&quot; modify&quot;;
+                    System.out.print(tmp + &quot; &quot;);
+                    System.out.println();
+                }
+            }
+        }).start();
+</code></pre><p>Iterable接口，可以返回一个iterator，实现它的类都可以用Iterator以及基于Iterator的foreach循环。Iterator因为三个核心方法都需要集合当前的索引位置，所以集合类不直接实现它，而是实现能返回它的Iterable接口：</p>
+<pre><code>package java.lang;
+
+import java.util.Iterator;
+import java.util.Objects;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.function.Consumer;
+
+/**
+ * Implementing this interface allows an object to be the target of
+ * the &quot;for-each loop&quot; statement. See
+ * &lt;strong&gt;
+ * &lt;a href=&quot;{@docRoot}/../technotes/guides/language/foreach.html&quot;&gt;For-each Loop&lt;/a&gt;
+ * &lt;/strong&gt;
+ *
+ * @param &lt;T&gt; the type of elements returned by the iterator
+ *
+ * @since 1.5
+ * @jls 14.14.2 The enhanced for statement
+ */
+public interface Iterable&lt;T&gt; {
+    /**
+     * Returns an iterator over elements of type {@code T}.
+     *
+     * @return an Iterator.
+     */
+    Iterator&lt;T&gt; iterator();
+
+    /**
+     * Performs the given action for each element of the {@code Iterable}
+     * until all elements have been processed or the action throws an
+     * exception.  Unless otherwise specified by the implementing class,
+     * actions are performed in the order of iteration (if an iteration order
+     * is specified).  Exceptions thrown by the action are relayed to the
+     * caller.
+     *
+     * @implSpec
+     * &lt;p&gt;The default implementation behaves as if:
+     * &lt;pre&gt;{@code
+     *     for (T t : this)
+     *         action.accept(t);
+     * }&lt;/pre&gt;
+     *
+     * @param action The action to be performed for each element
+     * @throws NullPointerException if the specified action is null
+     * @since 1.8
+     */
+    default void forEach(Consumer&lt;? super T&gt; action) {
+        Objects.requireNonNull(action);
+        for (T t : this) {
+            action.accept(t);
+        }
+    }
+
+    /**
+     * Creates a {@link Spliterator} over the elements described by this
+     * {@code Iterable}.
+     *
+     * @implSpec
+     * The default implementation creates an
+     * &lt;em&gt;&lt;a href=&quot;Spliterator.html#binding&quot;&gt;early-binding&lt;/a&gt;&lt;/em&gt;
+     * spliterator from the iterable&apos;s {@code Iterator}.  The spliterator
+     * inherits the &lt;em&gt;fail-fast&lt;/em&gt; properties of the iterable&apos;s iterator.
+     *
+     * @implNote
+     * The default implementation should usually be overridden.  The
+     * spliterator returned by the default implementation has poor splitting
+     * capabilities, is unsized, and does not report any spliterator
+     * characteristics. Implementing classes can nearly always provide a
+     * better implementation.
+     *
+     * @return a {@code Spliterator} over the elements described by this
+     * {@code Iterable}.
+     * @since 1.8
+     */
+    default Spliterator&lt;T&gt; spliterator() {
+        return Spliterators.spliteratorUnknownSize(iterator(), 0);
     }
 }
 </code></pre>
@@ -449,9 +696,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Java并发编程/" rel="tag"># Java并发编程</a>
+            <a href="/tags/遍历/" rel="tag"># 遍历</a>
           
-            <a href="/tags/Map/" rel="tag"># Map</a>
+            <a href="/tags/Java集合类/" rel="tag"># Java集合类</a>
           
         </div>
       
@@ -464,8 +711,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/10/ConcurrentHashMap实现原理（JDK1.6，1.7）/" rel="next" title="ConcurrentHashMap实现原理（JDK1.6，1.7）">
-                <i class="fa fa-chevron-left"></i> ConcurrentHashMap实现原理（JDK1.6，1.7）
+              <a href="/2018/02/13/线程创建方式和状态/" rel="next" title="线程三种创建方式">
+                <i class="fa fa-chevron-left"></i> 线程三种创建方式
               </a>
             
           </div>
@@ -474,8 +721,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/02/13/线程创建方式和状态/" rel="prev" title="线程三种创建方式">
-                线程三种创建方式 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/03/CAS操作和乐观锁思想/" rel="prev" title="CAS操作和乐观锁思想">
+                CAS操作和乐观锁思想 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
