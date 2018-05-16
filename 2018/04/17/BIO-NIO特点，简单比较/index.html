@@ -102,20 +102,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Bojun Ji&#39;s notes">
-<meta property="og:url" content="http://yoursite.com/page/3/index.html">
+  <meta name="description" content="socket：套接字，网络通信的两端，本质是对TCP/IP协议封装编程接口API。在不同机器上的进程需要通讯然后交换读写数据可以依赖socket编程接口。传统方式就是BIO。 阻塞：调用方法，一直阻塞直到IO操作完成才返回。非阻塞：调用，不能读写立即返回0，被事件分发器通知可以读写再执行IO，循环直到IO操作完成。 BIO：  Blocking IO，同步阻塞IO，服务器端会有一个acceptor">
+<meta name="keywords" content="BIO,NIO,网络编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BIO, NIO特点，简单比较">
+<meta property="og:url" content="http://yoursite.com/2018/04/17/BIO-NIO特点，简单比较/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
+<meta property="og:description" content="socket：套接字，网络通信的两端，本质是对TCP/IP协议封装编程接口API。在不同机器上的进程需要通讯然后交换读写数据可以依赖socket编程接口。传统方式就是BIO。 阻塞：调用方法，一直阻塞直到IO操作完成才返回。非阻塞：调用，不能读写立即返回0，被事件分发器通知可以读写再执行IO，循环直到IO操作完成。 BIO：  Blocking IO，同步阻塞IO，服务器端会有一个acceptor">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-05-16T16:57:35.342Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bojun Ji&#39;s notes">
+<meta name="twitter:title" content="BIO, NIO特点，简单比较">
+<meta name="twitter:description" content="socket：套接字，网络通信的两端，本质是对TCP/IP协议封装编程接口API。在不同机器上的进程需要通讯然后交换读写数据可以依赖socket编程接口。传统方式就是BIO。 阻塞：调用方法，一直阻塞直到IO操作完成才返回。非阻塞：调用，不能读写立即返回0，被事件分发器通知可以读写再执行IO，循环直到IO操作完成。 BIO：  Blocking IO，同步阻塞IO，服务器端会有一个acceptor">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/page/3/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/17/BIO-NIO特点，简单比较/"/>
 
 
 
@@ -125,7 +130,7 @@
   };
 </script>
 
-  <title>Bojun Ji's notes</title>
+  <title>BIO, NIO特点，简单比较 | Bojun Ji's notes</title>
   
 
 
@@ -172,8 +177,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -257,9 +261,9 @@
           
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -274,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/26/StringBuilder和StringBuffer对比/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/17/BIO-NIO特点，简单比较/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -291,11 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/26/StringBuilder和StringBuffer对比/" itemprop="url">
-                  StringBuilder和StringBuffer对比
-                </a>
+          <h1 class="post-title" itemprop="name headline">BIO, NIO特点，简单比较
               
             
           </h1>
@@ -320,7 +320,7 @@
                 
               
 
-              <time title="Created: 2017-12-26 23:47:44" itemprop="dateCreated datePublished" datetime="2017-12-26T23:47:44+08:00">2017-12-26</time>
+              <time title="Created: 2018-04-17 00:04:31" itemprop="dateCreated datePublished" datetime="2018-04-17T00:04:31+08:00">2018-04-17</time>
             
 
             
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-05-13 18:29:54" itemprop="dateModified" datetime="2018-05-13T18:29:54+08:00">2018-05-13</time>
+                <time title="Modified: 2018-05-17 00:57:35" itemprop="dateModified" datetime="2018-05-17T00:57:35+08:00">2018-05-17</time>
               
             
           </span>
@@ -354,7 +354,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaCore/" itemprop="url" rel="index"><span itemprop="name">JavaCore</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/IO/" itemprop="url" rel="index"><span itemprop="name">IO</span></a></span>
 
                 
                 
@@ -369,6 +369,14 @@
           
           
 
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
           
 
           
@@ -388,18 +396,24 @@
       
 
       
-        
-          
-          共同点：    都继承自AbstractStringBuilder，都用CHAR数组作为存储结构。和String比是变长的因为数组没有加FINAL，核心是APPEND方法，适用于拼接字符串经常变化的场景。    不传大小的话默认都是16。APPEND时候会有ensureCapacityInterna
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/12/26/StringBuilder和StringBuffer对比/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+        <p>socket：套接字，网络通信的两端，本质是对TCP/IP协议封装编程接口API。在不同机器上的进程需要通讯然后交换读写数据可以依赖socket编程接口。<br>传统方式就是BIO。</p>
+<p>阻塞：调用方法，一直阻塞直到IO操作完成才返回。<br>非阻塞：调用，不能读写立即返回0，被事件分发器通知可以读写再执行IO，循环直到IO操作完成。</p>
+<p>BIO：</p>
+<ol>
+<li>Blocking IO，同步阻塞IO，服务器端会有一个acceptor线程监听连接，客户端每个请求在服务端都需要启动线程。如果有大量socket申请连接，而服务端无法分配相应线程，就会阻塞。</li>
+<li>流传输（inputStream,outputStream），IO前获取流，然后对输入流读取，对输出流写入来完成IO，流是单向的，要么读，要么写。</li>
+</ol>
+<p>NIO</p>
+<ol>
+<li>NON-BLOCKING IO/NEW IO，同步非阻塞IO，开始于JDK1.4。事件驱动，selector可以单线程轮询监听多个channel，因为一个socket连接大部分时间等待，只有一段时间做真正的IO操作。所以这样做可以监听事件，如果有真正的读写IO操作才分配线程去同步完成IO操作。</li>
+<li>靠Channel和Buffer完成传输，Channel可以对应Stream，但它每次使用都是从Channel写到Buffer，或者从Buffer写到Channel。</li>
+</ol>
+<p>主要区别和NIO的改进：</p>
+<ol>
+<li>BIO每个连接都有线程对应，而其中没有数据不触发真正的IO请求这段时间都是浪费的，但仍阻塞。NIO靠SELECT单线程，监听多个连接的CHANNEL，只有真的收到IO请求时才开启线程同步处理完成IO。BIO是每个连接对应一个线程，而NIO是每个IO请求对应一个线程。大量减少了服务器端线程量以及线程工作的空闲时间。</li>
+<li>BIO流传输，单向，且普通IO是按字节单向流式传输。但是NIO有Buffer，从Channel读到Buffer，CPU再从缓冲取，可以一次一行，同样，CPU把数据写到缓冲，再从Buffer写到Channel里。一次大块字节传输，提升传输性能。</li>
+</ol>
+
       
     </div>
 
@@ -417,191 +431,44 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/24/Hashmap存储结构实现原理(JDK1.7及以前)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bojun Ji's notes">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/24/Hashmap存储结构实现原理(JDK1.7及以前)/" itemprop="url">
-                  Hashmap存储结构实现原理（JDK1.7及以前）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2017-12-24 23:47:44" itemprop="dateCreated datePublished" datetime="2017-12-24T23:47:44+08:00">2017-12-24</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-05-13 18:31:55" itemprop="dateModified" datetime="2018-05-13T18:31:55+08:00">2018-05-13</time>
-              
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java集合类/" itemprop="url" rel="index"><span itemprop="name">Java集合类</span></a></span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/BIO/" rel="tag"># BIO</a>
           
-
+            <a href="/tags/NIO/" rel="tag"># NIO</a>
           
-            
+            <a href="/tags/网络编程/" rel="tag"># 网络编程</a>
           
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          
-          Map接口，被AbstractMap抽象类实现，HashMap继承自AbstratMap且实现Map接口。
-public class HashMap&lt;K,V&gt; extends AbstractMap&lt;K,V&gt;    implements Map&lt;K,V&gt;, Clo
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/12/24/Hashmap存储结构实现原理(JDK1.7及以前)/#more" rel="contents">
-              Read more &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/13/长连接，短连接以及HTTP选择，Dubbo协议单一长连接/" rel="next" title="长连接，短连接以及HTTP选择，Dubbo协议单一长连接">
+                <i class="fa fa-chevron-left"></i> 长连接，短连接以及HTTP选择，Dubbo协议单一长连接
+              </a>
+            
           </div>
-          <!--/noindex-->
-        
-      
-    </div>
 
-    
+          <span class="post-nav-divider"></span>
 
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/18/GuavaCache和ehcache的简单对比/" rel="prev" title="GuavaCache和ehcache的简单对比">
+                GuavaCache和ehcache的简单对比 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
 
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -611,18 +478,19 @@ public class HashMap&lt;K,V&gt; extends AbstractMap&lt;K,V&gt;    implements Map
   </article>
 
 
-    
-  </section>
 
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
-  </nav>
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -919,6 +787,10 @@ public class HashMap&lt;K,V&gt; extends AbstractMap&lt;K,V&gt;    implements Map
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
 
   
 

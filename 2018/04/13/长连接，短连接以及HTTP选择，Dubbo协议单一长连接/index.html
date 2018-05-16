@@ -103,14 +103,14 @@
 
 
   <meta name="description" content="短连接：感觉可以理解为连接后，只做一次数据传输，做完断开连接，只做一件事，不维持连接。新做要重新建立连接。长连接：感觉可以理解为连接后，可以做多次数据传输，保持连接状态，并且通过心跳检测之类观察。 HTTP是一个无状态协议，如果两次客户端和服务器通过HTTP请求响应交换数据，这两次操作是没有记忆功能，没有任何关系的。但是无状态协议并不代表是无连接数据报（UDP），HTTP仍然能靠TCP保持长连接。">
-<meta name="keywords" content="Dubbo,网络,NIO">
+<meta name="keywords" content="NIO,Dubbo,网络">
 <meta property="og:type" content="article">
 <meta property="og:title" content="长连接，短连接以及HTTP选择，Dubbo协议单一长连接">
 <meta property="og:url" content="http://yoursite.com/2018/04/13/长连接，短连接以及HTTP选择，Dubbo协议单一长连接/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
 <meta property="og:description" content="短连接：感觉可以理解为连接后，只做一次数据传输，做完断开连接，只做一件事，不维持连接。新做要重新建立连接。长连接：感觉可以理解为连接后，可以做多次数据传输，保持连接状态，并且通过心跳检测之类观察。 HTTP是一个无状态协议，如果两次客户端和服务器通过HTTP请求响应交换数据，这两次操作是没有记忆功能，没有任何关系的。但是无状态协议并不代表是无连接数据报（UDP），HTTP仍然能靠TCP保持长连接。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-15T16:13:47.577Z">
+<meta property="og:updated_time" content="2018-05-16T16:09:42.831Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="长连接，短连接以及HTTP选择，Dubbo协议单一长连接">
 <meta name="twitter:description" content="短连接：感觉可以理解为连接后，只做一次数据传输，做完断开连接，只做一件事，不维持连接。新做要重新建立连接。长连接：感觉可以理解为连接后，可以做多次数据传输，保持连接状态，并且通过心跳检测之类观察。 HTTP是一个无状态协议，如果两次客户端和服务器通过HTTP请求响应交换数据，这两次操作是没有记忆功能，没有任何关系的。但是无状态协议并不代表是无连接数据报（UDP），HTTP仍然能靠TCP保持长连接。">
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-05-16 00:13:47" itemprop="dateModified" datetime="2018-05-16T00:13:47+08:00">2018-05-16</time>
+                <time title="Modified: 2018-05-17 00:09:42" itemprop="dateModified" datetime="2018-05-17T00:09:42+08:00">2018-05-17</time>
               
             
           </span>
@@ -406,10 +406,11 @@
 <li>HTTP 2.0：支持长连接，而且改动了1.1的报文格式（start line, header, body），有更良好的二进制格式。数据流共用一个连接。<br>有低延迟的良好性能，分布式服务框架GRPC就选用HTTP 2.0作为传输协议。</li>
 </ol>
 <hr>
-<p>对于Dubbo，是用单一长连接，2以上版本默认Dubbo协议以下配置：</p>
+<p>官方Dubbo协议介绍：<br><a href="http://dubbo.apache.org/books/dubbo-user-book-en/references/protocol/introduction.html" target="_blank" rel="noopener">http://dubbo.apache.org/books/dubbo-user-book-en/references/protocol/introduction.html</a></p>
+<p>对于Dubbo协议，是用单一长连接，2以上版本默认Dubbo协议，以下为缺省配置：</p>
 <ol>
-<li>传输方法：异步的NIO（NON BLOCKING IO，和BIO比，BIO一般每个socket请求要有一个线程处理，服务端线程数有限，未分到处理线程的请求会被阻塞等待。NIO可以用单线程监听一堆CHANNEL上的IO事件，连接的socket里只有真正发出IO请求时才会获得线程来处理，同步IO，因为获线程会不断尝试获取IO权限，取得后才能IO操作），基于Netty（1版本用Mina，Netty靠future-listener机制实现异步的NIO）,负责Socket部分网络传输。</li>
-<li>序列化：Hessian修改版</li>
+<li>传输方法：异步的NIO（NON BLOCKING IO，和BIO比，BIO每个请求要有一个线程处理，服务端线程数有限，未分到处理线程的请求会被阻塞等待。NIO可以用单线程监听多个CHANNEL上的IO事件，连接的socket里只有真正发出IO请求时才会获得线程来处理，IO部分是同步的，减少了BIO中的等待时间），基于Netty（1版本用Mina，Netty靠future-listener机制实现异步的NIO）,负责Socket部分网络传输。</li>
+<li>序列化：Hessian</li>
 <li>传输协议：TCP</li>
 <li>连接数量：单连接</li>
 <li>连接方式：长连接</li>
@@ -446,11 +447,11 @@
       
         <div class="post-tags">
           
+            <a href="/tags/NIO/" rel="tag"># NIO</a>
+          
             <a href="/tags/Dubbo/" rel="tag"># Dubbo</a>
           
             <a href="/tags/网络/" rel="tag"># 网络</a>
-          
-            <a href="/tags/NIO/" rel="tag"># NIO</a>
           
         </div>
       
@@ -473,8 +474,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/04/18/GuavaCache和ehcache的简单对比/" rel="prev" title="GuavaCache和ehcache的简单对比">
-                GuavaCache和ehcache的简单对比 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/04/17/BIO-NIO特点，简单比较/" rel="prev" title="BIO, NIO特点，简单比较">
+                BIO, NIO特点，简单比较 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -540,7 +541,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -569,7 +570,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -616,7 +619,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">17</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
