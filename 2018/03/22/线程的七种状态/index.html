@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="CAS操作：    1.CAS（Compare and swap）比较和替换是设计并发算法时用到的一种技术。比较和替换是使用一个期望值和一个变量的当前值进行比较，        如果当前变量的值与我们期望的值相等，就使用一个新值替换当前变量的值。    2.显而易见，CAS需要内存位置（V）、预期原值（A）和新值(B)这些参数，并且需要先进行读取操作，然后比较读取值和待写入值，想等则">
+  <meta name="description" content="new:新建状态，new一个thread或者它的子类 ready to run:  调用start()，但没有拿到时间片，等待CPU资源 已经获取时间片进入run()方法的逻辑，但是用完后从running变成ready to run 已经running的线程，让出CPU资源，进入blocked状态，例如Thread中的sleep（）方法，时间到了后再次进入ready to run  running">
 <meta name="keywords" content="Java并发编程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CAS操作和乐观锁思想">
-<meta property="og:url" content="http://yoursite.com/2018/03/03/CAS操作和乐观锁思想/index.html">
+<meta property="og:title" content="线程的七种状态">
+<meta property="og:url" content="http://yoursite.com/2018/03/22/线程的七种状态/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="CAS操作：    1.CAS（Compare and swap）比较和替换是设计并发算法时用到的一种技术。比较和替换是使用一个期望值和一个变量的当前值进行比较，        如果当前变量的值与我们期望的值相等，就使用一个新值替换当前变量的值。    2.显而易见，CAS需要内存位置（V）、预期原值（A）和新值(B)这些参数，并且需要先进行读取操作，然后比较读取值和待写入值，想等则">
+<meta property="og:description" content="new:新建状态，new一个thread或者它的子类 ready to run:  调用start()，但没有拿到时间片，等待CPU资源 已经获取时间片进入run()方法的逻辑，但是用完后从running变成ready to run 已经running的线程，让出CPU资源，进入blocked状态，例如Thread中的sleep（）方法，时间到了后再次进入ready to run  running">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-02T14:31:02.656Z">
+<meta property="og:updated_time" content="2018-05-21T16:26:04.591Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CAS操作和乐观锁思想">
-<meta name="twitter:description" content="CAS操作：    1.CAS（Compare and swap）比较和替换是设计并发算法时用到的一种技术。比较和替换是使用一个期望值和一个变量的当前值进行比较，        如果当前变量的值与我们期望的值相等，就使用一个新值替换当前变量的值。    2.显而易见，CAS需要内存位置（V）、预期原值（A）和新值(B)这些参数，并且需要先进行读取操作，然后比较读取值和待写入值，想等则">
+<meta name="twitter:title" content="线程的七种状态">
+<meta name="twitter:description" content="new:新建状态，new一个thread或者它的子类 ready to run:  调用start()，但没有拿到时间片，等待CPU资源 已经获取时间片进入run()方法的逻辑，但是用完后从running变成ready to run 已经running的线程，让出CPU资源，进入blocked状态，例如Thread中的sleep（）方法，时间到了后再次进入ready to run  running">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/03/CAS操作和乐观锁思想/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/22/线程的七种状态/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>CAS操作和乐观锁思想 | Bojun Ji's notes</title>
+  <title>线程的七种状态 | Bojun Ji's notes</title>
   
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/03/CAS操作和乐观锁思想/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/22/线程的七种状态/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -295,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">CAS操作和乐观锁思想
+          <h1 class="post-title" itemprop="name headline">线程的七种状态
               
             
           </h1>
@@ -320,7 +320,7 @@
                 
               
 
-              <time title="Created: 2018-03-03 22:08:13" itemprop="dateCreated datePublished" datetime="2018-03-03T22:08:13+08:00">2018-03-03</time>
+              <time title="Created: 2018-03-22 00:08:31" itemprop="dateCreated datePublished" datetime="2018-03-22T00:08:31+08:00">2018-03-22</time>
             
 
             
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-05-02 22:31:02" itemprop="dateModified" datetime="2018-05-02T22:31:02+08:00">2018-05-02</time>
+                <time title="Modified: 2018-05-22 00:26:04" itemprop="dateModified" datetime="2018-05-22T00:26:04+08:00">2018-05-22</time>
               
             
           </span>
@@ -396,32 +396,23 @@
       
 
       
-        <p>CAS操作：<br>    1.CAS（Compare and swap）比较和替换是设计并发算法时用到的一种技术。比较和替换是使用一个期望值和一个变量的当前值进行比较，<br>        如果当前变量的值与我们期望的值相等，就使用一个新值替换当前变量的值。<br>    2.显而易见，CAS需要内存位置（V）、预期原值（A）和新值(B)这些参数，并且需要先进行读取操作，然后比较读取值和待写入值，想等则<br>        做一个写入操作。在多线程环境下，如果CAS不能作为一个原子操作则会导致问题。<br>    3.现在CPU内部已经执行原子的CAS操作（JNI unsafe中compareAndSwapInt方法）。JDK1.5后，java.util.concurrent（J.U.C）.atomic包中的一些原子类可以用来使用CPU中的这些功能，<br>        同时弥补volatile关键字不能保证原子性的问题。</p>
-<pre><code>例如AtomicInteger, 自增操作(getAndIncrement)就是一个自旋CAS,int变量是volatile的，具有可见性,底层用CAS比较数值，成功则返回当前值，失败则不停自旋重试：
-public class AtomicInteger extends Number implements java.io.Serializable {  
-
-    private volatile int value;  
-
-    public final int get() {  
-        return value;  
-    }  
-
-    public final int getAndIncrement() {  
-        for (;;) {  
-            int current = get();  
-            int next = current + 1;  
-            if (compareAndSet(current, next))  
-                return current;  
-        }  
-    }  
-
-    public final boolean compareAndSet(int expect, int update) {  
-        return unsafe.compareAndSwapInt(this, valueOffset, expect, update);  
-    }  
-}
-</code></pre><p>乐观锁思想：<br>与悲观锁思想相对（总认为资源不安全，先取锁再访问的保守策略思想，例如RDBMS中查询时加S锁或者X锁，是数据处理的最终保证）。<br>乐观锁假定数据不会有冲突，所以只在最终写操作提交更新时候检查，假设发生了冲突，则返回错误信息，让用户应用程序决定如何处理。</p>
-<p>乐观锁=提交时冲突检查+数据更新</p>
-<p>根据以上，CAS操作其实可以被认为是乐观锁的一种实现方式，当多个线程尝试对同一个数据进行写操作时，利用CAS对比读取的值和预期值，同一时间只有一个线程可以成功，<br>失败的线程可以自旋，直到成功为止。CAS的读取比较类似于乐观锁最终写时候的冲突检查，CAS对比成功后的写入对应乐观锁的数据更新。以上JUC中的ATOMIC类就是一种典型<br>实现。</p>
+        <p>new:新建状态，new一个thread或者它的子类</p>
+<p>ready to run:</p>
+<ol>
+<li>调用start()，但没有拿到时间片，等待CPU资源</li>
+<li>已经获取时间片进入run()方法的逻辑，但是用完后从running变成ready to run</li>
+<li>已经running的线程，让出CPU资源，进入blocked状态，例如Thread中的sleep（）方法，时间到了后再次进入ready to run</li>
+</ol>
+<p>running：运行状态，ready to run的线程获取了CPU资源</p>
+<p>waiting：Object的wait方法（让出CPU资源并且放锁，需要其他线程notify），Thread的join()方法等待其他线程，或者park()方法</p>
+<p>sleeping：睡眠状态，调用线程的sleep()方法（让出CPU资源方便其他线程运行，但是不释放锁，等待sleep方法时间到自动唤醒）</p>
+<p>blocked：阻塞状态，线程等待获取锁</p>
+<p>dead：</p>
+<ol>
+<li>run()方法逻辑结束，运行完毕</li>
+<li>线程响应中断</li>
+<li>线程上层的进程退出</li>
+</ol>
 
       
     </div>
@@ -455,8 +446,8 @@ public class AtomicInteger extends Number implements java.io.Serializable {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/19/Mybatis-Sql中-与￥/" rel="next" title="Mybatis Sql中#{}与${}">
-                <i class="fa fa-chevron-left"></i> Mybatis Sql中#{}与${}
+              <a href="/2018/03/14/foreach原理以及特点/" rel="next" title="foreach原理以及特点">
+                <i class="fa fa-chevron-left"></i> foreach原理以及特点
               </a>
             
           </div>
@@ -465,8 +456,8 @@ public class AtomicInteger extends Number implements java.io.Serializable {
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/05/CAS ABA问题以及版本控制方法实现乐观锁/" rel="prev" title="CAS ABA问题以及版本控制方法实现乐观锁">
-                CAS ABA问题以及版本控制方法实现乐观锁 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/04/03/自旋锁以及不可重入时死锁问题/" rel="prev" title="自旋锁以及不可重入时死锁问题">
+                自旋锁以及不可重入时死锁问题 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
