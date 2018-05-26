@@ -102,21 +102,25 @@
 
 
 
-  <meta property="og:type" content="article">
+  <meta name="description" content="对于主键（PK），唯一性索引（unique index），有以下关系： 1.主键一定是唯一索引，唯一索引不一定是主键 2.唯一索引仍然能接受null，但主键不能接受null 3.主键在一张表里是唯一的，往往聚集索引也是跟着主键走改变数据在硬盘上的物理存储顺序，而唯一索引可以加多个列，同时加非空，来保证这些列的值不会重复。 4.主键和唯一性都是约束，约束在RDBMS里是逻辑单位，而索引是物理存在，需">
+<meta name="keywords" content="关系型数据库">
+<meta property="og:type" content="article">
 <meta property="og:title" content="主键和唯一性索引异同">
-<meta property="og:url" content="http://yoursite.com/2018/05/26/主键和唯一性索引异同/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/12/26/主键和唯一性索引异同/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
+<meta property="og:description" content="对于主键（PK），唯一性索引（unique index），有以下关系： 1.主键一定是唯一索引，唯一索引不一定是主键 2.唯一索引仍然能接受null，但主键不能接受null 3.主键在一张表里是唯一的，往往聚集索引也是跟着主键走改变数据在硬盘上的物理存储顺序，而唯一索引可以加多个列，同时加非空，来保证这些列的值不会重复。 4.主键和唯一性都是约束，约束在RDBMS里是逻辑单位，而索引是物理存在，需">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-26T10:18:09.143Z">
+<meta property="og:updated_time" content="2018-05-26T16:23:28.209Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="主键和唯一性索引异同">
+<meta name="twitter:description" content="对于主键（PK），唯一性索引（unique index），有以下关系： 1.主键一定是唯一索引，唯一索引不一定是主键 2.唯一索引仍然能接受null，但主键不能接受null 3.主键在一张表里是唯一的，往往聚集索引也是跟着主键走改变数据在硬盘上的物理存储顺序，而唯一索引可以加多个列，同时加非空，来保证这些列的值不会重复。 4.主键和唯一性都是约束，约束在RDBMS里是逻辑单位，而索引是物理存在，需">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/26/主键和唯一性索引异同/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/12/26/主键和唯一性索引异同/"/>
 
 
 
@@ -274,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/26/主键和唯一性索引异同/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/26/主键和唯一性索引异同/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -316,12 +320,46 @@
                 
               
 
-              <time title="Created: 2018-05-26 18:18:09" itemprop="dateCreated datePublished" datetime="2018-05-26T18:18:09+08:00">2018-05-26</time>
+              <time title="Created: 2018-12-26 18:18:09" itemprop="dateCreated datePublished" datetime="2018-12-26T18:18:09+08:00">2018-12-26</time>
             
 
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-05-27 00:23:28" itemprop="dateModified" datetime="2018-05-27T00:23:28+08:00">2018-05-27</time>
+              
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/关系型数据库/" itemprop="url" rel="index"><span itemprop="name">关系型数据库</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -358,7 +396,13 @@
       
 
       
-        
+        <p>对于主键（PK），唯一性索引（unique index），有以下关系：</p>
+<pre><code>1.主键一定是唯一索引，唯一索引不一定是主键
+2.唯一索引仍然能接受null，但主键不能接受null
+3.主键在一张表里是唯一的，往往聚集索引也是跟着主键走改变数据在硬盘上的物理存储顺序，而唯一索引可以加多个列，同时加非空，来保证这些列的值不会重复。
+4.主键和唯一性都是约束，约束在RDBMS里是逻辑单位，而索引是物理存在，需要实际文件存储，占用硬盘空间（例如数据文件，事务日志文件，这些都会存储在硬盘上，索引也一样，索引页会在硬盘上，查询时执行计划可以走index seek, index scan等提升效率，加了索引的列在插入时索引文件也有IO操作来维护索引）。
+5.只有PK能在一对多，一对一（可以理解为特殊的一对多）中被别的表当FK，物理外键设定中不能用唯一索引的列。
+</code></pre>
       
     </div>
 
@@ -375,6 +419,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/关系型数据库/" rel="tag"># 关系型数据库</a>
+          
+        </div>
       
 
       
@@ -394,6 +444,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/27/关系型数据库表之间三种关系/" rel="prev" title="关系型数据库表之间三种关系">
+                关系型数据库表之间三种关系 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -458,7 +512,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-count">32</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -493,7 +547,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -552,7 +608,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">23</span>
+                      
+                    
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
