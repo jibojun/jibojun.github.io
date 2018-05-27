@@ -682,8 +682,42 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-05-27 23:31:17" itemprop="dateModified" datetime="2018-05-27T23:31:17+08:00">2018-05-27</time>
+              
+            
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Mybatis/" itemprop="url" rel="index"><span itemprop="name">Mybatis</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -714,8 +748,10 @@
       
         
           
-          
-          
+          实际应用中，往往有多个数据源，或许是读写分离，或许是同样的表分库存储（例如按照某个对象某个值取模打散数据在多个库里），甚至是不同类型的数据源（例如SQL SERVER和MYSQL）。这种时候在使用mybatis中需要处理多数据源。
+方法一：
+适合多个库用同样的表结构（只是分库分散数据），动态方式，和
+          ...
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/05/26/mybatis多数据源切换/#more" rel="contents">
