@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="可重入性：线程1获取实例a的锁，进入里面A（）方法执行，并未释放锁时候可以再次获得锁进入方法。同线程未放锁前再次尝试获取锁则会死锁，这可以理解为不可重入。 自旋锁靠循环不停执行，直到拿到锁，不释放CPU时间片资源(不进入内核态等待，而是停留用户态自旋)，有减少线程上下文切换，高响应的作用。但是如果同一个线程连续两次lock就会死锁。 改造成可重入自旋锁需要加入lockCount变量记录重入次数。初">
-<meta name="keywords" content="Java并发编程">
+  <meta name="description" content="Mybatis insert时行为： 1. 默认返回的int值是写的行数，而不是主键 2. 插入返回主键一般有2个办法     1. 直接在Insert标签里用keyproerty     例子，自增主键，可以用在Mysql上：     useGeneratedKeys=&amp;quot;true&amp;quot; keyProperty=&amp;quot;id&amp;quot;     2. 用&amp;lt;selectke">
+<meta name="keywords" content="Mybatis,关系型数据库">
 <meta property="og:type" content="article">
-<meta property="og:title" content="自旋锁的可重入改造">
-<meta property="og:url" content="http://yoursite.com/2018/04/05/自旋锁的可重入改造/index.html">
+<meta property="og:title" content="Mybatis插入数据返回PK注意点">
+<meta property="og:url" content="http://yoursite.com/2018/04/30/Mybatis插入数据返回PK注意点/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="可重入性：线程1获取实例a的锁，进入里面A（）方法执行，并未释放锁时候可以再次获得锁进入方法。同线程未放锁前再次尝试获取锁则会死锁，这可以理解为不可重入。 自旋锁靠循环不停执行，直到拿到锁，不释放CPU时间片资源(不进入内核态等待，而是停留用户态自旋)，有减少线程上下文切换，高响应的作用。但是如果同一个线程连续两次lock就会死锁。 改造成可重入自旋锁需要加入lockCount变量记录重入次数。初">
+<meta property="og:description" content="Mybatis insert时行为： 1. 默认返回的int值是写的行数，而不是主键 2. 插入返回主键一般有2个办法     1. 直接在Insert标签里用keyproerty     例子，自增主键，可以用在Mysql上：     useGeneratedKeys=&amp;quot;true&amp;quot; keyProperty=&amp;quot;id&amp;quot;     2. 用&amp;lt;selectke">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-13T10:27:35.012Z">
+<meta property="og:updated_time" content="2018-05-30T15:39:08.553Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="自旋锁的可重入改造">
-<meta name="twitter:description" content="可重入性：线程1获取实例a的锁，进入里面A（）方法执行，并未释放锁时候可以再次获得锁进入方法。同线程未放锁前再次尝试获取锁则会死锁，这可以理解为不可重入。 自旋锁靠循环不停执行，直到拿到锁，不释放CPU时间片资源(不进入内核态等待，而是停留用户态自旋)，有减少线程上下文切换，高响应的作用。但是如果同一个线程连续两次lock就会死锁。 改造成可重入自旋锁需要加入lockCount变量记录重入次数。初">
+<meta name="twitter:title" content="Mybatis插入数据返回PK注意点">
+<meta name="twitter:description" content="Mybatis insert时行为： 1. 默认返回的int值是写的行数，而不是主键 2. 插入返回主键一般有2个办法     1. 直接在Insert标签里用keyproerty     例子，自增主键，可以用在Mysql上：     useGeneratedKeys=&amp;quot;true&amp;quot; keyProperty=&amp;quot;id&amp;quot;     2. 用&amp;lt;selectke">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/05/自旋锁的可重入改造/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/30/Mybatis插入数据返回PK注意点/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>自旋锁的可重入改造 | Bojun Ji's notes</title>
+  <title>Mybatis插入数据返回PK注意点 | Bojun Ji's notes</title>
   
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/05/自旋锁的可重入改造/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/30/Mybatis插入数据返回PK注意点/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -295,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">自旋锁的可重入改造
+          <h1 class="post-title" itemprop="name headline">Mybatis插入数据返回PK注意点
               
             
           </h1>
@@ -320,7 +320,7 @@
                 
               
 
-              <time title="Created: 2018-04-05 16:45:10" itemprop="dateCreated datePublished" datetime="2018-04-05T16:45:10+08:00">2018-04-05</time>
+              <time title="Created: 2018-04-30 23:08:00" itemprop="dateCreated datePublished" datetime="2018-04-30T23:08:00+08:00">2018-04-30</time>
             
 
             
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-05-13 18:27:35" itemprop="dateModified" datetime="2018-05-13T18:27:35+08:00">2018-05-13</time>
+                <time title="Modified: 2018-05-30 23:39:08" itemprop="dateModified" datetime="2018-05-30T23:39:08+08:00">2018-05-30</time>
               
             
           </span>
@@ -354,7 +354,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java并发编程/" itemprop="url" rel="index"><span itemprop="name">Java并发编程</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Mybatis/" itemprop="url" rel="index"><span itemprop="name">Mybatis</span></a></span>
 
                 
                 
@@ -396,79 +396,28 @@
       
 
       
-        <p>可重入性：线程1获取实例a的锁，进入里面A（）方法执行，并未释放锁时候可以再次获得锁进入方法。同线程未放锁前再次尝试获取锁则会死锁，这可以理解为不可重入。</p>
-<p>自旋锁靠循环不停执行，直到拿到锁，不释放CPU时间片资源(不进入内核态等待，而是停留用户态自旋)，有减少线程上下文切换，高响应的作用。但是如果同一个线程连续两次lock就会死锁。</p>
-<p>改造成可重入自旋锁需要加入lockCount变量记录重入次数。初始值是0。每次重入lock加一，每次unlock-1。</p>
-<p>例子：</p>
-<pre><code>package concurrency;
-
-import java.util.concurrent.atomic.AtomicReference;
-
-public class ReentrantSpinLock {
-    //持有资源的线程
-    private AtomicReference owner =new AtomicReference&lt;&gt;();
-
-    //记录进重次数
-    private int rentrantCount=0;
-
-    //锁
-    public void lock(){
-        Thread current = Thread.currentThread();
-        if(current==owner.get()){
-            rentrantCount++;
-            System.out.println(current.getName() + &quot;&apos;s reenter count is: &quot;+rentrantCount+&quot; now&quot;);
-            return;
-        }
-        //循环自旋，不释放CPU资源，直到获取锁为止
-        while(!owner .compareAndSet(null, current)){
-            System.out.println(current.getName()+ &quot; is waiting for lock release&quot;);
-        }
-    }
-
-    //解锁
-    public void unlock (){
-        Thread current = Thread.currentThread();
-        if(current==owner.get()){
-            if(rentrantCount!=0) {
-                rentrantCount--;
-                System.out.println(current.getName() + &quot;&apos;s reenter count is: &quot;+rentrantCount+&quot; now&quot;);
-            }else {
-                //CAS,预期值;当前线程，目标值:null,放锁
-                owner.compareAndSet(current, null);
-                System.out.println(current.getName() + &quot;&apos;s lock is released&quot;);
-            }
-        }
-
-    }
-    public static void main(String[] args) {
-        new Thread(new Runnable() {
-            public void run() {
-                ReentrantSpinLock l=new ReentrantSpinLock();
-                try {
-                    System.out.println(&quot;lock 1 time&quot;);
-                    l.lock();
-                    System.out.println(&quot;lock 2 times&quot;);
-                    l.lock();
-                }catch(Exception e){
-                    System.out.println(e.toString());
-                }finally {
-                    System.out.println(&quot;unlock 1 time&quot;);
-                    l.unlock();
-                    System.out.println(&quot;unlock 2 times&quot;);
-                    l.unlock();
-                }
-            }
-        }).start();
-    }
-}
-</code></pre><p>例子输出：</p>
-<pre><code>lock 1 time
-lock 2 times
-Thread-0&apos;s reenter count is: 1 now
-unlock 1 time
-Thread-0&apos;s reenter count is: 0 now
-unlock 2 times
-Thread-0&apos;s lock is released
+        <p>Mybatis insert时行为：</p>
+<pre><code>1. 默认返回的int值是写的行数，而不是主键
+2. 插入返回主键一般有2个办法
+    1. 直接在Insert标签里用keyproerty
+    例子，自增主键，可以用在Mysql上：
+    useGeneratedKeys=&quot;true&quot; keyProperty=&quot;id&quot;
+    2. 用&lt;selectkey&gt;，keyproperty加在这个标签里，适合sequence返回，例如oracle，也可以用在自增主键场景上。
+    例子，sequence：
+    &lt;selectKey resultType=&quot;Java.lang.Integer&quot; order=&quot;BEFORE&quot; keyProperty=&quot;id&quot;&gt;
+    SELECT SEQ_TABLE.NEXTVAL FROM DUAL
+    &lt;/selectKey&gt;
+    例子，自增id：
+    &lt;selectKey resultType=&quot;java.lang.Integer&quot; order=&quot;AFTER&quot; keyProperty=&quot;id&quot;&gt;
+    SELECT LAST_INSERT_ID() AS id
+    &lt;/selectKey&gt;
+ 3.插入返回主键的应用场景频繁：
+    例子：
+    因为现在很少使用物理外键。假设有2张表其实是多对多关系，在两张表各插入一条数据后，需要获取它们的主键ID，然后把它们的ID插入中间关系表。这时就需要以上方法。
+</code></pre><p>注意点：</p>
+<pre><code>1. order指的是和insert的顺序前，在插入前获取还是插入后获取。
+2. spring事务情况下，例如用自增主键取LAST_INSERT_ID()且顺序是after，这个select其实是在插入事务提交后发生。
+3. KeyProperty指的是实体类里对应的主键值的那个成员属性名。插入操作一般需要一个和表结构对应的实体类，并且带有值传给Mapper接口方法然后插入，其实最后操作完成，mybatis会把主键设在这个实体类实例里，只要从这个实体类实例里获取主键就行，而mapper接口方法的返回值仍然是操作行数，不是主键数值。所以按照上面的写法，其实可以同时获取操作行数和主键。
 </code></pre>
       
     </div>
@@ -489,7 +438,9 @@ Thread-0&apos;s lock is released
       
         <div class="post-tags">
           
-            <a href="/tags/Java并发编程/" rel="tag"># Java并发编程</a>
+            <a href="/tags/Mybatis/" rel="tag"># Mybatis</a>
+          
+            <a href="/tags/关系型数据库/" rel="tag"># 关系型数据库</a>
           
         </div>
       
@@ -502,8 +453,8 @@ Thread-0&apos;s lock is released
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/03/自旋锁以及不可重入时死锁问题/" rel="next" title="自旋锁以及不可重入时死锁问题">
-                <i class="fa fa-chevron-left"></i> 自旋锁以及不可重入时死锁问题
+              <a href="/2018/04/26/switch-case的使用注意点/" rel="next" title="switch-case的使用注意点">
+                <i class="fa fa-chevron-left"></i> switch-case的使用注意点
               </a>
             
           </div>
@@ -512,8 +463,8 @@ Thread-0&apos;s lock is released
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/04/13/长连接，短连接以及HTTP选择，Dubbo协议单一长连接/" rel="prev" title="长连接，短连接以及HTTP选择，Dubbo协议单一长连接">
-                长连接，短连接以及HTTP选择，Dubbo协议单一长连接 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/02/redis五种数据类型/" rel="prev" title="redis五种数据类型">
+                redis五种数据类型 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

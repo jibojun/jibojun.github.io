@@ -102,25 +102,20 @@
 
 
 
-  <meta name="description" content="可重入性：线程1获取实例a的锁，进入里面A（）方法执行，并未释放锁时候可以再次获得锁进入方法。同线程未放锁前再次尝试获取锁则会死锁，这可以理解为不可重入。 自旋锁靠循环不停执行，直到拿到锁，不释放CPU时间片资源(不进入内核态等待，而是停留用户态自旋)，有减少线程上下文切换，高响应的作用。但是如果同一个线程连续两次lock就会死锁。 改造成可重入自旋锁需要加入lockCount变量记录重入次数。初">
-<meta name="keywords" content="Java并发编程">
-<meta property="og:type" content="article">
-<meta property="og:title" content="自旋锁的可重入改造">
-<meta property="og:url" content="http://yoursite.com/2018/04/05/自旋锁的可重入改造/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Bojun Ji&#39;s notes">
+<meta property="og:url" content="http://yoursite.com/archives/2018/page/4/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="可重入性：线程1获取实例a的锁，进入里面A（）方法执行，并未释放锁时候可以再次获得锁进入方法。同线程未放锁前再次尝试获取锁则会死锁，这可以理解为不可重入。 自旋锁靠循环不停执行，直到拿到锁，不释放CPU时间片资源(不进入内核态等待，而是停留用户态自旋)，有减少线程上下文切换，高响应的作用。但是如果同一个线程连续两次lock就会死锁。 改造成可重入自旋锁需要加入lockCount变量记录重入次数。初">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-13T10:27:35.012Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="自旋锁的可重入改造">
-<meta name="twitter:description" content="可重入性：线程1获取实例a的锁，进入里面A（）方法执行，并未释放锁时候可以再次获得锁进入方法。同线程未放锁前再次尝试获取锁则会死锁，这可以理解为不可重入。 自旋锁靠循环不停执行，直到拿到锁，不释放CPU时间片资源(不进入内核态等待，而是停留用户态自旋)，有减少线程上下文切换，高响应的作用。但是如果同一个线程连续两次lock就会死锁。 改造成可重入自旋锁需要加入lockCount变量记录重入次数。初">
+<meta name="twitter:title" content="Bojun Ji&#39;s notes">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/05/自旋锁的可重入改造/"/>
+  <link rel="canonical" href="http://yoursite.com/archives/2018/page/4/"/>
 
 
 
@@ -130,7 +125,7 @@
   };
 </script>
 
-  <title>自旋锁的可重入改造 | Bojun Ji's notes</title>
+  <title>Archive | Bojun Ji's notes</title>
   
 
 
@@ -177,7 +172,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left page-archive">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -225,7 +220,7 @@
         
         
           
-          <li class="menu-item menu-item-archives">
+          <li class="menu-item menu-item-archives menu-item-active">
     <a href="/archives/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
   </li>
@@ -258,291 +253,100 @@
           
             
 
+    
+    
+      
+      
+    
+      
+      
+    
+    
+
+  
+
+
           
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block archive">
+    <div id="posts" class="posts-collapse">
+      <span class="archive-move-on"></span>
 
-  
+      
+      <span class="archive-page-counter">
+        
+        
+         
+        
+        OK! 33 posts in total. Keep on posting.
+      </span>
+      
 
-  
-  
-  
+      
 
-  
+        
+        
+        
+
+        
+          
+          <div class="collection-title">
+            <h1 class="archive-year" id="archive-year-2018">2018</h1>
+          </div>
+        
+        
+
+        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/05/自旋锁的可重入改造/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bojun Ji's notes">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
+            <a class="post-title-link" href="/2018/01/01/HashSet底层原理/" itemprop="url">
+              
+                <span itemprop="name">HashSet底层原理</span>
+              
+            </a>
         
-          <h1 class="post-title" itemprop="name headline">自旋锁的可重入改造
-              
-            
-          </h1>
-        
+      </h2>
 
-        <div class="post-meta">
-          <span class="post-time">
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2018-01-01T21:15:54+08:00"
+              content="2018-01-01" >
+          01-01
+        </time>
+      </div>
 
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-04-05 16:45:10" itemprop="dateCreated datePublished" datetime="2018-04-05T16:45:10+08:00">2018-04-05</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-05-13 18:27:35" itemprop="dateModified" datetime="2018-05-13T18:27:35+08:00">2018-05-13</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java并发编程/" itemprop="url" rel="index"><span itemprop="name">Java并发编程</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="post-meta-item-icon"
-            >
-            <i class="fa fa-eye"></i>
-             Views:  
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
-            </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>可重入性：线程1获取实例a的锁，进入里面A（）方法执行，并未释放锁时候可以再次获得锁进入方法。同线程未放锁前再次尝试获取锁则会死锁，这可以理解为不可重入。</p>
-<p>自旋锁靠循环不停执行，直到拿到锁，不释放CPU时间片资源(不进入内核态等待，而是停留用户态自旋)，有减少线程上下文切换，高响应的作用。但是如果同一个线程连续两次lock就会死锁。</p>
-<p>改造成可重入自旋锁需要加入lockCount变量记录重入次数。初始值是0。每次重入lock加一，每次unlock-1。</p>
-<p>例子：</p>
-<pre><code>package concurrency;
-
-import java.util.concurrent.atomic.AtomicReference;
-
-public class ReentrantSpinLock {
-    //持有资源的线程
-    private AtomicReference owner =new AtomicReference&lt;&gt;();
-
-    //记录进重次数
-    private int rentrantCount=0;
-
-    //锁
-    public void lock(){
-        Thread current = Thread.currentThread();
-        if(current==owner.get()){
-            rentrantCount++;
-            System.out.println(current.getName() + &quot;&apos;s reenter count is: &quot;+rentrantCount+&quot; now&quot;);
-            return;
-        }
-        //循环自旋，不释放CPU资源，直到获取锁为止
-        while(!owner .compareAndSet(null, current)){
-            System.out.println(current.getName()+ &quot; is waiting for lock release&quot;);
-        }
-    }
-
-    //解锁
-    public void unlock (){
-        Thread current = Thread.currentThread();
-        if(current==owner.get()){
-            if(rentrantCount!=0) {
-                rentrantCount--;
-                System.out.println(current.getName() + &quot;&apos;s reenter count is: &quot;+rentrantCount+&quot; now&quot;);
-            }else {
-                //CAS,预期值;当前线程，目标值:null,放锁
-                owner.compareAndSet(current, null);
-                System.out.println(current.getName() + &quot;&apos;s lock is released&quot;);
-            }
-        }
-
-    }
-    public static void main(String[] args) {
-        new Thread(new Runnable() {
-            public void run() {
-                ReentrantSpinLock l=new ReentrantSpinLock();
-                try {
-                    System.out.println(&quot;lock 1 time&quot;);
-                    l.lock();
-                    System.out.println(&quot;lock 2 times&quot;);
-                    l.lock();
-                }catch(Exception e){
-                    System.out.println(e.toString());
-                }finally {
-                    System.out.println(&quot;unlock 1 time&quot;);
-                    l.unlock();
-                    System.out.println(&quot;unlock 2 times&quot;);
-                    l.unlock();
-                }
-            }
-        }).start();
-    }
-}
-</code></pre><p>例子输出：</p>
-<pre><code>lock 1 time
-lock 2 times
-Thread-0&apos;s reenter count is: 1 now
-unlock 1 time
-Thread-0&apos;s reenter count is: 0 now
-unlock 2 times
-Thread-0&apos;s lock is released
-</code></pre>
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Java并发编程/" rel="tag"># Java并发编程</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/04/03/自旋锁以及不可重入时死锁问题/" rel="next" title="自旋锁以及不可重入时死锁问题">
-                <i class="fa fa-chevron-left"></i> 自旋锁以及不可重入时死锁问题
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/13/长连接，短连接以及HTTP选择，Dubbo协议单一长连接/" rel="prev" title="长连接，短连接以及HTTP选择，Dubbo协议单一长连接">
-                长连接，短连接以及HTTP选择，Dubbo协议单一长连接 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
 
-    <div class="post-spread">
       
+
     </div>
   </div>
+  
+  
+  
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/archives/2018/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/archives/2018/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2018/page/3/">3</a><span class="page-number current">4</span>
+  </nav>
+
+
 
 
           </div>
           
-
-  
-
-
 
         </div>
         
@@ -855,10 +659,6 @@ Thread-0&apos;s lock is released
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
-
-
 
   
 
