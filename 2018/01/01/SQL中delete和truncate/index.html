@@ -102,20 +102,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Bojun Ji&#39;s notes">
-<meta property="og:url" content="http://yoursite.com/tags/类加载/index.html">
+  <meta name="description" content="truncate和普通delete语句都可以用来删除表中数据，主要区别如下： 1. truncate是清空表数据，不能和where一起用，delete可以跟where一起删除指定数据 2. 自增ID，例如MYSQL的，truncate后可以重头开始，而delete后仍按照原来的点继续自增计数 3. delete和insert,update一样是dml，需要commit后才能生效，可以rollbac">
+<meta name="keywords" content="关系型数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL中delete和truncate">
+<meta property="og:url" content="http://yoursite.com/2018/01/01/SQL中delete和truncate/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
+<meta property="og:description" content="truncate和普通delete语句都可以用来删除表中数据，主要区别如下： 1. truncate是清空表数据，不能和where一起用，delete可以跟where一起删除指定数据 2. 自增ID，例如MYSQL的，truncate后可以重头开始，而delete后仍按照原来的点继续自增计数 3. delete和insert,update一样是dml，需要commit后才能生效，可以rollbac">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-06-01T16:25:39.072Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bojun Ji&#39;s notes">
+<meta name="twitter:title" content="SQL中delete和truncate">
+<meta name="twitter:description" content="truncate和普通delete语句都可以用来删除表中数据，主要区别如下： 1. truncate是清空表数据，不能和where一起用，delete可以跟where一起删除指定数据 2. 自增ID，例如MYSQL的，truncate后可以重头开始，而delete后仍按照原来的点继续自增计数 3. delete和insert,update一样是dml，需要commit后才能生效，可以rollbac">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/类加载/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/01/SQL中delete和truncate/"/>
 
 
 
@@ -125,7 +130,7 @@
   };
 </script>
 
-  <title>Tag: 类加载 | Bojun Ji's notes</title>
+  <title>SQL中delete和truncate | Bojun Ji's notes</title>
   
 
 
@@ -172,7 +177,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -253,103 +258,223 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>类加载<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/01/SQL中delete和truncate/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bojun Ji's notes">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/03/09/打破双亲委托模型方法/" itemprop="url">
-              
-                <span itemprop="name">打破双亲委托模型方法</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">SQL中delete和truncate
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-09T00:15:12+08:00"
-              content="2018-03-09" >
-          03-09
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
 
-    </header>
-  </article>
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-01-01 23:38:41" itemprop="dateCreated datePublished" datetime="2018-01-01T23:38:41+08:00">2018-01-01</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-06-02 00:25:39" itemprop="dateModified" datetime="2018-06-02T00:25:39+08:00">2018-06-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/关系型数据库/" itemprop="url" rel="index"><span itemprop="name">关系型数据库</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
+      
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/08/Java类加载和双亲委托模型/" itemprop="url">
-              
-                <span itemprop="name">Java类加载和双亲委托模型</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-08T23:30:47+08:00"
-              content="2018-03-08" >
-          03-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <p>truncate和普通delete语句都可以用来删除表中数据，主要区别如下：</p>
+<pre><code>1. truncate是清空表数据，不能和where一起用，delete可以跟where一起删除指定数据
+2. 自增ID，例如MYSQL的，truncate后可以重头开始，而delete后仍按照原来的点继续自增计数
+3. delete和insert,update一样是dml，需要commit后才能生效，可以rollback。而truncate和删除表的drop一样是ddl,立即生效，不能和触发器一起，也不能回滚
+4. delete可以产生事务日志，因为操作误删除DBA仍然可以恢复备份。而truncate清空数据没有日志无法恢复，但是执行速度上drop删除表和truncate清空表都比delete后提交快。
+</code></pre>
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/关系型数据库/" rel="tag"># 关系型数据库</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/01/HashSet底层原理/" rel="next" title="HashSet底层原理">
+                <i class="fa fa-chevron-left"></i> HashSet底层原理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/02/volatile关键字语义（JDK1-5及以后）/" rel="prev" title="volatile关键字（JDK1.5及以后）">
+                volatile关键字（JDK1.5及以后） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -662,6 +787,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
 
   
 
