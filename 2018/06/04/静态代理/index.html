@@ -102,20 +102,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Bojun Ji&#39;s notes">
-<meta property="og:url" content="http://yoursite.com/categories/JavaCore/index.html">
+  <meta name="description" content="代理模式/proxy可以分为三部分：调用端，代理类，目标类。根据开闭原则：对修改封闭，对开放扩展。假设有一个类，其中方法是写好的现成业务逻辑，现在需要加一些业务无关的事情例如记录这个业务方法的执行时间，按照开闭原则，可以通过代理模式调用目标方法，在代理类的方法里对它的实现扩展，而不是直接修改这个方法。 静态代理例子： 1.代理类和目标类实现同一个接口 2.代理类里有一个目标类对象 3.代理类会在自">
+<meta name="keywords" content="设计模式,AOP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="静态代理">
+<meta property="og:url" content="http://yoursite.com/2018/06/04/静态代理/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
+<meta property="og:description" content="代理模式/proxy可以分为三部分：调用端，代理类，目标类。根据开闭原则：对修改封闭，对开放扩展。假设有一个类，其中方法是写好的现成业务逻辑，现在需要加一些业务无关的事情例如记录这个业务方法的执行时间，按照开闭原则，可以通过代理模式调用目标方法，在代理类的方法里对它的实现扩展，而不是直接修改这个方法。 静态代理例子： 1.代理类和目标类实现同一个接口 2.代理类里有一个目标类对象 3.代理类会在自">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-06-03T16:55:10.089Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bojun Ji&#39;s notes">
+<meta name="twitter:title" content="静态代理">
+<meta name="twitter:description" content="代理模式/proxy可以分为三部分：调用端，代理类，目标类。根据开闭原则：对修改封闭，对开放扩展。假设有一个类，其中方法是写好的现成业务逻辑，现在需要加一些业务无关的事情例如记录这个业务方法的执行时间，按照开闭原则，可以通过代理模式调用目标方法，在代理类的方法里对它的实现扩展，而不是直接修改这个方法。 静态代理例子： 1.代理类和目标类实现同一个接口 2.代理类里有一个目标类对象 3.代理类会在自">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/JavaCore/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/04/静态代理/"/>
 
 
 
@@ -125,7 +130,7 @@
   };
 </script>
 
-  <title>Category: JavaCore | Bojun Ji's notes</title>
+  <title>静态代理 | Bojun Ji's notes</title>
   
 
 
@@ -172,7 +177,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -253,160 +258,262 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block category">
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>JavaCore<small>Category</small>
-        </h1>
-      </div>
-
-      
-        
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/04/静态代理/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bojun Ji's notes">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/04/26/switch-case的使用注意点/" itemprop="url">
-              
-                <span itemprop="name">switch-case的使用注意点</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">静态代理
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-26T01:57:50+08:00"
-              content="2018-04-26" >
-          04-26
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
 
-    </header>
-  </article>
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-06-04 00:34:21 / Modified: 00:55:10" itemprop="dateCreated datePublished" datetime="2018-06-04T00:34:21+08:00">2018-06-04</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/14/foreach原理以及特点/" itemprop="url">
-              
-                <span itemprop="name">foreach原理以及特点</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-14T21:23:54+08:00"
-              content="2018-03-14" >
-          03-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
+        <p>代理模式/proxy可以分为三部分：调用端，代理类，目标类。<br>根据开闭原则：对修改封闭，对开放扩展。假设有一个类，其中方法是写好的现成业务逻辑，现在需要加一些业务无关的事情例如记录这个业务方法的执行时间，按照开闭原则，可以通过代理模式调用目标方法，在代理类的方法里对它的实现扩展，而不是直接修改这个方法。</p>
+<p>静态代理例子：</p>
+<pre><code>1.代理类和目标类实现同一个接口
+2.代理类里有一个目标类对象
+3.代理类会在自己方法里扩展逻辑，然后调用目标类的方法
+4.调用方只需要创建目标类对象，用这个构造代理类，然后调用代理类方法即可
+5.这样扩展逻辑可以全部写在代理类中
+6.但是如果接口改动，目标类和代理类就都需要修改
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+接口：
+public interface Target {
+    void doSomething();
+}
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/02/14/iterator理解/" itemprop="url">
-              
-                <span itemprop="name">iterator理解</span>
-              
-            </a>
-        
-      </h2>
+目标类：
+public class TargetImpl implements Target{
+public void doSomething(){
+    for(int i=0;i&lt;3;i++) {
+            new Thread(() -&gt; System.out.println(Thread.currentThread().getName() + &quot; is running!&quot;)).start();
+        }
+    }
+}
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-02-14T21:23:37+08:00"
-              content="2018-02-14" >
-          02-14
-        </time>
-      </div>
+代理类：
+public class Proxy implements Target{
+private Target target;
 
-    </header>
-  </article>
+public Proxy(Target target){
+    this.target=target;
+}
 
+@Override
+public void doSomething() {
+    long start=System.currentTimeMillis();
+    target.doSomething();
+    long end=System.currentTimeMillis();
+        System.out.println(&quot;execution time is &quot;+(end-start)+&quot;ms&quot;);
+    }
+}
 
-      
-        
+调用类：
+public class Client {
+public static void main(String[] args) {
+    Target target=new TargetImpl();
+    Proxy proxy=new Proxy(target);
+    proxy.doSomething();
+    }
+}
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/12/26/StringBuilder和StringBuffer对比/" itemprop="url">
-              
-                <span itemprop="name">StringBuilder和StringBuffer对比</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-26T23:47:44+08:00"
-              content="2017-12-26" >
-          12-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+输出（只开启3个线程异步执行，开3个线程用了53ms）：
+Thread-0 is running!
+execution time is 53ms
+Thread-2 is running!
+Thread-1 is running!
+</code></pre>
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/设计模式/" rel="tag"># 设计模式</a>
+          
+            <a href="/tags/AOP/" rel="tag"># AOP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/26/mybatis多数据源切换/" rel="next" title="mybatis多数据源切换">
+                <i class="fa fa-chevron-left"></i> mybatis多数据源切换
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/26/主键和唯一性索引异同/" rel="prev" title="主键和唯一性索引异同">
+                主键和唯一性索引异同 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -723,6 +830,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
 
   
 
