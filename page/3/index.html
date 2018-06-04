@@ -274,7 +274,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/05/CAS ABA问题以及版本控制方法实现乐观锁/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/04/动态代理两种方法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -293,8 +293,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/03/05/CAS ABA问题以及版本控制方法实现乐观锁/" itemprop="url">
-                  CAS ABA问题以及版本控制方法实现乐观锁
+                <a class="post-title-link" href="/2018/03/04/动态代理两种方法/" itemprop="url">
+                  动态代理两种方法
                 </a>
               
             
@@ -320,7 +320,7 @@
                 
               
 
-              <time title="Created: 2018-03-05 22:40:43" itemprop="dateCreated datePublished" datetime="2018-03-05T22:40:43+08:00">2018-03-05</time>
+              <time title="Created: 2018-03-04 23:39:20" itemprop="dateCreated datePublished" datetime="2018-03-04T23:39:20+08:00">2018-03-04</time>
             
 
             
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-05-02 23:12:46" itemprop="dateModified" datetime="2018-05-02T23:12:46+08:00">2018-05-02</time>
+                <time title="Modified: 2018-06-05 00:23:26" itemprop="dateModified" datetime="2018-06-05T00:23:26+08:00">2018-06-05</time>
               
             
           </span>
@@ -354,7 +354,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java并发编程/" itemprop="url" rel="index"><span itemprop="name">Java并发编程</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
 
                 
                 
@@ -390,11 +390,194 @@
       
         
           
-          CAS操作的ABA问题：CAS为读取内存中值与自己的预期值对比，对比成功则写入自己的更新值。失败可以返回错误或者自旋重试直到成功。但是会带来ABA问题：    1.线程1读取内存中的值，当前是A，改为B，再改为A。    2.线程2执行CAS操作，预期值A，要改成B，读取值A对比成功所以更新值为B。
+          和静态代理相比，动态代理可以理解为不事先写好代理类，编译成class文件，而是运行时动态生成。AOP可以选用以下两种办法实现。
+
+JDK proxy注意点：类需要实现接口。
+CGLIB注意点：继承重写方式，类可以没实现接口但不能是final，否则无法继承。
+
+-
+1. JDK方式
+2. 基于反射：j
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/03/05/CAS ABA问题以及版本控制方法实现乐观锁/#more" rel="contents">
+            <a class="btn" href="/2018/03/04/动态代理两种方法/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/04/静态代理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bojun Ji's notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/04/静态代理/" itemprop="url">
+                  静态代理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-03-04 00:34:21" itemprop="dateCreated datePublished" datetime="2018-03-04T00:34:21+08:00">2018-03-04</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-06-04 23:40:13" itemprop="dateModified" datetime="2018-06-04T23:40:13+08:00">2018-06-04</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          代理模式/proxy可以分为三部分：调用端，代理类，目标类。根据开闭原则：对修改封闭，对开放扩展。假设有一个类，其中方法是写好的现成业务逻辑，现在需要加一些业务无关的事情例如记录这个业务方法的执行时间，按照开闭原则，可以通过代理模式调用目标方法，在代理类的方法里对它的实现扩展，而不是直接修改这个方法
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/04/静态代理/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1860,187 +2043,6 @@ public class ArrayList extends AbstractList        implements List, RandomAccess
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/08/HashMap扩容原理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bojun Ji's notes">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/08/HashMap扩容原理/" itemprop="url">
-                  HashMap扩容原理
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-01-08 21:26:58" itemprop="dateCreated datePublished" datetime="2018-01-08T21:26:58+08:00">2018-01-08</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-05-13 18:33:26" itemprop="dateModified" datetime="2018-05-13T18:33:26+08:00">2018-05-13</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java集合类/" itemprop="url" rel="index"><span itemprop="name">Java集合类</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          
-HashMap底层使用一个数组存储元素。根据key的hashcode确定数组中位置，1.7及以前用拉链法形成单链表解决单链表，1.8中在冲突严重（多个元素hashcode相同）时会用红黑树增加性能。
-根据默认无参构造方法，数组大小为16。负载因子为0.75。
- /**
-
-Constructs an
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/01/08/HashMap扩容原理/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2088,7 +2090,7 @@ Constructs an
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-count">36</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

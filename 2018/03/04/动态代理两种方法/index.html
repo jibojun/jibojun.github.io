@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="代理模式/proxy可以分为三部分：调用端，代理类，目标类。根据开闭原则：对修改封闭，对开放扩展。假设有一个类，其中方法是写好的现成业务逻辑，现在需要加一些业务无关的事情例如记录这个业务方法的执行时间，按照开闭原则，可以通过代理模式调用目标方法，在代理类的方法里对它的实现扩展，而不是直接修改这个方法。 静态代理例子： 1.代理类和目标类实现同一个接口 2.代理类里有一个目标类对象 3.代理类会在自">
+  <meta name="description" content="和静态代理相比，动态代理可以理解为不事先写好代理类，编译成class文件，而是运行时动态生成。AOP可以选用以下两种办法实现。  JDK proxy注意点：类需要实现接口。 CGLIB注意点：继承重写方式，类可以没实现接口但不能是final，否则无法继承。  - 1. JDK方式 2. 基于反射：java.lang.reflect.Proxy 3. 和静态代理很像，也是代理类和具体业务实现类实现同">
 <meta name="keywords" content="设计模式,AOP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="静态代理">
-<meta property="og:url" content="http://yoursite.com/2018/06/04/静态代理/index.html">
+<meta property="og:title" content="动态代理两种方法">
+<meta property="og:url" content="http://yoursite.com/2018/03/04/动态代理两种方法/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="代理模式/proxy可以分为三部分：调用端，代理类，目标类。根据开闭原则：对修改封闭，对开放扩展。假设有一个类，其中方法是写好的现成业务逻辑，现在需要加一些业务无关的事情例如记录这个业务方法的执行时间，按照开闭原则，可以通过代理模式调用目标方法，在代理类的方法里对它的实现扩展，而不是直接修改这个方法。 静态代理例子： 1.代理类和目标类实现同一个接口 2.代理类里有一个目标类对象 3.代理类会在自">
+<meta property="og:description" content="和静态代理相比，动态代理可以理解为不事先写好代理类，编译成class文件，而是运行时动态生成。AOP可以选用以下两种办法实现。  JDK proxy注意点：类需要实现接口。 CGLIB注意点：继承重写方式，类可以没实现接口但不能是final，否则无法继承。  - 1. JDK方式 2. 基于反射：java.lang.reflect.Proxy 3. 和静态代理很像，也是代理类和具体业务实现类实现同">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-06-03T16:55:10.089Z">
+<meta property="og:updated_time" content="2018-06-04T16:23:26.956Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="静态代理">
-<meta name="twitter:description" content="代理模式/proxy可以分为三部分：调用端，代理类，目标类。根据开闭原则：对修改封闭，对开放扩展。假设有一个类，其中方法是写好的现成业务逻辑，现在需要加一些业务无关的事情例如记录这个业务方法的执行时间，按照开闭原则，可以通过代理模式调用目标方法，在代理类的方法里对它的实现扩展，而不是直接修改这个方法。 静态代理例子： 1.代理类和目标类实现同一个接口 2.代理类里有一个目标类对象 3.代理类会在自">
+<meta name="twitter:title" content="动态代理两种方法">
+<meta name="twitter:description" content="和静态代理相比，动态代理可以理解为不事先写好代理类，编译成class文件，而是运行时动态生成。AOP可以选用以下两种办法实现。  JDK proxy注意点：类需要实现接口。 CGLIB注意点：继承重写方式，类可以没实现接口但不能是final，否则无法继承。  - 1. JDK方式 2. 基于反射：java.lang.reflect.Proxy 3. 和静态代理很像，也是代理类和具体业务实现类实现同">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/06/04/静态代理/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/04/动态代理两种方法/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>静态代理 | Bojun Ji's notes</title>
+  <title>动态代理两种方法 | Bojun Ji's notes</title>
   
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/04/静态代理/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/04/动态代理两种方法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -295,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">静态代理
+          <h1 class="post-title" itemprop="name headline">动态代理两种方法
               
             
           </h1>
@@ -320,12 +320,24 @@
                 
               
 
-              <time title="Created: 2018-06-04 00:34:21 / Modified: 00:55:10" itemprop="dateCreated datePublished" datetime="2018-06-04T00:34:21+08:00">2018-06-04</time>
+              <time title="Created: 2018-03-04 23:39:20" itemprop="dateCreated datePublished" datetime="2018-03-04T23:39:20+08:00">2018-03-04</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-06-05 00:23:26" itemprop="dateModified" datetime="2018-06-05T00:23:26+08:00">2018-06-05</time>
               
             
           </span>
@@ -384,60 +396,115 @@
       
 
       
-        <p>代理模式/proxy可以分为三部分：调用端，代理类，目标类。<br>根据开闭原则：对修改封闭，对开放扩展。假设有一个类，其中方法是写好的现成业务逻辑，现在需要加一些业务无关的事情例如记录这个业务方法的执行时间，按照开闭原则，可以通过代理模式调用目标方法，在代理类的方法里对它的实现扩展，而不是直接修改这个方法。</p>
-<p>静态代理例子：</p>
-<pre><code>1.代理类和目标类实现同一个接口
-2.代理类里有一个目标类对象
-3.代理类会在自己方法里扩展逻辑，然后调用目标类的方法
-4.调用方只需要创建目标类对象，用这个构造代理类，然后调用代理类方法即可
-5.这样扩展逻辑可以全部写在代理类中
-6.但是如果接口改动，目标类和代理类就都需要修改
+        <p>和静态代理相比，动态代理可以理解为不事先写好代理类，编译成class文件，而是运行时动态生成。AOP可以选用以下两种办法实现。</p>
+<ol>
+<li>JDK proxy注意点：类需要实现接口。</li>
+<li>CGLIB注意点：继承重写方式，类可以没实现接口但不能是final，否则无法继承。</li>
+</ol>
+<p>-</p>
+<pre><code>1. JDK方式
+2. 基于反射：java.lang.reflect.Proxy
+3. 和静态代理很像，也是代理类和具体业务实现类实现同一个接口，需要知道实现类的class loader，实现类的接口，在invocationhandler里的invoke方法里写代理类扩展逻辑。
+4. 建一个实现类的实例，传给proxy工厂方法，动态获取proxy，调用里面的方法。
+5. 这个方法的要求就是需要实现类必须有个接口，因为代理类和实现类是一个接口。
 
-接口：
-public interface Target {
-    void doSomething();
-}
+动态代理工厂类：
+import java.lang.reflect.Proxy;
 
-目标类：
-public class TargetImpl implements Target{
-public void doSomething(){
-    for(int i=0;i&lt;3;i++) {
-            new Thread(() -&gt; System.out.println(Thread.currentThread().getName() + &quot; is running!&quot;)).start();
-        }
+public class DynamicProxyFactory {
+    private Target target;
+
+    public DynamicProxyFactory(Target target){
+        this.target=target;
+    }
+
+    public Object getProxy(){
+        return Proxy.newProxyInstance(target.getClass().getClassLoader(), target.getClass().getInterfaces(), (proxy, method, args) -&gt; {
+            long start=System.currentTimeMillis();
+            Object result=method.invoke(target,args);
+            long end=System.currentTimeMillis();
+            System.out.println(&quot;execution time is &quot;+(end-start)+&quot;ms&quot;);
+            return result;
+        });
     }
 }
 
-代理类：
-public class Proxy implements Target{
-private Target target;
-
-public Proxy(Target target){
-    this.target=target;
+调用类：
+public class DynamicClient {
+    public static void main(String[] args) {
+        Target target=new TargetImpl();
+        Target proxy=(Target)new DynamicProxyFactory(target).getProxy();
+        proxy.doSomething();
+        System.out.println(&quot;class of the proxy generated in runtime is:&quot;+proxy.getClass().getName());
+    }
 }
 
-@Override
-public void doSomething() {
-    long start=System.currentTimeMillis();
-    target.doSomething();
-    long end=System.currentTimeMillis();
+输出结果：
+Thread-0 is running!
+Thread-2 is running!
+Thread-1 is running!
+execution time is 2ms
+class of the proxy generated in runtime is:class com.sun.proxy.$Proxy0
+</code></pre><p>第二种方法是CGLIB，子类继承重写。    </p>
+<pre><code>1. CGLIB实现其实是拦截且继承实现类，重写逻辑。
+2. 所以这个类不能是final的，否则无法继承。
+3. 和JDK里的PROXY比，不需要实现接口。
+4. CGLIB是一个代码生成包，可以运行时完成动态代理功能，使用需要引入JAR包，SPRING自带。
+5. 具体写法是工厂类继承cglib jar包的methodInterceptor,写里面的拦截方法。用CGLIB的ENHANCER设置父类，把这个代理工厂类设为回调函数，然后创建代理类。
+
+目前最新版JAR包：
+&lt;!--cglib test--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;cglib&lt;/groupId&gt;
+    &lt;artifactId&gt;CGLIB&lt;/artifactId&gt;
+    &lt;version&gt;3.2.6&lt;/version&gt;
+&lt;/dependency&gt;
+
+http://mvnrepository.com/artifact/cglib/cglib
+
+代理工厂：
+import net.sf.cglib.proxy.Enhancer;
+import net.sf.cglib.proxy.MethodInterceptor;
+import net.sf.cglib.proxy.MethodProxy;
+import java.lang.reflect.Method;
+
+
+public class ProxyFactory implements MethodInterceptor {
+    private Target target;
+
+    public ProxyFactory(Target target){
+        this.target=target;
+    }
+
+    //设置父类，设置回调
+    public Target getProxy(){
+        Enhancer enhancer=new Enhancer();
+        enhancer.setSuperclass(target.getClass());
+        enhancer.setCallback(this);
+        return (Target)enhancer.create();
+    }
+
+
+    //拦截方法，写逻辑
+    @Override
+    public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
+        long start=System.currentTimeMillis();
+        Object result=method.invoke(target,objects);
+        long end=System.currentTimeMillis();
         System.out.println(&quot;execution time is &quot;+(end-start)+&quot;ms&quot;);
+        return result;
     }
 }
 
 调用类：
 public class Client {
-public static void main(String[] args) {
-    Target target=new TargetImpl();
-    Proxy proxy=new Proxy(target);
-    proxy.doSomething();
+    public static void main(String[] args) {
+        Target target=new TargetImpl();
+        ProxyFactory factory=new ProxyFactory(target);
+        Target proxy=factory.getProxy();
+        proxy.doSomething();
     }
 }
-
-输出（只开启3个线程异步执行，开3个线程用了53ms）：
-Thread-0 is running!
-execution time is 53ms
-Thread-2 is running!
-Thread-1 is running!
 </code></pre>
       
     </div>
@@ -473,8 +540,8 @@ Thread-1 is running!
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/26/mybatis多数据源切换/" rel="next" title="mybatis多数据源切换">
-                <i class="fa fa-chevron-left"></i> mybatis多数据源切换
+              <a href="/2018/03/04/静态代理/" rel="next" title="静态代理">
+                <i class="fa fa-chevron-left"></i> 静态代理
               </a>
             
           </div>
@@ -483,8 +550,8 @@ Thread-1 is running!
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/12/26/主键和唯一性索引异同/" rel="prev" title="主键和唯一性索引异同">
-                主键和唯一性索引异同 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/05/CAS ABA问题以及版本控制方法实现乐观锁/" rel="prev" title="CAS ABA问题以及版本控制方法实现乐观锁">
+                CAS ABA问题以及版本控制方法实现乐观锁 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -550,7 +617,7 @@ Thread-1 is running!
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-count">36</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
