@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="CAS操作的ABA问题：CAS为读取内存中值与自己的预期值对比，对比成功则写入自己的更新值。失败可以返回错误或者自旋重试直到成功。但是会带来ABA问题：    1.线程1读取内存中的值，当前是A，改为B，再改为A。    2.线程2执行CAS操作，预期值A，要改成B，读取值A对比成功所以更新值为B。线程2只关注当前读出的值，并无法        得知之前值得改变，在实际业务场景中可能带来问题。 A">
-<meta name="keywords" content="Java并发编程">
+  <meta name="description" content="AOP本质还是创建动态代理类来增强逻辑，可以使用JDK的PROXY（基于接口，代理类和实现类实现同一个接口）和CGLIB（扩展JAR包，子类继承父类重写方法扩展逻辑）2个方式。AOP是基于IOC控制反转的，切面类就当一个BEAN，打上@Component注释。  Aspect:类，里面有advice和pointcut。给实现类/切面类打上这个注释。 PointCut:切点，一般是execution">
+<meta name="keywords" content="设计模式,AOP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CAS ABA问题以及版本控制方法实现乐观锁">
-<meta property="og:url" content="http://yoursite.com/2018/03/05/CAS ABA问题以及版本控制方法实现乐观锁/index.html">
+<meta property="og:title" content="Spring AOP理解">
+<meta property="og:url" content="http://yoursite.com/2018/03/05/Spring-AOP理解/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="CAS操作的ABA问题：CAS为读取内存中值与自己的预期值对比，对比成功则写入自己的更新值。失败可以返回错误或者自旋重试直到成功。但是会带来ABA问题：    1.线程1读取内存中的值，当前是A，改为B，再改为A。    2.线程2执行CAS操作，预期值A，要改成B，读取值A对比成功所以更新值为B。线程2只关注当前读出的值，并无法        得知之前值得改变，在实际业务场景中可能带来问题。 A">
+<meta property="og:description" content="AOP本质还是创建动态代理类来增强逻辑，可以使用JDK的PROXY（基于接口，代理类和实现类实现同一个接口）和CGLIB（扩展JAR包，子类继承父类重写方法扩展逻辑）2个方式。AOP是基于IOC控制反转的，切面类就当一个BEAN，打上@Component注释。  Aspect:类，里面有advice和pointcut。给实现类/切面类打上这个注释。 PointCut:切点，一般是execution">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-02T15:12:46.666Z">
+<meta property="og:updated_time" content="2018-06-05T17:32:11.271Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CAS ABA问题以及版本控制方法实现乐观锁">
-<meta name="twitter:description" content="CAS操作的ABA问题：CAS为读取内存中值与自己的预期值对比，对比成功则写入自己的更新值。失败可以返回错误或者自旋重试直到成功。但是会带来ABA问题：    1.线程1读取内存中的值，当前是A，改为B，再改为A。    2.线程2执行CAS操作，预期值A，要改成B，读取值A对比成功所以更新值为B。线程2只关注当前读出的值，并无法        得知之前值得改变，在实际业务场景中可能带来问题。 A">
+<meta name="twitter:title" content="Spring AOP理解">
+<meta name="twitter:description" content="AOP本质还是创建动态代理类来增强逻辑，可以使用JDK的PROXY（基于接口，代理类和实现类实现同一个接口）和CGLIB（扩展JAR包，子类继承父类重写方法扩展逻辑）2个方式。AOP是基于IOC控制反转的，切面类就当一个BEAN，打上@Component注释。  Aspect:类，里面有advice和pointcut。给实现类/切面类打上这个注释。 PointCut:切点，一般是execution">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/05/CAS ABA问题以及版本控制方法实现乐观锁/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/05/Spring-AOP理解/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>CAS ABA问题以及版本控制方法实现乐观锁 | Bojun Ji's notes</title>
+  <title>Spring AOP理解 | Bojun Ji's notes</title>
   
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/05/CAS ABA问题以及版本控制方法实现乐观锁/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/05/Spring-AOP理解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -295,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">CAS ABA问题以及版本控制方法实现乐观锁
+          <h1 class="post-title" itemprop="name headline">Spring AOP理解
               
             
           </h1>
@@ -320,7 +320,7 @@
                 
               
 
-              <time title="Created: 2018-03-05 22:40:43" itemprop="dateCreated datePublished" datetime="2018-03-05T22:40:43+08:00">2018-03-05</time>
+              <time title="Created: 2018-03-05 23:52:27" itemprop="dateCreated datePublished" datetime="2018-03-05T23:52:27+08:00">2018-03-05</time>
             
 
             
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-05-02 23:12:46" itemprop="dateModified" datetime="2018-05-02T23:12:46+08:00">2018-05-02</time>
+                <time title="Modified: 2018-06-06 01:32:11" itemprop="dateModified" datetime="2018-06-06T01:32:11+08:00">2018-06-06</time>
               
             
           </span>
@@ -354,7 +354,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java并发编程/" itemprop="url" rel="index"><span itemprop="name">Java并发编程</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
 
                 
                 
@@ -396,22 +396,96 @@
       
 
       
-        <p>CAS操作的ABA问题：<br>CAS为读取内存中值与自己的预期值对比，对比成功则写入自己的更新值。失败可以返回错误或者自旋重试直到成功。<br>但是会带来ABA问题：<br>    1.线程1读取内存中的值，当前是A，改为B，再改为A。<br>    2.线程2执行CAS操作，预期值A，要改成B，读取值A对比成功所以更新值为B。线程2只关注当前读出的值，并无法<br>        得知之前值得改变，在实际业务场景中可能带来问题。</p>
-<p>ABA问题较为理论化，贴一个网上看到的一个ABA错误实例：</p>
-<p>小明在提款机，提取了50元，因为提款机问题，有两个线程，同时把余额从100变为50<br>线程1（提款机）：获取当前值100，期望更新为50，<br>线程2（提款机）：获取当前值100，期望更新为50，<br>线程1成功执行，线程2某种原因block了，这时，某人给小明汇款50<br>线程3（默认）：获取当前值50，期望更新为100，<br>这时候线程3成功执行，余额变为100，<br>线程2从Block中恢复，获取到的也是100，compare之后，继续更新余额为50！！！<br>此时可以看到，实际余额应该为100（100-50+50），但是实际上变为了50（100-50+50-50）这就是ABA问题带来的成功提交</p>
-<p>版本控制实现乐观锁：<br>    1.给数据库表加一列版本号或者Java类中加一个版本号成员变量。<br>    2.每次需要先读取数据，此时也获取了数据的版本号。<br>    3.写入时候目标是版本号+1。提交数据写操作时，判断版本号是否等于第一次读出的，对比成功则写入，不成功则认为<br>        是过期数据，放弃操作。</p>
-<pre><code>    例如以下，比较，只有和之前版本号相同才做更新操作：
+        <p>AOP本质还是创建动态代理类来增强逻辑，可以使用JDK的PROXY（基于接口，代理类和实现类实现同一个接口）和CGLIB（扩展JAR包，子类继承父类重写方法扩展逻辑）2个方式。<br>AOP是基于IOC控制反转的，切面类就当一个BEAN，打上@Component注释。</p>
+<ol>
+<li>Aspect:类，里面有advice和pointcut。给实现类/切面类打上这个注释。</li>
+<li>PointCut:切点，一般是execution表达式。</li>
+<li>Advice:通知，就是代理类做的逻辑增强，比如before,after,around。做一些记录方法执行时长打LOG之类业务分离事情。</li>
+<li>JointPoint:连接点，一般就是具体的方法。</li>
+</ol>
+<p>5种通知方式，可能Around环绕用得最多（日志记录执行时间，spring事务管理）：</p>
+<ol>
+<li>Before，方法（连接点）执行前跑逻辑。只需要有切入点表达式就可以。</li>
+<li>After，方法执行后跑增强逻辑，不管方法成功与否。和Before一样只需要切入点表达式。</li>
+<li>Around，环绕，连接点前后做处理。环绕比较特殊，需要显示调用连接点的方法去执行方法。</li>
+<li>AfterReturning,方法正常完成后才增强，除了切入点还可以指定returning获得返回值。</li>
+<li>AfterThrowing,比如实现类方法里没有try,catch处理exception，就可以用这个，除了切入点还可以指定throwing获得抛出的异常。</li>
+</ol>
+<p>例子：</p>
+<pre><code>Aspect类，写切点，advice用around，在方法执行前后记录时间并且输出
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.stereotype.Component;
 
-    SQL更新数据库行：
-    update A set number=5 where id=10 and version=1
-    Java操作对象：
-    if(a.getVersion()==oldVersion){
-        a.setNumber(5);
+@Component
+@Aspect
+public class TestAspect {
+
+    @Pointcut(&quot;execution(* com.demo.springdemo.aspect..*.*(..))&quot;)
+    public void pointCut(){}
+
+    @Around(&quot;pointCut()&quot;)
+    public void recordExecutionTime(ProceedingJoinPoint jp){
+        long start=System.currentTimeMillis();
+        try {
+            jp.proceed();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        } finally {
+            long end=System.currentTimeMillis();
+            System.out.println(&quot;execution time is &quot;+(end-start)+&quot;ms&quot;);
+        }
     }
+}
 
+一个实现类，起一个线程并等待，线程池等这个线程执行完：
+import org.springframework.stereotype.Service;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
-4.上面例子中，如果加上版本号，线程2之前获取当前值时会有一个版本号，但后面线程3改动后版本号+1，线程2提交时
-    则会认为自己是过期数据从而放弃操作。
+@Service(&quot;test&quot;)
+public class TestBizImpl implements TestBiz {
+    public void doSomething() {
+
+        ExecutorService threadPool= Executors.newSingleThreadExecutor();
+        threadPool.submit(new Thread(() -&gt; {
+            System.out.println(&quot;start a thread and wait for 5S&quot;);
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }));
+        threadPool.shutdown();
+        try {
+            threadPool.awaitTermination(100,TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+测试类，调用实现类的方法：
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class TestClass {
+
+    public static void main(String[] args) {
+        ApplicationContext context=new ClassPathXmlApplicationContext(&quot;classpath:spring-context.xml&quot;);
+        TestBiz t=(TestBiz)context.getBean(&quot;test&quot;);
+        t.doSomething();
+    }
+}
+
+输出，打出了方法执行时间：
+start a thread and wait for 5S
+execution time is 5011ms
+
+Process finished with exit code 0
 </code></pre>
       
     </div>
@@ -432,7 +506,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Java并发编程/" rel="tag"># Java并发编程</a>
+            <a href="/tags/设计模式/" rel="tag"># 设计模式</a>
+          
+            <a href="/tags/AOP/" rel="tag"># AOP</a>
           
         </div>
       
@@ -445,8 +521,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/04/动态代理两种方法/" rel="next" title="动态代理两种方法">
-                <i class="fa fa-chevron-left"></i> 动态代理两种方法
+              <a href="/2018/03/05/CAS ABA问题以及版本控制方法实现乐观锁/" rel="next" title="CAS ABA问题以及版本控制方法实现乐观锁">
+                <i class="fa fa-chevron-left"></i> CAS ABA问题以及版本控制方法实现乐观锁
               </a>
             
           </div>
@@ -455,8 +531,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/05/Spring-AOP理解/" rel="prev" title="Spring AOP理解">
-                Spring AOP理解 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/08/Java类加载和双亲委托模型/" rel="prev" title="Java类加载和双亲委托模型">
+                Java类加载和双亲委托模型 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
