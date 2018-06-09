@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="缓存穿透： 1.分布式缓存或者多加一级本地缓存在DB前面，存储同样数据，查询先按级看缓存，命中就直接返回，不查询缓存。 2.如果使用者了解业务数据结构，知道有一些查询参数的数据永远不会存在于数据库中，假设造一个这样的请求发给CONTROLLER，服务端会先查询缓存，因为数据不可能存在，所以不命中，所以会推一条查询sql去DB并且也是空结果。如果制造大量这样无效数据的查询请求，因为缓存不可能命中，会">
-<meta name="keywords" content="缓存,分布式">
+  <meta name="description" content="dubbo使用主要有几个部分：  注册中心：服务端像注册中心发布服务，消费端像注册中心订阅服务，可以用zookeeper 服务端：提供服务接口，在容器中运行 消费端：订阅服务，从注册中心获取消息 监控中心(治理中心)：监控服务接口请求数量，调用次数，响应时长等，有一些开源实现比如大众点评的cathttps://github.com/dianping/cat  dubbo使用中没api侵入，直接用s">
+<meta name="keywords" content="Dubbo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="缓存穿透，缓存击穿，缓存雪崩理解">
-<meta property="og:url" content="http://yoursite.com/2018/05/26/缓存穿透，缓存击穿，缓存雪崩理解/index.html">
+<meta property="og:title" content="dubbo使用实例">
+<meta property="og:url" content="http://yoursite.com/2018/05/10/dubbo使用实例/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="缓存穿透： 1.分布式缓存或者多加一级本地缓存在DB前面，存储同样数据，查询先按级看缓存，命中就直接返回，不查询缓存。 2.如果使用者了解业务数据结构，知道有一些查询参数的数据永远不会存在于数据库中，假设造一个这样的请求发给CONTROLLER，服务端会先查询缓存，因为数据不可能存在，所以不命中，所以会推一条查询sql去DB并且也是空结果。如果制造大量这样无效数据的查询请求，因为缓存不可能命中，会">
+<meta property="og:description" content="dubbo使用主要有几个部分：  注册中心：服务端像注册中心发布服务，消费端像注册中心订阅服务，可以用zookeeper 服务端：提供服务接口，在容器中运行 消费端：订阅服务，从注册中心获取消息 监控中心(治理中心)：监控服务接口请求数量，调用次数，响应时长等，有一些开源实现比如大众点评的cathttps://github.com/dianping/cat  dubbo使用中没api侵入，直接用s">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-26T11:52:22.001Z">
+<meta property="og:updated_time" content="2018-06-09T18:37:44.138Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="缓存穿透，缓存击穿，缓存雪崩理解">
-<meta name="twitter:description" content="缓存穿透： 1.分布式缓存或者多加一级本地缓存在DB前面，存储同样数据，查询先按级看缓存，命中就直接返回，不查询缓存。 2.如果使用者了解业务数据结构，知道有一些查询参数的数据永远不会存在于数据库中，假设造一个这样的请求发给CONTROLLER，服务端会先查询缓存，因为数据不可能存在，所以不命中，所以会推一条查询sql去DB并且也是空结果。如果制造大量这样无效数据的查询请求，因为缓存不可能命中，会">
+<meta name="twitter:title" content="dubbo使用实例">
+<meta name="twitter:description" content="dubbo使用主要有几个部分：  注册中心：服务端像注册中心发布服务，消费端像注册中心订阅服务，可以用zookeeper 服务端：提供服务接口，在容器中运行 消费端：订阅服务，从注册中心获取消息 监控中心(治理中心)：监控服务接口请求数量，调用次数，响应时长等，有一些开源实现比如大众点评的cathttps://github.com/dianping/cat  dubbo使用中没api侵入，直接用s">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/26/缓存穿透，缓存击穿，缓存雪崩理解/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/10/dubbo使用实例/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>缓存穿透，缓存击穿，缓存雪崩理解 | Bojun Ji's notes</title>
+  <title>dubbo使用实例 | Bojun Ji's notes</title>
   
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/26/缓存穿透，缓存击穿，缓存雪崩理解/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/10/dubbo使用实例/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -295,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">缓存穿透，缓存击穿，缓存雪崩理解
+          <h1 class="post-title" itemprop="name headline">dubbo使用实例
               
             
           </h1>
@@ -320,12 +320,24 @@
                 
               
 
-              <time title="Created: 2018-05-26 18:13:49 / Modified: 19:52:22" itemprop="dateCreated datePublished" datetime="2018-05-26T18:13:49+08:00">2018-05-26</time>
+              <time title="Created: 2018-05-10 01:17:45" itemprop="dateCreated datePublished" datetime="2018-05-10T01:17:45+08:00">2018-05-10</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-06-10 02:37:44" itemprop="dateModified" datetime="2018-06-10T02:37:44+08:00">2018-06-10</time>
               
             
           </span>
@@ -342,7 +354,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/分布式系统设计/" itemprop="url" rel="index"><span itemprop="name">分布式系统设计</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Dubbo/" itemprop="url" rel="index"><span itemprop="name">Dubbo</span></a></span>
 
                 
                 
@@ -384,21 +396,120 @@
       
 
       
-        <p>缓存穿透：</p>
-<pre><code>1.分布式缓存或者多加一级本地缓存在DB前面，存储同样数据，查询先按级看缓存，命中就直接返回，不查询缓存。
-2.如果使用者了解业务数据结构，知道有一些查询参数的数据永远不会存在于数据库中，假设造一个这样的请求发给CONTROLLER，服务端会先查询缓存，因为数据不可能存在，所以不命中，所以会推一条查询sql去DB并且也是空结果。如果制造大量这样无效数据的查询请求，因为缓存不可能命中，会造成大量查询SQL，压力全集中在数据库一边。
-3.缓存穿透是一种绕开缓存借助DDOS直接攻击关系型数据库的方式。
-4.解决方法：如果有办法在缓存层前面设置拦截过滤器，而且过滤器存有所有查询可能参数，对无效参数进行直接过滤不让进入缓存层和数据库层，这样可以解决穿透问题。
-</code></pre><p>缓存击穿：</p>
-<pre><code>1. 一般REDIS或者本地缓存数据都会设一个过期时间。假设有大量数据是一个公司的，且可预计大量查询会命中，以公司某一唯一标识信息为KEY，存储公司具体信息进VALUE。这类数据就是热点数据。
-2.如果刚好缓存失效后，大量请求高并发访问，则会造成DB巨大压力。
-3.解决办法
-    1. 不设过期时间，K或者V里有过期时间，起异步线程去更新缓存，但是更新缓存构建过程中，可能造成一些请求读到过时脏数据。
-    2. redis的SETNX操作，SET IF NOT EXISTS，这样一个线程设了值，有了值别的线程无法设，这一个设值的线程就像获取了锁，继续执行，查询数据库，拿到结果，写缓存，删除这条为了互斥而设的KEY。这样别的线程就能继续下去从缓存中直接拿前面这条线程设进去的结果。
-</code></pre><p>缓存雪崩：</p>
-<pre><code>1.缓存击穿更针对于热点数据，一条KEY。而雪崩指的是有多条KEY的数据，在同一时间过期，这样大量不同业务需求的请求查询这多条KEY，会短时间内全部命中DB，造成压力。
-2.解决办法：
-    1.用算法，例如取模之类按一些参数或者完全随机在原缓存时间上加时间（假如一天，是86500MS，在这个上面加1-100的随机时间）。这样使多条KEY的过期时间分散，减少了压力。
+        <p>dubbo使用主要有几个部分：</p>
+<ol>
+<li>注册中心：服务端像注册中心发布服务，消费端像注册中心订阅服务，可以用zookeeper</li>
+<li>服务端：提供服务接口，在容器中运行</li>
+<li>消费端：订阅服务，从注册中心获取消息</li>
+<li>监控中心(治理中心)：监控服务接口请求数量，调用次数，响应时长等，有一些开源实现比如大众点评的cat<br><a href="https://github.com/dianping/cat" target="_blank" rel="noopener">https://github.com/dianping/cat</a></li>
+</ol>
+<p>dubbo使用中没api侵入，直接用spring配置加载。<br>开发中有两种方式，把服务接口暴露之类写在配置文件和注解暴露引用服务。用注解方式做一个例子。</p>
+<pre><code>在自己机器上启动zookeeper作为注册中心，默认端口2181:
+
+./zkServer.sh start
+ZooKeeper JMX enabled by default
+Using config: /Library/zookeeper-3.4.12/bin/../conf/zoo.cfg
+Starting zookeeper ... STARTED
+
+./zkServer.sh status
+ZooKeeper JMX enabled by default
+Using config: /Library/zookeeper-3.4.12/bin/../conf/zoo.cfg
+Mode: standalone
+
+服务端dubbo配置，服务提供方名字，协议（默认dubbo）端口（默认20880），注册中心地址，注解自动扫描的包：
+&lt;dubbo:application name=&quot;service_provider&quot; /&gt;
+&lt;dubbo:protocol port=&quot;20880&quot; name=&quot;thrift&quot;/&gt;
+&lt;dubbo:registry address=&quot;zookeeper://127.0.0.1:2181&quot; /&gt;
+&lt;dubbo:annotation package=&quot;com.dubbotest.service&quot; /&gt;
+
+&lt;context:component-scan base-package=&quot;com.dubbotest.service&quot; /&gt;
+
+引入jar包，curator是zookeeper的java客户端，用thrift协议才需要引入thrift的jar；
+ &lt;!--dubbo--&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+        &lt;artifactId&gt;dubbo&lt;/artifactId&gt;
+        &lt;version&gt;2.6.2&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!--thrift lib--&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.apache.thrift&lt;/groupId&gt;
+        &lt;artifactId&gt;libthrift&lt;/artifactId&gt;
+        &lt;version&gt;0.11.0&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!--zk and curator--&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.apache.curator&lt;/groupId&gt;
+        &lt;artifactId&gt;curator-framework&lt;/artifactId&gt;
+        &lt;version&gt;4.0.1&lt;/version&gt;
+    &lt;/dependency&gt;
+
+写接口和实现类，这里需要加dubbo的service注解表示服务，而不是spring的service，配置参数尽量全写在服务端：
+import com.alibaba.dubbo.config.annotation.Service;
+import com.google.common.base.Charsets;
+import com.google.common.hash.HashCode;
+import com.google.common.hash.HashFunction;
+import com.google.common.hash.Hashing;
+
+@Service(timeout = 1500,retries = 3)
+public class TestService implements ITestService{
+    public int getHash(String s) {
+        HashFunction hf = Hashing.murmur3_128(); // 32bit version available as well
+        HashCode hc = hf.newHasher()
+                .putString(s, Charsets.UTF_8)
+                .hash();
+        return hc.asInt();
+    }
+}
+
+测试的话写一个main方法加载spring context并且一直block住来启动服务让它一直跑着，正规做法可以web项目打war包放容器启动服务或者用dubbo得main类：
+    public class ServiceStarter {
+    public static void main(String[] args) {
+        ApplicationContext context=new ClassPathXmlApplicationContext(&quot;spring-context.xml&quot;);
+        ((ClassPathXmlApplicationContext) context).start();
+        try {
+            System.in.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+启动服务后，用zkCli.sh -server:{ip地址：端口}（zk客户端shell脚本）来查看注册的服务：
+ls /dubbo
+[com.dubbotest.service.ITestService]
+
+
+
+消费端配置，注意让dubbo比spring先扫描，否则dubbo这边的bean可能为null：
+&lt;dubbo:application name=&quot;service_consumer&quot; /&gt;
+&lt;dubbo:registry address=&quot;zookeeper://127.0.0.1:2181&quot; /&gt;
+&lt;dubbo:annotation package=&quot;com.dubbotest.client&quot; /&gt;
+&lt;context:component-scan base-package=&quot;com.dubbotest.client&quot; /&gt;
+
+消费端，消费端需要打入服务端的API，然后在上面用dubbo注解reference引用，然后dubbo会在客户端动态代理：
+import com.alibaba.dubbo.config.annotation.Reference;
+import org.springframework.stereotype.Component;
+
+@Component
+public class Consumer {
+    @Reference
+    ITestService service;
+
+    public void clientOperation() {
+        System.out.println(service);
+        System.out.println(service.getHash(&quot;dubboTest&quot;));
+    }
+
+}
+
+
+最后客户端输出，看到了dubbo动态生成的代理类：
+com.alibaba.dubbo.common.bytecode.proxy0@5a755cc1
+-1162322288
+
+调试看到invoker：
+interface com.dubbotest.service.ITestService -&gt; zookeeper://127.0.0.1:2181/com.alibaba.dubbo.registry.RegistryService?anyhost=true&amp;application=service_consumer&amp;check=false&amp;dubbo=2.6.2&amp;generic=false&amp;interface=com.dubbotest.service.ITestService&amp;methods=getHash&amp;pid=43990&amp;register.ip=192.168.0.102&amp;remote.timestamp=1528569195082&amp;retries=3&amp;side=consumer&amp;timeout=1500&amp;timestamp=1528569208758
 </code></pre>
       
     </div>
@@ -419,9 +530,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/缓存/" rel="tag"># 缓存</a>
-          
-            <a href="/tags/分布式/" rel="tag"># 分布式</a>
+            <a href="/tags/Dubbo/" rel="tag"># Dubbo</a>
           
         </div>
       
@@ -434,8 +543,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/22/synchronized对象锁和类锁/" rel="next" title="synchronized对象锁和类锁">
-                <i class="fa fa-chevron-left"></i> synchronized对象锁和类锁
+              <a href="/2018/05/02/redis五种数据类型/" rel="next" title="redis五种数据类型">
+                <i class="fa fa-chevron-left"></i> redis五种数据类型
               </a>
             
           </div>
@@ -444,8 +553,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/26/mybatis多数据源切换/" rel="prev" title="mybatis多数据源切换">
-                mybatis多数据源切换 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/22/synchronized对象锁和类锁/" rel="prev" title="synchronized对象锁和类锁">
+                synchronized对象锁和类锁 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
