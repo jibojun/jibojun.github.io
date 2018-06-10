@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="truncate和普通delete语句都可以用来删除表中数据，主要区别如下： 1. truncate是清空表数据，不能和where一起用，delete可以跟where一起删除指定数据 2. 自增ID，例如MYSQL的，truncate后可以重头开始，而delete后仍按照原来的点继续自增计数 3. delete和insert,update一样是dml，需要commit后才能生效，可以rollbac">
-<meta name="keywords" content="关系型数据库">
+  <meta name="description" content="wait()  Object的方法，针对对象。对象是并发时线程临界区索要获取的资源，线程是竞争资源的个体。 Wait()无法定义时间自动唤醒，需要其他线程notify(),notifyAll()来唤醒。在锁区域内使用。Notify唤醒任意线程，放到锁标识池中等待获取锁，notifyAll唤醒所有等待这个对象的线程。 wait/niotify操作的是对象的锁标志，所以必须在sychronized代码">
+<meta name="keywords" content="Java并发编程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL中delete和truncate">
-<meta property="og:url" content="http://yoursite.com/2018/01/01/SQL中delete和truncate/index.html">
+<meta property="og:title" content="wait, sleep, yeild方法区别">
+<meta property="og:url" content="http://yoursite.com/2018/04/10/wait-sleep-yeild方法区别/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="truncate和普通delete语句都可以用来删除表中数据，主要区别如下： 1. truncate是清空表数据，不能和where一起用，delete可以跟where一起删除指定数据 2. 自增ID，例如MYSQL的，truncate后可以重头开始，而delete后仍按照原来的点继续自增计数 3. delete和insert,update一样是dml，需要commit后才能生效，可以rollbac">
+<meta property="og:description" content="wait()  Object的方法，针对对象。对象是并发时线程临界区索要获取的资源，线程是竞争资源的个体。 Wait()无法定义时间自动唤醒，需要其他线程notify(),notifyAll()来唤醒。在锁区域内使用。Notify唤醒任意线程，放到锁标识池中等待获取锁，notifyAll唤醒所有等待这个对象的线程。 wait/niotify操作的是对象的锁标志，所以必须在sychronized代码">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-06-01T16:25:39.072Z">
+<meta property="og:updated_time" content="2018-06-10T07:17:20.696Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SQL中delete和truncate">
-<meta name="twitter:description" content="truncate和普通delete语句都可以用来删除表中数据，主要区别如下： 1. truncate是清空表数据，不能和where一起用，delete可以跟where一起删除指定数据 2. 自增ID，例如MYSQL的，truncate后可以重头开始，而delete后仍按照原来的点继续自增计数 3. delete和insert,update一样是dml，需要commit后才能生效，可以rollbac">
+<meta name="twitter:title" content="wait, sleep, yeild方法区别">
+<meta name="twitter:description" content="wait()  Object的方法，针对对象。对象是并发时线程临界区索要获取的资源，线程是竞争资源的个体。 Wait()无法定义时间自动唤醒，需要其他线程notify(),notifyAll()来唤醒。在锁区域内使用。Notify唤醒任意线程，放到锁标识池中等待获取锁，notifyAll唤醒所有等待这个对象的线程。 wait/niotify操作的是对象的锁标志，所以必须在sychronized代码">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/01/01/SQL中delete和truncate/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/10/wait-sleep-yeild方法区别/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>SQL中delete和truncate | Bojun Ji's notes</title>
+  <title>wait, sleep, yeild方法区别 | Bojun Ji's notes</title>
   
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/01/SQL中delete和truncate/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/10/wait-sleep-yeild方法区别/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -295,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">SQL中delete和truncate
+          <h1 class="post-title" itemprop="name headline">wait, sleep, yeild方法区别
               
             
           </h1>
@@ -320,7 +320,7 @@
                 
               
 
-              <time title="Created: 2018-01-01 23:38:41" itemprop="dateCreated datePublished" datetime="2018-01-01T23:38:41+08:00">2018-01-01</time>
+              <time title="Created: 2018-04-10 02:49:57" itemprop="dateCreated datePublished" datetime="2018-04-10T02:49:57+08:00">2018-04-10</time>
             
 
             
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-06-02 00:25:39" itemprop="dateModified" datetime="2018-06-02T00:25:39+08:00">2018-06-02</time>
+                <time title="Modified: 2018-06-10 15:17:20" itemprop="dateModified" datetime="2018-06-10T15:17:20+08:00">2018-06-10</time>
               
             
           </span>
@@ -354,7 +354,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/关系型数据库/" itemprop="url" rel="index"><span itemprop="name">关系型数据库</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java并发编程/" itemprop="url" rel="index"><span itemprop="name">Java并发编程</span></a></span>
 
                 
                 
@@ -396,12 +396,29 @@
       
 
       
-        <p>truncate和普通delete语句都可以用来删除表中数据，主要区别如下：</p>
-<pre><code>1. truncate是清空表数据，不能和where一起用，delete可以跟where一起删除指定数据
-2. 自增ID，例如MYSQL的，truncate后可以重头开始，而delete后仍按照原来的点继续自增计数
-3. delete和insert,update一样是dml，需要commit后才能生效，可以rollback。而truncate和删除表的drop一样是ddl,立即生效，不能和触发器一起，也不能回滚
-4. delete可以产生事务日志，因为操作误删除DBA仍然可以恢复备份。而truncate清空数据没有日志无法恢复，但是执行速度上drop删除表和truncate清空表都比delete后提交快。
-</code></pre>
+        <p>wait()</p>
+<ol>
+<li>Object的方法，针对对象。对象是并发时线程临界区索要获取的资源，线程是竞争资源的个体。</li>
+<li>Wait()无法定义时间自动唤醒，需要其他线程notify(),notifyAll()来唤醒。在锁区域内使用。Notify唤醒任意线程，放到锁标识池中等待获取锁，notifyAll唤醒所有等待这个对象的线程。</li>
+<li>wait/niotify操作的是对象的锁标志，所以必须在sychronized代码块里使用。不在里面运行时会出exception。</li>
+<li>wait/notify的机制可以实现生产消费模型/基本消息队列。</li>
+<li>一旦wait，锁的资源将会被释放，同时CPU资源也被释放，让其他线程有机会进入锁区域或者获取CPU资源执行。</li>
+<li>JDK 1.5后配合Lock有新的Condition类，await, signal方法类似wait/notify。</li>
+</ol>
+<p>sleep()</p>
+<ol>
+<li>sleep()是Thread的方法，针对线程。</li>
+<li>可以设置时长，到时间唤醒，类似于线程暂停执行。</li>
+<li>和wait有个明显区别就是不放锁，举个例子，线程1获得了对象A的锁，在执行sychronized代码块，跑到sleep，只是暂停，但因为锁没释放别的针对对象A的线程仍然没法进入同步代码块执行。相同点是会释放CPU资源。</li>
+<li>释放CPU资源可以让同优先级和更高优先级线程执行，同时，低优先级线程也获得了机会，举例，2个线程，一个优先级10，一个优先级1，本来获取资源时低的线程必须等高的线程执行完才能运行。但如果高优先线程sleep了释放资源，低优先线程就有机会执行。</li>
+</ol>
+<p>yield()</p>
+<ol>
+<li>把当前线程弹回可执行状态（running-&gt;ready to run），这样相当于给了同优先级线程执行的机会。</li>
+<li>但是也可能下一个执行的还是这个线程。</li>
+<li>和sleep区别是不能指定时间，只是一个线程状态转换，而且只给同优先级线程执行机会，也可能执行的还是当前线程。</li>
+</ol>
+
       
     </div>
 
@@ -421,7 +438,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/关系型数据库/" rel="tag"># 关系型数据库</a>
+            <a href="/tags/Java并发编程/" rel="tag"># Java并发编程</a>
           
         </div>
       
@@ -434,8 +451,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/01/HashSet底层原理/" rel="next" title="HashSet底层原理">
-                <i class="fa fa-chevron-left"></i> HashSet底层原理
+              <a href="/2018/04/05/自旋锁的可重入改造/" rel="next" title="自旋锁的可重入改造">
+                <i class="fa fa-chevron-left"></i> 自旋锁的可重入改造
               </a>
             
           </div>
@@ -444,8 +461,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/01/02/volatile关键字语义（JDK1-5及以后）/" rel="prev" title="volatile关键字（JDK1.5及以后）">
-                volatile关键字（JDK1.5及以后） <i class="fa fa-chevron-right"></i>
+              <a href="/2018/04/13/长连接，短连接以及HTTP选择，Dubbo协议单一长连接/" rel="prev" title="长连接，短连接以及HTTP选择，Dubbo协议单一长连接">
+                长连接，短连接以及HTTP选择，Dubbo协议单一长连接 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

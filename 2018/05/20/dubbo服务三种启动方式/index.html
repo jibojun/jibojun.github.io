@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="truncate和普通delete语句都可以用来删除表中数据，主要区别如下： 1. truncate是清空表数据，不能和where一起用，delete可以跟where一起删除指定数据 2. 自增ID，例如MYSQL的，truncate后可以重头开始，而delete后仍按照原来的点继续自增计数 3. delete和insert,update一样是dml，需要commit后才能生效，可以rollbac">
-<meta name="keywords" content="关系型数据库">
+  <meta name="description" content="容器启动法  在tomcat中当做一个web应用 打包war包 在主模块里引入web.xml web.xml里指定spring的配置文件，配置一个context loader listenser，这样容器启动应用时会初始化spring context，dubbo服务启动 一般被作为不推荐的方法，因为服务实际不是web应用，用容器有资源浪费。   main方法启动  本机测试时候用的方法 main">
+<meta name="keywords" content="Dubbo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL中delete和truncate">
-<meta property="og:url" content="http://yoursite.com/2018/01/01/SQL中delete和truncate/index.html">
+<meta property="og:title" content="dubbo服务三种启动方式">
+<meta property="og:url" content="http://yoursite.com/2018/05/20/dubbo服务三种启动方式/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="truncate和普通delete语句都可以用来删除表中数据，主要区别如下： 1. truncate是清空表数据，不能和where一起用，delete可以跟where一起删除指定数据 2. 自增ID，例如MYSQL的，truncate后可以重头开始，而delete后仍按照原来的点继续自增计数 3. delete和insert,update一样是dml，需要commit后才能生效，可以rollbac">
+<meta property="og:description" content="容器启动法  在tomcat中当做一个web应用 打包war包 在主模块里引入web.xml web.xml里指定spring的配置文件，配置一个context loader listenser，这样容器启动应用时会初始化spring context，dubbo服务启动 一般被作为不推荐的方法，因为服务实际不是web应用，用容器有资源浪费。   main方法启动  本机测试时候用的方法 main">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-06-01T16:25:39.072Z">
+<meta property="og:updated_time" content="2018-06-10T06:57:50.726Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SQL中delete和truncate">
-<meta name="twitter:description" content="truncate和普通delete语句都可以用来删除表中数据，主要区别如下： 1. truncate是清空表数据，不能和where一起用，delete可以跟where一起删除指定数据 2. 自增ID，例如MYSQL的，truncate后可以重头开始，而delete后仍按照原来的点继续自增计数 3. delete和insert,update一样是dml，需要commit后才能生效，可以rollbac">
+<meta name="twitter:title" content="dubbo服务三种启动方式">
+<meta name="twitter:description" content="容器启动法  在tomcat中当做一个web应用 打包war包 在主模块里引入web.xml web.xml里指定spring的配置文件，配置一个context loader listenser，这样容器启动应用时会初始化spring context，dubbo服务启动 一般被作为不推荐的方法，因为服务实际不是web应用，用容器有资源浪费。   main方法启动  本机测试时候用的方法 main">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/01/01/SQL中delete和truncate/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/20/dubbo服务三种启动方式/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>SQL中delete和truncate | Bojun Ji's notes</title>
+  <title>dubbo服务三种启动方式 | Bojun Ji's notes</title>
   
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/01/SQL中delete和truncate/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/20/dubbo服务三种启动方式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -295,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">SQL中delete和truncate
+          <h1 class="post-title" itemprop="name headline">dubbo服务三种启动方式
               
             
           </h1>
@@ -320,7 +320,7 @@
                 
               
 
-              <time title="Created: 2018-01-01 23:38:41" itemprop="dateCreated datePublished" datetime="2018-01-01T23:38:41+08:00">2018-01-01</time>
+              <time title="Created: 2018-05-20 02:48:53" itemprop="dateCreated datePublished" datetime="2018-05-20T02:48:53+08:00">2018-05-20</time>
             
 
             
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-06-02 00:25:39" itemprop="dateModified" datetime="2018-06-02T00:25:39+08:00">2018-06-02</time>
+                <time title="Modified: 2018-06-10 14:57:50" itemprop="dateModified" datetime="2018-06-10T14:57:50+08:00">2018-06-10</time>
               
             
           </span>
@@ -354,7 +354,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/关系型数据库/" itemprop="url" rel="index"><span itemprop="name">关系型数据库</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Dubbo/" itemprop="url" rel="index"><span itemprop="name">Dubbo</span></a></span>
 
                 
                 
@@ -396,12 +396,54 @@
       
 
       
-        <p>truncate和普通delete语句都可以用来删除表中数据，主要区别如下：</p>
-<pre><code>1. truncate是清空表数据，不能和where一起用，delete可以跟where一起删除指定数据
-2. 自增ID，例如MYSQL的，truncate后可以重头开始，而delete后仍按照原来的点继续自增计数
-3. delete和insert,update一样是dml，需要commit后才能生效，可以rollback。而truncate和删除表的drop一样是ddl,立即生效，不能和触发器一起，也不能回滚
-4. delete可以产生事务日志，因为操作误删除DBA仍然可以恢复备份。而truncate清空数据没有日志无法恢复，但是执行速度上drop删除表和truncate清空表都比delete后提交快。
-</code></pre>
+        <ol>
+<li><p>容器启动法</p>
+<ol>
+<li>在tomcat中当做一个web应用</li>
+<li>打包war包</li>
+<li>在主模块里引入web.xml</li>
+<li>web.xml里指定spring的配置文件，配置一个context loader listenser，这样容器启动应用时会初始化spring context，dubbo服务启动</li>
+<li>一般被作为不推荐的方法，因为服务实际不是web应用，用容器有资源浪费。</li>
+</ol>
+</li>
+<li><p>main方法启动</p>
+<ol>
+<li>本机测试时候用的方法</li>
+<li>main方法里加载spring context，这样dubbo服务bean就被初始化了</li>
+<li>让服务保持启动状态需要让main方法线程一直跑下去，可以用wait，输入流之类</li>
+</ol>
+</li>
+<li><p>dubbo提供的main类</p>
+<ol>
+<li>打出jar包而不是war，不作为web应用</li>
+<li><p>打包时加这个类的manifest，pom的build标签里加如下：</p>
+<pre><code>        &lt;plugin&gt;  
+    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;  
+    &lt;artifactId&gt;maven-jar-plugin&lt;/artifactId&gt;  
+    &lt;configuration&gt;  
+        &lt;classesDirectory&gt;target/classes/&lt;/classesDirectory&gt;  
+        &lt;archive&gt;  
+            &lt;manifest&gt;  
+                &lt;mainClass&gt;com.alibaba.dubbo.container.Main&lt;/mainClass&gt;  
+
+                &lt;useUniqueVersions&gt;false&lt;/useUniqueVersions&gt;  
+                &lt;addClasspath&gt;true&lt;/addClasspath&gt;  
+                &lt;classpathPrefix&gt;lib/&lt;/classpathPrefix&gt;  
+            &lt;/manifest&gt;  
+            &lt;manifestEntries&gt;  
+                &lt;Class-Path&gt;.&lt;/Class-Path&gt;  
+            &lt;/manifestEntries&gt;  
+        &lt;/archive&gt;  
+    &lt;/configuration&gt;  
+&lt;/plugin&gt;  
+</code></pre></li>
+</ol>
+<ol start="3">
+<li>java-jar 运行jar包启动服务 </li>
+</ol>
+</li>
+</ol>
+
       
     </div>
 
@@ -421,7 +463,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/关系型数据库/" rel="tag"># 关系型数据库</a>
+            <a href="/tags/Dubbo/" rel="tag"># Dubbo</a>
           
         </div>
       
@@ -434,8 +476,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/01/HashSet底层原理/" rel="next" title="HashSet底层原理">
-                <i class="fa fa-chevron-left"></i> HashSet底层原理
+              <a href="/2018/05/10/dubbo使用实例/" rel="next" title="dubbo使用实例">
+                <i class="fa fa-chevron-left"></i> dubbo使用实例
               </a>
             
           </div>
@@ -444,8 +486,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/01/02/volatile关键字语义（JDK1-5及以后）/" rel="prev" title="volatile关键字（JDK1.5及以后）">
-                volatile关键字（JDK1.5及以后） <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/22/synchronized对象锁和类锁/" rel="prev" title="synchronized对象锁和类锁">
+                synchronized对象锁和类锁 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
