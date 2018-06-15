@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="缓存穿透： 1.分布式缓存或者多加一级本地缓存在DB前面，存储同样数据，查询先按级看缓存，命中就直接返回，不查询缓存。 2.如果使用者了解业务数据结构，知道有一些查询参数的数据永远不会存在于数据库中，假设造一个这样的请求发给CONTROLLER，服务端会先查询缓存，因为数据不可能存在，所以不命中，所以会推一条查询sql去DB并且也是空结果。如果制造大量这样无效数据的查询请求，因为缓存不可能命中，会">
-<meta name="keywords" content="缓存,分布式">
+  <meta name="description" content="JDK1.5开始基于ThreadPoolExecutor有四种已有的线程池，可根据不同业务场景使用。1.8新加了work stealing pool。  fixedThreadPool:   固定线程数量，corePoolSize=maxiumPoolSize keepAliveTime为0 使用LinkedBlockingQueue作为工作队列，FIFO链表队列，默认大小可以达到int最大值 可">
+<meta name="keywords" content="Java并发编程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="缓存穿透，缓存击穿，缓存雪崩理解">
-<meta property="og:url" content="http://yoursite.com/2018/05/26/缓存穿透，缓存击穿，缓存雪崩理解/index.html">
+<meta property="og:title" content="Executors五种线程池">
+<meta property="og:url" content="http://yoursite.com/2018/05/16/Executors五种线程池/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="缓存穿透： 1.分布式缓存或者多加一级本地缓存在DB前面，存储同样数据，查询先按级看缓存，命中就直接返回，不查询缓存。 2.如果使用者了解业务数据结构，知道有一些查询参数的数据永远不会存在于数据库中，假设造一个这样的请求发给CONTROLLER，服务端会先查询缓存，因为数据不可能存在，所以不命中，所以会推一条查询sql去DB并且也是空结果。如果制造大量这样无效数据的查询请求，因为缓存不可能命中，会">
+<meta property="og:description" content="JDK1.5开始基于ThreadPoolExecutor有四种已有的线程池，可根据不同业务场景使用。1.8新加了work stealing pool。  fixedThreadPool:   固定线程数量，corePoolSize=maxiumPoolSize keepAliveTime为0 使用LinkedBlockingQueue作为工作队列，FIFO链表队列，默认大小可以达到int最大值 可">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-26T11:52:22.001Z">
+<meta property="og:updated_time" content="2018-06-15T18:02:08.665Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="缓存穿透，缓存击穿，缓存雪崩理解">
-<meta name="twitter:description" content="缓存穿透： 1.分布式缓存或者多加一级本地缓存在DB前面，存储同样数据，查询先按级看缓存，命中就直接返回，不查询缓存。 2.如果使用者了解业务数据结构，知道有一些查询参数的数据永远不会存在于数据库中，假设造一个这样的请求发给CONTROLLER，服务端会先查询缓存，因为数据不可能存在，所以不命中，所以会推一条查询sql去DB并且也是空结果。如果制造大量这样无效数据的查询请求，因为缓存不可能命中，会">
+<meta name="twitter:title" content="Executors五种线程池">
+<meta name="twitter:description" content="JDK1.5开始基于ThreadPoolExecutor有四种已有的线程池，可根据不同业务场景使用。1.8新加了work stealing pool。  fixedThreadPool:   固定线程数量，corePoolSize=maxiumPoolSize keepAliveTime为0 使用LinkedBlockingQueue作为工作队列，FIFO链表队列，默认大小可以达到int最大值 可">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/26/缓存穿透，缓存击穿，缓存雪崩理解/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/16/Executors五种线程池/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>缓存穿透，缓存击穿，缓存雪崩理解 | Bojun Ji's notes</title>
+  <title>Executors五种线程池 | Bojun Ji's notes</title>
   
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/26/缓存穿透，缓存击穿，缓存雪崩理解/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/16/Executors五种线程池/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -295,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">缓存穿透，缓存击穿，缓存雪崩理解
+          <h1 class="post-title" itemprop="name headline">Executors五种线程池
               
             
           </h1>
@@ -320,12 +320,24 @@
                 
               
 
-              <time title="Created: 2018-05-26 18:13:49 / Modified: 19:52:22" itemprop="dateCreated datePublished" datetime="2018-05-26T18:13:49+08:00">2018-05-26</time>
+              <time title="Created: 2018-05-16 01:10:45" itemprop="dateCreated datePublished" datetime="2018-05-16T01:10:45+08:00">2018-05-16</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-06-16 02:02:08" itemprop="dateModified" datetime="2018-06-16T02:02:08+08:00">2018-06-16</time>
               
             
           </span>
@@ -342,7 +354,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/分布式系统设计/" itemprop="url" rel="index"><span itemprop="name">分布式系统设计</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java并发编程/" itemprop="url" rel="index"><span itemprop="name">Java并发编程</span></a></span>
 
                 
                 
@@ -384,21 +396,146 @@
       
 
       
-        <p>缓存穿透：</p>
-<pre><code>1.分布式缓存或者多加一级本地缓存在DB前面，存储同样数据，查询先按级看缓存，命中就直接返回，不查询缓存。
-2.如果使用者了解业务数据结构，知道有一些查询参数的数据永远不会存在于数据库中，假设造一个这样的请求发给CONTROLLER，服务端会先查询缓存，因为数据不可能存在，所以不命中，所以会推一条查询sql去DB并且也是空结果。如果制造大量这样无效数据的查询请求，因为缓存不可能命中，会造成大量查询SQL，压力全集中在数据库一边。
-3.缓存穿透是一种绕开缓存借助DDOS直接攻击关系型数据库的方式。
-4.解决方法：如果有办法在缓存层前面设置拦截过滤器，而且过滤器存有所有查询可能参数，对无效参数进行直接过滤不让进入缓存层和数据库层，这样可以解决穿透问题。
-</code></pre><p>缓存击穿：</p>
-<pre><code>1. 一般REDIS或者本地缓存数据都会设一个过期时间。假设有大量数据是一个公司的，且可预计大量查询会命中，以公司某一唯一标识信息为KEY，存储公司具体信息进VALUE。这类数据就是热点数据。
-2.如果刚好缓存失效后，大量请求高并发访问，则会造成DB巨大压力。
-3.解决办法
-    1. 不设过期时间，K或者V里有过期时间，起异步线程去更新缓存，但是更新缓存构建过程中，可能造成一些请求读到过时脏数据。
-    2. redis的SETNX操作，SET IF NOT EXISTS，这样一个线程设了值，有了值别的线程无法设，这一个设值的线程就像获取了锁，继续执行，查询数据库，拿到结果，写缓存，删除这条为了互斥而设的KEY。这样别的线程就能继续下去从缓存中直接拿前面这条线程设进去的结果。
-</code></pre><p>缓存雪崩：</p>
-<pre><code>1.缓存击穿更针对于热点数据，一条KEY。而雪崩指的是有多条KEY的数据，在同一时间过期，这样大量不同业务需求的请求查询这多条KEY，会短时间内全部命中DB，造成压力。
-2.解决办法：
-    1.用算法，例如取模之类按一些参数或者完全随机在原缓存时间上加时间（假如一天，是86500MS，在这个上面加1-100的随机时间）。这样使多条KEY的过期时间分散，减少了压力。
+        <p>JDK1.5开始基于ThreadPoolExecutor有四种已有的线程池，可根据不同业务场景使用。<br>1.8新加了work stealing pool。</p>
+<ol>
+<li><p>fixedThreadPool: </p>
+<ol>
+<li>固定线程数量，corePoolSize=maxiumPoolSize</li>
+<li>keepAliveTime为0</li>
+<li>使用LinkedBlockingQueue作为工作队列，FIFO链表队列，默认大小可以达到int最大值</li>
+<li>可使用于一些场景，比如客户端多线程同步调用服务端接口，但服务端承受能力有限，需要控制请求数量，此时客户端多线程可以用固定数目，比如每次5个线程处理调用/发送请求。其余任务则在工作队列等待直到线程空出来。</li>
+</ol>
+</li>
+<li><p>singleThreadExecutor</p>
+<ol>
+<li>固定线程数量为1，corePoolSize=maxiumPoolSize=1</li>
+<li>单一线程遇到执行异常失败，仍然会有线程继续执行任务</li>
+<li>同样使用LinkedBlockingQueue来做工作队列</li>
+<li>使用场景例如主线程中起一些异步任务，用单线程可以保证任务的执行顺序</li>
+</ol>
+</li>
+<li><p>cachedThreadPool</p>
+<ol>
+<li>corePoolSize=0,maxiumPoolSize为int最大值，2的32位</li>
+<li>keepAliveTime为60秒</li>
+<li>SynchronousQueue作为工作队列，实际并不存储，每一次插入操作会阻塞，直到另一个线程做了移除操作。</li>
+<li>场景适合一些异步短时执行任务，线程池空闲时因为corePoolSize是0不占用资源，来任务会起线程做，线程空闲1分钟会被清理，1分钟内的线程如果来任务会被复用。</li>
+</ol>
+</li>
+<li><p>scheduledThreadPool</p>
+<ol>
+<li>corePoolSize作为传参，maxiumPoolSize为int最大值，但是仍然可以用set方法去改动</li>
+<li>用DelayedWorkQueue作为工作队列，取出线程操作时会block并且delay一段，周期操作取出来执行完会再重置时间加入队列</li>
+<li>有定时执行方法schedule，传参为延迟多久执行和时间单位</li>
+<li>有周期执行方法scheduleAtFixedRate，传参为延迟时间，周期时间，时间单位</li>
+</ol>
+</li>
+<li><p>workStealingPool</p>
+<ol>
+<li>JDK1.8新增</li>
+<li>传参是并行级别，可以按照线程数量传，但实际执行中无法保证数量和任务执行顺序</li>
+<li>思想有点类似hadoop的mapreduce计算，一个任务拆成多个小的执行，再在规约中合并成一个结果。利用多CPU多核的优势分散小任务</li>
+<li>依赖ForkJoinPool</li>
+</ol>
+</li>
+</ol>
+<p>fixedThreadPool:</p>
+<pre><code>    /**
+ * Creates a thread pool that reuses a fixed number of threads
+ * operating off a shared unbounded queue.  At any point, at most
+ * {@code nThreads} threads will be active processing tasks.
+ * If additional tasks are submitted when all threads are active,
+ * they will wait in the queue until a thread is available.
+ * If any thread terminates due to a failure during execution
+ * prior to shutdown, a new one will take its place if needed to
+ * execute subsequent tasks.  The threads in the pool will exist
+ * until it is explicitly {@link ExecutorService#shutdown shutdown}.
+ *
+ * @param nThreads the number of threads in the pool
+ * @return the newly created thread pool
+ * @throws IllegalArgumentException if {@code nThreads &lt;= 0}
+ */
+public static ExecutorService newFixedThreadPool(int nThreads) {
+    return new ThreadPoolExecutor(nThreads, nThreads,
+                                  0L, TimeUnit.MILLISECONDS,
+                                  new LinkedBlockingQueue&lt;Runnable&gt;());
+}
+</code></pre><p>singleThreadExecutor:</p>
+<pre><code>/**
+ * Creates an Executor that uses a single worker thread operating
+ * off an unbounded queue. (Note however that if this single
+ * thread terminates due to a failure during execution prior to
+ * shutdown, a new one will take its place if needed to execute
+ * subsequent tasks.)  Tasks are guaranteed to execute
+ * sequentially, and no more than one task will be active at any
+ * given time. Unlike the otherwise equivalent
+ * {@code newFixedThreadPool(1)} the returned executor is
+ * guaranteed not to be reconfigurable to use additional threads.
+ *
+ * @return the newly created single-threaded Executor
+ */
+public static ExecutorService newSingleThreadExecutor() {
+    return new FinalizableDelegatedExecutorService
+        (new ThreadPoolExecutor(1, 1,
+                                0L, TimeUnit.MILLISECONDS,
+                                new LinkedBlockingQueue&lt;Runnable&gt;()));
+}
+</code></pre><p>cachedThreadPool:</p>
+<pre><code>/**
+ * Creates a thread pool that creates new threads as needed, but
+ * will reuse previously constructed threads when they are
+ * available.  These pools will typically improve the performance
+ * of programs that execute many short-lived asynchronous tasks.
+ * Calls to {@code execute} will reuse previously constructed
+ * threads if available. If no existing thread is available, a new
+ * thread will be created and added to the pool. Threads that have
+ * not been used for sixty seconds are terminated and removed from
+ * the cache. Thus, a pool that remains idle for long enough will
+ * not consume any resources. Note that pools with similar
+ * properties but different details (for example, timeout parameters)
+ * may be created using {@link ThreadPoolExecutor} constructors.
+ *
+ * @return the newly created thread pool
+ */
+public static ExecutorService newCachedThreadPool() {
+    return new ThreadPoolExecutor(0, Integer.MAX_VALUE,
+                                  60L, TimeUnit.SECONDS,
+                                  new SynchronousQueue&lt;Runnable&gt;());
+}
+</code></pre><p>scheduledThreadPool:</p>
+<pre><code>/**
+ * Creates a thread pool that can schedule commands to run after a
+ * given delay, or to execute periodically.
+ * @param corePoolSize the number of threads to keep in the pool,
+ * even if they are idle
+ * @return a newly created scheduled thread pool
+ * @throws IllegalArgumentException if {@code corePoolSize &lt; 0}
+ */
+public static ScheduledExecutorService newScheduledThreadPool(int corePoolSize) {
+    return new ScheduledThreadPoolExecutor(corePoolSize);
+}
+</code></pre><p>workStealingPool:</p>
+<pre><code>/**
+ * Creates a thread pool that maintains enough threads to support
+ * the given parallelism level, and may use multiple queues to
+ * reduce contention. The parallelism level corresponds to the
+ * maximum number of threads actively engaged in, or available to
+ * engage in, task processing. The actual number of threads may
+ * grow and shrink dynamically. A work-stealing pool makes no
+ * guarantees about the order in which submitted tasks are
+ * executed.
+ *
+ * @param parallelism the targeted parallelism level
+ * @return the newly created thread pool
+ * @throws IllegalArgumentException if {@code parallelism &lt;= 0}
+ * @since 1.8
+ */
+public static ExecutorService newWorkStealingPool(int parallelism) {
+    return new ForkJoinPool
+        (parallelism,
+         ForkJoinPool.defaultForkJoinWorkerThreadFactory,
+         null, true);
+}
 </code></pre>
       
     </div>
@@ -419,9 +556,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/缓存/" rel="tag"># 缓存</a>
-          
-            <a href="/tags/分布式/" rel="tag"># 分布式</a>
+            <a href="/tags/Java并发编程/" rel="tag"># Java并发编程</a>
           
         </div>
       
@@ -434,8 +569,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/22/synchronized对象锁和类锁/" rel="next" title="synchronized对象锁和类锁">
-                <i class="fa fa-chevron-left"></i> synchronized对象锁和类锁
+              <a href="/2018/05/15/线程池任务提交execute-submit方法比较/" rel="next" title="线程池任务提交execute,submit方法比较">
+                <i class="fa fa-chevron-left"></i> 线程池任务提交execute,submit方法比较
               </a>
             
           </div>
@@ -444,8 +579,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/26/mybatis多数据源切换/" rel="prev" title="mybatis多数据源切换">
-                mybatis多数据源切换 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/20/dubbo服务三种启动方式/" rel="prev" title="dubbo服务三种启动方式">
+                dubbo服务三种启动方式 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
