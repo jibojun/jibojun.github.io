@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="共同点：    都继承自AbstractStringBuilder，都用CHAR数组作为存储结构。和String比是变长的因为数组没有加FINAL，核心是APPEND方法，适用于拼接字符串经常变化的场景。    不传大小的话默认都是16。APPEND时候会有ensureCapacityInternal先来确保数组长度够用。 继承自同一个抽象类：     public final class Str">
-<meta name="keywords" content="Java String">
+  <meta name="description" content="CyclicBarrier一般被叫做屏障点/栅栏/同步点，意思就是一组线程都到了一个同步点，才都开始执行接下来的代码，否则等待。主要构造方法也是一个传参，代表栅栏的线程数量。和CountDownLatch功能有一些相似，两个都是线程同步辅助类，许多场景两者都可以使用，但实现不同也有一些小区别。 主要区别：  计数方式，闭锁是减少，countdown到0了awiat的线程往下走。栅栏是一组线程都调用">
+<meta name="keywords" content="Java并发编程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="StringBuilder和StringBuffer对比">
-<meta property="og:url" content="http://yoursite.com/2017/12/26/StringBuilder和StringBuffer对比/index.html">
+<meta property="og:title" content="CyclicBarrier使用">
+<meta property="og:url" content="http://yoursite.com/2018/05/16/CyclicBarrier使用/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="共同点：    都继承自AbstractStringBuilder，都用CHAR数组作为存储结构。和String比是变长的因为数组没有加FINAL，核心是APPEND方法，适用于拼接字符串经常变化的场景。    不传大小的话默认都是16。APPEND时候会有ensureCapacityInternal先来确保数组长度够用。 继承自同一个抽象类：     public final class Str">
+<meta property="og:description" content="CyclicBarrier一般被叫做屏障点/栅栏/同步点，意思就是一组线程都到了一个同步点，才都开始执行接下来的代码，否则等待。主要构造方法也是一个传参，代表栅栏的线程数量。和CountDownLatch功能有一些相似，两个都是线程同步辅助类，许多场景两者都可以使用，但实现不同也有一些小区别。 主要区别：  计数方式，闭锁是减少，countdown到0了awiat的线程往下走。栅栏是一组线程都调用">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-13T10:29:54.374Z">
+<meta property="og:updated_time" content="2018-06-16T17:24:05.994Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="StringBuilder和StringBuffer对比">
-<meta name="twitter:description" content="共同点：    都继承自AbstractStringBuilder，都用CHAR数组作为存储结构。和String比是变长的因为数组没有加FINAL，核心是APPEND方法，适用于拼接字符串经常变化的场景。    不传大小的话默认都是16。APPEND时候会有ensureCapacityInternal先来确保数组长度够用。 继承自同一个抽象类：     public final class Str">
+<meta name="twitter:title" content="CyclicBarrier使用">
+<meta name="twitter:description" content="CyclicBarrier一般被叫做屏障点/栅栏/同步点，意思就是一组线程都到了一个同步点，才都开始执行接下来的代码，否则等待。主要构造方法也是一个传参，代表栅栏的线程数量。和CountDownLatch功能有一些相似，两个都是线程同步辅助类，许多场景两者都可以使用，但实现不同也有一些小区别。 主要区别：  计数方式，闭锁是减少，countdown到0了awiat的线程往下走。栅栏是一组线程都调用">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/12/26/StringBuilder和StringBuffer对比/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/16/CyclicBarrier使用/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>StringBuilder和StringBuffer对比 | Bojun Ji's notes</title>
+  <title>CyclicBarrier使用 | Bojun Ji's notes</title>
   
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/26/StringBuilder和StringBuffer对比/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/16/CyclicBarrier使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -295,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">StringBuilder和StringBuffer对比
+          <h1 class="post-title" itemprop="name headline">CyclicBarrier使用
               
             
           </h1>
@@ -320,7 +320,7 @@
                 
               
 
-              <time title="Created: 2017-12-26 23:47:44" itemprop="dateCreated datePublished" datetime="2017-12-26T23:47:44+08:00">2017-12-26</time>
+              <time title="Created: 2018-05-16 23:29:53" itemprop="dateCreated datePublished" datetime="2018-05-16T23:29:53+08:00">2018-05-16</time>
             
 
             
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-05-13 18:29:54" itemprop="dateModified" datetime="2018-05-13T18:29:54+08:00">2018-05-13</time>
+                <time title="Modified: 2018-06-17 01:24:05" itemprop="dateModified" datetime="2018-06-17T01:24:05+08:00">2018-06-17</time>
               
             
           </span>
@@ -354,7 +354,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaCore/" itemprop="url" rel="index"><span itemprop="name">JavaCore</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java并发编程/" itemprop="url" rel="index"><span itemprop="name">Java并发编程</span></a></span>
 
                 
                 
@@ -396,146 +396,172 @@
       
 
       
-        <p>共同点：<br>    都继承自AbstractStringBuilder，都用CHAR数组作为存储结构。和String比是变长的因为数组没有加FINAL，核心是APPEND方法，适用于拼接字符串经常变化的场景。<br>    不传大小的话默认都是16。APPEND时候会有ensureCapacityInternal先来确保数组长度够用。</p>
-<p>继承自同一个抽象类：</p>
-<pre><code>    public final class StringBuilder
-extends AbstractStringBuilder
+        <p>CyclicBarrier一般被叫做屏障点/栅栏/同步点，意思就是一组线程都到了一个同步点，才都开始执行接下来的代码，否则等待。主要构造方法也是一个传参，代表栅栏的线程数量。和CountDownLatch功能有一些相似，两个都是线程同步辅助类，许多场景两者都可以使用，但实现不同也有一些小区别。</p>
+<p>主要区别：</p>
+<ol>
+<li>计数方式，闭锁是减少，countdown到0了awiat的线程往下走。栅栏是一组线程都调用awiat，不停加1，到达了传参的线程数后，这些线程一起往下走。</li>
+<li>重置问题，闭锁计数到0了就无法重用了。而栅栏计数到了传参后自动重置0，所以这个栅栏对象仍然可以重用，也与Cyclic循环的意义符合。</li>
+<li>根据以上，闭锁有2个主要方法countDown()减少计数，awiat()只阻塞直到计数为0，本身不改计数值。栅栏只有awiat（）一个方法，但作用和闭锁的awiat不一样，这个方法调用是+1，+1后不到指定值，就阻塞。</li>
+</ol>
+<p>例子，计数设6，主线程+5个启动的线程：</p>
+<pre><code>    public static void main(String[] args) {
+    ExecutorService threadPool=Executors.newCachedThreadPool();
+    CyclicBarrier barrier=new CyclicBarrier(6);
+    long start=System.currentTimeMillis();
+    for(int i=0;i&lt;5;i++){
+        threadPool.submit(new Thread(() -&gt; {
+            System.out.println(&quot;thread reached barrier&quot;);
+            try {
+                barrier.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (BrokenBarrierException e) {
+                e.printStackTrace();
+            }
+            System.out.println(&quot;thread recovered&quot;);
+        }));
+    }
+    try {
+        barrier.await();
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    } catch (BrokenBarrierException e) {
+        e.printStackTrace();
+    }
+    long end=System.currentTimeMillis();
+    System.out.println(&quot;execution time is:&quot;+(end-start)+&quot;ms&quot;);
+}
+</code></pre><p>输出，主线程+5个线程都到了屏障点，才继续执行，输出下面的语句：</p>
+<pre><code>thread reached barrier
+thread reached barrier
+thread reached barrier
+thread reached barrier
+thread reached barrier
+thread recovered
+thread recovered
+execution time is:61ms
+thread recovered
+thread recovered
+thread recovered
+</code></pre><p>CyclicBarrier的实现靠ReentrantLock和Condition(awiat,signal)，核心doWait方法里用了lock加锁，同时利用Condition使线程等待（trip是一个Condition），栅栏任务完成时调用方法利用sinalAll唤醒所有等待线程。    </p>
+<p>内部类generation和成员变量：</p>
+<pre><code>    /**
+ * Each use of the barrier is represented as a generation instance.
+ * The generation changes whenever the barrier is tripped, or
+ * is reset. There can be many generations associated with threads
+ * using the barrier - due to the non-deterministic way the lock
+ * may be allocated to waiting threads - but only one of these
+ * can be active at a time (the one to which {@code count} applies)
+ * and all the rest are either broken or tripped.
+ * There need not be an active generation if there has been a break
+ * but no subsequent reset.
+ */
+private static class Generation {
+    boolean broken = false;
+}
 
- public final class StringBuffer
-extends AbstractStringBuilder
-</code></pre><p>存储结构是一个CHAR数组：</p>
+/** The lock for guarding barrier entry */
+private final ReentrantLock lock = new ReentrantLock();
+/** Condition to wait on until tripped */
+private final Condition trip = lock.newCondition();
+/** The number of parties */
+private final int parties;
+/* The command to run when tripped */
+private final Runnable barrierCommand;
+/** The current generation */
+private Generation generation = new Generation();
+</code></pre><p>awiat调用的doWait方法：</p>
 <pre><code>/**
- * The value is used for character storage.
+ * Main barrier code, covering the various policies.
  */
-char[] value;
+private int dowait(boolean timed, long nanos)
+    throws InterruptedException, BrokenBarrierException,
+           TimeoutException {
+    final ReentrantLock lock = this.lock;
+    lock.lock();
+    try {
+        final Generation g = generation;
+
+        if (g.broken)
+            throw new BrokenBarrierException();
+
+        if (Thread.interrupted()) {
+            breakBarrier();
+            throw new InterruptedException();
+        }
+
+        int index = --count;
+        if (index == 0) {  // tripped
+            boolean ranAction = false;
+            try {
+                final Runnable command = barrierCommand;
+                if (command != null)
+                    command.run();
+                ranAction = true;
+                nextGeneration();
+                return 0;
+            } finally {
+                if (!ranAction)
+                    breakBarrier();
+            }
+        }
+
+        // loop until tripped, broken, interrupted, or timed out
+        for (;;) {
+            try {
+                if (!timed)
+                    trip.await();
+                else if (nanos &gt; 0L)
+                    nanos = trip.awaitNanos(nanos);
+            } catch (InterruptedException ie) {
+                if (g == generation &amp;&amp; ! g.broken) {
+                    breakBarrier();
+                    throw ie;
+                } else {
+                    // We&apos;re about to finish waiting even if we had not
+                    // been interrupted, so this interrupt is deemed to
+                    // &quot;belong&quot; to subsequent execution.
+                    Thread.currentThread().interrupt();
+                }
+            }
+
+            if (g.broken)
+                throw new BrokenBarrierException();
+
+            if (g != generation)
+                return index;
+
+            if (timed &amp;&amp; nanos &lt;= 0L) {
+                breakBarrier();
+                throw new TimeoutException();
+            }
+        }
+    } finally {
+        lock.unlock();
+    }
+}
+</code></pre><p>主要唤醒方法：</p>
+<pre><code>    /**
+ * Updates state on barrier trip and wakes up everyone.
+ * Called only while holding lock.
+ */
+private void nextGeneration() {
+    // signal completion of last generation
+    trip.signalAll();
+    // set up next generation
+    count = parties;
+    generation = new Generation();
+}
 
 /**
- * The count is the number of characters used.
+ * Sets current barrier generation as broken and wakes up everyone.
+ * Called only while holding lock.
  */
-int count;
-
-默认大小16：
-/**
- * Constructs a string buffer with no characters in it and an
- * initial capacity of 16 characters.
- */
-public StringBuffer() {
-    super(16);
-}
-</code></pre><p>核心方法APPEND，在尾部接入String,接收OBJECT和STRING，OBJECT则调用String.valueOf方法转为String再调用String的APPEND方法：</p>
-<pre><code>/**
- * Appends the string representation of the {@code Object} argument.
- * &lt;p&gt;
- * The overall effect is exactly as if the argument were converted
- * to a string by the method {@link String#valueOf(Object)},
- * and the characters of that string were then
- * {@link #append(String) appended} to this character sequence.
- *
- * @param   obj   an {@code Object}.
- * @return  a reference to this object.
- */
-public AbstractStringBuilder append(Object obj) {
-    return append(String.valueOf(obj));
-}
-
-/**
- * Appends the specified string to this character sequence.
- * &lt;p&gt;
- * The characters of the {@code String} argument are appended, in
- * order, increasing the length of this sequence by the length of the
- * argument. If {@code str} is {@code null}, then the four
- * characters {@code &quot;null&quot;} are appended.
- * &lt;p&gt;
- * Let &lt;i&gt;n&lt;/i&gt; be the length of this character sequence just prior to
- * execution of the {@code append} method. Then the character at
- * index &lt;i&gt;k&lt;/i&gt; in the new character sequence is equal to the character
- * at index &lt;i&gt;k&lt;/i&gt; in the old character sequence, if &lt;i&gt;k&lt;/i&gt; is less
- * than &lt;i&gt;n&lt;/i&gt;; otherwise, it is equal to the character at index
- * &lt;i&gt;k-n&lt;/i&gt; in the argument {@code str}.
- *
- * @param   str   a string.
- * @return  a reference to this object.
- */
-public AbstractStringBuilder append(String str) {
-    if (str == null)
-        return appendNull();
-    int len = str.length();
-
-    //确保数组长度够用
-    ensureCapacityInternal(count + len);
-
-    //加入字符
-    str.getChars(0, len, value, count);
-    count += len;
-    return this;
-}
-</code></pre><p>数组扩展策略（JDK1.8），2倍长度再+2新建数组替换，所以和String不同，非final的数组只有在容量不够时被替换，和HASHMAP,ARRAYLIST直接扩展成2倍大小数组不同：</p>
-<pre><code>private void ensureCapacityInternal(int minimumCapacity) {
-    // overflow-conscious code
-    if (minimumCapacity - value.length &gt; 0) {
-        value = Arrays.copyOf(value,
-                newCapacity(minimumCapacity));
-    }
-}
-
-  /**
- * Returns a capacity at least as large as the given minimum capacity.
- * Returns the current capacity increased by the same amount + 2 if
- * that suffices.
- * Will not return a capacity greater than {@code MAX_ARRAY_SIZE}
- * unless the given minimum capacity is greater than that.
- *
- * @param  minCapacity the desired minimum capacity
- * @throws OutOfMemoryError if minCapacity is less than zero or
- *         greater than Integer.MAX_VALUE
- */
-private int newCapacity(int minCapacity) {
-
-    //2倍长度再+2
-    // overflow-conscious code
-    int newCapacity = (value.length &lt;&lt; 1) + 2;
-
-    if (newCapacity - minCapacity &lt; 0) {
-        newCapacity = minCapacity;
-    }
-    return (newCapacity &lt;= 0 || MAX_ARRAY_SIZE - newCapacity &lt; 0)
-        ? hugeCapacity(minCapacity)
-        : newCapacity;
-}
-
-private int hugeCapacity(int minCapacity) {
-    if (Integer.MAX_VALUE - minCapacity &lt; 0) { // overflow
-        throw new OutOfMemoryError();
-    }
-    return (minCapacity &gt; MAX_ARRAY_SIZE)
-        ? minCapacity : MAX_ARRAY_SIZE;
-}
-</code></pre><p>不同点：<br>    StringBuffer加了SYCHRONIZED保证了线程安全，StringBuilder不是线程安全的。需要根据是否线程安全来选用这两个类。</p>
-<pre><code>StringBuffer:
-    @Override
-    public synchronized StringBuffer append(Object obj) {
-        toStringCache = null;
-        super.append(String.valueOf(obj));
-        return this;
-    }
-
-    @Override
-    public synchronized StringBuffer append(String str) {
-        toStringCache = null;
-        super.append(str);
-        return this;
-    }
-StringBuilder:
-    @Override
-    public StringBuilder append(Object obj) {
-        return append(String.valueOf(obj));
-    }
-
-    @Override
-    public StringBuilder append(String str) {
-        super.append(str);
-        return this;
-    }
+private void breakBarrier() {
+    generation.broken = true;
+    count = parties;
+    trip.signalAll();
+}    
 </code></pre>
       
     </div>
@@ -556,7 +582,7 @@ StringBuilder:
       
         <div class="post-tags">
           
-            <a href="/tags/Java-String/" rel="tag"># Java String</a>
+            <a href="/tags/Java并发编程/" rel="tag"># Java并发编程</a>
           
         </div>
       
@@ -569,8 +595,8 @@ StringBuilder:
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/26/主键和唯一性索引异同/" rel="next" title="主键和唯一性索引异同">
-                <i class="fa fa-chevron-left"></i> 主键和唯一性索引异同
+              <a href="/2018/05/16/Executors五种线程池/" rel="next" title="Executors五种线程池">
+                <i class="fa fa-chevron-left"></i> Executors五种线程池
               </a>
             
           </div>
@@ -579,8 +605,8 @@ StringBuilder:
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/27/关系型数据库表之间三种关系/" rel="prev" title="关系型数据库表之间三种关系">
-                关系型数据库表之间三种关系 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/20/dubbo服务三种启动方式/" rel="prev" title="dubbo服务三种启动方式">
+                dubbo服务三种启动方式 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

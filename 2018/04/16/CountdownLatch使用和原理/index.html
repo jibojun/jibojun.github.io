@@ -106,11 +106,11 @@
 <meta name="keywords" content="Java并发编程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CountdownLatch使用和原理">
-<meta property="og:url" content="http://yoursite.com/2018/04/16/CountdownLatch使用和原理/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/04/16/CountDownLatch使用和原理/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
 <meta property="og:description" content="CountDownLatch可以用来做线程同步，构造时传入一个数值，需要等待的线程调用awiat方法，直到这个值到0才会继续。被等待线程执行完调用countDown方法对这个值减1。可以让多个线程等待，只要调用闭锁的await方法。 使用例子：     public static void main(String[] args) {     CountDownLatch cdl=new Count">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-06-16T12:09:12.966Z">
+<meta property="og:updated_time" content="2018-06-16T15:21:57.536Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CountdownLatch使用和原理">
 <meta name="twitter:description" content="CountDownLatch可以用来做线程同步，构造时传入一个数值，需要等待的线程调用awiat方法，直到这个值到0才会继续。被等待线程执行完调用countDown方法对这个值减1。可以让多个线程等待，只要调用闭锁的await方法。 使用例子：     public static void main(String[] args) {     CountDownLatch cdl=new Count">
@@ -120,7 +120,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/16/CountdownLatch使用和原理/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/16/CountDownLatch使用和原理/"/>
 
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/16/CountdownLatch使用和原理/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/16/CountDownLatch使用和原理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-06-16 20:09:12" itemprop="dateModified" datetime="2018-06-16T20:09:12+08:00">2018-06-16</time>
+                <time title="Modified: 2018-06-16 23:21:57" itemprop="dateModified" datetime="2018-06-16T23:21:57+08:00">2018-06-16</time>
               
             
           </span>
@@ -428,7 +428,7 @@
 <li>闭锁依赖于AQS的共享锁实现，里面有一个Sync类继承自AQS。</li>
 <li>调用awiat的线程如果此时count不为0（state）,则被加入队列等待。</li>
 <li>countDown方法会对start减1.</li>
-<li>置0的线程会判断头节点指向的通知节点，如果为通知状态，则指向后续释放线程节点，这个线程执行后发现自己是通知状态，再重复步骤唤醒队列后面的节点。</li>
+<li>置0的线程会判断头节点指向的通知节点，如果为通知状态，则指向后续释放线程节点，这个线程执行后发现自己是通知状态，再重复步骤唤醒队列后面的节点。简单来说AQS同步状态保存的是COUNT的值，闭锁的awiat实际调用了acquire，为0时，则立即返回，countdown方法则调用release。</li>
 </ol>
 <pre><code>/**
  * Synchronization control For CountDownLatch.
@@ -571,7 +571,7 @@ private static final class Sync extends AbstractQueuedSynchronizer {
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-count">45</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
