@@ -102,20 +102,24 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Bojun Ji&#39;s notes">
-<meta property="og:url" content="http://yoursite.com/archives/page/2/index.html">
+  <meta name="description" content="volatile可以保证共享变量在线程间的可见性，也可以避免代码重排序，但volatile变量并不具有原子性。如果是一些原子操作，例如单写（i=0）,能靠volatile保证可见性从而达到安全的目的，但非原子操作，例如自增自减（一读一写），则不能保证。需要用到jdk1.5开始的Atomic类，以AtomicInteger为例，同时也有别的类型的原子类。 volatile例如以下，加在变量上可以保证">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Atomic包使用及原理">
+<meta property="og:url" content="http://yoursite.com/2018/06/02/Atomic包使用及原理/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
+<meta property="og:description" content="volatile可以保证共享变量在线程间的可见性，也可以避免代码重排序，但volatile变量并不具有原子性。如果是一些原子操作，例如单写（i=0）,能靠volatile保证可见性从而达到安全的目的，但非原子操作，例如自增自减（一读一写），则不能保证。需要用到jdk1.5开始的Atomic类，以AtomicInteger为例，同时也有别的类型的原子类。 volatile例如以下，加在变量上可以保证">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-06-21T17:25:50.185Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bojun Ji&#39;s notes">
+<meta name="twitter:title" content="Atomic包使用及原理">
+<meta name="twitter:description" content="volatile可以保证共享变量在线程间的可见性，也可以避免代码重排序，但volatile变量并不具有原子性。如果是一些原子操作，例如单写（i=0）,能靠volatile保证可见性从而达到安全的目的，但非原子操作，例如自增自减（一读一写），则不能保证。需要用到jdk1.5开始的Atomic类，以AtomicInteger为例，同时也有别的类型的原子类。 volatile例如以下，加在变量上可以保证">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/page/2/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/02/Atomic包使用及原理/"/>
 
 
 
@@ -125,7 +129,7 @@
   };
 </script>
 
-  <title>Archive | Bojun Ji's notes</title>
+  <title>Atomic包使用及原理 | Bojun Ji's notes</title>
   
 
 
@@ -172,7 +176,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -220,7 +224,7 @@
         
         
           
-          <li class="menu-item menu-item-archives menu-item-active">
+          <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
   </li>
@@ -253,433 +257,298 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      
-      <span class="archive-page-counter">
-        
-        
-         
-        
-        OK! 50 posts in total. Keep on posting.
-      </span>
-      
+  
 
-      
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/02/Atomic包使用及原理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bojun Ji's notes">
+    </span>
+
+    
+      <header class="post-header">
 
         
         
+          <h1 class="post-title" itemprop="name headline">Atomic包使用及原理
+              
+            
+          </h1>
         
 
-        
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-06-02 23:59:52" itemprop="dateCreated datePublished" datetime="2018-06-02T23:59:52+08:00">2018-06-02</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-06-22 01:25:50" itemprop="dateModified" datetime="2018-06-22T01:25:50+08:00">2018-06-22</time>
+              
+            
+          </span>
+
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/16/Executors五种线程池/" itemprop="url">
-              
-                <span itemprop="name">Executors五种线程池</span>
-              
-            </a>
-        
-      </h2>
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-16T01:10:45+08:00"
-              content="2018-05-16" >
-          05-16
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+          
 
+        </div>
+      </header>
+    
 
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/15/线程池任务提交execute-submit方法比较/" itemprop="url">
-              
-                <span itemprop="name">线程池任务提交execute,submit方法比较</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-15T00:37:14+08:00"
-              content="2018-05-15" >
-          05-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/14/ThreadPoolExecutor参数和线程池任务执行逻辑/" itemprop="url">
-              
-                <span itemprop="name">ThreadPoolExecutor参数和线程池任务执行逻辑</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-14T00:17:48+08:00"
-              content="2018-05-14" >
-          05-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
+        <p>volatile可以保证共享变量在线程间的可见性，也可以避免代码重排序，但volatile变量并不具有原子性。如果是一些原子操作，例如单写（i=0）,能靠volatile保证可见性从而达到安全的目的，但非原子操作，例如自增自减（一读一写），则不能保证。<br>需要用到jdk1.5开始的Atomic类，以AtomicInteger为例，同时也有别的类型的原子类。</p>
+<p>volatile例如以下，加在变量上可以保证变量在线程间可见性，但是自增，自减这种一读一写的操作，volatile不能保证原子性，很可能会出现第二个读的线程在第一个写的线程自增（1读2写）两个操作间读到了值，这样就是脏数据：</p>
+<pre><code> private static volatile int i=0;
 
-        
-        
-        
+static class Thread1 implements Runnable{
 
-        
-        
+    @Override
+    public void run() {
+        int count=0;
+        while(count&lt;100) {
+            i++;
+            count++;
+        }
+    }
+}
 
-        
+static class Thread2 implements Runnable{
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    @Override
+    public void run() {
+        int count=0;
+        while(count&lt;100) {
+            System.out.println(&quot;current value is:&quot; + i);
+            count++;
+        }
+    }
+}
+</code></pre><p>Atomic类提供了自增(addAndGet,getAndAdd,incrementAndGet,getAndIncrement)自减(decrementAndGet,getAndDecrement)方法，可以保证原子性，可以认为是强化更好的volatile，适用于这种场景不加锁保证同步。例子,前面的可以改成以下：</p>
+<pre><code>    private static AtomicInteger i=new AtomicInteger(0);
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/10/dubbo使用实例/" itemprop="url">
-              
-                <span itemprop="name">dubbo使用实例</span>
-              
-            </a>
-        
-      </h2>
+static class Thread1 implements Runnable{
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-10T01:17:45+08:00"
-              content="2018-05-10" >
-          05-10
-        </time>
-      </div>
+    @Override
+    public void run() {
+        int count=0;
+        while(count&lt;100) {
+            i.incrementAndGet();
+            count++;
+        }
+    }
+}
 
-    </header>
-  </article>
+static class Thread2 implements Runnable{
 
+    @Override
+    public void run() {
+        int count=0;
+        while(count&lt;100) {
+            System.out.println(&quot;current value is:&quot; + i);
+            count++;
+        }
+    }
+}
+</code></pre><p>Atomic加强了volatile，里面持有了一个volatile的变量，并且通过CAS保证了原子性。</p>
+<ol>
+<li>现在的处理器基本支持CAS，算一种硬件同步，处理器对于共享区域能阻塞别的处理器以便更新共享数据。</li>
+<li>JNI是JAVA NATIVE INTERFACE，可调用别的语言方法操作底层，里面有CAS。</li>
+<li>CAS主要是三个参数，第一个内存地址，期望读出的内存值（用来比较），要更新的目标值（比较相等则更新为目标值），用C语言实现</li>
+</ol>
+<p>volatile成员变量，具有可见性：</p>
+<pre><code>public class AtomicInteger extends Number implements java.io.Serializable {
+private static final long serialVersionUID = 6214790243416807050L;
 
+// setup to use Unsafe.compareAndSwapInt for updates
+private static final Unsafe unsafe = Unsafe.getUnsafe();
+private static final long valueOffset;
 
+static {
+    try {
+        valueOffset = unsafe.objectFieldOffset
+            (AtomicInteger.class.getDeclaredField(&quot;value&quot;));
+    } catch (Exception ex) { throw new Error(ex); }
+}
+
+private volatile int value;
+</code></pre><p>CAS，调用JNI方法：</p>
+<pre><code>    /**
+ * Atomically sets the value to the given updated value
+ * if the current value {@code ==} the expected value.
+ *
+ * @param expect the expected value
+ * @param update the new value
+ * @return {@code true} if successful. False return indicates that
+ * the actual value was not equal to the expected value.
+ */
+public final boolean compareAndSet(int expect, int update) {
+    return unsafe.compareAndSwapInt(this, valueOffset, expect, update);
+}   
+</code></pre><p>自减方法（具有其他多种类似常用方法做计算），反编译看出底层循环用JNI CAS的方法直到成功更新。这样对于自增自减就类似于原子操作：    </p>
+<pre><code>    /**
+ * Atomically decrements by one the current value.
+ *
+ * @return the updated value
+ */
+public final int decrementAndGet() {
+    return unsafe.getAndAddInt(this, valueOffset, -1) - 1;
+}
+
+......
+
+    public final int getAndAddInt(Object var1, long var2, int var4) {
+    int var5;
+    do {
+        var5 = this.getIntVolatile(var1, var2);
+    } while(!this.compareAndSwapInt(var1, var2, var5, var5 + var4));
+
+    return var5;
+}
+</code></pre>
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/02/redis五种数据类型/" itemprop="url">
-              
-                <span itemprop="name">redis五种数据类型</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-02T00:24:17+08:00"
-              content="2018-05-02" >
-          05-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/30/Mybatis插入数据返回PK注意点/" itemprop="url">
-              
-                <span itemprop="name">Mybatis插入数据返回PK注意点</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-30T23:08:00+08:00"
-              content="2018-04-30" >
-          04-30
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/26/switch-case的使用注意点/" itemprop="url">
-              
-                <span itemprop="name">switch-case的使用注意点</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-26T01:57:50+08:00"
-              content="2018-04-26" >
-          04-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/18/GuavaCache和ehcache的简单对比/" itemprop="url">
-              
-                <span itemprop="name">GuavaCache和ehcache的简单对比</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-18T00:24:43+08:00"
-              content="2018-04-18" >
-          04-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/17/BIO-NIO特点，简单比较/" itemprop="url">
-              
-                <span itemprop="name">BIO, NIO特点，简单比较</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-17T00:04:31+08:00"
-              content="2018-04-17" >
-          04-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/16/CountDownLatch使用和原理/" itemprop="url">
-              
-                <span itemprop="name">CountdownLatch使用和原理</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-16T19:33:51+08:00"
-              content="2018-04-16" >
-          04-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/01/线程池awiatTermination/" rel="next" title="线程池awaitTermination">
+                <i class="fa fa-chevron-left"></i> 线程池awaitTermination
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/5/">5</a><a class="extend next" rel="next" href="/archives/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -996,6 +865,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
 
   
 
