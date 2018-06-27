@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="ExecutorService中四种线程池其实底层都是通过ThreadPoolExecutor来构造，只是传入了符合特点的参数。 也可以使用ThreadPoolExecutor来自定义线程池，有几种重载的构造方法，主要是下面这些参数：  corePoolSize,核心线程数量，如果提交任务时线程数量达不到这个值，则不管有没有空闲，都会创建新的线程执行任务。 maxiumPoolSize,线程池最大">
+  <meta name="description" content="ThreadLocal的存储结构其实是key，value形式。key是ThreadLocal对象（每次根据hashCode来索引map中的对象），value是存储的值。有一个内部类ThreadLocalMap,就是具体的存储结构。 而ThreadLocalMap中，维护了一个Entry的数组，而Entry是继承的WeakReference类，所以key是一个弱引用。换言之，如果没有key（Thre">
 <meta name="keywords" content="Java并发编程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ThreadPoolExecutor参数和线程池任务执行逻辑">
-<meta property="og:url" content="http://yoursite.com/2018/05/14/ThreadPoolExecutor参数和线程池任务执行逻辑/index.html">
+<meta property="og:title" content="ThreadLocal原理和内存泄漏问题">
+<meta property="og:url" content="http://yoursite.com/2018/06/16/ThreadLocal原理和内存泄漏问题/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="ExecutorService中四种线程池其实底层都是通过ThreadPoolExecutor来构造，只是传入了符合特点的参数。 也可以使用ThreadPoolExecutor来自定义线程池，有几种重载的构造方法，主要是下面这些参数：  corePoolSize,核心线程数量，如果提交任务时线程数量达不到这个值，则不管有没有空闲，都会创建新的线程执行任务。 maxiumPoolSize,线程池最大">
+<meta property="og:description" content="ThreadLocal的存储结构其实是key，value形式。key是ThreadLocal对象（每次根据hashCode来索引map中的对象），value是存储的值。有一个内部类ThreadLocalMap,就是具体的存储结构。 而ThreadLocalMap中，维护了一个Entry的数组，而Entry是继承的WeakReference类，所以key是一个弱引用。换言之，如果没有key（Thre">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-06-13T16:36:37.922Z">
+<meta property="og:updated_time" content="2018-06-27T17:53:41.483Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ThreadPoolExecutor参数和线程池任务执行逻辑">
-<meta name="twitter:description" content="ExecutorService中四种线程池其实底层都是通过ThreadPoolExecutor来构造，只是传入了符合特点的参数。 也可以使用ThreadPoolExecutor来自定义线程池，有几种重载的构造方法，主要是下面这些参数：  corePoolSize,核心线程数量，如果提交任务时线程数量达不到这个值，则不管有没有空闲，都会创建新的线程执行任务。 maxiumPoolSize,线程池最大">
+<meta name="twitter:title" content="ThreadLocal原理和内存泄漏问题">
+<meta name="twitter:description" content="ThreadLocal的存储结构其实是key，value形式。key是ThreadLocal对象（每次根据hashCode来索引map中的对象），value是存储的值。有一个内部类ThreadLocalMap,就是具体的存储结构。 而ThreadLocalMap中，维护了一个Entry的数组，而Entry是继承的WeakReference类，所以key是一个弱引用。换言之，如果没有key（Thre">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/14/ThreadPoolExecutor参数和线程池任务执行逻辑/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/16/ThreadLocal原理和内存泄漏问题/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>ThreadPoolExecutor参数和线程池任务执行逻辑 | Bojun Ji's notes</title>
+  <title>ThreadLocal原理和内存泄漏问题 | Bojun Ji's notes</title>
   
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/14/ThreadPoolExecutor参数和线程池任务执行逻辑/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/16/ThreadLocal原理和内存泄漏问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -295,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">ThreadPoolExecutor参数和线程池任务执行逻辑
+          <h1 class="post-title" itemprop="name headline">ThreadLocal原理和内存泄漏问题
               
             
           </h1>
@@ -320,7 +320,7 @@
                 
               
 
-              <time title="Created: 2018-05-14 00:17:48" itemprop="dateCreated datePublished" datetime="2018-05-14T00:17:48+08:00">2018-05-14</time>
+              <time title="Created: 2018-06-16 00:48:55" itemprop="dateCreated datePublished" datetime="2018-06-16T00:48:55+08:00">2018-06-16</time>
             
 
             
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-06-14 00:36:37" itemprop="dateModified" datetime="2018-06-14T00:36:37+08:00">2018-06-14</time>
+                <time title="Modified: 2018-06-28 01:53:41" itemprop="dateModified" datetime="2018-06-28T01:53:41+08:00">2018-06-28</time>
               
             
           </span>
@@ -396,181 +396,85 @@
       
 
       
-        <p>ExecutorService中四种线程池其实底层都是通过ThreadPoolExecutor来构造，只是传入了符合特点的参数。</p>
-<p>也可以使用ThreadPoolExecutor来自定义线程池，有几种重载的构造方法，主要是下面这些参数：</p>
-<ol>
-<li>corePoolSize,核心线程数量，如果提交任务时线程数量达不到这个值，则不管有没有空闲，都会创建新的线程执行任务。</li>
-<li>maxiumPoolSize,线程池最大线程数。</li>
-<li>workQueue,工作队列，数据结构上是一个阻塞队列，存储等待的任务。</li>
-<li>keepAliveTime,空闲线程的存活时间，这个参数是当线程超过核心线程数量时才生效。</li>
-<li>TimeUnit,存活时间的单位。</li>
-<li>ThreadFactory,工厂类，给线程池生产线程。</li>
-<li>RejectedExecutionHandler,拒绝处理器，当线程数量到了maxiumPoolSize后说明线程池到达极限，如果还有任务则会根据这个处理器执行拒绝逻辑。</li>
-</ol>
-<p>所以根据以上，线程池任务提交的逻辑大体如下：</p>
-<ol>
-<li>提交一个Runnable或者Callable,线程池收到任务。</li>
-<li>如果线程数量没有到corePoolSize,则无论如何会新建线程来执行任务。</li>
-<li>如果到了corePoolSize且工作队列没有到容量上限,则不新建线程，放入工作队列。</li>
-<li>如果工作队列也满了，但没有到maxiumPoolSize,则继续新建线程执行任务。</li>
-<li>如果到了maxiumPoolSize即线程池数量上限，则根据RejectedExecutionHandler执行拒绝任务策略。</li>
-</ol>
-<p>具体代码：</p>
+        <p>ThreadLocal的存储结构其实是key，value形式。key是ThreadLocal对象（每次根据hashCode来索引map中的对象），value是存储的值。有一个内部类ThreadLocalMap,就是具体的存储结构。</p>
+<p>而ThreadLocalMap中，维护了一个Entry的数组，而Entry是继承的WeakReference类，所以key是一个弱引用。换言之，如果没有key（ThreadLocal）对象的强引用，下一次GC就会被key这个ThreadLocal对象回收掉。而线程不结束的话，这些key为null的Entry在ThreadLocalMap中也无法被回收掉，造成内存泄漏。</p>
+<p>ThreadLocalHashCode,用来索引map中位置：</p>
 <pre><code>    /**
- * Creates a new {@code ThreadPoolExecutor} with the given initial
- * parameters and default thread factory and rejected execution handler.
- * It may be more convenient to use one of the {@link Executors} factory
- * methods instead of this general purpose constructor.
- *
- * @param corePoolSize the number of threads to keep in the pool, even
- *        if they are idle, unless {@code allowCoreThreadTimeOut} is set
- * @param maximumPoolSize the maximum number of threads to allow in the
- *        pool
- * @param keepAliveTime when the number of threads is greater than
- *        the core, this is the maximum time that excess idle threads
- *        will wait for new tasks before terminating.
- * @param unit the time unit for the {@code keepAliveTime} argument
- * @param workQueue the queue to use for holding tasks before they are
- *        executed.  This queue will hold only the {@code Runnable}
- *        tasks submitted by the {@code execute} method.
- * @throws IllegalArgumentException if one of the following holds:&lt;br&gt;
- *         {@code corePoolSize &lt; 0}&lt;br&gt;
- *         {@code keepAliveTime &lt; 0}&lt;br&gt;
- *         {@code maximumPoolSize &lt;= 0}&lt;br&gt;
- *         {@code maximumPoolSize &lt; corePoolSize}
- * @throws NullPointerException if {@code workQueue} is null
+ * ThreadLocals rely on per-thread linear-probe hash maps attached
+ * to each thread (Thread.threadLocals and
+ * inheritableThreadLocals).  The ThreadLocal objects act as keys,
+ * searched via threadLocalHashCode.  This is a custom hash code
+ * (useful only within ThreadLocalMaps) that eliminates collisions
+ * in the common case where consecutively constructed ThreadLocals
+ * are used by the same threads, while remaining well-behaved in
+ * less common cases.
  */
-public ThreadPoolExecutor(int corePoolSize,
-                          int maximumPoolSize,
-                          long keepAliveTime,
-                          TimeUnit unit,
-                          BlockingQueue&lt;Runnable&gt; workQueue) {
-    this(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue,
-         Executors.defaultThreadFactory(), defaultHandler);
-}
+private final int threadLocalHashCode = nextHashCode();
+</code></pre><p>ThreadLocalMap中Entry：</p>
+<pre><code>    /**
+ * ThreadLocalMap is a customized hash map suitable only for
+ * maintaining thread local values. No operations are exported
+ * outside of the ThreadLocal class. The class is package private to
+ * allow declaration of fields in class Thread.  To help deal with
+ * very large and long-lived usages, the hash table entries use
+ * WeakReferences for keys. However, since reference queues are not
+ * used, stale entries are guaranteed to be removed only when
+ * the table starts running out of space.
+ */
+static class ThreadLocalMap {
 
-/**
- * Creates a new {@code ThreadPoolExecutor} with the given initial
- * parameters and default rejected execution handler.
- *
- * @param corePoolSize the number of threads to keep in the pool, even
- *        if they are idle, unless {@code allowCoreThreadTimeOut} is set
- * @param maximumPoolSize the maximum number of threads to allow in the
- *        pool
- * @param keepAliveTime when the number of threads is greater than
- *        the core, this is the maximum time that excess idle threads
- *        will wait for new tasks before terminating.
- * @param unit the time unit for the {@code keepAliveTime} argument
- * @param workQueue the queue to use for holding tasks before they are
- *        executed.  This queue will hold only the {@code Runnable}
- *        tasks submitted by the {@code execute} method.
- * @param threadFactory the factory to use when the executor
- *        creates a new thread
- * @throws IllegalArgumentException if one of the following holds:&lt;br&gt;
- *         {@code corePoolSize &lt; 0}&lt;br&gt;
- *         {@code keepAliveTime &lt; 0}&lt;br&gt;
- *         {@code maximumPoolSize &lt;= 0}&lt;br&gt;
- *         {@code maximumPoolSize &lt; corePoolSize}
- * @throws NullPointerException if {@code workQueue}
- *         or {@code threadFactory} is null
- */
-public ThreadPoolExecutor(int corePoolSize,
-                          int maximumPoolSize,
-                          long keepAliveTime,
-                          TimeUnit unit,
-                          BlockingQueue&lt;Runnable&gt; workQueue,
-                          ThreadFactory threadFactory) {
-    this(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue,
-         threadFactory, defaultHandler);
-}
+    /**
+     * The entries in this hash map extend WeakReference, using
+     * its main ref field as the key (which is always a
+     * ThreadLocal object).  Note that null keys (i.e. entry.get()
+     * == null) mean that the key is no longer referenced, so the
+     * entry can be expunged from table.  Such entries are referred to
+     * as &quot;stale entries&quot; in the code that follows.
+     */
+    static class Entry extends WeakReference&lt;ThreadLocal&lt;?&gt;&gt; {
+        /** The value associated with this ThreadLocal. */
+        Object value;
 
-/**
- * Creates a new {@code ThreadPoolExecutor} with the given initial
- * parameters and default thread factory.
- *
- * @param corePoolSize the number of threads to keep in the pool, even
- *        if they are idle, unless {@code allowCoreThreadTimeOut} is set
- * @param maximumPoolSize the maximum number of threads to allow in the
- *        pool
- * @param keepAliveTime when the number of threads is greater than
- *        the core, this is the maximum time that excess idle threads
- *        will wait for new tasks before terminating.
- * @param unit the time unit for the {@code keepAliveTime} argument
- * @param workQueue the queue to use for holding tasks before they are
- *        executed.  This queue will hold only the {@code Runnable}
- *        tasks submitted by the {@code execute} method.
- * @param handler the handler to use when execution is blocked
- *        because the thread bounds and queue capacities are reached
- * @throws IllegalArgumentException if one of the following holds:&lt;br&gt;
- *         {@code corePoolSize &lt; 0}&lt;br&gt;
- *         {@code keepAliveTime &lt; 0}&lt;br&gt;
- *         {@code maximumPoolSize &lt;= 0}&lt;br&gt;
- *         {@code maximumPoolSize &lt; corePoolSize}
- * @throws NullPointerException if {@code workQueue}
- *         or {@code handler} is null
- */
-public ThreadPoolExecutor(int corePoolSize,
-                          int maximumPoolSize,
-                          long keepAliveTime,
-                          TimeUnit unit,
-                          BlockingQueue&lt;Runnable&gt; workQueue,
-                          RejectedExecutionHandler handler) {
-    this(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue,
-         Executors.defaultThreadFactory(), handler);
-}
+        Entry(ThreadLocal&lt;?&gt; k, Object v) {
+            super(k);
+            value = v;
+        }
+    }    
 
-/**
- * Creates a new {@code ThreadPoolExecutor} with the given initial
- * parameters.
+    ......
+
+            /**
+     * The table, resized as necessary.
+     * table.length MUST always be a power of two.
+     */
+    private Entry[] table;
+</code></pre><p>使用弱引用原因：</p>
+<ol>
+<li>如果使用强引用，因为ThreadLocalMap只要线程存在就一直存在，想回收ThreadLocal对象时，因为map里key持有了强引用无法回收（强引用就算OOM只要有引用在，对象就不会被回收）。可能需要手动删除key才能保证。</li>
+<li>弱引用可以保证下一次GC，ThreadLocal可以被回收。</li>
+</ol>
+<p>使用方法：</p>
+<ol>
+<li><p>需要手动删除不用的key，用完ThreadLocal后，可以在finally里调用remove()方法去显式删除。</p>
+<pre><code>/**
+ * Removes the current thread&apos;s value for this thread-local
+ * variable.  If this thread-local variable is subsequently
+ * {@linkplain #get read} by the current thread, its value will be
+ * reinitialized by invoking its {@link #initialValue} method,
+ * unless its value is {@linkplain #set set} by the current thread
+ * in the interim.  This may result in multiple invocations of the
+ * {@code initialValue} method in the current thread.
  *
- * @param corePoolSize the number of threads to keep in the pool, even
- *        if they are idle, unless {@code allowCoreThreadTimeOut} is set
- * @param maximumPoolSize the maximum number of threads to allow in the
- *        pool
- * @param keepAliveTime when the number of threads is greater than
- *        the core, this is the maximum time that excess idle threads
- *        will wait for new tasks before terminating.
- * @param unit the time unit for the {@code keepAliveTime} argument
- * @param workQueue the queue to use for holding tasks before they are
- *        executed.  This queue will hold only the {@code Runnable}
- *        tasks submitted by the {@code execute} method.
- * @param threadFactory the factory to use when the executor
- *        creates a new thread
- * @param handler the handler to use when execution is blocked
- *        because the thread bounds and queue capacities are reached
- * @throws IllegalArgumentException if one of the following holds:&lt;br&gt;
- *         {@code corePoolSize &lt; 0}&lt;br&gt;
- *         {@code keepAliveTime &lt; 0}&lt;br&gt;
- *         {@code maximumPoolSize &lt;= 0}&lt;br&gt;
- *         {@code maximumPoolSize &lt; corePoolSize}
- * @throws NullPointerException if {@code workQueue}
- *         or {@code threadFactory} or {@code handler} is null
+ * @since 1.5
  */
-public ThreadPoolExecutor(int corePoolSize,
-                          int maximumPoolSize,
-                          long keepAliveTime,
-                          TimeUnit unit,
-                          BlockingQueue&lt;Runnable&gt; workQueue,
-                          ThreadFactory threadFactory,
-                          RejectedExecutionHandler handler) {
-    if (corePoolSize &lt; 0 ||
-        maximumPoolSize &lt;= 0 ||
-        maximumPoolSize &lt; corePoolSize ||
-        keepAliveTime &lt; 0)
-        throw new IllegalArgumentException();
-    if (workQueue == null || threadFactory == null || handler == null)
-        throw new NullPointerException();
-    this.acc = System.getSecurityManager() == null ?
-            null :
-            AccessController.getContext();
-    this.corePoolSize = corePoolSize;
-    this.maximumPoolSize = maximumPoolSize;
-    this.workQueue = workQueue;
-    this.keepAliveTime = unit.toNanos(keepAliveTime);
-    this.threadFactory = threadFactory;
-    this.handler = handler;
-}
-</code></pre>
+ public void remove() {
+     ThreadLocalMap m = getMap(Thread.currentThread());
+     if (m != null)
+         m.remove(this);
+ }   
+</code></pre></li>
+</ol>
+
       
     </div>
 
@@ -603,8 +507,8 @@ public ThreadPoolExecutor(int corePoolSize,
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/10/dubbo使用实例/" rel="next" title="dubbo使用实例">
-                <i class="fa fa-chevron-left"></i> dubbo使用实例
+              <a href="/2018/06/14/AOP方法内部调用（嵌套调用）问题/" rel="next" title="AOP方法内部调用（嵌套调用）问题">
+                <i class="fa fa-chevron-left"></i> AOP方法内部调用（嵌套调用）问题
               </a>
             
           </div>
@@ -612,10 +516,6 @@ public ThreadPoolExecutor(int corePoolSize,
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/15/线程池任务提交execute-submit方法比较/" rel="prev" title="线程池任务提交execute,submit方法比较">
-                线程池任务提交execute,submit方法比较 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
