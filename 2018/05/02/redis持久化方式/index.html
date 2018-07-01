@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="线程池有execute和submit两个办法提交任务，两者主要对比如下：  ThreadPoolExecutor实现了execute方法来提交任务，没有返回值，是void的，只接收runnable，任务并不保证一定执行，可能被reject handler来拒绝（当线程池到了上限，程序不在执行，被shutdown等原因）。submit是被AbstractExecuotrService实现的（这个抽象">
-<meta name="keywords" content="Java并发编程">
+  <meta name="description" content="redis相比MC一大优势就是数据可以持久化（数据持久化到硬盘上），增加了可靠性。redis数据持久化有AOF（牺牲一些性能，最高的数据一致性）和RDB（性能较AOF好但不是全持久化）两种方式。  AOF方式：全持久化模式，类似于关系型数据库事务日志，每一个写操作都会记录到日志文件（读操作不记），相当于redis服务器每次写操作后都收到一个写指令，把改动事项记录到文件里，AOF记录文件可以直接打开">
+<meta name="keywords" content="Redis,分布式缓存">
 <meta property="og:type" content="article">
-<meta property="og:title" content="线程池任务提交execute,submit方法比较">
-<meta property="og:url" content="http://yoursite.com/2018/05/15/线程池任务提交execute-submit方法比较/index.html">
+<meta property="og:title" content="redis持久化方式">
+<meta property="og:url" content="http://yoursite.com/2018/05/02/redis持久化方式/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="线程池有execute和submit两个办法提交任务，两者主要对比如下：  ThreadPoolExecutor实现了execute方法来提交任务，没有返回值，是void的，只接收runnable，任务并不保证一定执行，可能被reject handler来拒绝（当线程池到了上限，程序不在执行，被shutdown等原因）。submit是被AbstractExecuotrService实现的（这个抽象">
+<meta property="og:description" content="redis相比MC一大优势就是数据可以持久化（数据持久化到硬盘上），增加了可靠性。redis数据持久化有AOF（牺牲一些性能，最高的数据一致性）和RDB（性能较AOF好但不是全持久化）两种方式。  AOF方式：全持久化模式，类似于关系型数据库事务日志，每一个写操作都会记录到日志文件（读操作不记），相当于redis服务器每次写操作后都收到一个写指令，把改动事项记录到文件里，AOF记录文件可以直接打开">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-06-13T16:59:38.392Z">
+<meta property="og:updated_time" content="2018-07-01T17:30:01.963Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="线程池任务提交execute,submit方法比较">
-<meta name="twitter:description" content="线程池有execute和submit两个办法提交任务，两者主要对比如下：  ThreadPoolExecutor实现了execute方法来提交任务，没有返回值，是void的，只接收runnable，任务并不保证一定执行，可能被reject handler来拒绝（当线程池到了上限，程序不在执行，被shutdown等原因）。submit是被AbstractExecuotrService实现的（这个抽象">
+<meta name="twitter:title" content="redis持久化方式">
+<meta name="twitter:description" content="redis相比MC一大优势就是数据可以持久化（数据持久化到硬盘上），增加了可靠性。redis数据持久化有AOF（牺牲一些性能，最高的数据一致性）和RDB（性能较AOF好但不是全持久化）两种方式。  AOF方式：全持久化模式，类似于关系型数据库事务日志，每一个写操作都会记录到日志文件（读操作不记），相当于redis服务器每次写操作后都收到一个写指令，把改动事项记录到文件里，AOF记录文件可以直接打开">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/15/线程池任务提交execute-submit方法比较/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/02/redis持久化方式/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>线程池任务提交execute,submit方法比较 | Bojun Ji's notes</title>
+  <title>redis持久化方式 | Bojun Ji's notes</title>
   
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/15/线程池任务提交execute-submit方法比较/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/02/redis持久化方式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -295,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">线程池任务提交execute,submit方法比较
+          <h1 class="post-title" itemprop="name headline">redis持久化方式
               
             
           </h1>
@@ -320,7 +320,7 @@
                 
               
 
-              <time title="Created: 2018-05-15 00:37:14" itemprop="dateCreated datePublished" datetime="2018-05-15T00:37:14+08:00">2018-05-15</time>
+              <time title="Created: 2018-05-02 01:12:34" itemprop="dateCreated datePublished" datetime="2018-05-02T01:12:34+08:00">2018-05-02</time>
             
 
             
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-06-14 00:59:38" itemprop="dateModified" datetime="2018-06-14T00:59:38+08:00">2018-06-14</time>
+                <time title="Modified: 2018-07-02 01:30:01" itemprop="dateModified" datetime="2018-07-02T01:30:01+08:00">2018-07-02</time>
               
             
           </span>
@@ -354,7 +354,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java并发编程/" itemprop="url" rel="index"><span itemprop="name">Java并发编程</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a></span>
 
                 
                 
@@ -396,122 +396,37 @@
       
 
       
-        <p>线程池有execute和submit两个办法提交任务，两者主要对比如下：</p>
+        <p>redis相比MC一大优势就是数据可以持久化（数据持久化到硬盘上），增加了可靠性。redis数据持久化有AOF（牺牲一些性能，最高的数据一致性）和RDB（性能较AOF好但不是全持久化）两种方式。</p>
 <ol>
-<li>ThreadPoolExecutor实现了execute方法来提交任务，没有返回值，是void的，只接收runnable，任务并不保证一定执行，可能被reject handler来拒绝（当线程池到了上限，程序不在执行，被shutdown等原因）。submit是被AbstractExecuotrService实现的（这个抽象类实现了ExecutorService,ThreadPoolExecutor再继承这个抽象类，但没有重写submit方法，且抽象类里只实现了submit没executor），submit可以接收Callable参数并返回Future，可以在一些计算场景里用。</li>
-<li>同时，submit还有两个针对Runnable的重载，也返回Future。Runnable和Callable比，本身的执行方法run()是void是没返回值的，一般不做计算这类需要返回的任务。而submit的Future结果只是用来判定Runnable任务是否执行成功，第一种重载只传入Runnable，成功执行的话返回null，第二种传Runnable和一个值表示结果，如果成功的话Future中get出这个结果。</li>
-<li>submit的三个重载其实就是做以上逻辑，底层逻辑仍然还是调用了execute方法。把传入的任务变成RunnableFuture类型然后交给execute去执行。</li>
+<li>AOF方式：全持久化模式，类似于关系型数据库事务日志，每一个写操作都会记录到日志文件（读操作不记），相当于redis服务器每次写操作后都收到一个写指令，把改动事项记录到文件里，AOF记录文件可以直接打开看操作，如果用always方式不会丢失任何改动。</li>
+<li>RDB方式：半持久化模式，指定时间间隔内将数据写入硬盘。实际是起了一个子进程异步方式，将内存数据集保存到临时文件（dump内存快照），改动的写操作成功后，临时文件替换原有的RDB文件，RDB文件二进制压缩。</li>
 </ol>
-<p>根据以上，感觉有以下使用场景：</p>
+<p>配置方式：</p>
+<p>AOF开启后两种方式</p>
 <ol>
-<li>如果需要汇总每个线程计算结果，就用submit方法+Callable。</li>
-<li>如果只是异步做一些事情，但不考虑是否执行成功（比如下订单后发短信这类不强可靠性场景），可以直接用execute方法+Runnable，减少了submit在execute之外包装future等多余操作。</li>
-<li>线程不是做计算任务返回值，但也需要判断线程是否成功的话需要用submit方法+Runnable。</li>
-<li>submit方法方便catch exception，比如不传result，则返回null是成功，在future.get()外面try, catch抓取失败时的异常。</li>
+<li>always方式，每次改动都保存。</li>
+<li>everysec方式，每1s保存一次，异步。</li>
 </ol>
-<p>execute方法代码：</p>
-<pre><code>    /**
- * Executes the given task sometime in the future.  The task
- * may execute in a new thread or in an existing pooled thread.
- *
- * If the task cannot be submitted for execution, either because this
- * executor has been shutdown or because its capacity has been reached,
- * the task is handled by the current {@code RejectedExecutionHandler}.
- *
- * @param command the task to execute
- * @throws RejectedExecutionException at discretion of
- *         {@code RejectedExecutionHandler}, if the task
- *         cannot be accepted for execution
- * @throws NullPointerException if {@code command} is null
- */
-public void execute(Runnable command) {
-    if (command == null)
-        throw new NullPointerException();
-    /*
-     * Proceed in 3 steps:
-     *
-     * 1. If fewer than corePoolSize threads are running, try to
-     * start a new thread with the given command as its first
-     * task.  The call to addWorker atomically checks runState and
-     * workerCount, and so prevents false alarms that would add
-     * threads when it shouldn&apos;t, by returning false.
-     *
-     * 2. If a task can be successfully queued, then we still need
-     * to double-check whether we should have added a thread
-     * (because existing ones died since last checking) or that
-     * the pool shut down since entry into this method. So we
-     * recheck state and if necessary roll back the enqueuing if
-     * stopped, or start a new thread if there are none.
-     *
-     * 3. If we cannot queue task, then we try to add a new
-     * thread.  If it fails, we know we are shut down or saturated
-     * and so reject the task.
-     */
-    int c = ctl.get();
-    if (workerCountOf(c) &lt; corePoolSize) {
-        if (addWorker(command, true))
-            return;
-        c = ctl.get();
-    }
-    if (isRunning(c) &amp;&amp; workQueue.offer(command)) {
-        int recheck = ctl.get();
-        if (! isRunning(recheck) &amp;&amp; remove(command))
-            reject(command);
-        else if (workerCountOf(recheck) == 0)
-            addWorker(null, false);
-    }
-    else if (!addWorker(command, false))
-        reject(command);
-}
-</code></pre><p>submit方法代码，三种重载：</p>
-<pre><code>    /**
- * Returns a {@code RunnableFuture} for the given callable task.
- *
- * @param callable the callable task being wrapped
- * @param &lt;T&gt; the type of the callable&apos;s result
- * @return a {@code RunnableFuture} which, when run, will call the
- * underlying callable and which, as a {@code Future}, will yield
- * the callable&apos;s result as its result and provide for
- * cancellation of the underlying task
- * @since 1.6
- */
-protected &lt;T&gt; RunnableFuture&lt;T&gt; newTaskFor(Callable&lt;T&gt; callable) {
-    return new FutureTask&lt;T&gt;(callable);
-}
+<p>RDB可以配置间隔和触发dump条件：</p>
+<pre><code>save 900 1              #在900秒(15分钟)之后，如果至少有1个key发生变化，则dump内存快照。
 
-/**
- * @throws RejectedExecutionException {@inheritDoc}
- * @throws NullPointerException       {@inheritDoc}
- */
-public Future&lt;?&gt; submit(Runnable task) {
-    if (task == null) throw new NullPointerException();
-    RunnableFuture&lt;Void&gt; ftask = newTaskFor(task, null);
-    execute(ftask);
-    return ftask;
-}
+save 300 10            #在300秒(5分钟)之后，如果至少有10个key发生变化，则dump内存快照。
 
-/**
- * @throws RejectedExecutionException {@inheritDoc}
- * @throws NullPointerException       {@inheritDoc}
- */
-public &lt;T&gt; Future&lt;T&gt; submit(Runnable task, T result) {
-    if (task == null) throw new NullPointerException();
-    RunnableFuture&lt;T&gt; ftask = newTaskFor(task, result);
-    execute(ftask);
-    return ftask;
-}
+save 60 10000        #在60秒(1分钟)之后，如果至少有10000个key发生变化，则dump内存快照。
+</code></pre><p>RDB优劣势：</p>
+<ol>
+<li>单一的数据备份文件</li>
+<li>异步子进程不影响主操作</li>
+<li>不是完全持久化，不能最大限度保存数据</li>
+</ol>
+<p>AOF优劣势：</p>
+<ol>
+<li>大限度持久化，其实开启每秒同步，如果宕机也只是丢失1S数据。开启always则每次改动写入。</li>
+<li>文件过大时有rewrite机制起新文件。</li>
+<li>文件内容为修改记录，易于阅读。</li>
+<li>文件要比RDB方式大。</li>
+</ol>
 
-/**
- * @throws RejectedExecutionException {@inheritDoc}
- * @throws NullPointerException       {@inheritDoc}
- */
-public &lt;T&gt; Future&lt;T&gt; submit(Callable&lt;T&gt; task) {
-    if (task == null) throw new NullPointerException();
-    RunnableFuture&lt;T&gt; ftask = newTaskFor(task);
-    execute(ftask);
-    return ftask;
-}    
-</code></pre>
       
     </div>
 
@@ -531,7 +446,9 @@ public &lt;T&gt; Future&lt;T&gt; submit(Callable&lt;T&gt; task) {
       
         <div class="post-tags">
           
-            <a href="/tags/Java并发编程/" rel="tag"># Java并发编程</a>
+            <a href="/tags/Redis/" rel="tag"># Redis</a>
+          
+            <a href="/tags/分布式缓存/" rel="tag"># 分布式缓存</a>
           
         </div>
       
@@ -544,8 +461,8 @@ public &lt;T&gt; Future&lt;T&gt; submit(Callable&lt;T&gt; task) {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/14/ThreadPoolExecutor参数和线程池任务执行逻辑/" rel="next" title="ThreadPoolExecutor参数和线程池任务执行逻辑">
-                <i class="fa fa-chevron-left"></i> ThreadPoolExecutor参数和线程池任务执行逻辑
+              <a href="/2018/05/02/redis五种数据类型/" rel="next" title="redis五种数据类型">
+                <i class="fa fa-chevron-left"></i> redis五种数据类型
               </a>
             
           </div>
@@ -554,8 +471,8 @@ public &lt;T&gt; Future&lt;T&gt; submit(Callable&lt;T&gt; task) {
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/16/Executors五种线程池/" rel="prev" title="Executors五种线程池">
-                Executors五种线程池 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/10/dubbo使用实例/" rel="prev" title="dubbo使用实例">
+                dubbo使用实例 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

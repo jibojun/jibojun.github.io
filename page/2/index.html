@@ -1893,7 +1893,7 @@ corePoolSize,核心线程数量，如果提交任务时线程数量
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/02/redis五种数据类型/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/02/redis持久化方式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -1912,8 +1912,8 @@ corePoolSize,核心线程数量，如果提交任务时线程数量
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/02/redis五种数据类型/" itemprop="url">
-                  redis五种数据类型
+                <a class="post-title-link" href="/2018/05/02/redis持久化方式/" itemprop="url">
+                  redis持久化方式
                 </a>
               
             
@@ -1939,7 +1939,7 @@ corePoolSize,核心线程数量，如果提交任务时线程数量
                 
               
 
-              <time title="Created: 2018-05-02 00:24:17" itemprop="dateCreated datePublished" datetime="2018-05-02T00:24:17+08:00">2018-05-02</time>
+              <time title="Created: 2018-05-02 01:12:34" itemprop="dateCreated datePublished" datetime="2018-05-02T01:12:34+08:00">2018-05-02</time>
             
 
             
@@ -1956,7 +1956,7 @@ corePoolSize,核心线程数量，如果提交任务时线程数量
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-05-08 00:58:26" itemprop="dateModified" datetime="2018-05-08T00:58:26+08:00">2018-05-08</time>
+                <time title="Modified: 2018-07-02 01:30:01" itemprop="dateModified" datetime="2018-07-02T01:30:01+08:00">2018-07-02</time>
               
             
           </span>
@@ -2009,12 +2009,13 @@ corePoolSize,核心线程数量，如果提交任务时线程数量
       
         
           
-          Redis作为分布式缓存，或者KV数据库。与MemCached比有几个明显区别：
-1.MC VALUE只有一种数据类型String, Redis有5种：String, List, Hash, Set, ZSet2.MC String容量最大1M，Redis最大1G。3.MC没有持久化方式，Redis
+          redis相比MC一大优势就是数据可以持久化（数据持久化到硬盘上），增加了可靠性。redis数据持久化有AOF（牺牲一些性能，最高的数据一致性）和RDB（性能较AOF好但不是全持久化）两种方式。
+
+AOF方式：全持久化模式，类似于关系型数据库事务日志，每一个写操作都会记录到日志文件（读操作不记），相
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/05/02/redis五种数据类型/#more" rel="contents">
+            <a class="btn" href="/2018/05/02/redis持久化方式/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -2102,7 +2103,7 @@ corePoolSize,核心线程数量，如果提交任务时线程数量
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">56</span>
+                    <span class="site-state-item-count">57</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
