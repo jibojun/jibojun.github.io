@@ -102,20 +102,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Bojun Ji&#39;s notes">
-<meta property="og:url" content="http://yoursite.com/archives/page/6/index.html">
+  <meta name="description" content="传统BIO中每个连接对应一个线程并且线程许多时候处于空闲状态（调用read则一直阻塞），同时服务器线程数有限，无法承受高并发的高连接数。 NIO依赖于REACTOR模式达到非阻塞目的，依靠一个SELECTOR（类似于事件监听者）去轮询所有注册在它上面的CHANNEL看有没有数据（与BUFFER交互，双向读写），返回给我们SelectionKey，我们读这些KEY来判断事件的类型（ACCEPT,CO">
+<meta name="keywords" content="NIO,网络编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nio例子和reactor模式">
+<meta property="og:url" content="http://yoursite.com/2018/06/22/nio例子和reactor模式/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
+<meta property="og:description" content="传统BIO中每个连接对应一个线程并且线程许多时候处于空闲状态（调用read则一直阻塞），同时服务器线程数有限，无法承受高并发的高连接数。 NIO依赖于REACTOR模式达到非阻塞目的，依靠一个SELECTOR（类似于事件监听者）去轮询所有注册在它上面的CHANNEL看有没有数据（与BUFFER交互，双向读写），返回给我们SelectionKey，我们读这些KEY来判断事件的类型（ACCEPT,CO">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-07-02T18:31:11.063Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bojun Ji&#39;s notes">
+<meta name="twitter:title" content="nio例子和reactor模式">
+<meta name="twitter:description" content="传统BIO中每个连接对应一个线程并且线程许多时候处于空闲状态（调用read则一直阻塞），同时服务器线程数有限，无法承受高并发的高连接数。 NIO依赖于REACTOR模式达到非阻塞目的，依靠一个SELECTOR（类似于事件监听者）去轮询所有注册在它上面的CHANNEL看有没有数据（与BUFFER交互，双向读写），返回给我们SelectionKey，我们读这些KEY来判断事件的类型（ACCEPT,CO">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/page/6/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/22/nio例子和reactor模式/"/>
 
 
 
@@ -125,7 +130,7 @@
   };
 </script>
 
-  <title>Archive | Bojun Ji's notes</title>
+  <title>nio例子和reactor模式 | Bojun Ji's notes</title>
   
 
 
@@ -172,7 +177,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -220,7 +225,7 @@
         
         
           
-          <li class="menu-item menu-item-archives menu-item-active">
+          <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
   </li>
@@ -253,364 +258,301 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      
-      <span class="archive-page-counter">
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/22/nio例子和reactor模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bojun Ji's notes">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
-         
+          <h1 class="post-title" itemprop="name headline">nio例子和reactor模式
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-06-22 23:30:37" itemprop="dateCreated datePublished" datetime="2018-06-22T23:30:37+08:00">2018-06-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-07-03 02:31:11" itemprop="dateModified" datetime="2018-07-03T02:31:11+08:00">2018-07-03</time>
+              
+            
+          </span>
+
           
-        Nice! 58 posts in total. Keep on posting.
-      </span>
-      
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java-IO/" itemprop="url" rel="index"><span itemprop="name">Java IO</span></a></span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
 
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/01/08/HashMap扩容原理/" itemprop="url">
-              
-                <span itemprop="name">HashMap扩容原理</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-08T21:26:58+08:00"
-              content="2018-01-08" >
-          01-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/01/02/volatile关键字语义（JDK1-5及以后）/" itemprop="url">
-              
-                <span itemprop="name">volatile关键字（JDK1.5及以后）</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-02T21:39:09+08:00"
-              content="2018-01-02" >
-          01-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/01/01/SQL中delete和truncate/" itemprop="url">
-              
-                <span itemprop="name">SQL中delete和truncate</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-01T23:38:41+08:00"
-              content="2018-01-01" >
-          01-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/01/01/HashSet底层原理/" itemprop="url">
-              
-                <span itemprop="name">HashSet底层原理</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-01T21:15:54+08:00"
-              content="2018-01-01" >
-          01-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2017">2017</h1>
-          </div>
-        
-        
+            
+          
 
-        
+          
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/12/27/关系型数据库表之间三种关系/" itemprop="url">
-              
-                <span itemprop="name">关系型数据库表之间三种关系</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-27T00:24:19+08:00"
-              content="2017-12-27" >
-          12-27
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+        </div>
+      </header>
+    
 
-
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/12/26/StringBuilder和StringBuffer对比/" itemprop="url">
-              
-                <span itemprop="name">StringBuilder和StringBuffer对比</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-26T23:47:44+08:00"
-              content="2017-12-26" >
-          12-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/12/26/主键和唯一性索引异同/" itemprop="url">
-              
-                <span itemprop="name">主键和唯一性索引异同</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-26T18:18:09+08:00"
-              content="2017-12-26" >
-          12-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
+        <p>传统BIO中每个连接对应一个线程并且线程许多时候处于空闲状态（调用read则一直阻塞），同时服务器线程数有限，无法承受高并发的高连接数。</p>
+<p>NIO依赖于REACTOR模式达到非阻塞目的，依靠一个SELECTOR（类似于事件监听者）去轮询所有注册在它上面的CHANNEL看有没有数据（与BUFFER交互，双向读写），返回给我们SelectionKey，我们读这些KEY来判断事件的类型（ACCEPT,CONNECT,READ,WRITE），只有CHANNEL实际有数据需要做事时才会触发线程去做。</p>
+<p>服务器例子：</p>
+<pre><code>    public class NioReactorServer implements Runnable {
+    private Selector selector;
+    private ByteBuffer byteBuffer;
+    private static final int BUFFER_SIZE=2048;
+    private static final String DATA_PREFIX=&quot;data&quot;;
+    private static int count=1;
 
-        
-        
-        
+    @Override
+    public void run() {
+        try {
+            init();
+            listen();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
 
-        
-        
+        }
+    }
 
-        
+    private void init() throws IOException {
+        byteBuffer=ByteBuffer.allocate(BUFFER_SIZE);
+        //TCP channel
+        ServerSocketChannel serverSocketChannel=ServerSocketChannel.open();
+        serverSocketChannel.bind(new InetSocketAddress(InetAddress.getLocalHost(),8888));
+        //non-blocking, different with BIO
+        serverSocketChannel.configureBlocking(false);
+        selector= Selector.open();
+        //register channel with selector, register accept when init
+        serverSocketChannel.register(selector,SelectionKey.OP_ACCEPT);
+    }
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    private void listen() throws IOException {
+        while(true) {
+            selector.select();
+            Iterator&lt;SelectionKey&gt; iterator = selector.selectedKeys().iterator();
+            while (iterator.hasNext()) {
+                SelectionKey key = iterator.next();
+                //remove, otherwise, will be repeat entering
+                iterator.remove();
+                handle(key);
+            }
+        }
+    }
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/12/24/Hashmap存储结构实现原理(JDK1.7及以前)/" itemprop="url">
-              
-                <span itemprop="name">Hashmap存储结构实现原理（JDK1.7及以前）</span>
-              
-            </a>
-        
-      </h2>
+    private void handle(SelectionKey key) throws IOException {
+        //accept request
+        if(key.isAcceptable()){
+            System.out.println(&quot;Accept connection request:&quot;+key.attachment());
+            //get channel and accept
+            ServerSocketChannel channel= (ServerSocketChannel) key.channel();
+            //register read or write
+            channel.accept().configureBlocking(false).register(selector,SelectionKey.OP_READ | SelectionKey.OP_WRITE );
+            System.out.println(&quot;Connection finished:&quot;+key.attachment());
+        }
+        //read data
+        else if(key.isReadable()){
+            System.out.println(&quot;Read request:&quot;+key.attachment());
+            SocketChannel channel= (SocketChannel) key.channel();
+            byteBuffer.flip();
+            //buffer-&gt;channel
+            int count=channel.read(byteBuffer);
+            System.out.println(&quot;Read finished:&quot;+key.attachment()+&quot;,data read:&quot;+count+&quot;,content is:&quot;+NioUtil.castByteToString(byteBuffer));
+        }
+        //write data
+        else if(key.isWritable()){
+            System.out.println(&quot;Write request:&quot;+key.attachment());
+            SocketChannel channel= (SocketChannel) key.channel();
+            //clean buffer
+            byteBuffer.clear();
+            //prefix
+            byteBuffer.put((DATA_PREFIX+(count++)).getBytes());
+            byteBuffer.flip();
+            //channel-&gt;buffer
+            while(byteBuffer.hasRemaining()) {
+                channel.write(byteBuffer);
+            }
+            System.out.println(&quot;Write finished:&quot;+key.attachment());
+        }
+    }
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-24T23:47:44+08:00"
-              content="2017-12-24" >
-          12-24
-        </time>
-      </div>
 
-    </header>
-  </article>
-
-
-
+}
+</code></pre>
       
-
     </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NIO/" rel="tag"># NIO</a>
+          
+            <a href="/tags/网络编程/" rel="tag"># 网络编程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/20/dubbo十种协议/" rel="next" title="dubbo十种协议">
+                <i class="fa fa-chevron-left"></i> dubbo十种协议
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/page/5/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/5/">5</a><span class="page-number current">6</span>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -931,6 +873,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
 
   
 
