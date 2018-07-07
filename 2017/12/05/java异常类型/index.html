@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="传统BIO中每个连接对应一个线程并且线程许多时候处于空闲状态（调用read则一直阻塞），同时服务器线程数有限，无法承受高并发的高连接数。 NIO依赖于REACTOR模式达到非阻塞目的，依靠一个SELECTOR（类似于事件监听者）去轮询所有注册在它上面的CHANNEL看有没有数据（与BUFFER交互，双向读写），返回给我们SelectionKey，我们读这些KEY来判断事件的类型（ACCEPT,CO">
-<meta name="keywords" content="NIO,网络编程">
+  <meta name="description" content="Throwable是Error和Exception的父类，catch Throwable可以抓住一切问题。 Error是不被处理的问题，JVM本身错误为主(VirtualMachineError)，最典型的是Stackoverflow(栈溢出，例如递归无出口，反复压栈，溢出)，Out of MEMORY/oom，内存不足。Exception代表异常，所有异常是它的子类，catch Excepti">
+<meta name="keywords" content="-JavaCore -Exception">
 <meta property="og:type" content="article">
-<meta property="og:title" content="nio例子和reactor模式">
-<meta property="og:url" content="http://yoursite.com/2018/06/22/nio例子和reactor模式/index.html">
+<meta property="og:title" content="java异常类型">
+<meta property="og:url" content="http://yoursite.com/2017/12/05/java异常类型/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="传统BIO中每个连接对应一个线程并且线程许多时候处于空闲状态（调用read则一直阻塞），同时服务器线程数有限，无法承受高并发的高连接数。 NIO依赖于REACTOR模式达到非阻塞目的，依靠一个SELECTOR（类似于事件监听者）去轮询所有注册在它上面的CHANNEL看有没有数据（与BUFFER交互，双向读写），返回给我们SelectionKey，我们读这些KEY来判断事件的类型（ACCEPT,CO">
+<meta property="og:description" content="Throwable是Error和Exception的父类，catch Throwable可以抓住一切问题。 Error是不被处理的问题，JVM本身错误为主(VirtualMachineError)，最典型的是Stackoverflow(栈溢出，例如递归无出口，反复压栈，溢出)，Out of MEMORY/oom，内存不足。Exception代表异常，所有异常是它的子类，catch Excepti">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-07-02T18:31:11.063Z">
+<meta property="og:updated_time" content="2018-07-07T10:55:25.666Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="nio例子和reactor模式">
-<meta name="twitter:description" content="传统BIO中每个连接对应一个线程并且线程许多时候处于空闲状态（调用read则一直阻塞），同时服务器线程数有限，无法承受高并发的高连接数。 NIO依赖于REACTOR模式达到非阻塞目的，依靠一个SELECTOR（类似于事件监听者）去轮询所有注册在它上面的CHANNEL看有没有数据（与BUFFER交互，双向读写），返回给我们SelectionKey，我们读这些KEY来判断事件的类型（ACCEPT,CO">
+<meta name="twitter:title" content="java异常类型">
+<meta name="twitter:description" content="Throwable是Error和Exception的父类，catch Throwable可以抓住一切问题。 Error是不被处理的问题，JVM本身错误为主(VirtualMachineError)，最典型的是Stackoverflow(栈溢出，例如递归无出口，反复压栈，溢出)，Out of MEMORY/oom，内存不足。Exception代表异常，所有异常是它的子类，catch Excepti">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/06/22/nio例子和reactor模式/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/12/05/java异常类型/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>nio例子和reactor模式 | Bojun Ji's notes</title>
+  <title>java异常类型 | Bojun Ji's notes</title>
   
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/22/nio例子和reactor模式/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/05/java异常类型/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -295,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">nio例子和reactor模式
+          <h1 class="post-title" itemprop="name headline">java异常类型
               
             
           </h1>
@@ -320,7 +320,7 @@
                 
               
 
-              <time title="Created: 2018-06-22 23:30:37" itemprop="dateCreated datePublished" datetime="2018-06-22T23:30:37+08:00">2018-06-22</time>
+              <time title="Created: 2017-12-05 00:36:48" itemprop="dateCreated datePublished" datetime="2017-12-05T00:36:48+08:00">2017-12-05</time>
             
 
             
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-07-03 02:31:11" itemprop="dateModified" datetime="2018-07-03T02:31:11+08:00">2018-07-03</time>
+                <time title="Modified: 2018-07-07 18:55:25" itemprop="dateModified" datetime="2018-07-07T18:55:25+08:00">2018-07-07</time>
               
             
           </span>
@@ -354,7 +354,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java-IO/" itemprop="url" rel="index"><span itemprop="name">Java IO</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaCore/" itemprop="url" rel="index"><span itemprop="name">JavaCore</span></a></span>
 
                 
                 
@@ -396,92 +396,16 @@
       
 
       
-        <p>传统BIO中每个连接对应一个线程并且线程许多时候处于空闲状态（调用read则一直阻塞），同时服务器线程数有限，无法承受高并发的高连接数。</p>
-<p>NIO依赖于REACTOR模式达到非阻塞目的，依靠一个SELECTOR（类似于事件监听者）去轮询所有注册在它上面的CHANNEL看有没有数据（与BUFFER交互，双向读写），返回给我们SelectionKey，我们读这些KEY来判断事件的类型（ACCEPT,CONNECT,READ,WRITE），只有CHANNEL实际有数据需要做事时才会触发线程去做。</p>
-<p>服务器例子：</p>
-<pre><code>    public class NioReactorServer implements Runnable {
-    private Selector selector;
-    private ByteBuffer byteBuffer;
-    private static final int BUFFER_SIZE=2048;
-    private static final String DATA_PREFIX=&quot;data&quot;;
-    private static int count=1;
+        <ol>
+<li>Throwable是Error和Exception的父类，catch Throwable可以抓住一切问题。</li>
+<li>Error是不被处理的问题，JVM本身错误为主(VirtualMachineError)，最典型的是Stackoverflow(栈溢出，例如递归无出口，反复压栈，溢出)，Out of MEMORY/oom，内存不足。Exception代表异常，所有异常是它的子类，catch Exception可以抓住所有类型异常。</li>
+<li>RuntimeException是Exception的子类，运行时异常，常见的如数组越界（访问不存在的下标位置），类没找到，空指针（调用一个Null对象的方法），一般是代码错误导致，不需要用try, catch处理。</li>
+<li>在Exception中还一般分为checked exception和unchecked exception，检查异常是需要我们用try catch finally代码块去处理的，或者throw出去让更上层的调用方法去处理。在实际系统中，一般是一些运行环境造成的问题，可能出现或者不出现，出现了此类问题catch住后可以记录log以便排错，前端输出错误信息。最常见的有数据库操作的SQLException，IO操作的IOException。也可以自己继承Exception定义业务方面的异常。</li>
+<li>非检查异常包括RuntimeException和Error。这部分不要求强制处理，很大可能性是代码问题，需要处理代码。</li>
+<li>日常系统中，经常每个方法调用了别的方法，这个方法再调用别的，异常类型也不一样，为了避免异常信息丢失，一个异常中包含了导致它的异常的对象，这样可以通过cause属性取出原因，查看call stack。</li>
+<li>异常发生的点后面代码就不会执行，直接进入catch。finally代码块保证了就算发生异常也会执行收尾工作，实际应用可以用来保证在异常发生时释放必要资源，比如JDBC中最后关闭connection, statement。</li>
+</ol>
 
-    @Override
-    public void run() {
-        try {
-            init();
-            listen();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        } finally {
-
-        }
-    }
-
-    private void init() throws IOException {
-        byteBuffer=ByteBuffer.allocate(BUFFER_SIZE);
-        //TCP channel
-        ServerSocketChannel serverSocketChannel=ServerSocketChannel.open();
-        serverSocketChannel.bind(new InetSocketAddress(InetAddress.getLocalHost(),8888));
-        //non-blocking, different with BIO
-        serverSocketChannel.configureBlocking(false);
-        selector= Selector.open();
-        //register channel with selector, register accept when init
-        serverSocketChannel.register(selector,SelectionKey.OP_ACCEPT);
-    }
-
-    private void listen() throws IOException {
-        while(true) {
-            selector.select();
-            Iterator&lt;SelectionKey&gt; iterator = selector.selectedKeys().iterator();
-            while (iterator.hasNext()) {
-                SelectionKey key = iterator.next();
-                //remove, otherwise, will be repeat entering
-                iterator.remove();
-                handle(key);
-            }
-        }
-    }
-
-    private void handle(SelectionKey key) throws IOException {
-        //accept request
-        if(key.isAcceptable()){
-            System.out.println(&quot;Accept connection request:&quot;+key.attachment());
-            //get channel and accept
-            ServerSocketChannel channel= (ServerSocketChannel) key.channel();
-            //register read or write
-            channel.accept().configureBlocking(false).register(selector,SelectionKey.OP_READ | SelectionKey.OP_WRITE );
-            System.out.println(&quot;Connection finished:&quot;+key.attachment());
-        }
-        //read data
-        else if(key.isReadable()){
-            System.out.println(&quot;Read request:&quot;+key.attachment());
-            SocketChannel channel= (SocketChannel) key.channel();
-            byteBuffer.flip();
-            //buffer-&gt;channel
-            int count=channel.read(byteBuffer);
-            System.out.println(&quot;Read finished:&quot;+key.attachment()+&quot;,data read:&quot;+count+&quot;,content is:&quot;+NioUtil.castByteToString(byteBuffer));
-        }
-        //write data
-        else if(key.isWritable()){
-            System.out.println(&quot;Write request:&quot;+key.attachment());
-            SocketChannel channel= (SocketChannel) key.channel();
-            //clean buffer
-            byteBuffer.clear();
-            //prefix
-            byteBuffer.put((DATA_PREFIX+(count++)).getBytes());
-            byteBuffer.flip();
-            //channel-&gt;buffer
-            while(byteBuffer.hasRemaining()) {
-                channel.write(byteBuffer);
-            }
-            System.out.println(&quot;Write finished:&quot;+key.attachment());
-        }
-    }
-
-
-}
-</code></pre>
       
     </div>
 
@@ -501,9 +425,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/NIO/" rel="tag"># NIO</a>
-          
-            <a href="/tags/网络编程/" rel="tag"># 网络编程</a>
+            <a href="/tags/JavaCore-Exception/" rel="tag"># -JavaCore -Exception</a>
           
         </div>
       
@@ -516,8 +438,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/20/dubbo十种协议/" rel="next" title="dubbo十种协议">
-                <i class="fa fa-chevron-left"></i> dubbo十种协议
+              <a href="/2017/11/15/final-finally-finailize功能/" rel="next" title="final, finally, finalize功能">
+                <i class="fa fa-chevron-left"></i> final, finally, finalize功能
               </a>
             
           </div>
@@ -525,6 +447,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/24/Hashmap存储结构实现原理(JDK1.7及以前)/" rel="prev" title="Hashmap存储结构实现原理（JDK1.7及以前）">
+                Hashmap存储结构实现原理（JDK1.7及以前） <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -589,7 +515,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">59</span>
+                    <span class="site-state-item-count">61</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -697,7 +623,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">29</span>
+                      
+                    
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
