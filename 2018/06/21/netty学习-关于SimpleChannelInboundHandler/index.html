@@ -102,20 +102,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Bojun Ji&#39;s notes">
-<meta property="og:url" content="http://yoursite.com/tags/类加载/index.html">
+  <meta name="description" content="使用channelRead0方法，重写其中逻辑，这个方法是一个抽象方法。 SimpleChannelInboundHandler继承了ChannelInboundHandlerAdapter。 主要重写了channelRead方法，简单逻辑就是如果消息是SimpleChannelInboundHandler&amp;lt;&amp;gt;中指定的类型（acceptInboundMessage判断，需要注意如果之">
+<meta name="keywords" content="-Netty -Java IO">
+<meta property="og:type" content="article">
+<meta property="og:title" content="netty学习:关于SimpleChannelInboundHandler">
+<meta property="og:url" content="http://yoursite.com/2018/06/21/netty学习-关于SimpleChannelInboundHandler/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
+<meta property="og:description" content="使用channelRead0方法，重写其中逻辑，这个方法是一个抽象方法。 SimpleChannelInboundHandler继承了ChannelInboundHandlerAdapter。 主要重写了channelRead方法，简单逻辑就是如果消息是SimpleChannelInboundHandler&amp;lt;&amp;gt;中指定的类型（acceptInboundMessage判断，需要注意如果之">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-07-10T18:25:31.963Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bojun Ji&#39;s notes">
+<meta name="twitter:title" content="netty学习:关于SimpleChannelInboundHandler">
+<meta name="twitter:description" content="使用channelRead0方法，重写其中逻辑，这个方法是一个抽象方法。 SimpleChannelInboundHandler继承了ChannelInboundHandlerAdapter。 主要重写了channelRead方法，简单逻辑就是如果消息是SimpleChannelInboundHandler&amp;lt;&amp;gt;中指定的类型（acceptInboundMessage判断，需要注意如果之">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/类加载/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/21/netty学习-关于SimpleChannelInboundHandler/"/>
 
 
 
@@ -125,7 +130,7 @@
   };
 </script>
 
-  <title>Tag: 类加载 | Bojun Ji's notes</title>
+  <title>netty学习:关于SimpleChannelInboundHandler | Bojun Ji's notes</title>
   
 
 
@@ -172,7 +177,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -253,103 +258,261 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>类加载<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/21/netty学习-关于SimpleChannelInboundHandler/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bojun Ji's notes">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/03/09/打破双亲委托模型方法/" itemprop="url">
-              
-                <span itemprop="name">打破双亲委托模型方法</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">netty学习:关于SimpleChannelInboundHandler
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-09T00:15:12+08:00"
-              content="2018-03-09" >
-          03-09
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
 
-    </header>
-  </article>
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-06-21 01:35:16" itemprop="dateCreated datePublished" datetime="2018-06-21T01:35:16+08:00">2018-06-21</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-07-11 02:25:31" itemprop="dateModified" datetime="2018-07-11T02:25:31+08:00">2018-07-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Netty/" itemprop="url" rel="index"><span itemprop="name">Netty</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
+      
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <ol>
+<li>使用channelRead0方法，重写其中逻辑，这个方法是一个抽象方法。</li>
+<li>SimpleChannelInboundHandler继承了ChannelInboundHandlerAdapter。</li>
+<li>主要重写了channelRead方法，简单逻辑就是如果消息是SimpleChannelInboundHandler&lt;&gt;中指定的类型（acceptInboundMessage判断，需要注意如果之前还有handler，需要保证给SimpleChannelInboundHandler的数据类型符合），就会调用channelRead0方法。否则，就给下一个handler，channelRead0方法不执行，所以当消息类型不匹配时，我们在这个方法内写的逻辑无法执行。</li>
+<li>可以看到finally中已经做好了消息释放，所以要注意后面不能再有handler接收SimpleChannelInboundHandler处理后的消息了。</li>
+<li><p>从Netty4以上版本注释中可以看出在netty5中，channelRead0将会被改名为messageReceived。</p>
+<pre><code>    /**
+ * Returns {@code true} if the given message should be handled. If {@code false} it will be passed to the next
+ * {@link ChannelInboundHandler} in the {@link ChannelPipeline}.
+ */
+public boolean acceptInboundMessage(Object msg) throws Exception {
+    return matcher.match(msg);
+}
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/08/Java类加载和双亲委托模型/" itemprop="url">
-              
-                <span itemprop="name">Java类加载和双亲委托模型</span>
-              
-            </a>
-        
-      </h2>
+@Override
+public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+    boolean release = true;
+    try {
+        if (acceptInboundMessage(msg)) {
+            @SuppressWarnings(&quot;unchecked&quot;)
+            I imsg = (I) msg;
+            channelRead0(ctx, imsg);
+        } else {
+            release = false;
+            ctx.fireChannelRead(msg);
+        }
+    } finally {
+        if (autoRelease &amp;&amp; release) {
+            ReferenceCountUtil.release(msg);
+        }
+    }
+}
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-08T23:30:47+08:00"
-              content="2018-03-08" >
-          03-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+/**
+ * &lt;strong&gt;Please keep in mind that this method will be renamed to
+ * {@code messageReceived(ChannelHandlerContext, I)} in 5.0.&lt;/strong&gt;
+ *
+ * Is called for each message of type {@link I}.
+ *
+ * @param ctx           the {@link ChannelHandlerContext} which this {@link SimpleChannelInboundHandler}
+ *                      belongs to
+ * @param msg           the message to handle
+ * @throws Exception    is thrown if an error occurred
+ */
+protected abstract void channelRead0(ChannelHandlerContext ctx, I msg) throws Exception;
+</code></pre></li>
+</ol>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Netty-Java-IO/" rel="tag"># -Netty -Java IO</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/20/dubbo十种协议/" rel="next" title="dubbo十种协议">
+                <i class="fa fa-chevron-left"></i> dubbo十种协议
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -678,6 +841,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
 
   
 
