@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="final:  加在类上表明类不可被继承，也和abstract冲突，例如cglib在被代理类是final时无法工作就是因为无法继承而重写方法加强逻辑 加在方法上表明方法不可被重写，子类再写一样的名字参数的方法是一个新方法而不是继承 加在变量上表明初始化后不可被更改，加在基本类型上值不可改变，加在引用数据类型时引用不可变（不能再new一个）但是引用对象内容可变（调用类的set或者别的修改方法，比如一">
-<meta name="keywords" content="JavaCore">
+  <meta name="description" content="ChannelInitializer中的initChannel我们需要实现，这是一个抽象方法。当channel注册时被调用。     /**  * This method will be called once the {@link Channel} was registered. After the method returns this instance  * will be removed">
+<meta name="keywords" content="-Netty -Java IO">
 <meta property="og:type" content="article">
-<meta property="og:title" content="final, finally, finalize功能">
-<meta property="og:url" content="http://yoursite.com/2017/11/15/final-finally-finailize功能/index.html">
+<meta property="og:title" content="netty学习:pipleline">
+<meta property="og:url" content="http://yoursite.com/2018/06/18/netty学习-pipleline/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="final:  加在类上表明类不可被继承，也和abstract冲突，例如cglib在被代理类是final时无法工作就是因为无法继承而重写方法加强逻辑 加在方法上表明方法不可被重写，子类再写一样的名字参数的方法是一个新方法而不是继承 加在变量上表明初始化后不可被更改，加在基本类型上值不可改变，加在引用数据类型时引用不可变（不能再new一个）但是引用对象内容可变（调用类的set或者别的修改方法，比如一">
+<meta property="og:description" content="ChannelInitializer中的initChannel我们需要实现，这是一个抽象方法。当channel注册时被调用。     /**  * This method will be called once the {@link Channel} was registered. After the method returns this instance  * will be removed">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-07-04T16:33:26.695Z">
+<meta property="og:updated_time" content="2018-07-12T18:04:15.126Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="final, finally, finalize功能">
-<meta name="twitter:description" content="final:  加在类上表明类不可被继承，也和abstract冲突，例如cglib在被代理类是final时无法工作就是因为无法继承而重写方法加强逻辑 加在方法上表明方法不可被重写，子类再写一样的名字参数的方法是一个新方法而不是继承 加在变量上表明初始化后不可被更改，加在基本类型上值不可改变，加在引用数据类型时引用不可变（不能再new一个）但是引用对象内容可变（调用类的set或者别的修改方法，比如一">
+<meta name="twitter:title" content="netty学习:pipleline">
+<meta name="twitter:description" content="ChannelInitializer中的initChannel我们需要实现，这是一个抽象方法。当channel注册时被调用。     /**  * This method will be called once the {@link Channel} was registered. After the method returns this instance  * will be removed">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/11/15/final-finally-finailize功能/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/18/netty学习-pipleline/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>final, finally, finalize功能 | Bojun Ji's notes</title>
+  <title>netty学习:pipleline | Bojun Ji's notes</title>
   
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/15/final-finally-finailize功能/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/18/netty学习-pipleline/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -295,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">final, finally, finalize功能
+          <h1 class="post-title" itemprop="name headline">netty学习:pipleline
               
             
           </h1>
@@ -320,7 +320,7 @@
                 
               
 
-              <time title="Created: 2017-11-15 00:14:36" itemprop="dateCreated datePublished" datetime="2017-11-15T00:14:36+08:00">2017-11-15</time>
+              <time title="Created: 2018-06-18 00:29:29" itemprop="dateCreated datePublished" datetime="2018-06-18T00:29:29+08:00">2018-06-18</time>
             
 
             
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-07-05 00:33:26" itemprop="dateModified" datetime="2018-07-05T00:33:26+08:00">2018-07-05</time>
+                <time title="Modified: 2018-07-13 02:04:15" itemprop="dateModified" datetime="2018-07-13T02:04:15+08:00">2018-07-13</time>
               
             
           </span>
@@ -354,7 +354,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaCore/" itemprop="url" rel="index"><span itemprop="name">JavaCore</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Netty/" itemprop="url" rel="index"><span itemprop="name">Netty</span></a></span>
 
                 
                 
@@ -396,19 +396,38 @@
       
 
       
-        <p>final:</p>
-<ol>
-<li>加在类上表明类不可被继承，也和abstract冲突，例如cglib在被代理类是final时无法工作就是因为无法继承而重写方法加强逻辑</li>
-<li>加在方法上表明方法不可被重写，子类再写一样的名字参数的方法是一个新方法而不是继承</li>
-<li>加在变量上表明初始化后不可被更改，加在基本类型上值不可改变，加在引用数据类型时引用不可变（不能再new一个）但是引用对象内容可变（调用类的set或者别的修改方法，比如一个StringBuffer是final，但是仍然可以继续append增加内容）。static final一般在java里标识常量，final有许多应用例如String是不可变字符串，内部就是一个final的char数组。</li>
+        <ol>
+<li><p>ChannelInitializer中的initChannel我们需要实现，这是一个抽象方法。当channel注册时被调用。</p>
+<pre><code>    /**
+ * This method will be called once the {@link Channel} was registered. After the method returns this instance
+ * will be removed from the {@link ChannelPipeline} of the {@link Channel}.
+ *
+ * @param ch            the {@link Channel} which was registered.
+ * @throws Exception    is thrown if an error occurs. In that case it will be handled by
+ *                      {@link #exceptionCaught(ChannelHandlerContext, Throwable)} which will by default close
+ *                      the {@link Channel}.
+ */
+protected abstract void initChannel(C ch) throws Exception;
+</code></pre></li>
+<li>而ChannelPipleline属于channel，两者一对一关系，是handler的容器，用来处理这个channel中监听的事件。</li>
+<li>一个pipleline中可以添加多个handler，inbound（线程触发事件，例如EventLoop监测到channel中有数据可读）按照加入管道顺序正序执行，outbound（用户代码主动触发的操作，例如channel.read(),channel.write(),flush()执行真正IO操作将buffer数据发出去等）按照加入管道顺序逆序执行。</li>
+<li>ServerBootstrap或者Bootstrap作为启动类，会为channel创建pipleline。pipleline是线程安全的，但里面的handler不是线程安全的。</li>
 </ol>
-<p>finally：</p>
-<ol>
-<li>finally代码块，配合try, catch一起使用，写在catch后，无论是否发生异常一定会被执行。一般用来保证一些必要操作，例如ThreadLocal最后remove防止内存泄漏，数据库连接最后关闭等。</li>
-</ol>
-<p>finalize：</p>
-<ol>
-<li>Object的一个方法，如果GC将要回收这个对象，清除前会调用。因为所有类都继承自Object，可以重写这个方法在对象回收前做必要操作。</li>
+<p>例子：</p>
+<pre><code>    Bootstrap bootstrap = new Bootstrap();
+bootstrap.group(group).channel(NioSocketChannel.class)
+        .handler(new ChannelInitializer&lt;SocketChannel&gt;() {
+            @Override
+            public void initChannel(SocketChannel channel)
+                    throws Exception {
+                channel.pipeline()
+                        .addLast(new MessageEncoder(RPCRequest.class))
+                        .addLast(new MessageDecoder(RPCResponse.class))
+                        .addLast(ClientDataHandler.this);
+            }
+        }).option(ChannelOption.SO_KEEPALIVE, true);
+</code></pre><ol start="5">
+<li>pipleline中添加handler使用addFirst,addLast,addBefore,addAfter等方法。</li>
 </ol>
 
       
@@ -430,7 +449,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/JavaCore/" rel="tag"># JavaCore</a>
+            <a href="/tags/Netty-Java-IO/" rel="tag"># -Netty -Java IO</a>
           
         </div>
       
@@ -443,14 +462,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/06/16/ThreadLocal原理和内存泄漏问题/" rel="next" title="ThreadLocal原理和内存泄漏问题">
+                <i class="fa fa-chevron-left"></i> ThreadLocal原理和内存泄漏问题
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/05/java异常类型/" rel="prev" title="java异常类型">
-                java异常类型 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/06/19/netty学习-Handler分类和执行顺序/" rel="prev" title="netty学习:Handler分类和执行顺序">
+                netty学习:Handler分类和执行顺序 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
