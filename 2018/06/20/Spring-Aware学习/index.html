@@ -102,20 +102,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Bojun Ji&#39;s notes">
-<meta property="og:url" content="http://yoursite.com/tags/网络编程/index.html">
+  <meta name="description" content="Spring中有一些Aware结尾的接口可以让bean反向获取spring容器的内容服务，例如获取上下文。 这些接口全部继承Awaer，总共有以下接口：  BeanNameAware               获得到容器中Bean的名称 BeanFactoryAware            获得当前bean Factory,从而调用容器的服务 ApplicationContextAware">
+<meta name="keywords" content="Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Aware学习">
+<meta property="og:url" content="http://yoursite.com/2018/06/20/Spring-Aware学习/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
+<meta property="og:description" content="Spring中有一些Aware结尾的接口可以让bean反向获取spring容器的内容服务，例如获取上下文。 这些接口全部继承Awaer，总共有以下接口：  BeanNameAware               获得到容器中Bean的名称 BeanFactoryAware            获得当前bean Factory,从而调用容器的服务 ApplicationContextAware">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-07-15T17:43:44.775Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bojun Ji&#39;s notes">
+<meta name="twitter:title" content="Spring Aware学习">
+<meta name="twitter:description" content="Spring中有一些Aware结尾的接口可以让bean反向获取spring容器的内容服务，例如获取上下文。 这些接口全部继承Awaer，总共有以下接口：  BeanNameAware               获得到容器中Bean的名称 BeanFactoryAware            获得当前bean Factory,从而调用容器的服务 ApplicationContextAware">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/网络编程/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/20/Spring-Aware学习/"/>
 
 
 
@@ -125,7 +130,7 @@
   };
 </script>
 
-  <title>Tag: 网络编程 | Bojun Ji's notes</title>
+  <title>Spring Aware学习 | Bojun Ji's notes</title>
   
 
 
@@ -172,7 +177,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -253,131 +258,303 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block tag">
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>网络编程<small>Tag</small>
-        </h1>
-      </div>
-
-      
-        
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/20/Spring-Aware学习/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bojun Ji's notes">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/06/08/nio例子和reactor模式/" itemprop="url">
-              
-                <span itemprop="name">nio例子和reactor模式</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Spring Aware学习
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-06-08T23:30:37+08:00"
-              content="2018-06-08" >
-          06-08
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
 
-    </header>
-  </article>
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-06-20 23:35:55" itemprop="dateCreated datePublished" datetime="2018-06-20T23:35:55+08:00">2018-06-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-07-16 01:43:44" itemprop="dateModified" datetime="2018-07-16T01:43:44+08:00">2018-07-16</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/05/nio主要类和用法/" itemprop="url">
-              
-                <span itemprop="name">nio主要类和用法</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-05T00:36:38+08:00"
-              content="2018-05-05" >
-          05-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
+        <ol>
+<li>Spring中有一些Aware结尾的接口可以让bean反向获取spring容器的内容服务，例如获取上下文。</li>
+<li><p>这些接口全部继承Awaer，总共有以下接口：</p>
+<p> BeanNameAware               获得到容器中Bean的名称<br> BeanFactoryAware            获得当前bean Factory,从而调用容器的服务<br> ApplicationContextAware         当前的application context从而调用容器的服务<br> MessageSourceAware          得到message source从而得到文本信息<br> ApplicationEventPublisherAware      应用时间发布器,用于发布事件<br> ResourceLoaderAware         获取资源加载器,可以获得外部资源文件</p>
+</li>
+<li><p>使用中继承相关接口，实现其中方法，方法的入参就是相关资源。</p>
+</li>
+<li>一般ApplicationContextAware使用较多，因为入参是上下文，继承了message source，时间发布器，资源加载器，可以使用它们的get方法。</li>
+</ol>
+<p>ApplicationContext:</p>
+<pre><code>public interface ApplicationContext extends EnvironmentCapable, ListableBeanFactory, HierarchicalBeanFactory,
+    MessageSource, ApplicationEventPublisher, ResourcePatternResolver 
+</code></pre><p>aware接口定义：</p>
+<pre><code>    /**
+ * Interface to be implemented by any object that wishes to be notified
+ * of the {@link ApplicationContext} that it runs in.
+ *
+ * &lt;p&gt;Implementing this interface makes sense for example when an object
+ * requires access to a set of collaborating beans. Note that configuration
+ * via bean references is preferable to implementing this interface just
+ * for bean lookup purposes.
+ *
+ * &lt;p&gt;This interface can also be implemented if an object needs access to file
+ * resources, i.e. wants to call {@code getResource}, wants to publish
+ * an application event, or requires access to the MessageSource. However,
+ * it is preferable to implement the more specific {@link ResourceLoaderAware},
+ * {@link ApplicationEventPublisherAware} or {@link MessageSourceAware} interface
+ * in such a specific scenario.
+ *
+ * &lt;p&gt;Note that file resource dependencies can also be exposed as bean properties
+ * of type {@link org.springframework.core.io.Resource}, populated via Strings
+ * with automatic type conversion by the bean factory. This removes the need
+ * for implementing any callback interface just for the purpose of accessing
+ * a specific file resource.
+ *
+ * &lt;p&gt;{@link org.springframework.context.support.ApplicationObjectSupport} is a
+ * convenience base class for application objects, implementing this interface.
+ *
+ * &lt;p&gt;For a list of all bean lifecycle methods, see the
+ * {@link org.springframework.beans.factory.BeanFactory BeanFactory javadocs}.
+ *
+ * @author Rod Johnson
+ * @author Juergen Hoeller
+ * @author Chris Beams
+ * @see ResourceLoaderAware
+ * @see ApplicationEventPublisherAware
+ * @see MessageSourceAware
+ * @see org.springframework.context.support.ApplicationObjectSupport
+ * @see org.springframework.beans.factory.BeanFactoryAware
+ */
+public interface ApplicationContextAware extends Aware {
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    /**
+     * Set the ApplicationContext that this object runs in.
+     * Normally this call will be used to initialize the object.
+     * &lt;p&gt;Invoked after population of normal bean properties but before an init callback such
+     * as {@link org.springframework.beans.factory.InitializingBean#afterPropertiesSet()}
+     * or a custom init-method. Invoked after {@link ResourceLoaderAware#setResourceLoader},
+     * {@link ApplicationEventPublisherAware#setApplicationEventPublisher} and
+     * {@link MessageSourceAware}, if applicable.
+     * @param applicationContext the ApplicationContext object to be used by this object
+     * @throws ApplicationContextException in case of context initialization errors
+     * @throws BeansException if thrown by application context methods
+     * @see org.springframework.beans.factory.BeanInitializationException
+     */
+    void setApplicationContext(ApplicationContext applicationContext) throws BeansException;
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/17/BIO-NIO特点，简单比较/" itemprop="url">
-              
-                <span itemprop="name">BIO, NIO特点，简单比较</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-17T00:04:31+08:00"
-              content="2018-04-17" >
-          04-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+}
+</code></pre><ol start="5">
+<li>setApplicationContext方法会在属性设置完，bean初始化后调用，</li>
+<li><p>例子：</p>
+<pre><code>public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+    //get service bean map of the service annotation
+    Map&lt;String, Object&gt; serviceBeanMap = applicationContext
+            .getBeansWithAnnotation(ServerService.class);
+    //if there is services, get class info to set key, use the bean to set value in service map
+    if (!serviceBeanMap.isEmpty()) {
+        for (Object serviceBean : serviceBeanMap.values()) {
+            serviceMap.put(serviceBean.getClass()
+                    .getAnnotation(ServerService.class).value().getName(), serviceBean);
+        }
+    }
+}
+</code></pre></li>
+</ol>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Spring/" rel="tag"># Spring</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/20/dubbo十种协议/" rel="next" title="dubbo十种协议">
+                <i class="fa fa-chevron-left"></i> dubbo十种协议
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/21/netty学习-关于SimpleChannelInboundHandler/" rel="prev" title="netty学习:关于SimpleChannelInboundHandler">
+                netty学习:关于SimpleChannelInboundHandler <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -706,6 +883,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
 
   
 
