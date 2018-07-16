@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="类锁：锁类，类似于全局锁  加在static方法上 synchronized代码块（）中直接对象.getClass()/.Class获取类锁  对象锁：范围只有这个对象，调用这个对象的方法或者代码块时候一次只有一个线程能执行  加在非静态方法上,作用在一个对象的特定方法上2.synchronized代码中锁对象  一个测试： 线程类： package concurrency;  import ja">
-<meta name="keywords" content="Java并发编程">
+  <meta name="description" content="如果针对同一个配置文件中两个同id bean，或者同一文件注解注入同value bean，会抛出异常。  例子,bean定义冲突异常： Caused by: org.springframework.context.annotation.ConflictingBeanDefinitionException: Annotation-specified bean name &amp;apos;springBe">
+<meta name="keywords" content="Spring">
 <meta property="og:type" content="article">
-<meta property="og:title" content="synchronized对象锁和类锁">
-<meta property="og:url" content="http://yoursite.com/2018/05/22/synchronized对象锁和类锁/index.html">
+<meta property="og:title" content="Spring同名bean问题">
+<meta property="og:url" content="http://yoursite.com/2018/06/11/Spring同名bean问题/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="类锁：锁类，类似于全局锁  加在static方法上 synchronized代码块（）中直接对象.getClass()/.Class获取类锁  对象锁：范围只有这个对象，调用这个对象的方法或者代码块时候一次只有一个线程能执行  加在非静态方法上,作用在一个对象的特定方法上2.synchronized代码中锁对象  一个测试： 线程类： package concurrency;  import ja">
+<meta property="og:description" content="如果针对同一个配置文件中两个同id bean，或者同一文件注解注入同value bean，会抛出异常。  例子,bean定义冲突异常： Caused by: org.springframework.context.annotation.ConflictingBeanDefinitionException: Annotation-specified bean name &amp;apos;springBe">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-22T17:01:40.577Z">
+<meta property="og:updated_time" content="2018-07-16T17:05:07.131Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="synchronized对象锁和类锁">
-<meta name="twitter:description" content="类锁：锁类，类似于全局锁  加在static方法上 synchronized代码块（）中直接对象.getClass()/.Class获取类锁  对象锁：范围只有这个对象，调用这个对象的方法或者代码块时候一次只有一个线程能执行  加在非静态方法上,作用在一个对象的特定方法上2.synchronized代码中锁对象  一个测试： 线程类： package concurrency;  import ja">
+<meta name="twitter:title" content="Spring同名bean问题">
+<meta name="twitter:description" content="如果针对同一个配置文件中两个同id bean，或者同一文件注解注入同value bean，会抛出异常。  例子,bean定义冲突异常： Caused by: org.springframework.context.annotation.ConflictingBeanDefinitionException: Annotation-specified bean name &amp;apos;springBe">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/22/synchronized对象锁和类锁/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/11/Spring同名bean问题/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>synchronized对象锁和类锁 | Bojun Ji's notes</title>
+  <title>Spring同名bean问题 | Bojun Ji's notes</title>
   
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/synchronized对象锁和类锁/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/11/Spring同名bean问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -295,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">synchronized对象锁和类锁
+          <h1 class="post-title" itemprop="name headline">Spring同名bean问题
               
             
           </h1>
@@ -320,7 +320,7 @@
                 
               
 
-              <time title="Created: 2018-05-22 23:54:04" itemprop="dateCreated datePublished" datetime="2018-05-22T23:54:04+08:00">2018-05-22</time>
+              <time title="Created: 2018-06-11 23:56:49" itemprop="dateCreated datePublished" datetime="2018-06-11T23:56:49+08:00">2018-06-11</time>
             
 
             
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-05-23 01:01:40" itemprop="dateModified" datetime="2018-05-23T01:01:40+08:00">2018-05-23</time>
+                <time title="Modified: 2018-07-17 01:05:07" itemprop="dateModified" datetime="2018-07-17T01:05:07+08:00">2018-07-17</time>
               
             
           </span>
@@ -354,7 +354,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java并发编程/" itemprop="url" rel="index"><span itemprop="name">Java并发编程</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
 
                 
                 
@@ -396,105 +396,110 @@
       
 
       
-        <p>类锁：<br>锁类，类似于全局锁</p>
-<ol>
-<li>加在static方法上</li>
-<li>synchronized代码块（）中直接对象.getClass()/.Class获取类锁</li>
+        <ol>
+<li>如果针对同一个配置文件中两个同id bean，或者同一文件注解注入同value bean，会抛出异常。</li>
 </ol>
-<p>对象锁：<br>范围只有这个对象，调用这个对象的方法或者代码块时候一次只有一个线程能执行</p>
-<ol>
-<li>加在非静态方法上,作用在一个对象的特定方法上<br>2.synchronized代码中锁对象</li>
+<p>例子,bean定义冲突异常：</p>
+<pre><code>Caused by: org.springframework.context.annotation.ConflictingBeanDefinitionException: Annotation-specified bean name &apos;springBean&apos; for bean class [com.demo.springdemo.service.samebeantest.sameBean2] conflicts with existing, non-compatible bean definition of same name and class [com.demo.springdemo.service.samebeantest.sameBean1]
+at org.springframework.context.annotation.ClassPathBeanDefinitionScanner.checkCandidate(ClassPathBeanDefinitionScanner.java:348)
+at org.springframework.context.annotation.ClassPathBeanDefinitionScanner.doScan(ClassPathBeanDefinitionScanner.java:286)
+at org.springframework.context.annotation.ComponentScanBeanDefinitionParser.parse(ComponentScanBeanDefinitionParser.java:90)
+at org.springframework.beans.factory.xml.NamespaceHandlerSupport.parse(NamespaceHandlerSupport.java:74)
+at org.springframework.beans.factory.xml.BeanDefinitionParserDelegate.parseCustomElement(BeanDefinitionParserDelegate.java:1366)
+at org.springframework.beans.factory.xml.BeanDefinitionParserDelegate.parseCustomElement(BeanDefinitionParserDelegate.java:1352)
+at org.springframework.beans.factory.xml.DefaultBeanDefinitionDocumentReader.parseBeanDefinitions(DefaultBeanDefinitionDocumentReader.java:178)
+at org.springframework.beans.factory.xml.DefaultBeanDefinitionDocumentReader.doRegisterBeanDefinitions(DefaultBeanDefinitionDocumentReader.java:148)
+at org.springframework.beans.factory.xml.DefaultBeanDefinitionDocumentReader.registerBeanDefinitions(DefaultBeanDefinitionDocumentReader.java:98)
+at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.registerBeanDefinitions(XmlBeanDefinitionReader.java:507)
+at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.doLoadBeanDefinitions(XmlBeanDefinitionReader.java:391)
+</code></pre><ol start="2">
+<li>但是如果有两个context配置文件，可能是不同开发者的文件，其中有两个同id bean，spring默认方式是覆盖，后加载的覆盖前面的bean。</li>
 </ol>
-<p>一个测试：</p>
-<p>线程类：</p>
-<pre><code>package concurrency;
+<p>测试：<br>两个类：</p>
+<pre><code>public class sameBean1 {
+    private String info=&quot;bean1&quot;;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+    public String getInfo() {
+        return info;
+    }
 
-public class SynchronizedTestThread extends Thread {
-    private Map&lt;String, List&lt;String&gt;&gt; resultMap;
-    private String line;
-    private SynchronizedTest instance;
+    public void setInfo(String info) {
+        this.info = info;
+    }
 
-public SynchronizedTestThread(Map&lt;String, List&lt;String&gt;&gt; resultMap, String line){
-    this.resultMap=resultMap;
-    this.line=line;
-    this.instance=instance;
-}
-
-@Override
-public void run() {
-    synchronized (this) {
-        String[] keyAndValue = line.trim().split(&quot;-&quot;);
-        String key = keyAndValue[0];
-        String value = keyAndValue[1];
-        if (!resultMap.containsKey(key)) {
-            List&lt;String&gt; list = new ArrayList&lt;&gt;();
-            list.add(value);
-            resultMap.put(key, list);
-        } else {
-            resultMap.get(key).add(value);
-        }
+    @Override
+    public String toString() {
+        return this.info;
     }
 }
+
+public class sameBean2 {
+    private String info=&quot;bean2&quot;;
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    @Override
+    public String toString() {
+        return this.info;
+    }
 }
+</code></pre><p>两个配置文件，bean id设成一样的</p>
+<pre><code>    &lt;!--&lt;context:component-scan base-package=&quot;com.demo.springdemo.*&quot; /&gt;--&gt;
+&lt;aop:aspectj-autoproxy /&gt;
+
+&lt;beans&gt;
+    &lt;bean id=&quot;springBean&quot; class=&quot;com.demo.springdemo.service.samebeantest.sameBean1&quot; &gt;
+        &lt;property name=&quot;info&quot; value=&quot;bean1&quot; /&gt;
+    &lt;/bean &gt;
+&lt;/beans&gt;
+
+    &lt;!--&lt;context:component-scan base-package=&quot;com.demo.springdemo.*&quot; /&gt;--&gt;
+&lt;aop:aspectj-autoproxy /&gt;
+
+&lt;beans&gt;
+    &lt;bean id=&quot;springBean&quot; class=&quot;com.demo.springdemo.service.samebeantest.sameBean2&quot; &gt;
+        &lt;property name=&quot;info&quot; value=&quot;bean2&quot; /&gt;
+    &lt;/bean &gt;
+&lt;/beans&gt;
 </code></pre><p>测试类：</p>
-<pre><code>package concurrency;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-
-public class SynchronizedTest {
-
-public void putResultToMap(String data,Map&lt;String,List&lt;String&gt;&gt; resultMap){
-    ExecutorService threadPool=Executors.newFixedThreadPool(3);
-    String[] lines=data.trim().split(&quot;,&quot;);
-    for(String line:lines){
-        SynchronizedTestThread thread=new SynchronizedTestThread(resultMap,line);
-        threadPool.submit(thread);
-    }
-    try {
-        threadPool.shutdown();
-        threadPool.awaitTermination(Long.MAX_VALUE,TimeUnit.MILLISECONDS);
-    } catch (InterruptedException e) {
-        e.printStackTrace();
-    }
+<pre><code>        public static void main(String[] args) {
+    ApplicationContext ctx=new ClassPathXmlApplicationContext(&quot;classpath:spring-context1.xml&quot;,&quot;classpath:spring-context2.xml&quot;);
+    //((ClassPathXmlApplicationContext) ctx).setAllowBeanDefinitionOverriding(false);
+    //((ClassPathXmlApplicationContext) ctx).refresh();
+    Object obj=ctx.getBean(&quot;springBean&quot;);
+    System.out.println(obj.toString());
 }
-
-public static void main(String[] args) {
-    StringBuilder sb=new StringBuilder();
-    for(int i=0;i&lt;100000;i++){
-        sb.append(&quot;1-test&quot;+i+&quot;,&quot;);
-    }
-    for(int i=0;i&lt;100000;i++){
-        sb.append(&quot;2-test&quot;+i+&quot;,&quot;);
-    }
-    for(int i=0;i&lt;100000;i++){
-        sb.append(&quot;3-test&quot;+i+&quot;,&quot;);
-    }
-    sb.deleteCharAt(sb.length()-1);
-
-    Map&lt;String, List&lt;String&gt;&gt; resultMap=new HashMap&lt;&gt;();
-    String data=String.valueOf(sb);
-
-    new SynchronizedTest().putResultToMap(data,resultMap);
-
-    for(Map.Entry&lt;String,List&lt;String&gt;&gt; entry:resultMap.entrySet()){
-        System.out.println(entry.getKey()+&quot;&apos;s count:&quot;+entry.getValue().size());
-    }
+</code></pre><p>输出，可以看到INFO级别LOG，后面的bean覆盖了前一个：</p>
+<pre><code>INFO: Overriding bean definition for bean &apos;springBean&apos; with a different definition: replacing [Generic bean: class [com.demo.springdemo.service.samebeantest.sameBean1]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null; defined in class path resource [spring-context1.xml]] with [Generic bean: class [com.demo.springdemo.service.samebeantest.sameBean2]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null; defined in class path resource [spring-context2.xml]]
+bean2    
+</code></pre><ol start="3">
+<li><p>这是因为DefaultLiatableBeanFactory中有setAllowBeanDefinitionOverriding，默认值是true。</p>
+<pre><code>   /**
+ * Set whether it should be allowed to override bean definitions by registering
+ * a different definition with the same name, automatically replacing the former.
+ * If not, an exception will be thrown. This also applies to overriding aliases.
+ * &lt;p&gt;Default is &quot;true&quot;.
+ * @see #registerBeanDefinition
+ */
+public void setAllowBeanDefinitionOverriding(boolean allowBeanDefinitionOverriding) {
+ this.allowBeanDefinitionOverriding = allowBeanDefinitionOverriding;
 }
-}
-</code></pre><p>输出，统计数量在并发情况下不正确，加在线程里的锁并不起效果，因为锁的是对象，每个线程都是一个新的对象：<br>1’s count:99434<br>2’s count:99658<br>3’s count:99960</p>
-<p>Process finished with exit code 0</p>
-<p>修改方法：</p>
-<p>1.可以在线程里改类锁（不好）<br>2.方法写在别的类里，方法上加锁，给这个类生成一个对象，给每个线程都传这个对象可以达到同步效果</p>
-
+</code></pre></li>
+<li><p>需要避免覆盖，只需要将这个值设为false。在实际web应用中可以继承ContextLoader，自定义context中将这个值设成false，并且继承ContextLoaderListener，返回自定义的context loader。</p>
+</li>
+</ol>
+<p>设为false后输出，可以看到异常并定位到具体配置文件里的具体bean，并做相应更改：</p>
+<pre><code>Caused by: org.springframework.beans.factory.BeanDefinitionStoreException: Invalid bean definition with name &apos;springBean&apos; defined in class path resource [spring-context2.xml]: Cannot register bean definition [Generic bean: class [com.demo.springdemo.service.samebeantest.sameBean2]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null; defined in class path resource [spring-context2.xml]] for bean &apos;springBean&apos;: There is already [Generic bean: class [com.demo.springdemo.service.samebeantest.sameBean1]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null; defined in class path resource [spring-context1.xml]] bound.
+at org.springframework.beans.factory.support.DefaultListableBeanFactory.registerBeanDefinition(DefaultListableBeanFactory.java:810)
+at org.springframework.beans.factory.support.BeanDefinitionReaderUtils.registerBeanDefinition(BeanDefinitionReaderUtils.java:150)
+at org.springframework.beans.factory.xml.DefaultBeanDefinitionDocumentReader.processBeanDefinition(DefaultBeanDefinitionDocumentReader.java:310)
+</code></pre>
       
     </div>
 
@@ -514,7 +519,7 @@ public static void main(String[] args) {
       
         <div class="post-tags">
           
-            <a href="/tags/Java并发编程/" rel="tag"># Java并发编程</a>
+            <a href="/tags/Spring/" rel="tag"># Spring</a>
           
         </div>
       
@@ -527,8 +532,8 @@ public static void main(String[] args) {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/21/Semaphore使用/" rel="next" title="Semaphore使用">
-                <i class="fa fa-chevron-left"></i> Semaphore使用
+              <a href="/2018/06/08/nio例子和reactor模式/" rel="next" title="nio例子和reactor模式">
+                <i class="fa fa-chevron-left"></i> nio例子和reactor模式
               </a>
             
           </div>
@@ -537,8 +542,8 @@ public static void main(String[] args) {
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/26/缓存穿透，缓存击穿，缓存雪崩理解/" rel="prev" title="缓存穿透，缓存击穿，缓存雪崩理解">
-                缓存穿透，缓存击穿，缓存雪崩理解 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/06/14/AOP方法内部调用（嵌套调用）问题/" rel="prev" title="AOP方法内部调用（嵌套调用）问题">
+                AOP方法内部调用（嵌套调用）问题 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
