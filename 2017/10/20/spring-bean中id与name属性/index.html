@@ -102,21 +102,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="http://yoursite.com/categories/index.html">
+  <meta name="description" content="bean的id属性不可重复，全局唯一，在两个上下文文件中（例如不同开发的），如果重复默认后一个覆盖前一个，如果设置override为false可以抛出异常。name和id一样在一个文件中不可以重复。 id和name可以都不配，默认是用类名当name，可以getBean(“类名”)获取bean。 都不配置情况下，如果有多个一个类的bean，则用#1，#2，#3等获取每个bean，例如第一个getB">
+<meta name="keywords" content="Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring bean中id与name属性">
+<meta property="og:url" content="http://yoursite.com/2017/10/20/spring-bean中id与name属性/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
+<meta property="og:description" content="bean的id属性不可重复，全局唯一，在两个上下文文件中（例如不同开发的），如果重复默认后一个覆盖前一个，如果设置override为false可以抛出异常。name和id一样在一个文件中不可以重复。 id和name可以都不配，默认是用类名当name，可以getBean(“类名”)获取bean。 都不配置情况下，如果有多个一个类的bean，则用#1，#2，#3等获取每个bean，例如第一个getB">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-01T17:13:35.710Z">
+<meta property="og:updated_time" content="2018-07-19T16:43:04.159Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="categories">
+<meta name="twitter:title" content="spring bean中id与name属性">
+<meta name="twitter:description" content="bean的id属性不可重复，全局唯一，在两个上下文文件中（例如不同开发的），如果重复默认后一个覆盖前一个，如果设置override为false可以抛出异常。name和id一样在一个文件中不可以重复。 id和name可以都不配，默认是用类名当name，可以getBean(“类名”)获取bean。 都不配置情况下，如果有多个一个类的bean，则用#1，#2，#3等获取每个bean，例如第一个getB">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/10/20/spring-bean中id与name属性/"/>
 
 
 
@@ -126,7 +130,7 @@
   };
 </script>
 
-  <title>categories | Bojun Ji's notes</title>
+  <title>spring bean中id与name属性 | Bojun Ji's notes</title>
   
 
 
@@ -254,128 +258,290 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/20/spring-bean中id与name属性/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bojun Ji's notes">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-<h1 class="post-title" itemprop="name headline">categories</h1>
-
-<div class="post-meta">
-  
-  
-
-
-
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="category-all-page">
-            <div class="category-all-title">
-                
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                13 categories in total
-            </div>
-            <div class="category-all">
-              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Dubbo/">Dubbo</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Guava/">Guava</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java-IO/">Java IO</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaCore/">JavaCore</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java并发编程/">Java并发编程</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java集合类/">Java集合类</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mybatis/">Mybatis</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Netty/">Netty</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/关系型数据库/">关系型数据库</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/分布式系统设计/">分布式系统设计</a><span class="category-list-count">1</span></li></ul>
-            </div>
-          </div>
+          <h1 class="post-title" itemprop="name headline">spring bean中id与name属性
+              
+            
+          </h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2017-10-20 00:03:36" itemprop="dateCreated datePublished" datetime="2017-10-20T00:03:36+08:00">2017-10-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-07-20 00:43:04" itemprop="dateModified" datetime="2018-07-20T00:43:04+08:00">2018-07-20</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <ol>
+<li>bean的id属性不可重复，全局唯一，在两个上下文文件中（例如不同开发的），如果重复默认后一个覆盖前一个，如果设置override为false可以抛出异常。name和id一样在一个文件中不可以重复。</li>
+<li>id和name可以都不配，默认是用类名当name，可以getBean(“类名”)获取bean。</li>
+<li>都不配置情况下，如果有多个一个类的bean，则用#1，#2，#3等获取每个bean，例如第一个getBean(“类名”)，第二个getBean(“类名#1”)</li>
+<li><p>注解情况下，输入的就是name：</p>
+<pre><code>@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Indexed
+public @interface Component {
+
+    /**
+     * The value may indicate a suggestion for a logical component name,
+     * to be turned into a Spring bean in case of an autodetected component.
+     * @return the suggested component name, if any (or empty String otherwise)
+     */
+    String value() default &quot;&quot;;
+
+}
+</code></pre></li>
+<li><p>如果一个类同时用了注解且在上下文配置文件里    配了的话，两者配置的name相同时，我们用getBean方法按name获取的是配置文件中的bean。但是如果两者name不同，则无冲突，按各自名字可以获取bean。这种情况出现几率较低。</p>
+</li>
+</ol>
+<p>例子：</p>
+<p>注解bean类：</p>
+<pre><code>@Component(&quot;testBean&quot;)
+public class TestBean3 {
+    private String data = &quot;test1&quot;;
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+}
+</code></pre><p>配置文件：</p>
+<pre><code>   &lt;context:component-scan base-package=&quot;com.demo.springdemo.service.beantest&quot; /&gt;
+&lt;aop:aspectj-autoproxy /&gt;
+
+&lt;beans&gt;
+    &lt;bean name=&quot;testBean&quot; class=&quot;com.demo.springdemo.service.beantest.TestBean3&quot; &gt;
+        &lt;property name=&quot;data&quot; value=&quot;test2&quot; /&gt;
+    &lt;/bean &gt;
+&lt;/beans&gt;
+</code></pre><p>拥有上述bean的类：</p>
+<pre><code>@Component(&quot;beanOwner&quot;)
+public class BeanOwner {
+    @Autowired
+    @Qualifier(&quot;testBean&quot;)
+    private TestBean3 bean;
+
+    public TestBean3 getBean() {
+        return bean;
+    }
+
+    public void setBean(TestBean3 bean) {
+        this.bean = bean;
+    }
+}
+</code></pre><p>测试类：</p>
+<pre><code>    public static void main(String[] args) {
+    ApplicationContext ctx = new ClassPathXmlApplicationContext(&quot;classpath:spring-context3.xml&quot;);
+    TestBean3 bean = (TestBean3) ctx.getBean(&quot;testBean&quot;);
+    System.out.println(bean.getData());
+    BeanOwner beanOwner=(BeanOwner)ctx.getBean(&quot;beanOwner&quot;);
+    System.out.println(beanOwner.getBean().getData());
+}
+</code></pre><p>输出，可以看到同名冲突时取了配置文件里配置的bean：</p>
+<pre><code>test2
+test2    
+</code></pre>
       
     </div>
+
     
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Spring/" rel="tag"># Spring</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/18/泛型基本使用/" rel="next" title="泛型基本使用">
+                <i class="fa fa-chevron-left"></i> 泛型基本使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/15/final-finally-finailize功能/" rel="prev" title="final, finally, finalize功能">
+                final, finally, finalize功能 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
 
 
 
-    
-    
-    
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
