@@ -103,14 +103,14 @@
 
 
   <meta name="description" content="缓存穿透： 1.分布式缓存或者多加一级本地缓存在DB前面，存储同样数据，查询先按级看缓存，命中就直接返回，不查询缓存。 2.如果使用者了解业务数据结构，知道有一些查询参数的数据永远不会存在于数据库中，假设造一个这样的请求发给CONTROLLER，服务端会先查询缓存，因为数据不可能存在，所以不命中，所以会推一条查询sql去DB并且也是空结果。如果制造大量这样无效数据的查询请求，因为缓存不可能命中，会">
-<meta name="keywords" content="缓存,分布式">
+<meta name="keywords" content="分布式,缓存">
 <meta property="og:type" content="article">
 <meta property="og:title" content="缓存穿透，缓存击穿，缓存雪崩理解">
 <meta property="og:url" content="http://yoursite.com/2018/05/26/缓存穿透，缓存击穿，缓存雪崩理解/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
 <meta property="og:description" content="缓存穿透： 1.分布式缓存或者多加一级本地缓存在DB前面，存储同样数据，查询先按级看缓存，命中就直接返回，不查询缓存。 2.如果使用者了解业务数据结构，知道有一些查询参数的数据永远不会存在于数据库中，假设造一个这样的请求发给CONTROLLER，服务端会先查询缓存，因为数据不可能存在，所以不命中，所以会推一条查询sql去DB并且也是空结果。如果制造大量这样无效数据的查询请求，因为缓存不可能命中，会">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-26T11:52:22.001Z">
+<meta property="og:updated_time" content="2018-07-21T07:36:02.795Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="缓存穿透，缓存击穿，缓存雪崩理解">
 <meta name="twitter:description" content="缓存穿透： 1.分布式缓存或者多加一级本地缓存在DB前面，存储同样数据，查询先按级看缓存，命中就直接返回，不查询缓存。 2.如果使用者了解业务数据结构，知道有一些查询参数的数据永远不会存在于数据库中，假设造一个这样的请求发给CONTROLLER，服务端会先查询缓存，因为数据不可能存在，所以不命中，所以会推一条查询sql去DB并且也是空结果。如果制造大量这样无效数据的查询请求，因为缓存不可能命中，会">
@@ -320,12 +320,24 @@
                 
               
 
-              <time title="Created: 2018-05-26 18:13:49 / Modified: 19:52:22" itemprop="dateCreated datePublished" datetime="2018-05-26T18:13:49+08:00">2018-05-26</time>
+              <time title="Created: 2018-05-26 18:13:49" itemprop="dateCreated datePublished" datetime="2018-05-26T18:13:49+08:00">2018-05-26</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-07-21 15:36:02" itemprop="dateModified" datetime="2018-07-21T15:36:02+08:00">2018-07-21</time>
               
             
           </span>
@@ -419,9 +431,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/缓存/" rel="tag"># 缓存</a>
-          
             <a href="/tags/分布式/" rel="tag"># 分布式</a>
+          
+            <a href="/tags/缓存/" rel="tag"># 缓存</a>
           
         </div>
       
@@ -511,7 +523,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">70</span>
+                    <span class="site-state-item-count">72</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -631,7 +643,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">34</span>
+                      
+                    
+                    <span class="site-state-item-count">35</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
