@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="List接口，被AbstractList抽象类实现，ArrayList类似于数组，继承AbstractList且实现了List接口。 public class ArrayList extends AbstractList        implements List, RandomAccess, Cloneable, java.io.Serializable 它是一个会自动扩容的数组结构，默认大小">
-<meta name="keywords" content="List">
+  <meta name="description" content="RPC框架中服务调用方与提供方的通讯，假设调用方知道提供方的IP和端口，可以直接与提供方进行网络通讯。 使用注册中心时，服务会发布到注册中心上，由注册中心统一管理服务。 服务的基本信息有服务名或者唯一标识的service id，以及服务器的地址端口。 注册中心可以是各种存储结构，例如数据库，注册表甚至文本文件之类，起到管理服务和服务地址的作用。 如果用ZK当注册中心，因为是树形结构，简单实现可以">
+<meta name="keywords" content="RPC,分布式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ArrayList实现原理以及与Vector区别">
-<meta property="og:url" content="http://yoursite.com/2018/02/06/ArrayList实现原理以及与Vector区别/index.html">
+<meta property="og:title" content="RPC框架中注册中心作用">
+<meta property="og:url" content="http://yoursite.com/2018/05/22/RPC框架中注册中心作用/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="List接口，被AbstractList抽象类实现，ArrayList类似于数组，继承AbstractList且实现了List接口。 public class ArrayList extends AbstractList        implements List, RandomAccess, Cloneable, java.io.Serializable 它是一个会自动扩容的数组结构，默认大小">
+<meta property="og:description" content="RPC框架中服务调用方与提供方的通讯，假设调用方知道提供方的IP和端口，可以直接与提供方进行网络通讯。 使用注册中心时，服务会发布到注册中心上，由注册中心统一管理服务。 服务的基本信息有服务名或者唯一标识的service id，以及服务器的地址端口。 注册中心可以是各种存储结构，例如数据库，注册表甚至文本文件之类，起到管理服务和服务地址的作用。 如果用ZK当注册中心，因为是树形结构，简单实现可以">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-05T18:47:53.001Z">
+<meta property="og:updated_time" content="2018-07-22T10:32:33.515Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ArrayList实现原理以及与Vector区别">
-<meta name="twitter:description" content="List接口，被AbstractList抽象类实现，ArrayList类似于数组，继承AbstractList且实现了List接口。 public class ArrayList extends AbstractList        implements List, RandomAccess, Cloneable, java.io.Serializable 它是一个会自动扩容的数组结构，默认大小">
+<meta name="twitter:title" content="RPC框架中注册中心作用">
+<meta name="twitter:description" content="RPC框架中服务调用方与提供方的通讯，假设调用方知道提供方的IP和端口，可以直接与提供方进行网络通讯。 使用注册中心时，服务会发布到注册中心上，由注册中心统一管理服务。 服务的基本信息有服务名或者唯一标识的service id，以及服务器的地址端口。 注册中心可以是各种存储结构，例如数据库，注册表甚至文本文件之类，起到管理服务和服务地址的作用。 如果用ZK当注册中心，因为是树形结构，简单实现可以">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/02/06/ArrayList实现原理以及与Vector区别/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/22/RPC框架中注册中心作用/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>ArrayList实现原理以及与Vector区别 | Bojun Ji's notes</title>
+  <title>RPC框架中注册中心作用 | Bojun Ji's notes</title>
   
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/06/ArrayList实现原理以及与Vector区别/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/RPC框架中注册中心作用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -295,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">ArrayList实现原理以及与Vector区别
+          <h1 class="post-title" itemprop="name headline">RPC框架中注册中心作用
               
             
           </h1>
@@ -320,7 +320,7 @@
                 
               
 
-              <time title="Created: 2018-02-06 01:49:31" itemprop="dateCreated datePublished" datetime="2018-02-06T01:49:31+08:00">2018-02-06</time>
+              <time title="Created: 2018-05-22 15:58:07" itemprop="dateCreated datePublished" datetime="2018-05-22T15:58:07+08:00">2018-05-22</time>
             
 
             
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-05-06 02:47:53" itemprop="dateModified" datetime="2018-05-06T02:47:53+08:00">2018-05-06</time>
+                <time title="Modified: 2018-07-22 18:32:33" itemprop="dateModified" datetime="2018-07-22T18:32:33+08:00">2018-07-22</time>
               
             
           </span>
@@ -354,7 +354,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java集合类/" itemprop="url" rel="index"><span itemprop="name">Java集合类</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/分布式系统设计/" itemprop="url" rel="index"><span itemprop="name">分布式系统设计</span></a></span>
 
                 
                 
@@ -396,68 +396,170 @@
       
 
       
-        <p>List接口，被AbstractList抽象类实现，ArrayList类似于数组，继承AbstractList且实现了List接口。</p>
-<p>public class ArrayList<e> extends AbstractList<e><br>        implements List<e>, RandomAccess, Cloneable, java.io.Serializable</e></e></e></p>
-<p>它是一个会自动扩容的数组结构，默认大小10。特点是能根据下标快速获取元素，和LinkedList比根据下标查询更改元素更方便，同时靠add方法在数组末尾插入元素也快，但是按下标插入删除元素需要前后移动则代价较大。</p>
-<pre><code>   /**
-     * Default initial capacity.
-     */ 
-private static final int DEFAULT_CAPACITY = 10;
-
-/**
-     * The array buffer into which the elements of the ArrayList are stored.
-     * The capacity of the ArrayList is the length of this array buffer. Any
-     * empty ArrayList with elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA
-     * will be expanded to DEFAULT_CAPACITY when the first element is added.
-     */  
-transient Object[] elementData; // non-private to simplify nested class access    
-</code></pre><p>和HashMap不同，并没有为了缓解哈希冲突的负载因子，只是在数组大小不够用时进行扩容。扩容逻辑是新建1.5大小的数组，然后将元素移动至新数组。</p>
-<p>ArrayList和Vector主要区别在于ArrayList的add，remove等写方法并没有加锁，不是线程安全的，需要外部保证。<br>同时，vector的扩容逻辑会扩展为2倍大小，ArrayList只会扩容1.5倍，具有节约空间的优势。</p>
-<pre><code>private void ensureExplicitCapacity(int minCapacity) {
-        modCount++;
-    // overflow-conscious code
-    if (minCapacity - elementData.length &gt; 0)
-        grow(minCapacity);
+        <ol>
+<li>RPC框架中服务调用方与提供方的通讯，假设调用方知道提供方的IP和端口，可以直接与提供方进行网络通讯。</li>
+<li>使用注册中心时，服务会发布到注册中心上，由注册中心统一管理服务。</li>
+<li>服务的基本信息有服务名或者唯一标识的service id，以及服务器的地址端口。</li>
+<li>注册中心可以是各种存储结构，例如数据库，注册表甚至文本文件之类，起到管理服务和服务地址的作用。</li>
+<li>如果用ZK当注册中心，因为是树形结构，简单实现可以创建一个父节点作为注册中心节点/registry，然后子节点是具体服务/serviceName1，/serviceName2等，服务名的子节点是数据节点，服务提供方的具体地址端口。这样调用方可以根据需要的服务名去注册中心上找一个服务提供方，再给这个发送请求通讯。</li>
+<li>注册中心一般与注册的服务器保持心跳，自动移除不可达的地址，返回给调用方可用列表。用ZK时，可以把最下层的服务器地址节点作为临时节点，一旦和ZK断开连接就删除。</li>
+</ol>
+<p>例子：</p>
+<p>ZK服务注册，底层的服务器URL节点用有序临时节点：</p>
+<pre><code>public void registerService(String serviceName, String serverAddress) {
+    //if server address is not null, connect ZK server and create data node for this service
+    if (serverAddress != null) {
+        try {
+            byte[] data = serverAddress.getBytes();
+            //if no registry node, create one
+            if (zkClient.checkExists().forPath(ZooKeeperConfigurationEnum.ZK_REGISTRY_PATH.getValue()) == null) {
+                zkClient.create().withMode(CreateMode.PERSISTENT).forPath(ZooKeeperConfigurationEnum.ZK_REGISTRY_PATH.getValue(), null);
+            }
+            //if no service name node, create one
+            if (serviceName != null &amp;&amp; !serviceName.isEmpty() &amp;&amp; zkClient.checkExists().forPath(ZooKeeperConfigurationEnum.ZK_REGISTRY_PATH.getValue() + SeparatorEnum.URL_SEPARATOR + serviceName) == null) {
+                zkClient.create().withMode(CreateMode.PERSISTENT).forPath(ZooKeeperConfigurationEnum.ZK_REGISTRY_PATH.getValue() + SeparatorEnum.URL_SEPARATOR + serviceName, null);
+            }
+            //create data node with service URL, temp sequential node
+            zkClient.create().withMode(CreateMode.EPHEMERAL_SEQUENTIAL).forPath(ZooKeeperConfigurationEnum.ZK_REGISTRY_PATH.getValue() + SeparatorEnum.URL_SEPARATOR + ZooKeeperConfigurationEnum.ZK_DATA_PATH, serverAddress.getBytes());
+        } catch (Exception e) {
+            LogUtil.logError(ZKServiceRegistry.class, LogTipEnum.ZK_REGISTER_SERVICE_ERROR + e.getMessage());
+        }
+    }
 }
+</code></pre><p>节点监听，服务发现：</p>
+<p>服务名节点监听：</p>
+<pre><code>    public final class ServiceNameListener implements PathChildrenCacheListener {
+    private volatile Map&lt;String, List&lt;String&gt;&gt; serviceMap;
 
-/**
-     * Increases the capacity to ensure that it can hold at least the
-     * number of elements specified by the minimum capacity argument.
-     *
-     * @param minCapacity the desired minimum capacity
-     */
+    public ServiceNameListener(Map&lt;String, List&lt;String&gt;&gt; serviceMap) {
+        this.serviceMap = serviceMap;
+    }
 
-private void grow(int minCapacity) {
-    // overflow-conscious code
-    int oldCapacity = elementData.length;
-
-    //扩展为1.5倍
-    int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);
-
-    //仍然不够用则直接扩展为当前需求大小
-    if (newCapacity - minCapacity &lt; 0)
-        newCapacity = minCapacity;
-    if (newCapacity - MAX_ARRAY_SIZE &gt; 0)
-        newCapacity = hugeCapacity(minCapacity);
-    // minCapacity is usually close to size, so this is a win:
-    elementData = Arrays.copyOf(elementData, newCapacity);
+    @Override
+    public void childEvent(CuratorFramework curatorFramework, PathChildrenCacheEvent pathChildrenCacheEvent) throws Exception {
+        switch (pathChildrenCacheEvent.getType()) {
+            case CHILD_ADDED: {
+                //add the service with empty list
+                if (!serviceMap.containsKey(pathChildrenCacheEvent.getData().getPath())) {
+                    serviceMap.put(new String(pathChildrenCacheEvent.getData().getData()), new ArrayList&lt;String&gt;());
+                }
+                break;
+            }
+            case CHILD_REMOVED: {
+                //remove the service
+                if (serviceMap.containsKey(pathChildrenCacheEvent.getData().getPath()))
+                    serviceMap.remove(pathChildrenCacheEvent.getData().getPath());
+                break;
+            }
+            case CHILD_UPDATED: {
+                break;
+            }
+        }
+    }
 }
+</code></pre><p>服务地址节点监听：</p>
+<pre><code>    public class ServiceAddressListener implements PathChildrenCacheListener {
+    private volatile Map&lt;String, List&lt;String&gt;&gt; serviceMap;
+    private String listenedServiceName;
 
-private static int hugeCapacity(int minCapacity) {
-    if (minCapacity &lt; 0) // overflow
-        throw new OutOfMemoryError();
-    return (minCapacity &gt; MAX_ARRAY_SIZE) ?
-        Integer.MAX_VALUE :
-        MAX_ARRAY_SIZE;
+    public ServiceAddressListener(Map&lt;String, List&lt;String&gt;&gt; serviceMap, String listenedServiceName) {
+        this.serviceMap = serviceMap;
+        this.listenedServiceName = listenedServiceName;
+    }
+
+    @Override
+    public void childEvent(CuratorFramework curatorFramework, PathChildrenCacheEvent pathChildrenCacheEvent) throws Exception {
+        switch (pathChildrenCacheEvent.getType()) {
+            case CHILD_ADDED: {
+                //add the service address for this service
+                if (serviceMap.containsKey(this.listenedServiceName)) {
+                    synchronized (ServiceAddressListener.class) {
+                        List&lt;String&gt; serviceAddressList = serviceMap.get(listenedServiceName);
+                        if (serviceAddressList != null) {
+                            serviceAddressList.add(new String(pathChildrenCacheEvent.getData().getData()));
+                        } else {
+                            List&lt;String&gt; tmpList = new ArrayList&lt;&gt;();
+                            tmpList.add(new String(pathChildrenCacheEvent.getData().getData()));
+                            serviceMap.put(listenedServiceName, tmpList);
+                        }
+                    }
+                    serviceMap.put(new String(pathChildrenCacheEvent.getData().getData()), new ArrayList&lt;String&gt;());
+                }
+                break;
+            }
+            case CHILD_REMOVED: {
+                //remove the service address for this service
+                if (serviceMap.containsKey(pathChildrenCacheEvent.getData().getPath())) {
+                    synchronized (ServiceAddressListener.class) {
+                        List&lt;String&gt; serviceAddressList = serviceMap.get(listenedServiceName);
+                        if (serviceAddressList != null) {
+                           serviceAddressList.remove(new String(pathChildrenCacheEvent.getData().getData()));
+                        }
+                    }
+                }
+                break;
+            }
+            case CHILD_UPDATED: {
+                break;
+            }
+        }
+    }
 }
-</code></pre><p>扩容最大大小为INT最大值-8。超出这个值在hugeCapacity方法中也会给到int最大值。</p>
-<pre><code>/**
- * The maximum size of array to allocate.
- * Some VMs reserve some header words in an array.
- * Attempts to allocate larger arrays may result in
- * OutOfMemoryError: Requested array size exceeds VM limit
- */
-private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;    
+</code></pre><p>注册监听，发现服务：</p>
+<pre><code>    public class ZKServiceDiscovery implements ServiceDiscovery {
+    private static CuratorFramework zkClient;
+    //list to store service address info from ZK
+    private volatile static Map&lt;String, List&lt;String&gt;&gt; serviceMap = new ConcurrentHashMap&lt;&gt;();
+    private static PathChildrenCache serviceNamePathChildCache;
+    private static List&lt;PathChildrenCache&gt; serviceAddressPathChildCacheList;
+
+
+    static {
+        //init ZK client, assign retry configuration, connect ZK server by curator
+        RetryPolicy retryPolicy = new ExponentialBackoffRetry(Integer.getInteger(ZooKeeperConfigurationEnum.ZK_CONNECT_SLEEP_TIME.getValue()), Integer.getInteger(ZooKeeperConfigurationEnum.ZK_CONNECT_MAX_RETRY_TIMES.getValue()));
+        zkClient = CuratorFrameworkFactory.newClient(ZooKeeperConfigurationEnum.ZK_SERVER_ADDRESS.getValue(), retryPolicy);
+        zkClient.start();
+        //init path children cache
+        try {
+            //listen to service name nodes
+            serviceNamePathChildCache = new PathChildrenCache(zkClient, ZooKeeperConfigurationEnum.ZK_REGISTRY_PATH.getValue(), true);
+            serviceNamePathChildCache.start();
+            serviceNamePathChildCache.getListenable().addListener(new ServiceNameListener(serviceMap));
+            //listen to service address nodes
+            List&lt;String&gt; serverNamePaths = zkClient.getChildren().forPath(ZooKeeperConfigurationEnum.ZK_REGISTRY_PATH.getValue());
+            for(String serverNamePath:serverNamePaths){
+                PathChildrenCache serviceAddressPathChildCache=new PathChildrenCache(zkClient,ZooKeeperConfigurationEnum.ZK_REGISTRY_PATH.getValue()+SeparatorEnum.URL_SEPARATOR+serverNamePath,true);
+                serviceAddressPathChildCache.start();
+                serviceAddressPathChildCacheList.add(serviceAddressPathChildCache);
+                serviceNamePathChildCache.getListenable().addListener(new ServiceAddressListener(serviceMap,serverNamePath));
+            }
+        } catch (Exception e) {
+            LogUtil.logError(ZKServiceDiscovery.class, e.getMessage());
+        }
+    }
+
+    //discover and get node in node list
+    public String discover(String serviceName) {
+        List&lt;String&gt; serviceAddressList = serviceMap.get(serviceName);
+        if (serviceAddressList == null || serviceAddressList.isEmpty()) {
+            return null;
+        }
+        int size = serviceAddressList.size();
+        if (size &gt; 0) {
+            if (size == 1) {
+                //only 1 address node, use it
+                LogUtil.logInfo(ZKServiceDiscovery.class, LogTipEnum.SERVICE + serviceName + LogTipEnum.DISCOVERY_SELECT_ONE_NODE + serviceAddressList.get(0));
+                return serviceAddressList.get(0);
+            } else {
+                //multiple nodes, random select
+                String dataNode = serviceAddressList.get(ThreadLocalRandom.current().nextInt(size));
+                LogUtil.logInfo(ZKServiceDiscovery.class, LogTipEnum.SERVICE + serviceName + LogTipEnum.DISCOVERY_SELECT_RANDOM_NODE + dataNode);
+                return dataNode;
+            }
+        }
+        return null;
+    }
+}    
 </code></pre>
       
     </div>
@@ -478,7 +580,9 @@ private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
       
         <div class="post-tags">
           
-            <a href="/tags/List/" rel="tag"># List</a>
+            <a href="/tags/RPC/" rel="tag"># RPC</a>
+          
+            <a href="/tags/分布式/" rel="tag"># 分布式</a>
           
         </div>
       
@@ -491,8 +595,8 @@ private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/18/MyBatis缓存/" rel="next" title="MyBatis缓存">
-                <i class="fa fa-chevron-left"></i> MyBatis缓存
+              <a href="/2018/05/21/RPC框架客户端基本功能设计/" rel="next" title="RPC框架客户端基本功能设计">
+                <i class="fa fa-chevron-left"></i> RPC框架客户端基本功能设计
               </a>
             
           </div>
@@ -501,8 +605,8 @@ private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/02/10/ConcurrentHashMap实现原理（JDK1.6，1.7）/" rel="prev" title="ConcurrentHashMap实现原理（JDK1.6，1.7）">
-                ConcurrentHashMap实现原理（JDK1.6，1.7） <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/22/synchronized对象锁和类锁/" rel="prev" title="synchronized对象锁和类锁">
+                synchronized对象锁和类锁 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
