@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="Mybatis insert时行为： 1. 默认返回的int值是写的行数，而不是主键 2. 插入返回主键一般有2个办法     1. 直接在Insert标签里用keyproerty     例子，自增主键，可以用在Mysql上：     useGeneratedKeys=&amp;quot;true&amp;quot; keyProperty=&amp;quot;id&amp;quot;     2. 用&amp;lt;selectke">
-<meta name="keywords" content="Mybatis,关系型数据库">
+  <meta name="description" content="-Xss:每个线程栈内存大小，JDK5+默认1M -Xms:启动时给JVM分配的内存 -Xmx:运行中JVM可以获取的最大内存 -Xmn:堆区分代GC，年轻代的内存大小 -XX:NewRatio:年轻代与老年代的比值，设置3则老年代为年轻代3倍大小 -XX:SurvivorRatio:一个Survivo区和Eden区的比值，年轻代有2个Survivo区和一个Eden区 -XX:MaxPermSiz">
+<meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mybatis插入数据返回PK注意点">
-<meta property="og:url" content="http://yoursite.com/2018/04/30/Mybatis插入数据返回PK注意点/index.html">
+<meta property="og:title" content="JVM内存设置基本参数">
+<meta property="og:url" content="http://yoursite.com/2017/09/28/JVM内存设置基本参数/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="Mybatis insert时行为： 1. 默认返回的int值是写的行数，而不是主键 2. 插入返回主键一般有2个办法     1. 直接在Insert标签里用keyproerty     例子，自增主键，可以用在Mysql上：     useGeneratedKeys=&amp;quot;true&amp;quot; keyProperty=&amp;quot;id&amp;quot;     2. 用&amp;lt;selectke">
+<meta property="og:description" content="-Xss:每个线程栈内存大小，JDK5+默认1M -Xms:启动时给JVM分配的内存 -Xmx:运行中JVM可以获取的最大内存 -Xmn:堆区分代GC，年轻代的内存大小 -XX:NewRatio:年轻代与老年代的比值，设置3则老年代为年轻代3倍大小 -XX:SurvivorRatio:一个Survivo区和Eden区的比值，年轻代有2个Survivo区和一个Eden区 -XX:MaxPermSiz">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-30T15:39:08.553Z">
+<meta property="og:updated_time" content="2018-07-28T09:18:06.180Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mybatis插入数据返回PK注意点">
-<meta name="twitter:description" content="Mybatis insert时行为： 1. 默认返回的int值是写的行数，而不是主键 2. 插入返回主键一般有2个办法     1. 直接在Insert标签里用keyproerty     例子，自增主键，可以用在Mysql上：     useGeneratedKeys=&amp;quot;true&amp;quot; keyProperty=&amp;quot;id&amp;quot;     2. 用&amp;lt;selectke">
+<meta name="twitter:title" content="JVM内存设置基本参数">
+<meta name="twitter:description" content="-Xss:每个线程栈内存大小，JDK5+默认1M -Xms:启动时给JVM分配的内存 -Xmx:运行中JVM可以获取的最大内存 -Xmn:堆区分代GC，年轻代的内存大小 -XX:NewRatio:年轻代与老年代的比值，设置3则老年代为年轻代3倍大小 -XX:SurvivorRatio:一个Survivo区和Eden区的比值，年轻代有2个Survivo区和一个Eden区 -XX:MaxPermSiz">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/30/Mybatis插入数据返回PK注意点/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/09/28/JVM内存设置基本参数/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>Mybatis插入数据返回PK注意点 | Bojun Ji's notes</title>
+  <title>JVM内存设置基本参数 | Bojun Ji's notes</title>
   
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/30/Mybatis插入数据返回PK注意点/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/28/JVM内存设置基本参数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -295,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Mybatis插入数据返回PK注意点
+          <h1 class="post-title" itemprop="name headline">JVM内存设置基本参数
               
             
           </h1>
@@ -320,7 +320,7 @@
                 
               
 
-              <time title="Created: 2018-04-30 23:08:00" itemprop="dateCreated datePublished" datetime="2018-04-30T23:08:00+08:00">2018-04-30</time>
+              <time title="Created: 2017-09-28 16:35:15" itemprop="dateCreated datePublished" datetime="2017-09-28T16:35:15+08:00">2017-09-28</time>
             
 
             
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-05-30 23:39:08" itemprop="dateModified" datetime="2018-05-30T23:39:08+08:00">2018-05-30</time>
+                <time title="Modified: 2018-07-28 17:18:06" itemprop="dateModified" datetime="2018-07-28T17:18:06+08:00">2018-07-28</time>
               
             
           </span>
@@ -354,7 +354,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Mybatis/" itemprop="url" rel="index"><span itemprop="name">Mybatis</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JVM/" itemprop="url" rel="index"><span itemprop="name">JVM</span></a></span>
 
                 
                 
@@ -396,29 +396,16 @@
       
 
       
-        <p>Mybatis insert时行为：</p>
-<pre><code>1. 默认返回的int值是写的行数，而不是主键
-2. 插入返回主键一般有2个办法
-    1. 直接在Insert标签里用keyproerty
-    例子，自增主键，可以用在Mysql上：
-    useGeneratedKeys=&quot;true&quot; keyProperty=&quot;id&quot;
-    2. 用&lt;selectkey&gt;，keyproperty加在这个标签里，适合sequence返回，例如oracle，也可以用在自增主键场景上。
-    例子，sequence：
-    &lt;selectKey resultType=&quot;Java.lang.Integer&quot; order=&quot;BEFORE&quot; keyProperty=&quot;id&quot;&gt;
-    SELECT SEQ_TABLE.NEXTVAL FROM DUAL
-    &lt;/selectKey&gt;
-    例子，自增id：
-    &lt;selectKey resultType=&quot;java.lang.Integer&quot; order=&quot;AFTER&quot; keyProperty=&quot;id&quot;&gt;
-    SELECT LAST_INSERT_ID() AS id
-    &lt;/selectKey&gt;
- 3.插入返回主键的应用场景频繁：
-    例子：
-    因为现在很少使用物理外键。假设有2张表其实是多对多关系，在两张表各插入一条数据后，需要获取它们的主键ID，然后把它们的ID插入中间关系表。这时就需要以上方法。
-</code></pre><p>注意点：</p>
-<pre><code>1. order指的是和insert的顺序前，在插入前获取还是插入后获取。
-2. spring事务情况下，例如用自增主键取LAST_INSERT_ID()且顺序是after，这个select其实是在插入事务提交后发生。
-3. KeyProperty指的是实体类里对应的主键值的那个成员属性名。插入操作一般需要一个和表结构对应的实体类，并且带有值传给Mapper接口方法然后插入，其实最后操作完成，mybatis会把主键设在这个实体类实例里，只要从这个实体类实例里获取主键就行，而mapper接口方法的返回值仍然是操作行数，不是主键数值。所以按照上面的写法，其实可以同时获取操作行数和主键。
-</code></pre>
+        <p>-Xss:每个线程栈内存大小，JDK5+默认1M</p>
+<p>-Xms:启动时给JVM分配的内存</p>
+<p>-Xmx:运行中JVM可以获取的最大内存</p>
+<p>-Xmn:堆区分代GC，年轻代的内存大小</p>
+<p>-XX:NewRatio:年轻代与老年代的比值，设置3则老年代为年轻代3倍大小</p>
+<p>-XX:SurvivorRatio:一个Survivo区和Eden区的比值，年轻代有2个Survivo区和一个Eden区</p>
+<p>-XX:MaxPermSize:永久代的大小</p>
+<p>-XX:MaxTenuringThreshold:垃圾年龄，为0的话存活则直接进老年代跳过Survivor区复制。复制算法中，每次MINOR GC会回收对象，存活的对象会在两块Survivor区域中反复复制，总有一块Survivor区域是空余的，次数就是这个值。如果设大的话会增大对象在年轻代的存活时间。</p>
+<p>1.8前堆区大小=年轻代+老年代+永久代64M</p>
+
       
     </div>
 
@@ -438,9 +425,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Mybatis/" rel="tag"># Mybatis</a>
-          
-            <a href="/tags/关系型数据库/" rel="tag"># 关系型数据库</a>
+            <a href="/tags/JVM/" rel="tag"># JVM</a>
           
         </div>
       
@@ -453,8 +438,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/26/switch-case的使用注意点/" rel="next" title="switch-case的使用注意点">
-                <i class="fa fa-chevron-left"></i> switch-case的使用注意点
+              <a href="/2017/08/26/JVM基本内存结构/" rel="next" title="JVM基本内存结构">
+                <i class="fa fa-chevron-left"></i> JVM基本内存结构
               </a>
             
           </div>
@@ -463,8 +448,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/02/redis五种数据类型/" rel="prev" title="redis五种数据类型">
-                redis五种数据类型 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/10/18/泛型基本使用/" rel="prev" title="泛型基本使用">
+                泛型基本使用 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
