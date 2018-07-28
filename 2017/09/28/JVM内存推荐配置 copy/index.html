@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="线程池有五种状态：  RUNNING，线程池创建后的初始状态，接收新任务状态，线程池刚创建后，任务数量为0 SHUTDOWN，调用shutDown后的状态，不再接收新任务，但处理旧的 STOP，调用shutDownNow后的状态，不接受新任务，不处理已经添加的任务，尝试中断运行中的任务，但不保证可中断（用interrupt方法） TIDYING，任务计数为0的状态，可以从SHUTDOWN何STOP">
-<meta name="keywords" content="Java并发编程">
+  <meta name="description" content="堆内存大小=年轻代（Xmn参数）+老年代 Sun官方推荐年轻代大约占整个堆大小的3分之一，例如可以配Xmx为8G，Xmn设3G 根据Java performance一书，有以下推荐配置：  根据老年代每次full gc后还存活的长生存对象大小来确定 Xms,Xmx设为full gc后存活对象大小的3到4倍 XX:PermSize和XX:MaxPermSize控制非堆内存的初始大小和最大值，为存活对">
+<meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="线程池的状态">
-<meta property="og:url" content="http://yoursite.com/2018/05/17/线程池的状态/index.html">
+<meta property="og:title" content="JVM内存推荐配置">
+<meta property="og:url" content="http://yoursite.com/2017/09/28/JVM内存推荐配置 copy/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="线程池有五种状态：  RUNNING，线程池创建后的初始状态，接收新任务状态，线程池刚创建后，任务数量为0 SHUTDOWN，调用shutDown后的状态，不再接收新任务，但处理旧的 STOP，调用shutDownNow后的状态，不接受新任务，不处理已经添加的任务，尝试中断运行中的任务，但不保证可中断（用interrupt方法） TIDYING，任务计数为0的状态，可以从SHUTDOWN何STOP">
+<meta property="og:description" content="堆内存大小=年轻代（Xmn参数）+老年代 Sun官方推荐年轻代大约占整个堆大小的3分之一，例如可以配Xmx为8G，Xmn设3G 根据Java performance一书，有以下推荐配置：  根据老年代每次full gc后还存活的长生存对象大小来确定 Xms,Xmx设为full gc后存活对象大小的3到4倍 XX:PermSize和XX:MaxPermSize控制非堆内存的初始大小和最大值，为存活对">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-06-20T16:11:10.459Z">
+<meta property="og:updated_time" content="2018-07-28T18:59:03.792Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="线程池的状态">
-<meta name="twitter:description" content="线程池有五种状态：  RUNNING，线程池创建后的初始状态，接收新任务状态，线程池刚创建后，任务数量为0 SHUTDOWN，调用shutDown后的状态，不再接收新任务，但处理旧的 STOP，调用shutDownNow后的状态，不接受新任务，不处理已经添加的任务，尝试中断运行中的任务，但不保证可中断（用interrupt方法） TIDYING，任务计数为0的状态，可以从SHUTDOWN何STOP">
+<meta name="twitter:title" content="JVM内存推荐配置">
+<meta name="twitter:description" content="堆内存大小=年轻代（Xmn参数）+老年代 Sun官方推荐年轻代大约占整个堆大小的3分之一，例如可以配Xmx为8G，Xmn设3G 根据Java performance一书，有以下推荐配置：  根据老年代每次full gc后还存活的长生存对象大小来确定 Xms,Xmx设为full gc后存活对象大小的3到4倍 XX:PermSize和XX:MaxPermSize控制非堆内存的初始大小和最大值，为存活对">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/17/线程池的状态/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/09/28/JVM内存推荐配置 copy/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>线程池的状态 | Bojun Ji's notes</title>
+  <title>JVM内存推荐配置 | Bojun Ji's notes</title>
   
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/17/线程池的状态/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/28/JVM内存推荐配置 copy/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -295,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">线程池的状态
+          <h1 class="post-title" itemprop="name headline">JVM内存推荐配置
               
             
           </h1>
@@ -320,7 +320,7 @@
                 
               
 
-              <time title="Created: 2018-05-17 17:50:09" itemprop="dateCreated datePublished" datetime="2018-05-17T17:50:09+08:00">2018-05-17</time>
+              <time title="Created: 2017-09-28 18:35:15" itemprop="dateCreated datePublished" datetime="2017-09-28T18:35:15+08:00">2017-09-28</time>
             
 
             
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-06-21 00:11:10" itemprop="dateModified" datetime="2018-06-21T00:11:10+08:00">2018-06-21</time>
+                <time title="Modified: 2018-07-29 02:59:03" itemprop="dateModified" datetime="2018-07-29T02:59:03+08:00">2018-07-29</time>
               
             
           </span>
@@ -354,7 +354,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java并发编程/" itemprop="url" rel="index"><span itemprop="name">Java并发编程</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JVM/" itemprop="url" rel="index"><span itemprop="name">JVM</span></a></span>
 
                 
                 
@@ -396,14 +396,17 @@
       
 
       
-        <p>线程池有五种状态：</p>
+        <p>堆内存大小=年轻代（Xmn参数）+老年代</p>
+<p>Sun官方推荐年轻代大约占整个堆大小的3分之一，例如可以配Xmx为8G，Xmn设3G</p>
+<p>根据Java performance一书，有以下推荐配置：</p>
 <ol>
-<li>RUNNING，线程池创建后的初始状态，接收新任务状态，线程池刚创建后，任务数量为0</li>
-<li>SHUTDOWN，调用shutDown后的状态，不再接收新任务，但处理旧的</li>
-<li>STOP，调用shutDownNow后的状态，不接受新任务，不处理已经添加的任务，尝试中断运行中的任务，但不保证可中断（用interrupt方法）</li>
-<li>TIDYING，任务计数为0的状态，可以从SHUTDOWN何STOP两种状态变来，当执行任务为0时</li>
-<li>TERMINATED，最终状态，表明线程池关闭退出，调用awaitTermination可以返回true表明线程池已经终止</li>
+<li>根据老年代每次full gc后还存活的长生存对象大小来确定</li>
+<li>Xms,Xmx设为full gc后存活对象大小的3到4倍</li>
+<li>XX:PermSize和XX:MaxPermSize控制非堆内存的初始大小和最大值，为存活对象的1.2到1.5倍</li>
+<li>Xmn年轻代大小，为存活对象的1到1.5倍</li>
+<li>因为整个堆为存货对象3到4倍，年轻代为了1到1.5倍，年轻代的整体占比接近于Sun推荐的八分之三。</li>
 </ol>
+<p>具体配置时需要根据应用或者服务的业务场景确定响应，吞吐量等优先级，是否需要减少full gc次数等条件，来配置年轻代和老年代的大小。</p>
 
       
     </div>
@@ -424,7 +427,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Java并发编程/" rel="tag"># Java并发编程</a>
+            <a href="/tags/JVM/" rel="tag"># JVM</a>
           
         </div>
       
@@ -437,8 +440,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/16/CyclicBarrier使用/" rel="next" title="CyclicBarrier使用">
-                <i class="fa fa-chevron-left"></i> CyclicBarrier使用
+              <a href="/2017/09/28/JVM内存设置基本参数/" rel="next" title="JVM内存设置基本参数">
+                <i class="fa fa-chevron-left"></i> JVM内存设置基本参数
               </a>
             
           </div>
@@ -447,8 +450,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/20/dubbo服务三种启动方式/" rel="prev" title="dubbo服务三种启动方式">
-                dubbo服务三种启动方式 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/10/18/泛型基本使用/" rel="prev" title="泛型基本使用">
+                泛型基本使用 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

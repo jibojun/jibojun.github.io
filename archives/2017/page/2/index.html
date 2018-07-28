@@ -102,25 +102,20 @@
 
 
 
-  <meta name="description" content="线程池有五种状态：  RUNNING，线程池创建后的初始状态，接收新任务状态，线程池刚创建后，任务数量为0 SHUTDOWN，调用shutDown后的状态，不再接收新任务，但处理旧的 STOP，调用shutDownNow后的状态，不接受新任务，不处理已经添加的任务，尝试中断运行中的任务，但不保证可中断（用interrupt方法） TIDYING，任务计数为0的状态，可以从SHUTDOWN何STOP">
-<meta name="keywords" content="Java并发编程">
-<meta property="og:type" content="article">
-<meta property="og:title" content="线程池的状态">
-<meta property="og:url" content="http://yoursite.com/2018/05/17/线程池的状态/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Bojun Ji&#39;s notes">
+<meta property="og:url" content="http://yoursite.com/archives/2017/page/2/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="线程池有五种状态：  RUNNING，线程池创建后的初始状态，接收新任务状态，线程池刚创建后，任务数量为0 SHUTDOWN，调用shutDown后的状态，不再接收新任务，但处理旧的 STOP，调用shutDownNow后的状态，不接受新任务，不处理已经添加的任务，尝试中断运行中的任务，但不保证可中断（用interrupt方法） TIDYING，任务计数为0的状态，可以从SHUTDOWN何STOP">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-06-20T16:11:10.459Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="线程池的状态">
-<meta name="twitter:description" content="线程池有五种状态：  RUNNING，线程池创建后的初始状态，接收新任务状态，线程池刚创建后，任务数量为0 SHUTDOWN，调用shutDown后的状态，不再接收新任务，但处理旧的 STOP，调用shutDownNow后的状态，不接受新任务，不处理已经添加的任务，尝试中断运行中的任务，但不保证可中断（用interrupt方法） TIDYING，任务计数为0的状态，可以从SHUTDOWN何STOP">
+<meta name="twitter:title" content="Bojun Ji&#39;s notes">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/17/线程池的状态/"/>
+  <link rel="canonical" href="http://yoursite.com/archives/2017/page/2/"/>
 
 
 
@@ -130,7 +125,7 @@
   };
 </script>
 
-  <title>线程池的状态 | Bojun Ji's notes</title>
+  <title>Archive | Bojun Ji's notes</title>
   
 
 
@@ -177,7 +172,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left page-archive">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -225,7 +220,7 @@
         
         
           
-          <li class="menu-item menu-item-archives">
+          <li class="menu-item menu-item-archives menu-item-active">
     <a href="/archives/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
   </li>
@@ -258,226 +253,100 @@
           
             
 
+    
+    
+      
+      
+    
+      
+      
+    
+    
+
+  
+
+
           
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block archive">
+    <div id="posts" class="posts-collapse">
+      <span class="archive-move-on"></span>
 
-  
+      
+      <span class="archive-page-counter">
+        
+        
+         
+          
+        Nice! 76 posts in total. Keep on posting.
+      </span>
+      
 
-  
-  
-  
+      
 
-  
+        
+        
+        
+
+        
+          
+          <div class="collection-title">
+            <h1 class="archive-year" id="archive-year-2017">2017</h1>
+          </div>
+        
+        
+
+        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/17/线程池的状态/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bojun Ji's notes">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
+            <a class="post-title-link" href="/2017/08/26/JVM基本内存结构/" itemprop="url">
+              
+                <span itemprop="name">JVM基本内存结构</span>
+              
+            </a>
         
-          <h1 class="post-title" itemprop="name headline">线程池的状态
-              
-            
-          </h1>
-        
+      </h2>
 
-        <div class="post-meta">
-          <span class="post-time">
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2017-08-26T00:05:56+08:00"
+              content="2017-08-26" >
+          08-26
+        </time>
+      </div>
 
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-05-17 17:50:09" itemprop="dateCreated datePublished" datetime="2018-05-17T17:50:09+08:00">2018-05-17</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-06-21 00:11:10" itemprop="dateModified" datetime="2018-06-21T00:11:10+08:00">2018-06-21</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java并发编程/" itemprop="url" rel="index"><span itemprop="name">Java并发编程</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="post-meta-item-icon"
-            >
-            <i class="fa fa-eye"></i>
-             Views:  
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
-            </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>线程池有五种状态：</p>
-<ol>
-<li>RUNNING，线程池创建后的初始状态，接收新任务状态，线程池刚创建后，任务数量为0</li>
-<li>SHUTDOWN，调用shutDown后的状态，不再接收新任务，但处理旧的</li>
-<li>STOP，调用shutDownNow后的状态，不接受新任务，不处理已经添加的任务，尝试中断运行中的任务，但不保证可中断（用interrupt方法）</li>
-<li>TIDYING，任务计数为0的状态，可以从SHUTDOWN何STOP两种状态变来，当执行任务为0时</li>
-<li>TERMINATED，最终状态，表明线程池关闭退出，调用awaitTermination可以返回true表明线程池已经终止</li>
-</ol>
-
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Java并发编程/" rel="tag"># Java并发编程</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/05/16/CyclicBarrier使用/" rel="next" title="CyclicBarrier使用">
-                <i class="fa fa-chevron-left"></i> CyclicBarrier使用
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/20/dubbo服务三种启动方式/" rel="prev" title="dubbo服务三种启动方式">
-                dubbo服务三种启动方式 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
 
-    <div class="post-spread">
       
+
     </div>
   </div>
+  
+  
+  
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/archives/2017/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/archives/2017/">1</a><span class="page-number current">2</span>
+  </nav>
+
+
 
 
           </div>
           
-
-  
-
-
 
         </div>
         
@@ -814,10 +683,6 @@
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
-
-
 
   
 
