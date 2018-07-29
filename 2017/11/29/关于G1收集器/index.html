@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="线程池有execute和submit两个办法提交任务，两者主要对比如下：  ThreadPoolExecutor实现了execute方法来提交任务，没有返回值，是void的，只接收runnable，任务并不保证一定执行，可能被reject handler来拒绝（当线程池到了上限，程序不在执行，被shutdown等原因）。submit是被AbstractExecuotrService实现的（这个抽象">
-<meta name="keywords" content="Java并发编程">
+  <meta name="description" content="G1收集器是JDK1.7新推出的，是垃圾优先的管理整个堆区的垃圾收集器  使用G1收集器，-XX:+UseG1GC 取消了年轻代，老年代的物理划分 G1将堆区划分为多个区域，区域有Eden,Survivor,Old和Humongous 占用空间巨大的大型对象可能直接进入老年代，但如果存活时间很短，FULL GC会回收，造成影响。Humongous区域专门用来存储大型对象，如果一个不够则会寻找连续的">
+<meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="线程池任务提交execute,submit方法比较">
-<meta property="og:url" content="http://yoursite.com/2018/05/15/线程池任务提交execute-submit方法比较/index.html">
+<meta property="og:title" content="关于G1收集器">
+<meta property="og:url" content="http://yoursite.com/2017/11/29/关于G1收集器/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="线程池有execute和submit两个办法提交任务，两者主要对比如下：  ThreadPoolExecutor实现了execute方法来提交任务，没有返回值，是void的，只接收runnable，任务并不保证一定执行，可能被reject handler来拒绝（当线程池到了上限，程序不在执行，被shutdown等原因）。submit是被AbstractExecuotrService实现的（这个抽象">
+<meta property="og:description" content="G1收集器是JDK1.7新推出的，是垃圾优先的管理整个堆区的垃圾收集器  使用G1收集器，-XX:+UseG1GC 取消了年轻代，老年代的物理划分 G1将堆区划分为多个区域，区域有Eden,Survivor,Old和Humongous 占用空间巨大的大型对象可能直接进入老年代，但如果存活时间很短，FULL GC会回收，造成影响。Humongous区域专门用来存储大型对象，如果一个不够则会寻找连续的">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-06-13T16:59:38.392Z">
+<meta property="og:updated_time" content="2018-07-29T16:44:33.811Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="线程池任务提交execute,submit方法比较">
-<meta name="twitter:description" content="线程池有execute和submit两个办法提交任务，两者主要对比如下：  ThreadPoolExecutor实现了execute方法来提交任务，没有返回值，是void的，只接收runnable，任务并不保证一定执行，可能被reject handler来拒绝（当线程池到了上限，程序不在执行，被shutdown等原因）。submit是被AbstractExecuotrService实现的（这个抽象">
+<meta name="twitter:title" content="关于G1收集器">
+<meta name="twitter:description" content="G1收集器是JDK1.7新推出的，是垃圾优先的管理整个堆区的垃圾收集器  使用G1收集器，-XX:+UseG1GC 取消了年轻代，老年代的物理划分 G1将堆区划分为多个区域，区域有Eden,Survivor,Old和Humongous 占用空间巨大的大型对象可能直接进入老年代，但如果存活时间很短，FULL GC会回收，造成影响。Humongous区域专门用来存储大型对象，如果一个不够则会寻找连续的">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/15/线程池任务提交execute-submit方法比较/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/11/29/关于G1收集器/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>线程池任务提交execute,submit方法比较 | Bojun Ji's notes</title>
+  <title>关于G1收集器 | Bojun Ji's notes</title>
   
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/15/线程池任务提交execute-submit方法比较/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/29/关于G1收集器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -295,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">线程池任务提交execute,submit方法比较
+          <h1 class="post-title" itemprop="name headline">关于G1收集器
               
             
           </h1>
@@ -320,7 +320,7 @@
                 
               
 
-              <time title="Created: 2018-05-15 00:37:14" itemprop="dateCreated datePublished" datetime="2018-05-15T00:37:14+08:00">2018-05-15</time>
+              <time title="Created: 2017-11-29 13:10:15" itemprop="dateCreated datePublished" datetime="2017-11-29T13:10:15+08:00">2017-11-29</time>
             
 
             
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-06-14 00:59:38" itemprop="dateModified" datetime="2018-06-14T00:59:38+08:00">2018-06-14</time>
+                <time title="Modified: 2018-07-30 00:44:33" itemprop="dateModified" datetime="2018-07-30T00:44:33+08:00">2018-07-30</time>
               
             
           </span>
@@ -354,7 +354,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java并发编程/" itemprop="url" rel="index"><span itemprop="name">Java并发编程</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JVM/" itemprop="url" rel="index"><span itemprop="name">JVM</span></a></span>
 
                 
                 
@@ -396,122 +396,30 @@
       
 
       
-        <p>线程池有execute和submit两个办法提交任务，两者主要对比如下：</p>
+        <p>G1收集器是JDK1.7新推出的，是垃圾优先的管理整个堆区的垃圾收集器</p>
 <ol>
-<li>ThreadPoolExecutor实现了execute方法来提交任务，没有返回值，是void的，只接收runnable，任务并不保证一定执行，可能被reject handler来拒绝（当线程池到了上限，程序不在执行，被shutdown等原因）。submit是被AbstractExecuotrService实现的（这个抽象类实现了ExecutorService,ThreadPoolExecutor再继承这个抽象类，但没有重写submit方法，且抽象类里只实现了submit没executor），submit可以接收Callable参数并返回Future，可以在一些计算场景里用。</li>
-<li>同时，submit还有两个针对Runnable的重载，也返回Future。Runnable和Callable比，本身的执行方法run()是void是没返回值的，一般不做计算这类需要返回的任务。而submit的Future结果只是用来判定Runnable任务是否执行成功，第一种重载只传入Runnable，成功执行的话返回null，第二种传Runnable和一个值表示结果，如果成功的话Future中get出这个结果。</li>
-<li>submit的三个重载其实就是做以上逻辑，底层逻辑仍然还是调用了execute方法。把传入的任务变成RunnableFuture类型然后交给execute去执行。</li>
+<li>使用G1收集器，-XX:+UseG1GC</li>
+<li>取消了年轻代，老年代的物理划分</li>
+<li>G1将堆区划分为多个区域，区域有Eden,Survivor,Old和Humongous</li>
+<li>占用空间巨大的大型对象可能直接进入老年代，但如果存活时间很短，FULL GC会回收，造成影响。Humongous区域专门用来存储大型对象，如果一个不够则会寻找连续的H区域，甚至使用FULL GC清理出空间。</li>
+<li>Eden区域GC，G1年轻代GC，也需要停顿用户线程来清理EDEN区，数据会被复制到S区，S区如果空间不够，部分对象也可能直接晋升到老年代O区。直到E区为空。</li>
+<li>一个区的对象可能被别的区对象引用，MINOR GC时可能也需要看老年代。为了避免扫描整个老年代，有RSet,每个区域都有，写入引用时记录引用的对象是否在同一个区中，不是的话则靠卡表把信息写到被引用对象所在区域的RSet中。不全局扫描也可以不遗漏。</li>
+<li>除开RSet相关操作，过程和CMS GC类似，主要第四步：筛选回收，会根据用户配置的GC停顿时间来回收一些价值高区域中对象。</li>
+<li>参数： -XX:MaxGCPauseMillis=200，配置的是最大GC停顿时间</li>
+<li>另外一种模式：G1混合GC，不止对年轻代GC，也清理一些后台扫描线程标记的老年代区域。G1的区别就是不要求回收整个老年代，每次只回收区的子集，而且和年轻代回收一起做。</li>
+<li>在G1把对象从一个区域复制到另一个区域过程中，会完成清理工作，避免内存碎片问题。</li>
+<li>参数：-XX:G1HeapRegionSize=n ，G1划分的区域大小，值是2的几次方，可以从1M到32M</li>
+<li>-XX:ParallelGCThreads=n，STW停顿GC时，线程数量，可以设为逻辑处理器数量</li>
+<li>-XX:ConcGCThreads=n，并行标记（第三步，和用户线程同时运行）的线程数量，前者的四分之一</li>
+<li>G1如果遇到FULL GC，会退化到SERIAL OLD，单线程停顿用户线程来垃圾回收。可能是巨型对象分配失败，GC时没有足够空间晋升对象等原因可以触发full gc。</li>
+<li><p>JVM默认垃圾收集器：</p>
+<pre><code>JDK1.7，推出G1收集器，默认Parallel Scavenge（新生代）+Parallel Old（老年代）
+JDK1.8，默认Parallel Scavenge（新生代）+Parallel Old（老年代）
+JDK1.9，G1变为默认垃圾收集器
+-XX:+PrintCommandLineFlagsjvm查看收集器类型
+</code></pre></li>
 </ol>
-<p>根据以上，感觉有以下使用场景：</p>
-<ol>
-<li>如果需要汇总每个线程计算结果，就用submit方法+Callable。</li>
-<li>如果只是异步做一些事情，但不考虑是否执行成功（比如下订单后发短信这类不强可靠性场景），可以直接用execute方法+Runnable，减少了submit在execute之外包装future等多余操作。</li>
-<li>线程不是做计算任务返回值，但也需要判断线程是否成功的话需要用submit方法+Runnable。</li>
-<li>submit方法方便catch exception，比如不传result，则返回null是成功，在future.get()外面try, catch抓取失败时的异常。</li>
-</ol>
-<p>execute方法代码：</p>
-<pre><code>    /**
- * Executes the given task sometime in the future.  The task
- * may execute in a new thread or in an existing pooled thread.
- *
- * If the task cannot be submitted for execution, either because this
- * executor has been shutdown or because its capacity has been reached,
- * the task is handled by the current {@code RejectedExecutionHandler}.
- *
- * @param command the task to execute
- * @throws RejectedExecutionException at discretion of
- *         {@code RejectedExecutionHandler}, if the task
- *         cannot be accepted for execution
- * @throws NullPointerException if {@code command} is null
- */
-public void execute(Runnable command) {
-    if (command == null)
-        throw new NullPointerException();
-    /*
-     * Proceed in 3 steps:
-     *
-     * 1. If fewer than corePoolSize threads are running, try to
-     * start a new thread with the given command as its first
-     * task.  The call to addWorker atomically checks runState and
-     * workerCount, and so prevents false alarms that would add
-     * threads when it shouldn&apos;t, by returning false.
-     *
-     * 2. If a task can be successfully queued, then we still need
-     * to double-check whether we should have added a thread
-     * (because existing ones died since last checking) or that
-     * the pool shut down since entry into this method. So we
-     * recheck state and if necessary roll back the enqueuing if
-     * stopped, or start a new thread if there are none.
-     *
-     * 3. If we cannot queue task, then we try to add a new
-     * thread.  If it fails, we know we are shut down or saturated
-     * and so reject the task.
-     */
-    int c = ctl.get();
-    if (workerCountOf(c) &lt; corePoolSize) {
-        if (addWorker(command, true))
-            return;
-        c = ctl.get();
-    }
-    if (isRunning(c) &amp;&amp; workQueue.offer(command)) {
-        int recheck = ctl.get();
-        if (! isRunning(recheck) &amp;&amp; remove(command))
-            reject(command);
-        else if (workerCountOf(recheck) == 0)
-            addWorker(null, false);
-    }
-    else if (!addWorker(command, false))
-        reject(command);
-}
-</code></pre><p>submit方法代码，三种重载：</p>
-<pre><code>    /**
- * Returns a {@code RunnableFuture} for the given callable task.
- *
- * @param callable the callable task being wrapped
- * @param &lt;T&gt; the type of the callable&apos;s result
- * @return a {@code RunnableFuture} which, when run, will call the
- * underlying callable and which, as a {@code Future}, will yield
- * the callable&apos;s result as its result and provide for
- * cancellation of the underlying task
- * @since 1.6
- */
-protected &lt;T&gt; RunnableFuture&lt;T&gt; newTaskFor(Callable&lt;T&gt; callable) {
-    return new FutureTask&lt;T&gt;(callable);
-}
 
-/**
- * @throws RejectedExecutionException {@inheritDoc}
- * @throws NullPointerException       {@inheritDoc}
- */
-public Future&lt;?&gt; submit(Runnable task) {
-    if (task == null) throw new NullPointerException();
-    RunnableFuture&lt;Void&gt; ftask = newTaskFor(task, null);
-    execute(ftask);
-    return ftask;
-}
-
-/**
- * @throws RejectedExecutionException {@inheritDoc}
- * @throws NullPointerException       {@inheritDoc}
- */
-public &lt;T&gt; Future&lt;T&gt; submit(Runnable task, T result) {
-    if (task == null) throw new NullPointerException();
-    RunnableFuture&lt;T&gt; ftask = newTaskFor(task, result);
-    execute(ftask);
-    return ftask;
-}
-
-/**
- * @throws RejectedExecutionException {@inheritDoc}
- * @throws NullPointerException       {@inheritDoc}
- */
-public &lt;T&gt; Future&lt;T&gt; submit(Callable&lt;T&gt; task) {
-    if (task == null) throw new NullPointerException();
-    RunnableFuture&lt;T&gt; ftask = newTaskFor(task);
-    execute(ftask);
-    return ftask;
-}    
-</code></pre>
       
     </div>
 
@@ -531,7 +439,7 @@ public &lt;T&gt; Future&lt;T&gt; submit(Callable&lt;T&gt; task) {
       
         <div class="post-tags">
           
-            <a href="/tags/Java并发编程/" rel="tag"># Java并发编程</a>
+            <a href="/tags/JVM/" rel="tag"># JVM</a>
           
         </div>
       
@@ -544,8 +452,8 @@ public &lt;T&gt; Future&lt;T&gt; submit(Callable&lt;T&gt; task) {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/14/ThreadPoolExecutor参数和线程池任务执行逻辑/" rel="next" title="ThreadPoolExecutor参数和线程池任务执行逻辑">
-                <i class="fa fa-chevron-left"></i> ThreadPoolExecutor参数和线程池任务执行逻辑
+              <a href="/2017/11/15/final-finally-finailize功能/" rel="next" title="final, finally, finalize功能">
+                <i class="fa fa-chevron-left"></i> final, finally, finalize功能
               </a>
             
           </div>
@@ -554,8 +462,8 @@ public &lt;T&gt; Future&lt;T&gt; submit(Callable&lt;T&gt; task) {
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/16/Executors五种线程池/" rel="prev" title="Executors五种线程池">
-                Executors五种线程池 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/12/05/java异常类型/" rel="prev" title="java异常类型">
+                java异常类型 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
