@@ -102,20 +102,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Bojun Ji&#39;s notes">
-<meta property="og:url" content="http://yoursite.com/categories/Guava/index.html">
+  <meta name="description" content="对于Hotspot VM,除开JDK7新出的G1，有以下垃圾收集器种类： 年轻代：  Serial，串行收集器，采用复制算法，单线程，收集时暂停用户的工作线程，就是所谓的GC停顿。单线程减少了切换线程的开销。 使用参数： -XX:+UseSerialGC  ParNew，与Serial比GC改成了多线程。只有这个能与老年代的CMS一起使用使用参数： &amp;quot;-XX:+UseConcMarkSw">
+<meta name="keywords" content="JVM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="垃圾收集器种类和搭配">
+<meta property="og:url" content="http://yoursite.com/2017/09/29/垃圾收集器种类和搭配/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
+<meta property="og:description" content="对于Hotspot VM,除开JDK7新出的G1，有以下垃圾收集器种类： 年轻代：  Serial，串行收集器，采用复制算法，单线程，收集时暂停用户的工作线程，就是所谓的GC停顿。单线程减少了切换线程的开销。 使用参数： -XX:+UseSerialGC  ParNew，与Serial比GC改成了多线程。只有这个能与老年代的CMS一起使用使用参数： &amp;quot;-XX:+UseConcMarkSw">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-07-29T08:29:03.395Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bojun Ji&#39;s notes">
+<meta name="twitter:title" content="垃圾收集器种类和搭配">
+<meta name="twitter:description" content="对于Hotspot VM,除开JDK7新出的G1，有以下垃圾收集器种类： 年轻代：  Serial，串行收集器，采用复制算法，单线程，收集时暂停用户的工作线程，就是所谓的GC停顿。单线程减少了切换线程的开销。 使用参数： -XX:+UseSerialGC  ParNew，与Serial比GC改成了多线程。只有这个能与老年代的CMS一起使用使用参数： &amp;quot;-XX:+UseConcMarkSw">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/Guava/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/09/29/垃圾收集器种类和搭配/"/>
 
 
 
@@ -125,7 +130,7 @@
   };
 </script>
 
-  <title>Category: Guava | Bojun Ji's notes</title>
+  <title>垃圾收集器种类和搭配 | Bojun Ji's notes</title>
   
 
 
@@ -172,7 +177,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -253,76 +258,287 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Guava<small>Category</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/29/垃圾收集器种类和搭配/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bojun Ji's notes">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/04/18/GuavaCache和ehcache的简单对比/" itemprop="url">
-              
-                <span itemprop="name">GuavaCache和ehcache的简单对比</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">垃圾收集器种类和搭配
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-18T00:24:43+08:00"
-              content="2018-04-18" >
-          04-18
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
 
-    </header>
-  </article>
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2017-09-29 03:10:15" itemprop="dateCreated datePublished" datetime="2017-09-29T03:10:15+08:00">2017-09-29</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-07-29 16:29:03" itemprop="dateModified" datetime="2018-07-29T16:29:03+08:00">2018-07-29</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JVM/" itemprop="url" rel="index"><span itemprop="name">JVM</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>对于Hotspot VM,除开JDK7新出的G1，有以下垃圾收集器种类：</p>
+<p>年轻代：</p>
+<ol>
+<li><p>Serial，串行收集器，采用复制算法，单线程，收集时暂停用户的工作线程，就是所谓的GC停顿。单线程减少了切换线程的开销。</p>
+<pre><code>使用参数： -XX:+UseSerialGC
+</code></pre></li>
+<li><p>ParNew，与Serial比GC改成了多线程。只有这个能与老年代的CMS一起使用<br>使用参数：</p>
+<pre><code>&quot;-XX:+UseConcMarkSweepGC&quot;：指定使用CMS后，会默认使用ParNew作为新生代收集器；
+
+&quot;-XX:+UseParNewGC&quot;：强制指定使用ParNew；    
+
+&quot;-XX:ParallelGCThreads&quot;：指定垃圾收集的线程数量，ParNew默认开启的收集线程与CPU的数量相同；
+</code></pre></li>
+<li><p>Parallel Scavenge,从JDK1.4开始，吞吐量收集器，注重高吞吐量而不是CMS等关注的响应时间，减少GC时用户线程停顿时间（注重吞吐量的系统一般为与用户交互少，后台计算任务重，如定时结算任务等）。而是直接减少GC时间，让用户代码获得更长运行时间，<br>吞吐量=CPU用于运行用户代码时间/(CPU用于运行用户代码时间+CPU用于垃圾回收时间)</p>
+</li>
+</ol>
+<p>使用参数：</p>
+<pre><code>（A）、&quot;-XX:MaxGCPauseMillis&quot;
+
+  控制最大垃圾收集停顿时间，大于0的毫秒数；
+
+  MaxGCPauseMillis设置得稍小，停顿时间可能会缩短，但也可能会使得吞吐量下降；
+
+  因为可能导致垃圾收集发生得更频繁；
+
+（B）、&quot;-XX:GCTimeRatio&quot;
+
+      设置垃圾收集时间占总时间的比率，0&lt;n&lt;100的整数；
+
+      GCTimeRatio相当于设置吞吐量大小；
+
+      垃圾收集执行时间占应用程序执行时间的比例的计算方法是：
+
+      1 / (1 + n)
+
+      例如，选项-XX:GCTimeRatio=19，设置了垃圾收集时间占总时间的5%--1/(1+19)；
+
+      默认值是1%--1/(1+99)，即n=99；
+</code></pre><p>老年代：</p>
+<ol>
+<li><p>Serial Old: Serial收集器的老年代版本，标记-整理，标记-压缩算法，单线程收集会暂停用户线程。</p>
+</li>
+<li><p>Parallel Old: 1.6开始提供，Parallel Scavenge的老年代版本，多CPU情况下注重吞吐量，多线程GC暂停用户线程，使用标记-整理。</p>
+</li>
+<li><p>CMS，并发标记清理收集器，用标记清理，不整理压缩，会有内存碎片，1.5推出，注重响应，几乎让用户线程和GC线程同时工作，减少停顿。</p>
+<ol>
+<li>初始标记：要停顿，标记GC ROOTS直接关联对象</li>
+<li>并发标记：GC ROOTS TRACING中，刚才集合中标记存活对象，并发处理，此时用户线程也在运行。</li>
+<li>重新标记：因为并发标记时程序在运行，此处修正前一阶段的问题，需要停顿。</li>
+<li>并发清除：回收垃圾。</li>
+</ol>
+</li>
+</ol>
+<p>可以看出第一步，第三步需要stop the world，但第二步并发标记时和用户线程同时运行的。</p>
+<p>缺点：</p>
+<ol>
+<li>占用CPU资源吗，吞吐量降低。    </li>
+<li>最后一步并发清除时，新产生的垃圾叫浮动垃圾，需要预留一定空间处理。如果内存空间不足，则会出现Concurrent Mode Failure，失败后悔用Serial Old来full gc，代价很大。 “-XX:CMSInitiatingOccupancyFraction”设置预留内存空间。</li>
+<li>标记-清除算法的内存碎片问题。大对象可能得不到连续内存。</li>
+</ol>
+<p>除开整堆收集器G1，老年代+年轻代收集器搭配：</p>
+<ol>
+<li>Serial+Serial Old,两代都是单线程停顿</li>
+<li>Serial+CMS</li>
+<li>ParNew++Serial Old</li>
+<li>ParNew+CMS,常见组合,高响应</li>
+<li>Parallel Scavenge+Serial Old</li>
+<li>Parallel Scavenge+Parallel Old,常见组合，高吞吐量</li>
+</ol>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JVM/" rel="tag"># JVM</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/28/JVM内存推荐配置 copy/" rel="next" title="JVM内存推荐配置">
+                <i class="fa fa-chevron-left"></i> JVM内存推荐配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/18/泛型基本使用/" rel="prev" title="泛型基本使用">
+                泛型基本使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -659,6 +875,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
 
   
 
