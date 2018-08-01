@@ -102,18 +102,18 @@
 
 
 
-  <meta name="description" content="-Xss:每个线程栈内存大小，JDK5+默认1M -Xms:启动时给JVM分配的内存 -Xmx:运行中JVM可以获取的最大内存 -Xmn:堆区分代GC，年轻代的内存大小 -XX:NewRatio:年轻代与老年代的比值，设置3则老年代为年轻代3倍大小 -XX:SurvivorRatio:一个Survivo区和Eden区的比值，年轻代有2个Survivo区和一个Eden区 -XX：PermSize:永">
+  <meta name="description" content="-Xss:每个线程栈内存大小，JDK5+默认1M -Xms:启动时给JVM分配的内存 -Xmx:运行中JVM可以获取的最大内存 -Xmn:堆区分代GC，年轻代的内存大小 -XX:NewRatio:年轻代与老年代的比值，设置3则老年代为年轻代3倍大小 -XX:SurvivorRatio:一个Survivor区和Eden区的比值，年轻代有2个Survivor区和一个Eden区 -XX：PermSize">
 <meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM内存设置基本参数">
 <meta property="og:url" content="http://yoursite.com/2017/09/28/JVM内存设置基本参数/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="-Xss:每个线程栈内存大小，JDK5+默认1M -Xms:启动时给JVM分配的内存 -Xmx:运行中JVM可以获取的最大内存 -Xmn:堆区分代GC，年轻代的内存大小 -XX:NewRatio:年轻代与老年代的比值，设置3则老年代为年轻代3倍大小 -XX:SurvivorRatio:一个Survivo区和Eden区的比值，年轻代有2个Survivo区和一个Eden区 -XX：PermSize:永">
+<meta property="og:description" content="-Xss:每个线程栈内存大小，JDK5+默认1M -Xms:启动时给JVM分配的内存 -Xmx:运行中JVM可以获取的最大内存 -Xmn:堆区分代GC，年轻代的内存大小 -XX:NewRatio:年轻代与老年代的比值，设置3则老年代为年轻代3倍大小 -XX:SurvivorRatio:一个Survivor区和Eden区的比值，年轻代有2个Survivor区和一个Eden区 -XX：PermSize">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-07-28T18:59:58.808Z">
+<meta property="og:updated_time" content="2018-08-01T16:58:25.111Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM内存设置基本参数">
-<meta name="twitter:description" content="-Xss:每个线程栈内存大小，JDK5+默认1M -Xms:启动时给JVM分配的内存 -Xmx:运行中JVM可以获取的最大内存 -Xmn:堆区分代GC，年轻代的内存大小 -XX:NewRatio:年轻代与老年代的比值，设置3则老年代为年轻代3倍大小 -XX:SurvivorRatio:一个Survivo区和Eden区的比值，年轻代有2个Survivo区和一个Eden区 -XX：PermSize:永">
+<meta name="twitter:description" content="-Xss:每个线程栈内存大小，JDK5+默认1M -Xms:启动时给JVM分配的内存 -Xmx:运行中JVM可以获取的最大内存 -Xmn:堆区分代GC，年轻代的内存大小 -XX:NewRatio:年轻代与老年代的比值，设置3则老年代为年轻代3倍大小 -XX:SurvivorRatio:一个Survivor区和Eden区的比值，年轻代有2个Survivor区和一个Eden区 -XX：PermSize">
 
 
 
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-07-29 02:59:58" itemprop="dateModified" datetime="2018-07-29T02:59:58+08:00">2018-07-29</time>
+                <time title="Modified: 2018-08-02 00:58:25" itemprop="dateModified" datetime="2018-08-02T00:58:25+08:00">2018-08-02</time>
               
             
           </span>
@@ -401,10 +401,10 @@
 <p>-Xmx:运行中JVM可以获取的最大内存</p>
 <p>-Xmn:堆区分代GC，年轻代的内存大小</p>
 <p>-XX:NewRatio:年轻代与老年代的比值，设置3则老年代为年轻代3倍大小</p>
-<p>-XX:SurvivorRatio:一个Survivo区和Eden区的比值，年轻代有2个Survivo区和一个Eden区</p>
+<p>-XX:SurvivorRatio:一个Survivor区和Eden区的比值，年轻代有2个Survivor区和一个Eden区</p>
 <p>-XX：PermSize:永久代非堆内存的初始值</p>
 <p>-XX:MaxPermSize:永久代非堆内存的最大值</p>
-<p>-XX:MaxTenuringThreshold:垃圾年龄，为0的话存活则直接进老年代跳过Survivor区复制。复制算法中，每次MINOR GC会回收对象，存活的对象会在两块Survivor区域中反复复制，总有一块Survivor区域是空余的，次数就是这个值。如果设大的话会增大对象在年轻代的存活时间。</p>
+<p>-XX:MaxTenuringThreshold:垃圾年龄最大值，为0的话存活则直接进老年代跳过Survivor区复制。复制算法中，每次MINOR GC会回收对象，存活的对象会在两块Survivor区域中反复复制，总有一块Survivor区域是空余的，次数就是这个值。如果设大的话会增大对象在年轻代的存活时间。</p>
 <p>1.8前内存大小=堆内存大小（年轻代+老年代）+非堆内存（永久代）</p>
 
       
@@ -516,7 +516,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">78</span>
+                    <span class="site-state-item-count">80</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -638,7 +638,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">35</span>
+                      
+                    
+                    <span class="site-state-item-count">36</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>

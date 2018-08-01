@@ -103,14 +103,14 @@
 
 
   <meta name="description" content="G1收集器是JDK1.7新推出的，是垃圾优先的管理整个堆区的垃圾收集器  使用G1收集器，-XX:+UseG1GC 取消了年轻代，老年代的物理划分 G1将堆区划分为多个区域，区域有Eden,Survivor,Old和Humongous 占用空间巨大的大型对象可能直接进入老年代，但如果存活时间很短，FULL GC会回收，造成影响。Humongous区域专门用来存储大型对象，如果一个不够则会寻找连续的">
-<meta name="keywords" content="JVM">
+<meta name="keywords" content="JVM,GC">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于G1收集器">
 <meta property="og:url" content="http://yoursite.com/2017/11/29/关于G1收集器/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
 <meta property="og:description" content="G1收集器是JDK1.7新推出的，是垃圾优先的管理整个堆区的垃圾收集器  使用G1收集器，-XX:+UseG1GC 取消了年轻代，老年代的物理划分 G1将堆区划分为多个区域，区域有Eden,Survivor,Old和Humongous 占用空间巨大的大型对象可能直接进入老年代，但如果存活时间很短，FULL GC会回收，造成影响。Humongous区域专门用来存储大型对象，如果一个不够则会寻找连续的">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-07-29T16:44:33.811Z">
+<meta property="og:updated_time" content="2018-08-01T16:28:25.673Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于G1收集器">
 <meta name="twitter:description" content="G1收集器是JDK1.7新推出的，是垃圾优先的管理整个堆区的垃圾收集器  使用G1收集器，-XX:+UseG1GC 取消了年轻代，老年代的物理划分 G1将堆区划分为多个区域，区域有Eden,Survivor,Old和Humongous 占用空间巨大的大型对象可能直接进入老年代，但如果存活时间很短，FULL GC会回收，造成影响。Humongous区域专门用来存储大型对象，如果一个不够则会寻找连续的">
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-07-30 00:44:33" itemprop="dateModified" datetime="2018-07-30T00:44:33+08:00">2018-07-30</time>
+                <time title="Modified: 2018-08-02 00:28:25" itemprop="dateModified" datetime="2018-08-02T00:28:25+08:00">2018-08-02</time>
               
             
           </span>
@@ -441,6 +441,8 @@ JDK1.9，G1变为默认垃圾收集器
           
             <a href="/tags/JVM/" rel="tag"># JVM</a>
           
+            <a href="/tags/GC/" rel="tag"># GC</a>
+          
         </div>
       
 
@@ -529,7 +531,7 @@ JDK1.9，G1变为默认垃圾收集器
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">78</span>
+                    <span class="site-state-item-count">80</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -651,7 +653,9 @@ JDK1.9，G1变为默认垃圾收集器
                     
                       
                     
-                    <span class="site-state-item-count">35</span>
+                      
+                    
+                    <span class="site-state-item-count">36</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
