@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="在mapper文件中，我们需要给dao接口里的方法编写sql，会接收来自方法中的传参。 传参变量可以用#{}或者${}，例如： select * from table where id=#{id} select * from table where id=${id} Preparedstatement:预编译的SQL语句对象。SQL有预编译，在DB端内存可以缓存一些编译后的SQL。再次执行同样SQ">
-<meta name="keywords" content="Mybatis,关系型数据库">
+  <meta name="description" content="部分gc：  minor gc/young gc，年轻代gc，只回收年轻代对象。触发条件为年轻代eden区满，一部分存货对象晋升到老年代，一部分被整理后复制到另一个存活区。 old gc，只回收老年代对象，只有CMS具有。触发条件主要是CMS的周期性old gc。 混合gc，回收年轻代对象和部分老年代对象，只有G1具有。G1不要求回收老年代全部垃圾，而是每次和年轻代GC一起，回收子集。触发条件是G">
+<meta name="keywords" content="JVM,GC">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mybatis Sql中#{}与${}">
-<meta property="og:url" content="http://yoursite.com/2018/02/19/Mybatis-Sql中-与￥/index.html">
+<meta property="og:title" content="minor gc和full gc">
+<meta property="og:url" content="http://yoursite.com/2017/10/02/minor-gc和full-gc/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="在mapper文件中，我们需要给dao接口里的方法编写sql，会接收来自方法中的传参。 传参变量可以用#{}或者${}，例如： select * from table where id=#{id} select * from table where id=${id} Preparedstatement:预编译的SQL语句对象。SQL有预编译，在DB端内存可以缓存一些编译后的SQL。再次执行同样SQ">
+<meta property="og:description" content="部分gc：  minor gc/young gc，年轻代gc，只回收年轻代对象。触发条件为年轻代eden区满，一部分存货对象晋升到老年代，一部分被整理后复制到另一个存活区。 old gc，只回收老年代对象，只有CMS具有。触发条件主要是CMS的周期性old gc。 混合gc，回收年轻代对象和部分老年代对象，只有G1具有。G1不要求回收老年代全部垃圾，而是每次和年轻代GC一起，回收子集。触发条件是G">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-18T19:24:47.652Z">
+<meta property="og:updated_time" content="2018-08-03T17:22:35.787Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mybatis Sql中#{}与${}">
-<meta name="twitter:description" content="在mapper文件中，我们需要给dao接口里的方法编写sql，会接收来自方法中的传参。 传参变量可以用#{}或者${}，例如： select * from table where id=#{id} select * from table where id=${id} Preparedstatement:预编译的SQL语句对象。SQL有预编译，在DB端内存可以缓存一些编译后的SQL。再次执行同样SQ">
+<meta name="twitter:title" content="minor gc和full gc">
+<meta name="twitter:description" content="部分gc：  minor gc/young gc，年轻代gc，只回收年轻代对象。触发条件为年轻代eden区满，一部分存货对象晋升到老年代，一部分被整理后复制到另一个存活区。 old gc，只回收老年代对象，只有CMS具有。触发条件主要是CMS的周期性old gc。 混合gc，回收年轻代对象和部分老年代对象，只有G1具有。G1不要求回收老年代全部垃圾，而是每次和年轻代GC一起，回收子集。触发条件是G">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/02/19/Mybatis-Sql中-与￥/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/10/02/minor-gc和full-gc/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>Mybatis Sql中#{}与${} | Bojun Ji's notes</title>
+  <title>minor gc和full gc | Bojun Ji's notes</title>
   
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/19/Mybatis-Sql中-与￥/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/02/minor-gc和full-gc/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -295,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Mybatis Sql中#{}与${}
+          <h1 class="post-title" itemprop="name headline">minor gc和full gc
               
             
           </h1>
@@ -320,7 +320,7 @@
                 
               
 
-              <time title="Created: 2018-02-19 01:35:01" itemprop="dateCreated datePublished" datetime="2018-02-19T01:35:01+08:00">2018-02-19</time>
+              <time title="Created: 2017-10-02 23:59:07" itemprop="dateCreated datePublished" datetime="2017-10-02T23:59:07+08:00">2017-10-02</time>
             
 
             
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-05-19 03:24:47" itemprop="dateModified" datetime="2018-05-19T03:24:47+08:00">2018-05-19</time>
+                <time title="Modified: 2018-08-04 01:22:35" itemprop="dateModified" datetime="2018-08-04T01:22:35+08:00">2018-08-04</time>
               
             
           </span>
@@ -354,7 +354,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Mybatis/" itemprop="url" rel="index"><span itemprop="name">Mybatis</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JVM/" itemprop="url" rel="index"><span itemprop="name">JVM</span></a></span>
 
                 
                 
@@ -396,28 +396,26 @@
       
 
       
-        <p>在mapper文件中，我们需要给dao接口里的方法编写sql，会接收来自方法中的传参。</p>
-<p>传参变量可以用#{}或者${}，例如：</p>
-<p>select * from table where id=#{id}</p>
-<p>select * from table where id=${id}</p>
-<p>Preparedstatement:预编译的SQL语句对象。SQL有预编译，在DB端内存可以缓存一些编译后的SQL。再次执行同样SQL就不需要预编译了，可以运行，提高性能。</p>
-<p>statement:静态完整的SQL语句运行，并且负责返回结果。</p>
-<p>$</p>
+        <p>部分gc：</p>
 <ol>
-<li>是SQL中字符串替换，静态语句，直接参与了SQL的编译。对应statement。</li>
-<li>无法避免SQL注入攻击。SQL注入的恶意语句是会一起被编译，最后被运行。</li>
+<li>minor gc/young gc，年轻代gc，只回收年轻代对象。触发条件为年轻代eden区满，一部分存货对象晋升到老年代，一部分被整理后复制到另一个存活区。</li>
+<li>old gc，只回收老年代对象，只有CMS具有。触发条件主要是CMS的周期性old gc。</li>
+<li>混合gc，回收年轻代对象和部分老年代对象，只有G1具有。G1不要求回收老年代全部垃圾，而是每次和年轻代GC一起，回收子集。触发条件是G1分配Eden Region失败时，会gc并复制到Survivor Region。</li>
 </ol>
-<p>#</p>
+<p>full gc：</p>
 <ol>
-<li>用于参数传递，对应PreparedStatement,预编译里参数会用占位符？代替，创建PreparedStatement,与SQL语句绑定，之后才填入具体参数。因为创建PreparedStatement时候已经传了SQL，执行时不再需要传入SQL。<br>参数部分并不是SQL指令的一部分，DB做完SQL指令编译后，才用参数来执行，所以就算参数里含有SQL注入的恶意语句，最后也不会被运行。</li>
-<li>可以避免大部分SQL注入攻击。</li>
-<li>因为预编译SQL会被缓存在数据库，在数据库做参数化查询，性能会更好。</li>
+<li>回收整个堆，而不是部分。</li>
+<li>触发条件： <ol>
+<li>老年代空间不足，例如年轻代晋升大对象，full gc后仍然不足则OOM，所以需要尽量增加对象在年轻代的时间。</li>
+<li>永久代空间不足，目前应用场景中可能有大量代理，反射的类，会占用这部分空间，JDK1.8取消了这个区域改为元空间。</li>
+<li>System.gc()，建议GC，但不一定执行，执行时大多触发full gc。</li>
+<li>超大型对象，需要连续空间，有时会跳过eden区直接进入老年代，如果老年代空间足够但是缺乏连续空间也会触发。例如CMS使用标记清理，则有内存碎片问题。-XX:+UseCMSCompactAtFullCollection可以在full gc后整理内存但也增长了停顿时间。</li>
+<li>minor gc后可能会有存活对象晋升到老年代，为了避免老年代空间不足，会查看统计信息，比较之前晋升对象的平均大小和老年代剩余内存空间，不足时则直接full gc。</li>
+<li>CMS垃圾收集器的晋升失败错误，promotion failed。minor gc时要进行复制算法，如果有对象无法放到存活区，也无法放进老年代，则触发full gc清理空间。</li>
+<li>CMS的concurrent mode failure。CMS在进行OLD GC时正好有对象要进入老年代，可能因为浮动碎片等原因导致空间不足，触发full gc。</li>
 </ol>
-<p>SQL注入例子：<br>select * from account where name=${name}</p>
-<p>在name部分填入:</p>
-<p>‘xxx’ or ‘1’=’1’</p>
-<p>拼入恒等条件，查出数据。</p>
-<p>拼入恒等条件后，可以用；结束这句语句，后面再跟其它破坏语句，例如DROP TABLE。</p>
+</li>
+</ol>
 
       
     </div>
@@ -438,9 +436,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Mybatis/" rel="tag"># Mybatis</a>
+            <a href="/tags/JVM/" rel="tag"># JVM</a>
           
-            <a href="/tags/关系型数据库/" rel="tag"># 关系型数据库</a>
+            <a href="/tags/GC/" rel="tag"># GC</a>
           
         </div>
       
@@ -453,8 +451,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/14/iterator理解/" rel="next" title="iterator理解">
-                <i class="fa fa-chevron-left"></i> iterator理解
+              <a href="/2017/10/01/年轻代GC复制算法/" rel="next" title="年轻代GC复制算法">
+                <i class="fa fa-chevron-left"></i> 年轻代GC复制算法
               </a>
             
           </div>
@@ -463,8 +461,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/02/24/java四种引用方式/" rel="prev" title="java四种引用方式">
-                java四种引用方式 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/10/18/泛型基本使用/" rel="prev" title="泛型基本使用">
+                泛型基本使用 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
