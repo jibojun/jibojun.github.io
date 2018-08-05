@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="bean的id属性不可重复，全局唯一，在两个上下文文件中（例如不同开发的），如果重复默认后一个覆盖前一个，如果设置override为false可以抛出异常。name和id一样在一个文件中不可以重复。 id和name可以都不配，默认是用类名当name，可以getBean(“类名”)获取bean。 都不配置情况下，如果有多个一个类的bean，则用#1，#2，#3等获取每个bean，例如第一个getB">
-<meta name="keywords" content="Spring">
+  <meta name="description" content="针对业务场景中经常出现的filter场景，JDK1.8中可以借助stream方法，之前一般使用for循环。 apache common中有CollectionUtils可以达到，在guava中也可以借助Iterables类中方法做到这些。 里面的filter方法与JDK stream中的中间方法filter类似，起到过滤作用，但是返回Iterable。     /**  * Returns a">
+<meta name="keywords" content="Guava,Java集合类">
 <meta property="og:type" content="article">
-<meta property="og:title" content="spring bean中id与name属性">
-<meta property="og:url" content="http://yoursite.com/2017/10/20/spring-bean中id与name属性/index.html">
+<meta property="og:title" content="Guava中集合filter">
+<meta property="og:url" content="http://yoursite.com/2018/04/05/Guava中集合filter/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="bean的id属性不可重复，全局唯一，在两个上下文文件中（例如不同开发的），如果重复默认后一个覆盖前一个，如果设置override为false可以抛出异常。name和id一样在一个文件中不可以重复。 id和name可以都不配，默认是用类名当name，可以getBean(“类名”)获取bean。 都不配置情况下，如果有多个一个类的bean，则用#1，#2，#3等获取每个bean，例如第一个getB">
+<meta property="og:description" content="针对业务场景中经常出现的filter场景，JDK1.8中可以借助stream方法，之前一般使用for循环。 apache common中有CollectionUtils可以达到，在guava中也可以借助Iterables类中方法做到这些。 里面的filter方法与JDK stream中的中间方法filter类似，起到过滤作用，但是返回Iterable。     /**  * Returns a">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-07-19T16:43:04.159Z">
+<meta property="og:updated_time" content="2018-08-05T10:26:00.590Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="spring bean中id与name属性">
-<meta name="twitter:description" content="bean的id属性不可重复，全局唯一，在两个上下文文件中（例如不同开发的），如果重复默认后一个覆盖前一个，如果设置override为false可以抛出异常。name和id一样在一个文件中不可以重复。 id和name可以都不配，默认是用类名当name，可以getBean(“类名”)获取bean。 都不配置情况下，如果有多个一个类的bean，则用#1，#2，#3等获取每个bean，例如第一个getB">
+<meta name="twitter:title" content="Guava中集合filter">
+<meta name="twitter:description" content="针对业务场景中经常出现的filter场景，JDK1.8中可以借助stream方法，之前一般使用for循环。 apache common中有CollectionUtils可以达到，在guava中也可以借助Iterables类中方法做到这些。 里面的filter方法与JDK stream中的中间方法filter类似，起到过滤作用，但是返回Iterable。     /**  * Returns a">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/10/20/spring-bean中id与name属性/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/05/Guava中集合filter/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>spring bean中id与name属性 | Bojun Ji's notes</title>
+  <title>Guava中集合filter | Bojun Ji's notes</title>
   
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/20/spring-bean中id与name属性/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/05/Guava中集合filter/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -295,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">spring bean中id与name属性
+          <h1 class="post-title" itemprop="name headline">Guava中集合filter
               
             
           </h1>
@@ -320,7 +320,7 @@
                 
               
 
-              <time title="Created: 2017-10-20 00:03:36" itemprop="dateCreated datePublished" datetime="2017-10-20T00:03:36+08:00">2017-10-20</time>
+              <time title="Created: 2018-04-05 16:43:15" itemprop="dateCreated datePublished" datetime="2018-04-05T16:43:15+08:00">2018-04-05</time>
             
 
             
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-07-20 00:43:04" itemprop="dateModified" datetime="2018-07-20T00:43:04+08:00">2018-07-20</time>
+                <time title="Modified: 2018-08-05 18:26:00" itemprop="dateModified" datetime="2018-08-05T18:26:00+08:00">2018-08-05</time>
               
             
           </span>
@@ -354,7 +354,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Guava/" itemprop="url" rel="index"><span itemprop="name">Guava</span></a></span>
 
                 
                 
@@ -397,78 +397,75 @@
 
       
         <ol>
-<li>bean的id属性不可重复，全局唯一，在两个上下文文件中（例如不同开发的），如果重复默认后一个覆盖前一个，如果设置override为false可以抛出异常。name和id一样在一个文件中不可以重复。</li>
-<li>id和name可以都不配，默认是用类名当name，可以getBean(“类名”)获取bean。</li>
-<li>都不配置情况下，如果有多个一个类的bean，则用#1，#2，#3等获取每个bean，例如第一个getBean(“类名”)，第二个getBean(“类名#1”)</li>
-<li><p>注解情况下，输入的就是name：</p>
-<pre><code>@Target(ElementType.TYPE)
-@Retention(RetentionPolicy.RUNTIME)
-@Documented
-@Indexed
-public @interface Component {
+<li>针对业务场景中经常出现的filter场景，JDK1.8中可以借助stream方法，之前一般使用for循环。</li>
+<li>apache common中有CollectionUtils可以达到，在guava中也可以借助Iterables类中方法做到这些。</li>
+<li><p>里面的filter方法与JDK stream中的中间方法filter类似，起到过滤作用，但是返回Iterable。</p>
+<pre><code>    /**
+ * Returns a view of {@code unfiltered} containing all elements that satisfy the input predicate
+ * {@code retainIfTrue}. The returned iterable&apos;s iterator does not support {@code remove()}.
+ *
+ * &lt;p&gt;&lt;b&gt;{@code Stream} equivalent:&lt;/b&gt; {@link Stream#filter}.
+ */
+public static &lt;T&gt; Iterable&lt;T&gt; filter(
+    final Iterable&lt;T&gt; unfiltered, final Predicate&lt;? super T&gt; retainIfTrue) {
+  checkNotNull(unfiltered);
+  checkNotNull(retainIfTrue);
+  return new FluentIterable&lt;T&gt;() {
+    @Override
+    public Iterator&lt;T&gt; iterator() {
+      return Iterators.filter(unfiltered.iterator(), retainIfTrue);
+    }
 
-    /**
-     * The value may indicate a suggestion for a logical component name,
-     * to be turned into a Spring bean in case of an autodetected component.
-     * @return the suggested component name, if any (or empty String otherwise)
-     */
-    String value() default &quot;&quot;;
+    @Override
+    public void forEach(Consumer&lt;? super T&gt; action) {
+      checkNotNull(action);
+      unfiltered.forEach(
+          (T a) -&gt; {
+            if (retainIfTrue.test(a)) {
+              action.accept(a);
+            }
+          });
+    }
 
+    @Override
+    public Spliterator&lt;T&gt; spliterator() {
+      return CollectSpliterators.filter(unfiltered.spliterator(), retainIfTrue);
+    }
+  };
 }
 </code></pre></li>
-<li><p>如果一个类同时用了注解且在上下文配置文件里    配了的话，两者配置的name相同时，我们用getBean方法按name获取的是配置文件中的bean。但是如果两者name不同，则无冲突，按各自名字可以获取bean。这种情况出现几率较低。</p>
+<li><p>transform方法可以对每个元素进行处理，返回新集合，但操作并不是线程安全的。</p>
 </li>
+<li>可以通过 Predicates类中的各种静态方法，组合筛选条件。</li>
+<li><p>使用例子：</p>
+<pre><code>public static void main(String[] args) {
+    List&lt;String&gt; list = prepareList();
+    //foreach
+    Iterables.filter(list, s -&gt; !s.isEmpty()).forEach(s -&gt; System.out.println(s));
+    //transform
+    Iterables.transform(list, s -&gt; String.format(&quot;String transform: %s&quot;, s)).forEach(s -&gt; System.out.println(s));
+    //multiple predicates
+    Iterables.filter(list, Predicates.and(Predicates.containsPattern(&quot;t&quot;), Predicates.not(Predicates.containsPattern(&quot;t2&quot;)))).forEach(s -&gt; System.out.println(s));
+    //try find first element
+    Optional optional=Iterators.tryFind(list.iterator(), input -&gt; input.isEmpty());
+    if (optional.isPresent()) {
+        System.out.println(&quot;found empty string&quot;);
+    } else {
+        System.out.println(&quot;not found empty string&quot;);
+    }
+}
+
+private static List&lt;String&gt; prepareList() {
+    List&lt;String&gt; list = new ArrayList&lt;&gt;();
+    list.add(&quot;test1&quot;);
+    list.add(&quot;test2&quot;);
+    list.add(&quot;&quot;);
+    list.add(&quot;test3&quot;);
+    return list;
+}
+</code></pre></li>
 </ol>
-<p>例子：</p>
-<p>注解bean类：</p>
-<pre><code>@Component(&quot;testBean&quot;)
-public class TestBean3 {
-    private String data = &quot;test1&quot;;
 
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
-}
-</code></pre><p>配置文件：</p>
-<pre><code>   &lt;context:component-scan base-package=&quot;com.demo.springdemo.service.beantest&quot; /&gt;
-&lt;aop:aspectj-autoproxy /&gt;
-
-&lt;beans&gt;
-    &lt;bean name=&quot;testBean&quot; class=&quot;com.demo.springdemo.service.beantest.TestBean3&quot; &gt;
-        &lt;property name=&quot;data&quot; value=&quot;test2&quot; /&gt;
-    &lt;/bean &gt;
-&lt;/beans&gt;
-</code></pre><p>拥有上述bean的类：</p>
-<pre><code>@Component(&quot;beanOwner&quot;)
-public class BeanOwner {
-    @Autowired
-    @Qualifier(&quot;testBean&quot;)
-    private TestBean3 bean;
-
-    public TestBean3 getBean() {
-        return bean;
-    }
-
-    public void setBean(TestBean3 bean) {
-        this.bean = bean;
-    }
-}
-</code></pre><p>测试类：</p>
-<pre><code>    public static void main(String[] args) {
-    ApplicationContext ctx = new ClassPathXmlApplicationContext(&quot;classpath:spring-context3.xml&quot;);
-    TestBean3 bean = (TestBean3) ctx.getBean(&quot;testBean&quot;);
-    System.out.println(bean.getData());
-    BeanOwner beanOwner=(BeanOwner)ctx.getBean(&quot;beanOwner&quot;);
-    System.out.println(beanOwner.getBean().getData());
-}
-</code></pre><p>输出，可以看到同名冲突时取了配置文件里配置的bean：</p>
-<pre><code>test2
-test2    
-</code></pre>
       
     </div>
 
@@ -488,7 +485,9 @@ test2
       
         <div class="post-tags">
           
-            <a href="/tags/Spring/" rel="tag"># Spring</a>
+            <a href="/tags/Guava/" rel="tag"># Guava</a>
+          
+            <a href="/tags/Java集合类/" rel="tag"># Java集合类</a>
           
         </div>
       
@@ -501,8 +500,8 @@ test2
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/18/泛型基本使用/" rel="next" title="泛型基本使用">
-                <i class="fa fa-chevron-left"></i> 泛型基本使用
+              <a href="/2018/04/03/自旋锁以及不可重入时死锁问题/" rel="next" title="自旋锁以及不可重入时死锁问题">
+                <i class="fa fa-chevron-left"></i> 自旋锁以及不可重入时死锁问题
               </a>
             
           </div>
@@ -511,8 +510,8 @@ test2
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/11/15/final-finally-finailize功能/" rel="prev" title="final, finally, finalize功能">
-                final, finally, finalize功能 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/04/05/自旋锁的可重入改造/" rel="prev" title="自旋锁的可重入改造">
+                自旋锁的可重入改造 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

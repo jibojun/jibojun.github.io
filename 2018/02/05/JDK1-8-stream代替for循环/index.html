@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="bean的id属性不可重复，全局唯一，在两个上下文文件中（例如不同开发的），如果重复默认后一个覆盖前一个，如果设置override为false可以抛出异常。name和id一样在一个文件中不可以重复。 id和name可以都不配，默认是用类名当name，可以getBean(“类名”)获取bean。 都不配置情况下，如果有多个一个类的bean，则用#1，#2，#3等获取每个bean，例如第一个getB">
-<meta name="keywords" content="Spring">
+  <meta name="description" content="经常有一些场景我们需要从一个集合中查询第一个符合条件的元素或者所有符合条件的元素。 在JDK1.8前可能使用循环，for,foreach,iterator等筛选需要的结果。 在JDK1.8集合中新加入了Stream的方法，Stream的方法分为惰性（不产生新集合）和早求值（返回新集合）。 /**  Returns a sequential {@code Stream} with this col">
+<meta name="keywords" content="Java集合类,JavaCore">
 <meta property="og:type" content="article">
-<meta property="og:title" content="spring bean中id与name属性">
-<meta property="og:url" content="http://yoursite.com/2017/10/20/spring-bean中id与name属性/index.html">
+<meta property="og:title" content="JDK1.8 stream代替for循环">
+<meta property="og:url" content="http://yoursite.com/2018/02/05/JDK1-8-stream代替for循环/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="bean的id属性不可重复，全局唯一，在两个上下文文件中（例如不同开发的），如果重复默认后一个覆盖前一个，如果设置override为false可以抛出异常。name和id一样在一个文件中不可以重复。 id和name可以都不配，默认是用类名当name，可以getBean(“类名”)获取bean。 都不配置情况下，如果有多个一个类的bean，则用#1，#2，#3等获取每个bean，例如第一个getB">
+<meta property="og:description" content="经常有一些场景我们需要从一个集合中查询第一个符合条件的元素或者所有符合条件的元素。 在JDK1.8前可能使用循环，for,foreach,iterator等筛选需要的结果。 在JDK1.8集合中新加入了Stream的方法，Stream的方法分为惰性（不产生新集合）和早求值（返回新集合）。 /**  Returns a sequential {@code Stream} with this col">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-07-19T16:43:04.159Z">
+<meta property="og:updated_time" content="2018-08-05T10:14:59.220Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="spring bean中id与name属性">
-<meta name="twitter:description" content="bean的id属性不可重复，全局唯一，在两个上下文文件中（例如不同开发的），如果重复默认后一个覆盖前一个，如果设置override为false可以抛出异常。name和id一样在一个文件中不可以重复。 id和name可以都不配，默认是用类名当name，可以getBean(“类名”)获取bean。 都不配置情况下，如果有多个一个类的bean，则用#1，#2，#3等获取每个bean，例如第一个getB">
+<meta name="twitter:title" content="JDK1.8 stream代替for循环">
+<meta name="twitter:description" content="经常有一些场景我们需要从一个集合中查询第一个符合条件的元素或者所有符合条件的元素。 在JDK1.8前可能使用循环，for,foreach,iterator等筛选需要的结果。 在JDK1.8集合中新加入了Stream的方法，Stream的方法分为惰性（不产生新集合）和早求值（返回新集合）。 /**  Returns a sequential {@code Stream} with this col">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/10/20/spring-bean中id与name属性/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/02/05/JDK1-8-stream代替for循环/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>spring bean中id与name属性 | Bojun Ji's notes</title>
+  <title>JDK1.8 stream代替for循环 | Bojun Ji's notes</title>
   
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/20/spring-bean中id与name属性/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/05/JDK1-8-stream代替for循环/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -295,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">spring bean中id与name属性
+          <h1 class="post-title" itemprop="name headline">JDK1.8 stream代替for循环
               
             
           </h1>
@@ -320,7 +320,7 @@
                 
               
 
-              <time title="Created: 2017-10-20 00:03:36" itemprop="dateCreated datePublished" datetime="2017-10-20T00:03:36+08:00">2017-10-20</time>
+              <time title="Created: 2018-02-05 17:20:40" itemprop="dateCreated datePublished" datetime="2018-02-05T17:20:40+08:00">2018-02-05</time>
             
 
             
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-07-20 00:43:04" itemprop="dateModified" datetime="2018-07-20T00:43:04+08:00">2018-07-20</time>
+                <time title="Modified: 2018-08-05 18:14:59" itemprop="dateModified" datetime="2018-08-05T18:14:59+08:00">2018-08-05</time>
               
             
           </span>
@@ -354,7 +354,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java集合类/" itemprop="url" rel="index"><span itemprop="name">Java集合类</span></a></span>
 
                 
                 
@@ -397,78 +397,68 @@
 
       
         <ol>
-<li>bean的id属性不可重复，全局唯一，在两个上下文文件中（例如不同开发的），如果重复默认后一个覆盖前一个，如果设置override为false可以抛出异常。name和id一样在一个文件中不可以重复。</li>
-<li>id和name可以都不配，默认是用类名当name，可以getBean(“类名”)获取bean。</li>
-<li>都不配置情况下，如果有多个一个类的bean，则用#1，#2，#3等获取每个bean，例如第一个getBean(“类名”)，第二个getBean(“类名#1”)</li>
-<li><p>注解情况下，输入的就是name：</p>
-<pre><code>@Target(ElementType.TYPE)
-@Retention(RetentionPolicy.RUNTIME)
-@Documented
-@Indexed
-public @interface Component {
-
-    /**
-     * The value may indicate a suggestion for a logical component name,
-     * to be turned into a Spring bean in case of an autodetected component.
-     * @return the suggested component name, if any (or empty String otherwise)
-     */
-    String value() default &quot;&quot;;
-
-}
-</code></pre></li>
-<li><p>如果一个类同时用了注解且在上下文配置文件里    配了的话，两者配置的name相同时，我们用getBean方法按name获取的是配置文件中的bean。但是如果两者name不同，则无冲突，按各自名字可以获取bean。这种情况出现几率较低。</p>
+<li>经常有一些场景我们需要从一个集合中查询第一个符合条件的元素或者所有符合条件的元素。</li>
+<li>在JDK1.8前可能使用循环，for,foreach,iterator等筛选需要的结果。</li>
+<li><p>在JDK1.8集合中新加入了Stream的方法，Stream的方法分为惰性（不产生新集合）和早求值（返回新集合）。</p>
+<pre><code>/**
+</code></pre><ul>
+<li>Returns a sequential {@code Stream} with this collection as its source.<br>*</li>
+<li><p>This method should be overridden when the {@link #spliterator()}</p></li>
+<li>method cannot return a spliterator that is {@code IMMUTABLE},</li>
+<li>{@code CONCURRENT}, or <em>late-binding</em>. (See {@link #spliterator()}</li>
+<li>for details.)<br>*</li>
+<li>@implSpec</li>
+<li>The default implementation creates a sequential {@code Stream} from the</li>
+<li>collection’s {@code Spliterator}.<br>*</li>
+<li>@return a sequential {@code Stream} over the elements in this collection</li>
+<li>@since 1.8<br>*/<br>default Stream<e> stream() {<br> return StreamSupport.stream(spliterator(), false);<br>}</e></li>
+</ul>
+</li>
+<li><p>判断类型时看方法返回值，是Stream或者void的是惰性，其余早求值。常用的filter()方法是惰性，count()是早求值。按照顺序来说，filter()过滤方法是中间方法，count(),foreach,collect()等集中处理的方法是最终方法（terminal）。stream处理就是通过stream方法获取集合，然后经过中间方法和最终方法输出结果。</p>
 </li>
 </ol>
-<p>例子：</p>
-<p>注解bean类：</p>
-<pre><code>@Component(&quot;testBean&quot;)
-public class TestBean3 {
-    private String data = &quot;test1&quot;;
-
-    public String getData() {
-        return data;
+<p>filter():</p>
+<pre><code>    /**
+ * Returns a stream consisting of the elements of this stream that match
+ * the given predicate.
+ *
+ * &lt;p&gt;This is an &lt;a href=&quot;package-summary.html#StreamOps&quot;&gt;intermediate
+ * operation&lt;/a&gt;.
+ *
+ * @param predicate a &lt;a href=&quot;package-summary.html#NonInterference&quot;&gt;non-interfering&lt;/a&gt;,
+ *                  &lt;a href=&quot;package-summary.html#Statelessness&quot;&gt;stateless&lt;/a&gt;
+ *                  predicate to apply to each element to determine if it
+ *                  should be included
+ * @return the new stream
+ */
+Stream&lt;T&gt; filter(Predicate&lt;? super T&gt; predicate);
+</code></pre><ol start="5">
+<li><p>用法例子，包含第一个元素用optional.ispresent判断是否找到，将条件元素收集到集合中，foreach方法：</p>
+<pre><code>public static void main(String[] args) {
+    List&lt;String&gt; list = prepareList();
+    Optional optional1 = list.stream().filter(s -&gt; s.isEmpty()).findFirst();
+    if (optional1.isPresent()) {
+        System.out.println(&quot;found empty string&quot;);
+    } else {
+        System.out.println(&quot;not found empty string&quot;);
     }
+    List&lt;String&gt; resultList = list.stream().filter(s -&gt; !s.isEmpty()).collect(Collectors.toList());
+    System.out.println(resultList);
+    list.stream().filter(s -&gt; !s.isEmpty()).forEach(s -&gt; System.out.println(s));
 
-    public void setData(String data) {
-        this.data = data;
-    }
 }
-</code></pre><p>配置文件：</p>
-<pre><code>   &lt;context:component-scan base-package=&quot;com.demo.springdemo.service.beantest&quot; /&gt;
-&lt;aop:aspectj-autoproxy /&gt;
 
-&lt;beans&gt;
-    &lt;bean name=&quot;testBean&quot; class=&quot;com.demo.springdemo.service.beantest.TestBean3&quot; &gt;
-        &lt;property name=&quot;data&quot; value=&quot;test2&quot; /&gt;
-    &lt;/bean &gt;
-&lt;/beans&gt;
-</code></pre><p>拥有上述bean的类：</p>
-<pre><code>@Component(&quot;beanOwner&quot;)
-public class BeanOwner {
-    @Autowired
-    @Qualifier(&quot;testBean&quot;)
-    private TestBean3 bean;
+private static List&lt;String&gt; prepareList() {
+    List&lt;String&gt; list = new ArrayList&lt;&gt;();
+    list.add(&quot;test1&quot;);
+    list.add(&quot;test2&quot;);
+    list.add(&quot;&quot;);
+    list.add(&quot;test3&quot;);
+    return list;
+}  
+</code></pre></li>
+</ol>
 
-    public TestBean3 getBean() {
-        return bean;
-    }
-
-    public void setBean(TestBean3 bean) {
-        this.bean = bean;
-    }
-}
-</code></pre><p>测试类：</p>
-<pre><code>    public static void main(String[] args) {
-    ApplicationContext ctx = new ClassPathXmlApplicationContext(&quot;classpath:spring-context3.xml&quot;);
-    TestBean3 bean = (TestBean3) ctx.getBean(&quot;testBean&quot;);
-    System.out.println(bean.getData());
-    BeanOwner beanOwner=(BeanOwner)ctx.getBean(&quot;beanOwner&quot;);
-    System.out.println(beanOwner.getBean().getData());
-}
-</code></pre><p>输出，可以看到同名冲突时取了配置文件里配置的bean：</p>
-<pre><code>test2
-test2    
-</code></pre>
       
     </div>
 
@@ -488,7 +478,9 @@ test2
       
         <div class="post-tags">
           
-            <a href="/tags/Spring/" rel="tag"># Spring</a>
+            <a href="/tags/Java集合类/" rel="tag"># Java集合类</a>
+          
+            <a href="/tags/JavaCore/" rel="tag"># JavaCore</a>
           
         </div>
       
@@ -501,8 +493,8 @@ test2
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/18/泛型基本使用/" rel="next" title="泛型基本使用">
-                <i class="fa fa-chevron-left"></i> 泛型基本使用
+              <a href="/2018/01/18/MyBatis缓存/" rel="next" title="MyBatis缓存">
+                <i class="fa fa-chevron-left"></i> MyBatis缓存
               </a>
             
           </div>
@@ -511,8 +503,8 @@ test2
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/11/15/final-finally-finailize功能/" rel="prev" title="final, finally, finalize功能">
-                final, finally, finalize功能 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/02/06/ArrayList实现原理以及与Vector区别/" rel="prev" title="ArrayList实现原理以及与Vector区别">
+                ArrayList实现原理以及与Vector区别 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
