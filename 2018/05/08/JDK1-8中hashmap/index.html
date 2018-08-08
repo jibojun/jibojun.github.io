@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="对于Hotspot VM,除开JDK7新出的G1，有以下垃圾收集器种类： 年轻代：  Serial，串行收集器，采用复制算法，单线程，收集时暂停用户的工作线程，就是所谓的GC停顿。单线程减少了切换线程的开销。 使用参数： -XX:+UseSerialGC  ParNew，与Serial比GC改成了多线程。只有这个能与老年代的CMS一起使用使用参数： &amp;quot;-XX:+UseConcMarkSw">
-<meta name="keywords" content="JVM,GC">
+  <meta name="description" content="HashMap的基本存储结构是数组，key经过hashcode等方法（后面跟高位和取模运算）计算后获取数组中的索引位置放入。所以本质是一个哈希桶数组。 hash冲突时，既不同的项计算出的哈希值相同，此时数组存储的对象会变为链表。既拉链法解决冲突。 哈希冲突的频率和数组大小有关，很小的数组就算拥有好的哈希算法也难以分散，所以采用负载因子0.75扩容的机制来在空间和时间当中做了一个平衡 JDK1.8">
+<meta name="keywords" content="Map">
 <meta property="og:type" content="article">
-<meta property="og:title" content="垃圾收集器种类和搭配">
-<meta property="og:url" content="http://yoursite.com/2017/09/29/垃圾收集器种类和搭配/index.html">
+<meta property="og:title" content="JDK1.8中hashmap">
+<meta property="og:url" content="http://yoursite.com/2018/05/08/JDK1-8中hashmap/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="对于Hotspot VM,除开JDK7新出的G1，有以下垃圾收集器种类： 年轻代：  Serial，串行收集器，采用复制算法，单线程，收集时暂停用户的工作线程，就是所谓的GC停顿。单线程减少了切换线程的开销。 使用参数： -XX:+UseSerialGC  ParNew，与Serial比GC改成了多线程。只有这个能与老年代的CMS一起使用使用参数： &amp;quot;-XX:+UseConcMarkSw">
+<meta property="og:description" content="HashMap的基本存储结构是数组，key经过hashcode等方法（后面跟高位和取模运算）计算后获取数组中的索引位置放入。所以本质是一个哈希桶数组。 hash冲突时，既不同的项计算出的哈希值相同，此时数组存储的对象会变为链表。既拉链法解决冲突。 哈希冲突的频率和数组大小有关，很小的数组就算拥有好的哈希算法也难以分散，所以采用负载因子0.75扩容的机制来在空间和时间当中做了一个平衡 JDK1.8">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-08-01T16:28:16.843Z">
+<meta property="og:updated_time" content="2018-08-08T15:47:15.166Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="垃圾收集器种类和搭配">
-<meta name="twitter:description" content="对于Hotspot VM,除开JDK7新出的G1，有以下垃圾收集器种类： 年轻代：  Serial，串行收集器，采用复制算法，单线程，收集时暂停用户的工作线程，就是所谓的GC停顿。单线程减少了切换线程的开销。 使用参数： -XX:+UseSerialGC  ParNew，与Serial比GC改成了多线程。只有这个能与老年代的CMS一起使用使用参数： &amp;quot;-XX:+UseConcMarkSw">
+<meta name="twitter:title" content="JDK1.8中hashmap">
+<meta name="twitter:description" content="HashMap的基本存储结构是数组，key经过hashcode等方法（后面跟高位和取模运算）计算后获取数组中的索引位置放入。所以本质是一个哈希桶数组。 hash冲突时，既不同的项计算出的哈希值相同，此时数组存储的对象会变为链表。既拉链法解决冲突。 哈希冲突的频率和数组大小有关，很小的数组就算拥有好的哈希算法也难以分散，所以采用负载因子0.75扩容的机制来在空间和时间当中做了一个平衡 JDK1.8">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/09/29/垃圾收集器种类和搭配/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/08/JDK1-8中hashmap/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>垃圾收集器种类和搭配 | Bojun Ji's notes</title>
+  <title>JDK1.8中hashmap | Bojun Ji's notes</title>
   
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/29/垃圾收集器种类和搭配/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/08/JDK1-8中hashmap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -295,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">垃圾收集器种类和搭配
+          <h1 class="post-title" itemprop="name headline">JDK1.8中hashmap
               
             
           </h1>
@@ -320,7 +320,7 @@
                 
               
 
-              <time title="Created: 2017-09-29 03:10:15" itemprop="dateCreated datePublished" datetime="2017-09-29T03:10:15+08:00">2017-09-29</time>
+              <time title="Created: 2018-05-08 00:21:38" itemprop="dateCreated datePublished" datetime="2018-05-08T00:21:38+08:00">2018-05-08</time>
             
 
             
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-08-02 00:28:16" itemprop="dateModified" datetime="2018-08-02T00:28:16+08:00">2018-08-02</time>
+                <time title="Modified: 2018-08-08 23:47:15" itemprop="dateModified" datetime="2018-08-08T23:47:15+08:00">2018-08-08</time>
               
             
           </span>
@@ -354,7 +354,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JVM/" itemprop="url" rel="index"><span itemprop="name">JVM</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java集合类/" itemprop="url" rel="index"><span itemprop="name">Java集合类</span></a></span>
 
                 
                 
@@ -396,76 +396,81 @@
       
 
       
-        <p>对于Hotspot VM,除开JDK7新出的G1，有以下垃圾收集器种类：</p>
-<p>年轻代：</p>
-<ol>
-<li><p>Serial，串行收集器，采用复制算法，单线程，收集时暂停用户的工作线程，就是所谓的GC停顿。单线程减少了切换线程的开销。</p>
-<pre><code>使用参数： -XX:+UseSerialGC
-</code></pre></li>
-<li><p>ParNew，与Serial比GC改成了多线程。只有这个能与老年代的CMS一起使用<br>使用参数：</p>
-<pre><code>&quot;-XX:+UseConcMarkSweepGC&quot;：指定使用CMS后，会默认使用ParNew作为新生代收集器；
-
-&quot;-XX:+UseParNewGC&quot;：强制指定使用ParNew；    
-
-&quot;-XX:ParallelGCThreads&quot;：指定垃圾收集的线程数量，ParNew默认开启的收集线程与CPU的数量相同；
-</code></pre></li>
-<li><p>Parallel Scavenge,从JDK1.4开始，吞吐量收集器，注重高吞吐量而不是CMS等关注的响应时间，减少GC时用户线程停顿时间（注重吞吐量的系统一般为与用户交互少，后台计算任务重，如定时结算任务等）。而是直接减少GC时间，让用户代码获得更长运行时间，<br>吞吐量=CPU用于运行用户代码时间/(CPU用于运行用户代码时间+CPU用于垃圾回收时间)</p>
-</li>
+        <ol>
+<li>HashMap的基本存储结构是数组，key经过hashcode等方法（后面跟高位和取模运算）计算后获取数组中的索引位置放入。所以本质是一个哈希桶数组。</li>
+<li>hash冲突时，既不同的项计算出的哈希值相同，此时数组存储的对象会变为链表。既拉链法解决冲突。</li>
+<li>哈希冲突的频率和数组大小有关，很小的数组就算拥有好的哈希算法也难以分散，所以采用负载因子0.75扩容的机制来在空间和时间当中做了一个平衡</li>
+<li>JDK1.8中对HashMap做的改动是当哈希冲突较厉害，数组一个项中链表超过8个时就会转为红黑树结构存储。</li>
+<li>单链表结构的主要问题，是在哈希冲突厉害时，链表很长，如果要访问后面节点元素则需要通过前面元素往后遍历。</li>
+<li>红黑树牺牲了严格的高度平衡性，部分平衡，三次旋转内可达到平衡，而达到了查询，插入，删除 o(log2n)时间复杂度的性能。</li>
 </ol>
-<p>使用参数：</p>
-<pre><code>（A）、&quot;-XX:MaxGCPauseMillis&quot;
+<pre><code>    /**
+ * The bin count threshold for using a tree rather than list for a
+ * bin.  Bins are converted to trees when adding an element to a
+ * bin with at least this many nodes. The value must be greater
+ * than 2 and should be at least 8 to mesh with assumptions in
+ * tree removal about conversion back to plain bins upon
+ * shrinkage.
+ */
+static final int TREEIFY_THRESHOLD = 8;
 
-  控制最大垃圾收集停顿时间，大于0的毫秒数；
-
-  MaxGCPauseMillis设置得稍小，停顿时间可能会缩短，但也可能会使得吞吐量下降；
-
-  因为可能导致垃圾收集发生得更频繁；
-
-（B）、&quot;-XX:GCTimeRatio&quot;
-
-      设置垃圾收集时间占总时间的比率，0&lt;n&lt;100的整数；
-
-      GCTimeRatio相当于设置吞吐量大小；
-
-      垃圾收集执行时间占应用程序执行时间的比例的计算方法是：
-
-      1 / (1 + n)
-
-      例如，选项-XX:GCTimeRatio=19，设置了垃圾收集时间占总时间的5%--1/(1+19)；
-
-      默认值是1%--1/(1+99)，即n=99；
-</code></pre><p>老年代：</p>
-<ol>
-<li><p>Serial Old: Serial收集器的老年代版本，标记-整理，标记-压缩算法，单线程收集会暂停用户线程。</p>
-</li>
-<li><p>Parallel Old: 1.6开始提供，Parallel Scavenge的老年代版本，多CPU情况下注重吞吐量，多线程GC暂停用户线程，使用标记-整理。</p>
-</li>
-<li><p>CMS，并发标记清理收集器，用标记清理，不整理压缩，会有内存碎片，1.5推出，注重响应，几乎让用户线程和GC线程同时工作，减少停顿。</p>
-<ol>
-<li>初始标记：要停顿，标记GC ROOTS直接关联对象</li>
-<li>并发标记：GC ROOTS TRACING中，刚才集合中标记存活对象，并发处理，此时用户线程也在运行。</li>
-<li>重新标记：因为并发标记时程序在运行，此处修正前一阶段的问题，需要停顿。</li>
-<li>并发清除：回收垃圾。</li>
-</ol>
-</li>
-</ol>
-<p>可以看出第一步，第三步需要stop the world，但第二步并发标记时和用户线程同时运行的。</p>
-<p>缺点：</p>
-<ol>
-<li>占用CPU资源吗，吞吐量降低。    </li>
-<li>最后一步并发清除时，新产生的垃圾叫浮动垃圾，需要预留一定空间处理。如果内存空间不足，则会出现Concurrent Mode Failure，失败后悔用Serial Old来full gc，代价很大。 “-XX:CMSInitiatingOccupancyFraction”设置预留内存空间。</li>
-<li>标记-清除算法的内存碎片问题。大对象可能得不到连续内存。</li>
-</ol>
-<p>除开整堆收集器G1，老年代+年轻代收集器搭配：</p>
-<ol>
-<li>Serial+Serial Old,两代都是单线程停顿</li>
-<li>Serial+CMS</li>
-<li>ParNew++Serial Old</li>
-<li>ParNew+CMS,常见组合,高响应</li>
-<li>Parallel Scavenge+Serial Old</li>
-<li>Parallel Scavenge+Parallel Old,常见组合，高吞吐量</li>
-</ol>
-
+/**
+ * Implements Map.put and related methods
+ *
+ * @param hash hash for key
+ * @param key the key
+ * @param value the value to put
+ * @param onlyIfAbsent if true, don&apos;t change existing value
+ * @param evict if false, the table is in creation mode.
+ * @return previous value, or null if none
+ */
+final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
+               boolean evict) {
+    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;
+    if ((tab = table) == null || (n = tab.length) == 0)
+        n = (tab = resize()).length;
+    if ((p = tab[i = (n - 1) &amp; hash]) == null)
+        tab[i] = newNode(hash, key, value, null);
+    else {
+        Node&lt;K,V&gt; e; K k;
+        //key存在，则覆盖
+        if (p.hash == hash &amp;&amp;
+            ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))
+            e = p;
+        //这里判断是不是红黑树节点
+        else if (p instanceof TreeNode)
+            e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);
+        //链表节点
+        else {
+            for (int binCount = 0; ; ++binCount) {
+                if ((e = p.next) == null) {
+                    p.next = newNode(hash, key, value, null);
+                    //转换红黑树
+                    if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st
+                        treeifyBin(tab, hash);
+                    break;
+                }
+                if (e.hash == hash &amp;&amp;
+                    ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
+                    break;
+                p = e;
+            }
+        }
+        if (e != null) { // existing mapping for key
+            V oldValue = e.value;
+            if (!onlyIfAbsent || oldValue == null)
+                e.value = value;
+            afterNodeAccess(e);
+            return oldValue;
+        }
+    }
+    ++modCount;
+    if (++size &gt; threshold)
+        resize();
+    afterNodeInsertion(evict);
+    return null;
+}
+</code></pre>
       
     </div>
 
@@ -485,9 +490,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/JVM/" rel="tag"># JVM</a>
-          
-            <a href="/tags/GC/" rel="tag"># GC</a>
+            <a href="/tags/Map/" rel="tag"># Map</a>
           
         </div>
       
@@ -500,8 +503,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/28/JVM内存推荐配置 copy/" rel="next" title="JVM内存推荐配置">
-                <i class="fa fa-chevron-left"></i> JVM内存推荐配置
+              <a href="/2018/05/05/nio主要类和用法/" rel="next" title="nio主要类和用法">
+                <i class="fa fa-chevron-left"></i> nio主要类和用法
               </a>
             
           </div>
@@ -510,8 +513,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/01/年轻代GC复制算法/" rel="prev" title="年轻代GC复制算法">
-                年轻代GC复制算法 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/10/dubbo使用实例/" rel="prev" title="dubbo使用实例">
+                dubbo使用实例 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

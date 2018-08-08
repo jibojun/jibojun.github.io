@@ -1893,7 +1893,7 @@ corePoolSize,核心线程数量，如果提交任务时线程数量
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/05/nio主要类和用法/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/08/JDK1-8中hashmap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -1912,8 +1912,8 @@ corePoolSize,核心线程数量，如果提交任务时线程数量
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/05/nio主要类和用法/" itemprop="url">
-                  nio主要类和用法
+                <a class="post-title-link" href="/2018/05/08/JDK1-8中hashmap/" itemprop="url">
+                  JDK1.8中hashmap
                 </a>
               
             
@@ -1939,7 +1939,7 @@ corePoolSize,核心线程数量，如果提交任务时线程数量
                 
               
 
-              <time title="Created: 2018-05-05 00:36:38" itemprop="dateCreated datePublished" datetime="2018-05-05T00:36:38+08:00">2018-05-05</time>
+              <time title="Created: 2018-05-08 00:21:38" itemprop="dateCreated datePublished" datetime="2018-05-08T00:21:38+08:00">2018-05-08</time>
             
 
             
@@ -1956,7 +1956,7 @@ corePoolSize,核心线程数量，如果提交任务时线程数量
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-07-07 18:20:10" itemprop="dateModified" datetime="2018-07-07T18:20:10+08:00">2018-07-07</time>
+                <time title="Modified: 2018-08-08 23:47:15" itemprop="dateModified" datetime="2018-08-08T23:47:15+08:00">2018-08-08</time>
               
             
           </span>
@@ -1973,7 +1973,7 @@ corePoolSize,核心线程数量，如果提交任务时线程数量
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java-IO/" itemprop="url" rel="index"><span itemprop="name">Java IO</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java集合类/" itemprop="url" rel="index"><span itemprop="name">Java集合类</span></a></span>
 
                 
                 
@@ -2009,15 +2009,14 @@ corePoolSize,核心线程数量，如果提交任务时线程数量
       
         
           
-          Selector:
-
-相当于监听器，向上面注册CHANNEL。
-通过select()方法获取就绪事件，没有就绪事件会阻塞，写在循环内轮询获取。
-select()后用selectedKeys()方法，返回值是SelectionKey对象的set，对于每个key可以通过以下方式判断就绪事件，也可以通过a
+          
+HashMap的基本存储结构是数组，key经过hashcode等方法（后面跟高位和取模运算）计算后获取数组中的索引位置放入。所以本质是一个哈希桶数组。
+hash冲突时，既不同的项计算出的哈希值相同，此时数组存储的对象会变为链表。既拉链法解决冲突。
+哈希冲突的频率和数组大小有关，很小的数组就算拥有好
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/05/05/nio主要类和用法/#more" rel="contents">
+            <a class="btn" href="/2018/05/08/JDK1-8中hashmap/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -2105,7 +2104,7 @@ select()后用selectedKeys()方法，返回值是SelectionKey对象的set，对�
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">84</span>
+                    <span class="site-state-item-count">85</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
