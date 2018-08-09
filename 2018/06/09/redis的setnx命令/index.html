@@ -102,20 +102,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Bojun Ji&#39;s notes">
-<meta property="og:url" content="http://yoursite.com/tags/zooKeeper-Dubbo/index.html">
+  <meta name="description" content="setNx是针对redis字符串数据类型的命令。 作用是只有key不存在时才设值，而set命令是会覆盖原来值的。 命令在设值成功（原本没有这个key）时返回1，失败（key已经存在）时返回0。 如果用redis实现分布式锁，可以作为尝试获取锁的方法，比如将锁名字作为key，过期时间点作为value，则只有当key不存在时，有一个线程能设值成功，其余线程则会因为值存在而无法设值成功，认为没获取到锁">
+<meta name="keywords" content="Redis,分布式缓存">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis的setnx命令">
+<meta property="og:url" content="http://yoursite.com/2018/06/09/redis的setnx命令/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
+<meta property="og:description" content="setNx是针对redis字符串数据类型的命令。 作用是只有key不存在时才设值，而set命令是会覆盖原来值的。 命令在设值成功（原本没有这个key）时返回1，失败（key已经存在）时返回0。 如果用redis实现分布式锁，可以作为尝试获取锁的方法，比如将锁名字作为key，过期时间点作为value，则只有当key不存在时，有一个线程能设值成功，其余线程则会因为值存在而无法设值成功，认为没获取到锁">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-08-09T17:19:04.514Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bojun Ji&#39;s notes">
+<meta name="twitter:title" content="redis的setnx命令">
+<meta name="twitter:description" content="setNx是针对redis字符串数据类型的命令。 作用是只有key不存在时才设值，而set命令是会覆盖原来值的。 命令在设值成功（原本没有这个key）时返回1，失败（key已经存在）时返回0。 如果用redis实现分布式锁，可以作为尝试获取锁的方法，比如将锁名字作为key，过期时间点作为value，则只有当key不存在时，有一个线程能设值成功，其余线程则会因为值存在而无法设值成功，认为没获取到锁">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/zooKeeper-Dubbo/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/09/redis的setnx命令/"/>
 
 
 
@@ -125,7 +130,7 @@
   };
 </script>
 
-  <title>Tag: zooKeeper - Dubbo | Bojun Ji's notes</title>
+  <title>redis的setnx命令 | Bojun Ji's notes</title>
   
 
 
@@ -172,7 +177,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -253,75 +258,242 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>zooKeeper - Dubbo<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/09/redis的setnx命令/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bojun Ji's notes">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/05/20/zookeeper基本操作/" itemprop="url">
-              
-                <span itemprop="name">zookeeper基本操作</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">redis的setnx命令
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-20T17:40:32+08:00"
-              content="2018-05-20" >
-          05-20
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
 
-    </header>
-  </article>
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-06-09 23:35:21" itemprop="dateCreated datePublished" datetime="2018-06-09T23:35:21+08:00">2018-06-09</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-08-10 01:19:04" itemprop="dateModified" datetime="2018-08-10T01:19:04+08:00">2018-08-10</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ol>
+<li>setNx是针对redis字符串数据类型的命令。</li>
+<li>作用是只有key不存在时才设值，而set命令是会覆盖原来值的。</li>
+<li>命令在设值成功（原本没有这个key）时返回1，失败（key已经存在）时返回0。</li>
+<li>如果用redis实现分布式锁，可以作为尝试获取锁的方法，比如将锁名字作为key，过期时间点作为value，则只有当key不存在时，有一个线程能设值成功，其余线程则会因为值存在而无法设值成功，认为没获取到锁。</li>
+<li><p>Jedis中方法：</p>
+<p>   /**</p>
+<pre><code>* SETNX works exactly like {@link #set(String, String) SET} with the only difference that if the
+* key already exists no operation is performed. SETNX actually means &quot;SET if Not eXists&quot;.
+* &lt;p&gt;
+* Time complexity: O(1)
+* @param key
+* @param value
+* @return Integer reply, specifically: 1 if the key was set 0 if the key was not set
+*/
+</code></pre><p>   public Long setnx(final String key, final String value) {</p>
+<pre><code>checkIsInMultiOrPipeline();
+client.setnx(key, value);
+return client.getIntegerReply();
+</code></pre><p>   }</p>
+</li>
+</ol>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Redis/" rel="tag"># Redis</a>
+          
+            <a href="/tags/分布式缓存/" rel="tag"># 分布式缓存</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/08/nio例子和reactor模式/" rel="next" title="nio例子和reactor模式">
+                <i class="fa fa-chevron-left"></i> nio例子和reactor模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/11/Spring同名bean问题/" rel="prev" title="Spring同名bean问题">
+                Spring同名bean问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -660,6 +832,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
 
   
 

@@ -1894,7 +1894,7 @@ Caused by: org.springframework.context.annotation.ConflictingBeanDefinitionExcep
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/08/nio例子和reactor模式/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/09/redis的setnx命令/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -1913,8 +1913,8 @@ Caused by: org.springframework.context.annotation.ConflictingBeanDefinitionExcep
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/08/nio例子和reactor模式/" itemprop="url">
-                  nio例子和reactor模式
+                <a class="post-title-link" href="/2018/06/09/redis的setnx命令/" itemprop="url">
+                  redis的setnx命令
                 </a>
               
             
@@ -1940,7 +1940,7 @@ Caused by: org.springframework.context.annotation.ConflictingBeanDefinitionExcep
                 
               
 
-              <time title="Created: 2018-06-08 23:30:37" itemprop="dateCreated datePublished" datetime="2018-06-08T23:30:37+08:00">2018-06-08</time>
+              <time title="Created: 2018-06-09 23:35:21" itemprop="dateCreated datePublished" datetime="2018-06-09T23:35:21+08:00">2018-06-09</time>
             
 
             
@@ -1957,7 +1957,7 @@ Caused by: org.springframework.context.annotation.ConflictingBeanDefinitionExcep
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-07-05 00:37:31" itemprop="dateModified" datetime="2018-07-05T00:37:31+08:00">2018-07-05</time>
+                <time title="Modified: 2018-08-10 01:19:04" itemprop="dateModified" datetime="2018-08-10T01:19:04+08:00">2018-08-10</time>
               
             
           </span>
@@ -1974,7 +1974,7 @@ Caused by: org.springframework.context.annotation.ConflictingBeanDefinitionExcep
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java-IO/" itemprop="url" rel="index"><span itemprop="name">Java IO</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a></span>
 
                 
                 
@@ -2010,12 +2010,15 @@ Caused by: org.springframework.context.annotation.ConflictingBeanDefinitionExcep
       
         
           
-          传统BIO中每个连接对应一个线程并且线程许多时候处于空闲状态（调用read则一直阻塞），同时服务器线程数有限，无法承受高并发的高连接数。
-NIO依赖于REACTOR模式达到非阻塞目的，依靠一个SELECTOR（类似于事件监听者）去轮询所有注册在它上面的CHANNEL看有没有数据（与BUFFER交互，
+          
+setNx是针对redis字符串数据类型的命令。
+作用是只有key不存在时才设值，而set命令是会覆盖原来值的。
+命令在设值成功（原本没有这个key）时返回1，失败（key已经存在）时返回0。
+如果用redis实现分布式锁，可以作为尝试获取锁的方法，比如将锁名字作为key，过期时间点作为value
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/06/08/nio例子和reactor模式/#more" rel="contents">
+            <a class="btn" href="/2018/06/09/redis的setnx命令/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -2103,7 +2106,7 @@ NIO依赖于REACTOR模式达到非阻塞目的，依靠一个SELECTOR（类似�
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">85</span>
+                    <span class="site-state-item-count">86</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
