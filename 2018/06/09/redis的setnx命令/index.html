@@ -110,7 +110,7 @@
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
 <meta property="og:description" content="setNx是针对redis字符串数据类型的命令。 作用是只有key不存在时才设值，而set命令是会覆盖原来值的。 命令在设值成功（原本没有这个key）时返回1，失败（key已经存在）时返回0。 如果用redis实现分布式锁，可以作为尝试获取锁的方法，比如将锁名字作为key，过期时间点作为value，则只有当key不存在时，有一个线程能设值成功，其余线程则会因为值存在而无法设值成功，认为没获取到锁">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-08-09T17:19:04.514Z">
+<meta property="og:updated_time" content="2018-08-10T16:43:59.198Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis的setnx命令">
 <meta name="twitter:description" content="setNx是针对redis字符串数据类型的命令。 作用是只有key不存在时才设值，而set命令是会覆盖原来值的。 命令在设值成功（原本没有这个key）时返回1，失败（key已经存在）时返回0。 如果用redis实现分布式锁，可以作为尝试获取锁的方法，比如将锁名字作为key，过期时间点作为value，则只有当key不存在时，有一个线程能设值成功，其余线程则会因为值存在而无法设值成功，认为没获取到锁">
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-08-10 01:19:04" itemprop="dateModified" datetime="2018-08-10T01:19:04+08:00">2018-08-10</time>
+                <time title="Modified: 2018-08-11 00:43:59" itemprop="dateModified" datetime="2018-08-11T00:43:59+08:00">2018-08-11</time>
               
             
           </span>
@@ -417,6 +417,25 @@ client.setnx(key, value);
 return client.getIntegerReply();
 </code></pre><p>   }</p>
 </li>
+<li><p>现在高版本的jedis可以支持多参数的set方法，共5个参数，key,value,NAXX(NX就是不存在时设值，XX是只存在时设值)，超时时间单位，超时时间数值。要起到SETNX效果的话第三个参数需要传NX，如果同时传入超时时间和单位可以把SETNX和EXPIRE合到一个操作。返回值和普通SET命令相同，为状态码，成功的话会是“OK”。</p>
+<pre><code>/**
+ * Set the string value as value of the key. The string can&apos;t be longer than 1073741824 bytes (1
+ * GB).
+ * @param key
+ * @param value
+ * @param nxxx NX|XX, NX -- Only set the key if it does not already exist. XX -- Only set the key
+ *          if it already exist.
+ * @param expx EX|PX, expire time units: EX = seconds; PX = milliseconds
+ * @param time expire time in the units of &lt;code&gt;expx&lt;/code&gt;
+ * @return Status code reply
+ */
+public String set(final String key, final String value, final String nxxx, final String expx,
+    final long time) {
+  checkIsInMultiOrPipeline();
+  client.set(key, value, nxxx, expx, time);
+  return client.getStatusCodeReply();
+}
+</code></pre></li>
 </ol>
 
       
@@ -463,8 +482,8 @@ return client.getIntegerReply();
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/06/11/Spring同名bean问题/" rel="prev" title="Spring同名bean问题">
-                Spring同名bean问题 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/06/10/redis的getset命令/" rel="prev" title="redis的getset命令">
+                redis的getset命令 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -530,7 +549,7 @@ return client.getIntegerReply();
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">86</span>
+                    <span class="site-state-item-count">87</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
