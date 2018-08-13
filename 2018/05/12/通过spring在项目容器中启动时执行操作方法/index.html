@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.2.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.2.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="web项目中初始化bean依靠spring的contextLoaderListener监听并初始化上下文。 可以继承这个类，并重写其中的contextInitialized方法，在里面可以先调用父类原本的这个方法初始化上下文，然后写自己的逻辑，例如加载缓存等     public class ContextLoaderListenerNew extends ContextLoaderListen">
+<meta name="keywords" content="Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通过spring在项目容器中启动时执行操作方法">
+<meta property="og:url" content="http://yoursite.com/2018/05/12/通过spring在项目容器中启动时执行操作方法/index.html">
+<meta property="og:site_name" content="Bojun Ji&#39;s notes">
+<meta property="og:description" content="web项目中初始化bean依靠spring的contextLoaderListener监听并初始化上下文。 可以继承这个类，并重写其中的contextInitialized方法，在里面可以先调用父类原本的这个方法初始化上下文，然后写自己的逻辑，例如加载缓存等     public class ContextLoaderListenerNew extends ContextLoaderListen">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-08-13T16:40:20.392Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="通过spring在项目容器中启动时执行操作方法">
+<meta name="twitter:description" content="web项目中初始化bean依靠spring的contextLoaderListener监听并初始化上下文。 可以继承这个类，并重写其中的contextInitialized方法，在里面可以先调用父类原本的这个方法初始化上下文，然后写自己的逻辑，例如加载缓存等     public class ContextLoaderListenerNew extends ContextLoaderListen">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/12/通过spring在项目容器中启动时执行操作方法/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>通过spring在项目容器中启动时执行操作方法 | Bojun Ji's notes</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Bojun Ji's notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">仅做个人笔记用途！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/12/通过spring在项目容器中启动时执行操作方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bojun Ji's notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">通过spring在项目容器中启动时执行操作方法
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-05-12 23:39:51" itemprop="dateCreated datePublished" datetime="2018-05-12T23:39:51+08:00">2018-05-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-08-14 00:40:20" itemprop="dateModified" datetime="2018-08-14T00:40:20+08:00">2018-08-14</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ol>
+<li>web项目中初始化bean依靠spring的contextLoaderListener监听并初始化上下文。</li>
+<li><p>可以继承这个类，并重写其中的contextInitialized方法，在里面可以先调用父类原本的这个方法初始化上下文，然后写自己的逻辑，例如加载缓存等</p>
+<pre><code>    public class ContextLoaderListenerNew extends ContextLoaderListener {
+
+    @Override
+    public void contextInitialized(ServletContextEvent event) {
+        //run spring context loader listener&apos;s initialization function
+        super.contextInitialized(event);
+        //TODO: do something
+    }
+}
+
+/**
+ * Initialize the root web application context.
+ */
+@Override
+public void contextInitialized(ServletContextEvent event) {
+    initWebApplicationContext(event.getServletContext());
+}
+</code></pre></li>
+<li><p>spring允许在bean初始化后或者销毁前进行操作</p>
+</li>
+<li>在方法上加注解@PostConstruct或@PreDestroy，注意PostConstruct是对象构造初始化完后，调用init-method之前调用的，所以如果懒加载的话，bean在容器启动时不会初始化，而是调用时，则不会执行。</li>
+<li>InitializingBean接口中实现afterPropertiesSet（）方法。</li>
+</ol>
+<pre><code>        package org.springframework.beans.factory;
+
+    /**
+     * Interface to be implemented by beans that need to react once all their
+     * properties have been set by a BeanFactory: for example, to perform custom
+     * initialization, or merely to check that all mandatory properties have been set.
+     *
+     * &lt;p&gt;An alternative to implementing InitializingBean is specifying a custom
+     * init-method, for example in an XML bean definition.
+     * For a list of all bean lifecycle methods, see the
+     * {@link BeanFactory BeanFactory javadocs}.
+     *
+     * @author Rod Johnson
+     * @see BeanNameAware
+     * @see BeanFactoryAware
+     * @see BeanFactory
+     * @see org.springframework.beans.factory.support.RootBeanDefinition#getInitMethodName
+     * @see org.springframework.context.ApplicationContextAware
+     */
+    public interface InitializingBean {
+
+        /**
+         * Invoked by a BeanFactory after it has set all bean properties supplied
+         * (and satisfied BeanFactoryAware and ApplicationContextAware).
+         * &lt;p&gt;This method allows the bean instance to perform initialization only
+         * possible when all bean properties have been set and to throw an
+         * exception in the event of misconfiguration.
+         * @throws Exception in the event of misconfiguration (such
+         * as failure to set an essential property) or if initialization fails.
+         */
+        void afterPropertiesSet() throws Exception;
+
+}
+</code></pre><ol start="6">
+<li><p>例如spring-jdbc的AbstractRoutingDataSource分库类，就实现了这个接口，在方法里构建数据源map。</p>
+<pre><code>public abstract class AbstractRoutingDataSource extends AbstractDataSource implements InitializingBean {
+
+@Nullable
+private Map&lt;Object, Object&gt; targetDataSources;
+
+@Nullable
+private Object defaultTargetDataSource;
+
+private boolean lenientFallback = true;
+
+private DataSourceLookup dataSourceLookup = new JndiDataSourceLookup();
+
+@Nullable
+private Map&lt;Object, DataSource&gt; resolvedDataSources;
+
+@Nullable
+private DataSource resolvedDefaultDataSource;
+</code></pre></li>
+</ol>
+<pre><code>/**
+ * Specify the map of target DataSources, with the lookup key as key.
+ * The mapped value can either be a corresponding {@link javax.sql.DataSource}
+ * instance or a data source name String (to be resolved via a
+ * {@link #setDataSourceLookup DataSourceLookup}).
+ * &lt;p&gt;The key can be of arbitrary type; this class implements the
+ * generic lookup process only. The concrete key representation will
+ * be handled by {@link #resolveSpecifiedLookupKey(Object)} and
+ * {@link #determineCurrentLookupKey()}.
+ */
+public void setTargetDataSources(Map&lt;Object, Object&gt; targetDataSources) {
+    this.targetDataSources = targetDataSources;
+}
+
+/**
+ * Specify the default target DataSource, if any.
+ * &lt;p&gt;The mapped value can either be a corresponding {@link javax.sql.DataSource}
+ * instance or a data source name String (to be resolved via a
+ * {@link #setDataSourceLookup DataSourceLookup}).
+ * &lt;p&gt;This DataSource will be used as target if none of the keyed
+ * {@link #setTargetDataSources targetDataSources} match the
+ * {@link #determineCurrentLookupKey()} current lookup key.
+ */
+public void setDefaultTargetDataSource(Object defaultTargetDataSource) {
+    this.defaultTargetDataSource = defaultTargetDataSource;
+}
+
+/**
+ * Specify whether to apply a lenient fallback to the default DataSource
+ * if no specific DataSource could be found for the current lookup key.
+ * &lt;p&gt;Default is &quot;true&quot;, accepting lookup keys without a corresponding entry
+ * in the target DataSource map - simply falling back to the default DataSource
+ * in that case.
+ * &lt;p&gt;Switch this flag to &quot;false&quot; if you would prefer the fallback to only apply
+ * if the lookup key was {@code null}. Lookup keys without a DataSource
+ * entry will then lead to an IllegalStateException.
+ * @see #setTargetDataSources
+ * @see #setDefaultTargetDataSource
+ * @see #determineCurrentLookupKey()
+ */
+public void setLenientFallback(boolean lenientFallback) {
+    this.lenientFallback = lenientFallback;
+}
+
+/**
+ * Set the DataSourceLookup implementation to use for resolving data source
+ * name Strings in the {@link #setTargetDataSources targetDataSources} map.
+ * &lt;p&gt;Default is a {@link JndiDataSourceLookup}, allowing the JNDI names
+ * of application server DataSources to be specified directly.
+ */
+public void setDataSourceLookup(@Nullable DataSourceLookup dataSourceLookup) {
+    this.dataSourceLookup = (dataSourceLookup != null ? dataSourceLookup : new JndiDataSourceLookup());
+}
+
+
+@Override
+public void afterPropertiesSet() {
+    if (this.targetDataSources == null) {
+        throw new IllegalArgumentException(&quot;Property &apos;targetDataSources&apos; is required&quot;);
+    }
+    this.resolvedDataSources = new HashMap&lt;&gt;(this.targetDataSources.size());
+    this.targetDataSources.forEach((key, value) -&gt; {
+        Object lookupKey = resolveSpecifiedLookupKey(key);
+        DataSource dataSource = resolveSpecifiedDataSource(value);
+        this.resolvedDataSources.put(lookupKey, dataSource);
+    });
+    if (this.defaultTargetDataSource != null) {
+        this.resolvedDefaultDataSource = resolveSpecifiedDataSource(this.defaultTargetDataSource);
+    }
+}    
+</code></pre><ol start="7">
+<li>相应的销毁前接口是DisposableBean。</li>
+</ol>
+<pre><code>    /**
+ * Interface to be implemented by beans that want to release resources
+ * on destruction. A BeanFactory is supposed to invoke the destroy
+ * method if it disposes a cached singleton. An application context
+ * is supposed to dispose all of its singletons on close.
+ *
+ * &lt;p&gt;An alternative to implementing DisposableBean is specifying a custom
+ * destroy-method, for example in an XML bean definition.
+ * For a list of all bean lifecycle methods, see the
+ * {@link BeanFactory BeanFactory javadocs}.
+ *
+ * @author Juergen Hoeller
+ * @since 12.08.2003
+ * @see org.springframework.beans.factory.support.RootBeanDefinition#getDestroyMethodName
+ * @see org.springframework.context.ConfigurableApplicationContext#close
+ */
+public interface DisposableBean {
+
+    /**
+     * Invoked by a BeanFactory on destruction of a singleton.
+     * @throws Exception in case of shutdown errors.
+     * Exceptions will get logged but not rethrown to allow
+     * other beans to release their resources too.
+     */
+    void destroy() throws Exception;
+
+}    
+</code></pre>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Spring/" rel="tag"># Spring</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/10/dubbo使用实例/" rel="next" title="dubbo使用实例">
+                <i class="fa fa-chevron-left"></i> dubbo使用实例
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/14/ThreadPoolExecutor参数和线程池任务执行逻辑/" rel="prev" title="ThreadPoolExecutor参数和线程池任务执行逻辑">
+                ThreadPoolExecutor参数和线程池任务执行逻辑 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">91</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">37</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.2.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="Total Visitors">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="Total Views">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.2.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.2.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.2.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
