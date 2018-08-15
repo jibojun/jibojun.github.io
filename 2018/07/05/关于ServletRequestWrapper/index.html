@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="-Xss:每个线程栈内存大小，JDK5+默认1M -Xms:启动时给JVM分配的内存 -Xmx:运行中JVM可以获取的最大内存 -Xmn:堆区分代GC，年轻代的内存大小 -XX:NewRatio:年轻代与老年代的比值，设置3则老年代为年轻代3倍大小 -XX:SurvivorRatio:一个Survivor区和Eden区的比值，年轻代有2个Survivor区和一个Eden区 -XX：PermSize">
-<meta name="keywords" content="JVM">
+  <meta name="description" content="有时可能有如下需求：  filter中要修改请求中的属性。 interceptor中需要反复读取一个requestrequest body中的inputstream（流单向，只能读取一次）。 此时需要使用装饰模式，我们获取的原始对象类型是HttpServletRequest，接口继承了ServletRequest /**  *  * Extends the {@link javax.servlet">
+<meta name="keywords" content="Spring Mvc">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JVM内存设置基本参数">
-<meta property="og:url" content="http://yoursite.com/2017/09/28/JVM内存设置基本参数/index.html">
+<meta property="og:title" content="关于ServletRequestWrapper">
+<meta property="og:url" content="http://yoursite.com/2018/07/05/关于ServletRequestWrapper/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="-Xss:每个线程栈内存大小，JDK5+默认1M -Xms:启动时给JVM分配的内存 -Xmx:运行中JVM可以获取的最大内存 -Xmn:堆区分代GC，年轻代的内存大小 -XX:NewRatio:年轻代与老年代的比值，设置3则老年代为年轻代3倍大小 -XX:SurvivorRatio:一个Survivor区和Eden区的比值，年轻代有2个Survivor区和一个Eden区 -XX：PermSize">
+<meta property="og:description" content="有时可能有如下需求：  filter中要修改请求中的属性。 interceptor中需要反复读取一个requestrequest body中的inputstream（流单向，只能读取一次）。 此时需要使用装饰模式，我们获取的原始对象类型是HttpServletRequest，接口继承了ServletRequest /**  *  * Extends the {@link javax.servlet">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-08-01T16:58:25.111Z">
+<meta property="og:updated_time" content="2018-08-15T17:05:55.597Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JVM内存设置基本参数">
-<meta name="twitter:description" content="-Xss:每个线程栈内存大小，JDK5+默认1M -Xms:启动时给JVM分配的内存 -Xmx:运行中JVM可以获取的最大内存 -Xmn:堆区分代GC，年轻代的内存大小 -XX:NewRatio:年轻代与老年代的比值，设置3则老年代为年轻代3倍大小 -XX:SurvivorRatio:一个Survivor区和Eden区的比值，年轻代有2个Survivor区和一个Eden区 -XX：PermSize">
+<meta name="twitter:title" content="关于ServletRequestWrapper">
+<meta name="twitter:description" content="有时可能有如下需求：  filter中要修改请求中的属性。 interceptor中需要反复读取一个requestrequest body中的inputstream（流单向，只能读取一次）。 此时需要使用装饰模式，我们获取的原始对象类型是HttpServletRequest，接口继承了ServletRequest /**  *  * Extends the {@link javax.servlet">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/09/28/JVM内存设置基本参数/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/05/关于ServletRequestWrapper/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>JVM内存设置基本参数 | Bojun Ji's notes</title>
+  <title>关于ServletRequestWrapper | Bojun Ji's notes</title>
   
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/28/JVM内存设置基本参数/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/05/关于ServletRequestWrapper/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -295,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JVM内存设置基本参数
+          <h1 class="post-title" itemprop="name headline">关于ServletRequestWrapper
               
             
           </h1>
@@ -320,7 +320,7 @@
                 
               
 
-              <time title="Created: 2017-09-28 16:35:15" itemprop="dateCreated datePublished" datetime="2017-09-28T16:35:15+08:00">2017-09-28</time>
+              <time title="Created: 2018-07-05 00:24:54" itemprop="dateCreated datePublished" datetime="2018-07-05T00:24:54+08:00">2018-07-05</time>
             
 
             
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-08-02 00:58:25" itemprop="dateModified" datetime="2018-08-02T00:58:25+08:00">2018-08-02</time>
+                <time title="Modified: 2018-08-16 01:05:55" itemprop="dateModified" datetime="2018-08-16T01:05:55+08:00">2018-08-16</time>
               
             
           </span>
@@ -354,7 +354,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JVM/" itemprop="url" rel="index"><span itemprop="name">JVM</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
 
                 
                 
@@ -396,16 +396,59 @@
       
 
       
-        <p>-Xss:每个线程栈内存大小，JDK5+默认1M</p>
-<p>-Xms:启动时给JVM分配的内存</p>
-<p>-Xmx:运行中JVM可以获取的最大内存</p>
-<p>-Xmn:堆区分代GC，年轻代的内存大小</p>
-<p>-XX:NewRatio:年轻代与老年代的比值，设置3则老年代为年轻代3倍大小</p>
-<p>-XX:SurvivorRatio:一个Survivor区和Eden区的比值，年轻代有2个Survivor区和一个Eden区</p>
-<p>-XX：PermSize:永久代非堆内存的初始值</p>
-<p>-XX:MaxPermSize:永久代非堆内存的最大值</p>
-<p>-XX:MaxTenuringThreshold:垃圾年龄最大值，为0的话存活则直接进老年代跳过Survivor区复制。复制算法中，每次MINOR GC会回收对象，存活的对象会在两块Survivor区域中反复复制，总有一块Survivor区域是空余的，次数就是这个值。如果设大的话会增大对象在年轻代的存活时间。</p>
-<p>1.8前内存大小=堆内存大小（年轻代+老年代）+非堆内存（永久代）</p>
+        <p>有时可能有如下需求：</p>
+<ol>
+<li>filter中要修改请求中的属性。</li>
+<li>interceptor中需要反复读取一个requestrequest body中的inputstream（流单向，只能读取一次）。</li>
+<li><p>此时需要使用装饰模式，我们获取的原始对象类型是HttpServletRequest，接口继承了ServletRequest</p>
+<pre><code>/**
+ *
+ * Extends the {@link javax.servlet.ServletRequest} interface to provide
+ * request information for HTTP servlets.
+ *
+ * &lt;p&gt;The servlet container creates an &lt;code&gt;HttpServletRequest&lt;/code&gt;
+ * object and passes it as an argument to the servlet&apos;s service
+ * methods (&lt;code&gt;doGet&lt;/code&gt;, &lt;code&gt;doPost&lt;/code&gt;, etc).
+ *
+ *
+ * @author     Various
+ */
+
+public interface HttpServletRequest extends ServletRequest
+</code></pre></li>
+<li><p>而装饰类ServletRequestWrapper实现了ServletRequest，是一个基本的装饰类。我们可以继承这个类重写我们需要的方法。</p>
+<pre><code>/**
+ * Provides a convenient implementation of the ServletRequest interface that
+ * can be subclassed by developers wishing to adapt the request to a Servlet.
+ * This class implements the Wrapper or Decorator pattern. Methods default to
+ * calling through to the wrapped request object.
+ *
+ * @see javax.servlet.ServletRequest
+ *
+ * @since Servlet 2.3
+ */
+
+public class ServletRequestWrapper implements ServletRequest    
+</code></pre></li>
+<li><p>而处理HTTP请求更好的方式是继承HttpServletRequestWrapper类，这个类是更具体的装饰类，继承了ServletRequestWrapper。我们需要的是继承后，重写需要的方法，然后在使用时替换成自己的装饰类请求或者响应，因为装饰类继承了原始类，所以传入不会出错。</p>
+<pre><code>/**
+ * Provides a convenient implementation of the HttpServletRequest interface
+ * that can be subclassed by developers wishing to adapt the request to a
+ * Servlet.
+ *
+ * &lt;p&gt;This class implements the Wrapper or Decorator pattern. Methods default
+ * to calling through to the wrapped request object.
+ * 
+ * @see javax.servlet.http.HttpServletRequest
+ * @since Servlet 2.3
+ */
+</code></pre></li>
+</ol>
+<pre><code>public class HttpServletRequestWrapper extends ServletRequestWrapper implements HttpServletRequest
+</code></pre><ol start="6">
+<li>对于上面的场景一，因为Controller中取参数是用得getParameter，getParameterValues方法，只要继承后重写这两个方法改值就可以。然后在filter中将原来的请求对象传入装饰类的构造方法，构建一个装饰类，在doFilter方法中使用装饰类请求。对于响应装饰类也相同。    如果是interceptor的话，可以在preHandle方法中替换请求，postHandle方法中替换响应。</li>
+<li>对于场景二，filter或者interceptor中反复获取inputstream，我们可以在装饰类构造时保存inputstream内容为一个成员属性，重写getInputStream方法每次返回一个新的输入流对象。</li>
+</ol>
 
       
     </div>
@@ -426,7 +469,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/JVM/" rel="tag"># JVM</a>
+            <a href="/tags/Spring-Mvc/" rel="tag"># Spring Mvc</a>
           
         </div>
       
@@ -439,8 +482,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/02/标记清除和标记整理算法/" rel="next" title="标记清除和标记整理算法">
-                <i class="fa fa-chevron-left"></i> 标记清除和标记整理算法
+              <a href="/2018/07/02/JDK8的metaspace/" rel="next" title="JDK8的metaspace">
+                <i class="fa fa-chevron-left"></i> JDK8的metaspace
               </a>
             
           </div>
@@ -449,8 +492,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/09/28/JVM内存推荐配置 copy/" rel="prev" title="JVM内存推荐配置">
-                JVM内存推荐配置 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/07/11/redis分布式锁实现学习/" rel="prev" title="redis分布式锁实现学习">
+                redis分布式锁实现学习 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
