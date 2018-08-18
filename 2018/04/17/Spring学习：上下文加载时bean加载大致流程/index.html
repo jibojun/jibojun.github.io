@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="服务端基本功能：  （如果有注册中心）服务发布，例如在zk上建立节点。 运行时，获取客户端请求反序列化。 根据客户端信息，反射生成相应对象实例，运行方法。 建立响应，序列化后发送回给客户端。  服务端启动发布注册：         //accept connection group     EventLoopGroup bossGroup = new NioEventLoopGroup();">
-<meta name="keywords" content="RPC,分布式">
+  <meta name="description" content="spring bean加载中，ApplicationContext上下文是BeanFactory的子接口，而对于这个多次继承，从ConfigurableApplicationContext开始。ClassPathXmlApplicationContext是加载classpath下上下文配置文件的实现类。 Spring加载上下文时候回初始化bean。主要流程在refresh方法中 public c">
+<meta name="keywords" content="Spring">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RPC框架服务端基本功能设计">
-<meta property="og:url" content="http://yoursite.com/2018/05/21/RPC框架服务端基本功能设计/index.html">
+<meta property="og:title" content="Spring学习：加载上下文时bean加载大致流程">
+<meta property="og:url" content="http://yoursite.com/2018/04/17/Spring学习：上下文加载时bean加载大致流程/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="服务端基本功能：  （如果有注册中心）服务发布，例如在zk上建立节点。 运行时，获取客户端请求反序列化。 根据客户端信息，反射生成相应对象实例，运行方法。 建立响应，序列化后发送回给客户端。  服务端启动发布注册：         //accept connection group     EventLoopGroup bossGroup = new NioEventLoopGroup();">
+<meta property="og:description" content="spring bean加载中，ApplicationContext上下文是BeanFactory的子接口，而对于这个多次继承，从ConfigurableApplicationContext开始。ClassPathXmlApplicationContext是加载classpath下上下文配置文件的实现类。 Spring加载上下文时候回初始化bean。主要流程在refresh方法中 public c">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-07-21T07:36:00.764Z">
+<meta property="og:updated_time" content="2018-08-18T18:01:25.286Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="RPC框架服务端基本功能设计">
-<meta name="twitter:description" content="服务端基本功能：  （如果有注册中心）服务发布，例如在zk上建立节点。 运行时，获取客户端请求反序列化。 根据客户端信息，反射生成相应对象实例，运行方法。 建立响应，序列化后发送回给客户端。  服务端启动发布注册：         //accept connection group     EventLoopGroup bossGroup = new NioEventLoopGroup();">
+<meta name="twitter:title" content="Spring学习：加载上下文时bean加载大致流程">
+<meta name="twitter:description" content="spring bean加载中，ApplicationContext上下文是BeanFactory的子接口，而对于这个多次继承，从ConfigurableApplicationContext开始。ClassPathXmlApplicationContext是加载classpath下上下文配置文件的实现类。 Spring加载上下文时候回初始化bean。主要流程在refresh方法中 public c">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/21/RPC框架服务端基本功能设计/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/17/Spring学习：上下文加载时bean加载大致流程/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>RPC框架服务端基本功能设计 | Bojun Ji's notes</title>
+  <title>Spring学习：加载上下文时bean加载大致流程 | Bojun Ji's notes</title>
   
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/21/RPC框架服务端基本功能设计/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/17/Spring学习：上下文加载时bean加载大致流程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -295,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">RPC框架服务端基本功能设计
+          <h1 class="post-title" itemprop="name headline">Spring学习：加载上下文时bean加载大致流程
               
             
           </h1>
@@ -320,7 +320,7 @@
                 
               
 
-              <time title="Created: 2018-05-21 15:02:02" itemprop="dateCreated datePublished" datetime="2018-05-21T15:02:02+08:00">2018-05-21</time>
+              <time title="Created: 2018-04-17 23:24:33" itemprop="dateCreated datePublished" datetime="2018-04-17T23:24:33+08:00">2018-04-17</time>
             
 
             
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-07-21 15:36:00" itemprop="dateModified" datetime="2018-07-21T15:36:00+08:00">2018-07-21</time>
+                <time title="Modified: 2018-08-19 02:01:25" itemprop="dateModified" datetime="2018-08-19T02:01:25+08:00">2018-08-19</time>
               
             
           </span>
@@ -354,7 +354,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/分布式系统设计/" itemprop="url" rel="index"><span itemprop="name">分布式系统设计</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
 
                 
                 
@@ -396,93 +396,253 @@
       
 
       
-        <p>服务端基本功能：</p>
-<ol>
-<li>（如果有注册中心）服务发布，例如在zk上建立节点。</li>
-<li>运行时，获取客户端请求反序列化。</li>
-<li>根据客户端信息，反射生成相应对象实例，运行方法。</li>
-<li>建立响应，序列化后发送回给客户端。</li>
-</ol>
-<p>服务端启动发布注册：</p>
-<pre><code>        //accept connection group
-    EventLoopGroup bossGroup = new NioEventLoopGroup();
-    //detailed event handler group
-    EventLoopGroup workerGroup = new NioEventLoopGroup();
-    try {
-        ServerBootstrap bootstrap = new ServerBootstrap();
-        //use nio, non-blocking
-        bootstrap.channel(NioServerSocketChannel.class);
-        //bind groups
-        bootstrap.group(bossGroup, workerGroup);
-        //configuration， no delay for TCP transfer,
-        bootstrap.option(ChannelOption.TCP_NODELAY, true);
-        //configuration, connection number,
-        bootstrap.option(ChannelOption.SO_BACKLOG, ConnectionEnum.SERVER_CONNECTION_NUMBER.getIntValue());
-        //configuration, connection keep alive, after acceptor accept the channel
-        bootstrap.childOption(ChannelOption.SO_KEEPALIVE, true);
+        <ol>
+<li>spring bean加载中，ApplicationContext上下文是BeanFactory的子接口，而对于这个多次继承，从ConfigurableApplicationContext开始。ClassPathXmlApplicationContext是加载classpath下上下文配置文件的实现类。</li>
+<li><p>Spring加载上下文时候回初始化bean。主要流程在refresh方法中</p>
+<pre><code>public class ClassPathXmlApplicationContext extends AbstractXmlApplicationContext
+...
 
-        //new connection handler
-        bootstrap.childHandler(new ChannelInitializer&lt;SocketChannel&gt;() {
-            @Override
-            protected void initChannel(SocketChannel sc) throws Exception {
-                // add handlers to pipeline for inbound and outbound
-                ChannelPipeline pipeline = sc.pipeline();
-                pipeline.addLast(&quot;1&quot;,new MessageDecoder(RPCRequest.class));//decoder,inbound
-                pipeline.addLast(&quot;2&quot;,new ServerDataSender());//outbound, send result back to client side
-                pipeline.addLast(&quot;3&quot;,new MessageEncoder(RPCResponse.class));//encoder,outbound
-                pipeline.addLast(&quot;4&quot;,new ServerDataHandler(serviceMap));//inbound, receive and handle data
-            }
-        });
+    public ClassPathXmlApplicationContext(String[] paths, Class&lt;?&gt; clazz, @Nullable ApplicationContext parent)
+        throws BeansException {
 
-        //bind
-        String host=InetAddress.getLocalHost().getHostAddress();
-        int port=ConnectionEnum.SERVER_DEFAULT_EXPORT_PORT.getIntValue();
-        ChannelFuture f = bootstrap.bind(host,port);
-        LogUtil.logInfo(RPCServer.class,LogTipEnum.SERVER_START_LOG_TIP+host+SeparatorEnum.ADDRESS_SEPARATOR+port);
-
-        //register service
-        registry.registerService(host+SeparatorEnum.ADDRESS_SEPARATOR+port);
-
-        if (f.isSuccess()) {
-            LogUtil.logInfo(RPCServer.class,&quot;long connection started successfully&quot;);
-        } else {
-            LogUtil.logError(RPCServer.class,&quot;long connection started failed&quot;);
-
-        }
-    } finally{
-//            bossGroup.shutdownGracefully();
-//            workerGroup.shutdownGracefully();
-        }
-</code></pre><p>服务端获取客户端请求时的处理：</p>
-<pre><code>@Override
-public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-    RPCRequest request = (RPCRequest) msg;
-    RPCResponse response = new RPCResponse();
-    try {
-        response.setRequestId(request.getRequestId());
-        response.setResult(handleRequest(request));
-    } catch (Exception e) {
-        response.setError(e);
-        LogUtil.logError(ServerDataHandler.class, LogTipEnum.SERVER_HANDLE_ERROR_LOG_TIP + e.getMessage());
+    super(parent);
+    Assert.notNull(paths, &quot;Path array must not be null&quot;);
+    Assert.notNull(clazz, &quot;Class argument must not be null&quot;);
+    this.configResources = new Resource[paths.length];
+    for (int i = 0; i &lt; paths.length; i++) {
+        this.configResources[i] = new ClassPathResource(paths[i], clazz);
     }
-    //write event
-    ctx.write(response);
+    refresh();
 }
+</code></pre></li>
+<li><p>这个方法是在上下文抽象类AbstractApplicationContext中定义的，涵盖了bean加载流程。</p>
+<pre><code>    @Override
+public void refresh() throws BeansException, IllegalStateException {
+    synchronized (this.startupShutdownMonitor) {
+        // Prepare this context for refreshing.
+        prepareRefresh();
 
-    private Object handleRequest(RPCRequest request) throws Exception {
-    //classname, got from client request
-    String className = request.getClassName();
-    Object serviceBean = this.serviceMap.get(className);
-    //method init
-    String methodName = request.getMethodName();
-    Class&lt;?&gt;[] parameterTypes = request.getParameterTypes();
-    Object[] parameters = request.getParameters();
-    //reflect to get instance
-    Class&lt;?&gt; cls = Class.forName(className);
-    Method method = cls.getMethod(methodName, parameterTypes);
-    return method.invoke(serviceBean, parameters);
+        // Tell the subclass to refresh the internal bean factory.
+        ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
+
+        // Prepare the bean factory for use in this context.
+        prepareBeanFactory(beanFactory);
+
+        try {
+            // Allows post-processing of the bean factory in context subclasses.
+            postProcessBeanFactory(beanFactory);
+
+            // Invoke factory processors registered as beans in the context.
+            invokeBeanFactoryPostProcessors(beanFactory);
+
+            // Register bean processors that intercept bean creation.
+            registerBeanPostProcessors(beanFactory);
+
+            // Initialize message source for this context.
+            initMessageSource();
+
+            // Initialize event multicaster for this context.
+            initApplicationEventMulticaster();
+
+            // Initialize other special beans in specific context subclasses.
+            onRefresh();
+
+            // Check for listener beans and register them.
+            registerListeners();
+
+            // Instantiate all remaining (non-lazy-init) singletons.
+            finishBeanFactoryInitialization(beanFactory);
+
+            // Last step: publish corresponding event.
+            finishRefresh();
+        }
+
+        catch (BeansException ex) {
+            if (logger.isWarnEnabled()) {
+                logger.warn(&quot;Exception encountered during context initialization - &quot; +
+                        &quot;cancelling refresh attempt: &quot; + ex);
+            }
+
+            // Destroy already created singletons to avoid dangling resources.
+            destroyBeans();
+
+            // Reset &apos;active&apos; flag.
+            cancelRefresh(ex);
+
+            // Propagate exception to caller.
+            throw ex;
+        }
+
+        finally {
+            // Reset common introspection caches in Spring&apos;s core, since we
+            // might not ever need metadata for singleton beans anymore...
+            resetCommonCaches();
+        }
+    }
+}
+</code></pre></li>
+<li><p>第一个方法prepareRefresh调用了validateRequiredProperties做一个基本检查，确保所有required不是false的属性都能被解析。</p>
+<pre><code>protected void prepareRefresh() {
+    this.startupDate = System.currentTimeMillis();
+    this.closed.set(false);
+    this.active.set(true);
+
+    if (logger.isInfoEnabled()) {
+        logger.info(&quot;Refreshing &quot; + this);
+    }
+
+    // Initialize any placeholder property sources in the context environment
+    initPropertySources();
+
+    // Validate that all properties marked as required are resolvable
+    // see ConfigurablePropertyResolver#setRequiredProperties
+    getEnvironment().validateRequiredProperties();
+
+    // Allow for the collection of early ApplicationEvents,
+    // to be published once the multicaster is available...
+    this.earlyApplicationEvents = new LinkedHashSet&lt;&gt;();
 }    
-</code></pre>
+</code></pre></li>
+<li><p>obtainFreshBeanFactory获取了beanFactory对象。</p>
+<pre><code>/**
+ * Tell the subclass to refresh the internal bean factory.
+ * @return the fresh BeanFactory instance
+ * @see #refreshBeanFactory()
+ * @see #getBeanFactory()
+ */
+protected ConfigurableListableBeanFactory obtainFreshBeanFactory() {
+    refreshBeanFactory();
+    ConfigurableListableBeanFactory beanFactory = getBeanFactory();
+    if (logger.isDebugEnabled()) {
+        logger.debug(&quot;Bean factory for &quot; + getDisplayName() + &quot;: &quot; + beanFactory);
+    }
+    return beanFactory;
+}    
+</code></pre></li>
+<li><p>这个方法中主要是refreshBeanFactory方法。AbstractApplicationContext中是抽象方法，在它的子类AbstractRefreshableApplicationContext中实现。主要是关闭任何之前的bean工厂，初始化新的。</p>
+<p> /**</p>
+<ul>
+<li>This implementation performs an actual refresh of this context’s underlying</li>
+<li>bean factory, shutting down the previous bean factory (if any) and</li>
+<li>initializing a fresh bean factory for the next phase of the context’s lifecycle.<br>*/<br>@Override<br>protected final void refreshBeanFactory() throws BeansException {<br> if (hasBeanFactory()) {<pre><code>destroyBeans();
+closeBeanFactory();
+</code></pre> }<br> try {<pre><code>DefaultListableBeanFactory beanFactory = createBeanFactory();
+beanFactory.setSerializationId(getId());
+customizeBeanFactory(beanFactory);
+loadBeanDefinitions(beanFactory);
+synchronized (this.beanFactoryMonitor) {
+    this.beanFactory = beanFactory;
+}
+</code></pre> }<br> catch (IOException ex) {<pre><code>throw new ApplicationContextException(&quot;I/O error parsing bean definition source for &quot; + getDisplayName(), ex);
+</code></pre> }<br>}</li>
+</ul>
+</li>
+<li><p>然后之后会有finishBeanFactoryInitialization完成对bean工厂对象的初始化，加载所有单例bean(scope不设置的话默认单例，需要多例懒加载要把scope改成prototype)</p>
+<pre><code>/**
+ * Finish the initialization of this context&apos;s bean factory,
+ * initializing all remaining singleton beans.
+ */
+protected void finishBeanFactoryInitialization(ConfigurableListableBeanFactory beanFactory) {
+    // Initialize conversion service for this context.
+    if (beanFactory.containsBean(CONVERSION_SERVICE_BEAN_NAME) &amp;&amp;
+            beanFactory.isTypeMatch(CONVERSION_SERVICE_BEAN_NAME, ConversionService.class)) {
+        beanFactory.setConversionService(
+                beanFactory.getBean(CONVERSION_SERVICE_BEAN_NAME, ConversionService.class));
+    }
+
+    // Register a default embedded value resolver if no bean post-processor
+    // (such as a PropertyPlaceholderConfigurer bean) registered any before:
+    // at this point, primarily for resolution in annotation attribute values.
+    if (!beanFactory.hasEmbeddedValueResolver()) {
+        beanFactory.addEmbeddedValueResolver(strVal -&gt; getEnvironment().resolvePlaceholders(strVal));
+    }
+
+    // Initialize LoadTimeWeaverAware beans early to allow for registering their transformers early.
+    String[] weaverAwareNames = beanFactory.getBeanNamesForType(LoadTimeWeaverAware.class, false, false);
+    for (String weaverAwareName : weaverAwareNames) {
+        getBean(weaverAwareName);
+    }
+
+    // Stop using the temporary ClassLoader for type matching.
+    beanFactory.setTempClassLoader(null);
+
+    // Allow for caching all bean definition metadata, not expecting further changes.
+    beanFactory.freezeConfiguration();
+
+    // Instantiate all remaining (non-lazy-init) singletons.
+    beanFactory.preInstantiateSingletons();
+}
+</code></pre></li>
+<li><p>DefaultListableBeanFactory是bean工厂最终对象。可以看出最终初始化里调用了它的preInstantiateSingletons来初始化单例bean。    </p>
+<pre><code>@Override
+public void preInstantiateSingletons() throws BeansException {
+    if (this.logger.isDebugEnabled()) {
+        this.logger.debug(&quot;Pre-instantiating singletons in &quot; + this);
+    }
+
+    // Iterate over a copy to allow for init methods which in turn register new bean definitions.
+    // While this may not be part of the regular factory bootstrap, it does otherwise work fine.
+    List&lt;String&gt; beanNames = new ArrayList&lt;&gt;(this.beanDefinitionNames);
+
+    // Trigger initialization of all non-lazy singleton beans...
+    for (String beanName : beanNames) {
+        RootBeanDefinition bd = getMergedLocalBeanDefinition(beanName);
+        if (!bd.isAbstract() &amp;&amp; bd.isSingleton() &amp;&amp; !bd.isLazyInit()) {
+            if (isFactoryBean(beanName)) {
+                Object bean = getBean(FACTORY_BEAN_PREFIX + beanName);
+                if (bean instanceof FactoryBean) {
+                    final FactoryBean&lt;?&gt; factory = (FactoryBean&lt;?&gt;) bean;
+                    boolean isEagerInit;
+                    if (System.getSecurityManager() != null &amp;&amp; factory instanceof SmartFactoryBean) {
+                        isEagerInit = AccessController.doPrivileged((PrivilegedAction&lt;Boolean&gt;)
+                                        ((SmartFactoryBean&lt;?&gt;) factory)::isEagerInit,
+                                getAccessControlContext());
+                    }
+                    else {
+                        isEagerInit = (factory instanceof SmartFactoryBean &amp;&amp;
+                                ((SmartFactoryBean&lt;?&gt;) factory).isEagerInit());
+                    }
+                    if (isEagerInit) {
+                        getBean(beanName);
+                    }
+                }
+            }
+            else {
+                getBean(beanName);
+            }
+        }
+    }
+
+    // Trigger post-initialization callback for all applicable beans...
+    for (String beanName : beanNames) {
+        Object singletonInstance = getSingleton(beanName);
+        if (singletonInstance instanceof SmartInitializingSingleton) {
+            final SmartInitializingSingleton smartSingleton = (SmartInitializingSingleton) singletonInstance;
+            if (System.getSecurityManager() != null) {
+                AccessController.doPrivileged((PrivilegedAction&lt;Object&gt;) () -&gt; {
+                    smartSingleton.afterSingletonsInstantiated();
+                    return null;
+                }, getAccessControlContext());
+            }
+            else {
+                smartSingleton.afterSingletonsInstantiated();
+            }
+        }
+    }
+}
+</code></pre></li>
+<li><p>而最后的getBean方法调用了熟悉的doGetBean，对bean进行装载。</p>
+<pre><code>    //---------------------------------------------------------------------
+// Implementation of BeanFactory interface
+//---------------------------------------------------------------------
+
+    @Override
+    public Object getBean(String name) throws BeansException {
+        return doGetBean(name, null, null, false);
+}    
+</code></pre></li>
+</ol>
+
       
     </div>
 
@@ -502,9 +662,7 @@ public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception 
       
         <div class="post-tags">
           
-            <a href="/tags/RPC/" rel="tag"># RPC</a>
-          
-            <a href="/tags/分布式/" rel="tag"># 分布式</a>
+            <a href="/tags/Spring/" rel="tag"># Spring</a>
           
         </div>
       
@@ -517,8 +675,8 @@ public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception 
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/21/Semaphore使用/" rel="next" title="Semaphore使用">
-                <i class="fa fa-chevron-left"></i> Semaphore使用
+              <a href="/2018/04/17/BIO-NIO特点，简单比较/" rel="next" title="BIO, NIO特点，简单比较">
+                <i class="fa fa-chevron-left"></i> BIO, NIO特点，简单比较
               </a>
             
           </div>
@@ -527,8 +685,8 @@ public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception 
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/21/RPC框架客户端基本功能设计/" rel="prev" title="RPC框架客户端基本功能设计">
-                RPC框架客户端基本功能设计 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/04/18/GuavaCache和ehcache的简单对比/" rel="prev" title="GuavaCache和ehcache的简单对比">
+                GuavaCache和ehcache的简单对比 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
