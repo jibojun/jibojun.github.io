@@ -1884,7 +1884,7 @@ Wait()无法定义时间自动唤醒，需要其他线程notify(),notifyAll()来
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/05/自旋锁的可重入改造/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/09/Spring-bean的实例化/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -1903,8 +1903,8 @@ Wait()无法定义时间自动唤醒，需要其他线程notify(),notifyAll()来
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/05/自旋锁的可重入改造/" itemprop="url">
-                  自旋锁的可重入改造
+                <a class="post-title-link" href="/2018/04/09/Spring-bean的实例化/" itemprop="url">
+                  Spring bean的实例化
                 </a>
               
             
@@ -1930,7 +1930,7 @@ Wait()无法定义时间自动唤醒，需要其他线程notify(),notifyAll()来
                 
               
 
-              <time title="Created: 2018-04-05 16:45:10" itemprop="dateCreated datePublished" datetime="2018-04-05T16:45:10+08:00">2018-04-05</time>
+              <time title="Created: 2018-04-09 17:43:36" itemprop="dateCreated datePublished" datetime="2018-04-09T17:43:36+08:00">2018-04-09</time>
             
 
             
@@ -1947,7 +1947,7 @@ Wait()无法定义时间自动唤醒，需要其他线程notify(),notifyAll()来
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-05-13 18:27:35" itemprop="dateModified" datetime="2018-05-13T18:27:35+08:00">2018-05-13</time>
+                <time title="Modified: 2018-08-19 18:41:27" itemprop="dateModified" datetime="2018-08-19T18:41:27+08:00">2018-08-19</time>
               
             
           </span>
@@ -1964,7 +1964,7 @@ Wait()无法定义时间自动唤醒，需要其他线程notify(),notifyAll()来
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java并发编程/" itemprop="url" rel="index"><span itemprop="name">Java并发编程</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
 
                 
                 
@@ -2000,12 +2000,14 @@ Wait()无法定义时间自动唤醒，需要其他线程notify(),notifyAll()来
       
         
           
-          可重入性：线程1获取实例a的锁，进入里面A（）方法执行，并未释放锁时候可以再次获得锁进入方法。同线程未放锁前再次尝试获取锁则会死锁，这可以理解为不可重入。
-自旋锁靠循环不停执行，直到拿到锁，不释放CPU时间片资源(不进入内核态等待，而是停留用户态自旋)，有减少线程上下文切换，高响应的作用。但是如果同
+          
+spring首先是一个bean容器，加载时，会读取上下文配置文件。
+将bean信息配置成bean definition对象。持有bean的各种定义属性，例如scope，是否懒加载等。
+BeanDefinitionRegistry接口中方法registerBeanDefinition负责将bean注
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/04/05/自旋锁的可重入改造/#more" rel="contents">
+            <a class="btn" href="/2018/04/09/Spring-bean的实例化/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -2093,7 +2095,7 @@ Wait()无法定义时间自动唤醒，需要其他线程notify(),notifyAll()来
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">94</span>
+                    <span class="site-state-item-count">95</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
