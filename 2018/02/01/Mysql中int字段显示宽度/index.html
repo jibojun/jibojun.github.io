@@ -110,7 +110,7 @@
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
 <meta property="og:description" content="Mysql中int()括号中长度并不影响数据存储，不同int类占的字节（1byte=8bits）分别如下： tinyint: 1字节 smallint: 2字节 mediumint: 3字节 int: 4字节 bigint: 8字节  而int(）括号中的值代表了显示宽度，最大有效显示宽度为255.  显示宽度指的是在填充0属性zerofill开启时，假设设为5，具体数字为1，则会从左侧以0填充">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-08-31T16:39:06.947Z">
+<meta property="og:updated_time" content="2018-09-01T19:12:38.681Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql中int字段显示宽度">
 <meta name="twitter:description" content="Mysql中int()括号中长度并不影响数据存储，不同int类占的字节（1byte=8bits）分别如下： tinyint: 1字节 smallint: 2字节 mediumint: 3字节 int: 4字节 bigint: 8字节  而int(）括号中的值代表了显示宽度，最大有效显示宽度为255.  显示宽度指的是在填充0属性zerofill开启时，假设设为5，具体数字为1，则会从左侧以0填充">
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-09-01 00:39:06" itemprop="dateModified" datetime="2018-09-01T00:39:06+08:00">2018-09-01</time>
+                <time title="Modified: 2018-09-02 03:12:38" itemprop="dateModified" datetime="2018-09-02T03:12:38+08:00">2018-09-02</time>
               
             
           </span>
@@ -413,11 +413,9 @@ bigint: 8字节
 <li><p>int默认11.</p>
 </li>
 <li><p>有一些业务场景会用到显示宽度设置与0填充属性，例如：</p>
-<ol>
-<li>月份列中10月前的月份，希望显示2位，则可以设宽度为2填充0，则2月为02。</li>
-<li>一些固定长度的ID,流水号，需要左侧填充0，则可以开始0填充并按照要求设置显示宽度    </li>
-</ol>
-</li>
+<pre><code>1. 月份列中10月前的月份，希望显示2位，则可以设宽度为2填充0，则2月为02。
+2. 一些固定长度的ID,流水号，需要左侧填充0，则可以开始0填充并按照要求设置显示宽度    
+</code></pre></li>
 </ol>
 
       
@@ -454,8 +452,8 @@ bigint: 8字节
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/26/Kafka基本组件/" rel="next" title="Kafka基本组件">
-                <i class="fa fa-chevron-left"></i> Kafka基本组件
+              <a href="/2018/01/30/Mysql-int类型的unsigned属性/" rel="next" title="Mysql int类型的unsigned属性">
+                <i class="fa fa-chevron-left"></i> Mysql int类型的unsigned属性
               </a>
             
           </div>
@@ -531,7 +529,7 @@ bigint: 8字节
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">97</span>
+                    <span class="site-state-item-count">98</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

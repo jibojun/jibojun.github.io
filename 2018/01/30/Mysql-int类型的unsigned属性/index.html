@@ -102,25 +102,24 @@
 
 
 
-  <meta name="description" content="CAS操作的ABA问题：CAS为读取内存中值与自己的预期值对比，对比成功则写入自己的更新值。失败可以返回错误或者自旋重试直到成功。但是会带来ABA问题：    1.线程1读取内存中的值，当前是A，改为B，再改为A。    2.线程2执行CAS操作，预期值A，要改成B，读取值A对比成功所以更新值为B。线程2只关注当前读出的值，并无法        得知之前值得改变，在实际业务场景中可能带来问题。 A">
-<meta name="keywords" content="Java并发编程">
+  <meta name="description" content="mysql中int字段具有zerofill和unsigned属性，unsigned代表着无符号的意思。 unsigned使Int类型变为非负数。 主要作用是扩充正数范围，不加unsigned的tinyint范围为-128到127，加了unsigned，则不能为负数，变成0-255。例如设置ID主键时经常使用 各种int类型加unsigned与不加unsigned的取值范围如下：  1. tiny">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CAS ABA问题以及版本控制方法实现乐观锁">
-<meta property="og:url" content="http://yoursite.com/2018/03/05/CAS ABA问题以及版本控制方法实现乐观锁/index.html">
+<meta property="og:title" content="Mysql int类型的unsigned属性">
+<meta property="og:url" content="http://yoursite.com/2018/01/30/Mysql-int类型的unsigned属性/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="CAS操作的ABA问题：CAS为读取内存中值与自己的预期值对比，对比成功则写入自己的更新值。失败可以返回错误或者自旋重试直到成功。但是会带来ABA问题：    1.线程1读取内存中的值，当前是A，改为B，再改为A。    2.线程2执行CAS操作，预期值A，要改成B，读取值A对比成功所以更新值为B。线程2只关注当前读出的值，并无法        得知之前值得改变，在实际业务场景中可能带来问题。 A">
+<meta property="og:description" content="mysql中int字段具有zerofill和unsigned属性，unsigned代表着无符号的意思。 unsigned使Int类型变为非负数。 主要作用是扩充正数范围，不加unsigned的tinyint范围为-128到127，加了unsigned，则不能为负数，变成0-255。例如设置ID主键时经常使用 各种int类型加unsigned与不加unsigned的取值范围如下：  1. tiny">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-02T15:12:46.666Z">
+<meta property="og:updated_time" content="2018-09-01T19:12:31.362Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CAS ABA问题以及版本控制方法实现乐观锁">
-<meta name="twitter:description" content="CAS操作的ABA问题：CAS为读取内存中值与自己的预期值对比，对比成功则写入自己的更新值。失败可以返回错误或者自旋重试直到成功。但是会带来ABA问题：    1.线程1读取内存中的值，当前是A，改为B，再改为A。    2.线程2执行CAS操作，预期值A，要改成B，读取值A对比成功所以更新值为B。线程2只关注当前读出的值，并无法        得知之前值得改变，在实际业务场景中可能带来问题。 A">
+<meta name="twitter:title" content="Mysql int类型的unsigned属性">
+<meta name="twitter:description" content="mysql中int字段具有zerofill和unsigned属性，unsigned代表着无符号的意思。 unsigned使Int类型变为非负数。 主要作用是扩充正数范围，不加unsigned的tinyint范围为-128到127，加了unsigned，则不能为负数，变成0-255。例如设置ID主键时经常使用 各种int类型加unsigned与不加unsigned的取值范围如下：  1. tiny">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/05/CAS ABA问题以及版本控制方法实现乐观锁/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/30/Mysql-int类型的unsigned属性/"/>
 
 
 
@@ -130,7 +129,7 @@
   };
 </script>
 
-  <title>CAS ABA问题以及版本控制方法实现乐观锁 | Bojun Ji's notes</title>
+  <title>Mysql int类型的unsigned属性 | Bojun Ji's notes</title>
   
 
 
@@ -278,7 +277,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/05/CAS ABA问题以及版本控制方法实现乐观锁/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/30/Mysql-int类型的unsigned属性/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -295,7 +294,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">CAS ABA问题以及版本控制方法实现乐观锁
+          <h1 class="post-title" itemprop="name headline">Mysql int类型的unsigned属性
               
             
           </h1>
@@ -320,7 +319,7 @@
                 
               
 
-              <time title="Created: 2018-03-05 22:40:43" itemprop="dateCreated datePublished" datetime="2018-03-05T22:40:43+08:00">2018-03-05</time>
+              <time title="Created: 2018-01-30 00:40:35" itemprop="dateCreated datePublished" datetime="2018-01-30T00:40:35+08:00">2018-01-30</time>
             
 
             
@@ -337,29 +336,11 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-05-02 23:12:46" itemprop="dateModified" datetime="2018-05-02T23:12:46+08:00">2018-05-02</time>
+                <time title="Modified: 2018-09-02 03:12:31" itemprop="dateModified" datetime="2018-09-02T03:12:31+08:00">2018-09-02</time>
               
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java并发编程/" itemprop="url" rel="index"><span itemprop="name">Java并发编程</span></a></span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -396,23 +377,27 @@
       
 
       
-        <p>CAS操作的ABA问题：<br>CAS为读取内存中值与自己的预期值对比，对比成功则写入自己的更新值。失败可以返回错误或者自旋重试直到成功。<br>但是会带来ABA问题：<br>    1.线程1读取内存中的值，当前是A，改为B，再改为A。<br>    2.线程2执行CAS操作，预期值A，要改成B，读取值A对比成功所以更新值为B。线程2只关注当前读出的值，并无法<br>        得知之前值得改变，在实际业务场景中可能带来问题。</p>
-<p>ABA问题较为理论化，贴一个网上看到的一个ABA错误实例：</p>
-<p>小明在提款机，提取了50元，因为提款机问题，有两个线程，同时把余额从100变为50<br>线程1（提款机）：获取当前值100，期望更新为50，<br>线程2（提款机）：获取当前值100，期望更新为50，<br>线程1成功执行，线程2某种原因block了，这时，某人给小明汇款50<br>线程3（默认）：获取当前值50，期望更新为100，<br>这时候线程3成功执行，余额变为100，<br>线程2从Block中恢复，获取到的也是100，compare之后，继续更新余额为50！！！<br>此时可以看到，实际余额应该为100（100-50+50），但是实际上变为了50（100-50+50-50）这就是ABA问题带来的成功提交</p>
-<p>版本控制实现乐观锁：<br>    1.给数据库表加一列版本号或者Java类中加一个版本号成员变量。<br>    2.每次需要先读取数据，此时也获取了数据的版本号。<br>    3.写入时候目标是版本号+1。提交数据写操作时，判断版本号是否等于第一次读出的，对比成功则写入，不成功则认为<br>        是过期数据，放弃操作。</p>
-<pre><code>    例如以下，比较，只有和之前版本号相同才做更新操作：
+        <ol>
+<li>mysql中int字段具有zerofill和unsigned属性，unsigned代表着无符号的意思。</li>
+<li>unsigned使Int类型变为非负数。</li>
+<li>主要作用是扩充正数范围，不加unsigned的tinyint范围为-128到127，加了unsigned，则不能为负数，变成0-255。例如设置ID主键时经常使用</li>
+<li>各种int类型加unsigned与不加unsigned的取值范围如下：</li>
+</ol>
+<pre><code>1. tinyint: 不加：-128到127 加：0到255 1字节
+2. smallint: 不加：-32768到32767 加：0到65535 2字节
+3. mediumint: 不加：-8388608到8388607 加：0到16777215 3字节
+4. int: 不加：-2147683648到2147683647 加：0到4294967295 4字节
+5. bigint: 不加：-9223372036854到9223373036854775807 加：0到18446744073709551615 8字节
+</code></pre><ol start="5">
+<li><p>unsigned只针对整型，float和double精度类型和decimal（数字类型，无精度缺失）没有，任何时候有负数。</p>
+<pre><code>1. float: 最小非零值：±1.175494351e - 38 4字节
+2. double: 最小非零值：±2.2250738585072014e - 308 8字节
+3. decimal: 取决于decimal(a,b)中的a,b值，a为小数点左右存储总长最大值，b为小数点右边数字个数最大值。 占用存储空间为a+2字节
+</code></pre></li>
+<li><p>因为整型设置了unsigned属性后只能为非负数，所以在需要存储负数场景时不能使用。    </p>
+</li>
+</ol>
 
-    SQL更新数据库行：
-    update A set number=5 where id=10 and version=1
-    Java操作对象：
-    if(a.getVersion()==oldVersion){
-        a.setNumber(5);
-    }
-
-
-4.上面例子中，如果加上版本号，线程2之前获取当前值时会有一个版本号，但后面线程3改动后版本号+1，线程2提交时
-    则会认为自己是过期数据从而放弃操作。
-</code></pre>
       
     </div>
 
@@ -430,12 +415,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Java并发编程/" rel="tag"># Java并发编程</a>
-          
-        </div>
-      
 
       
       
@@ -445,8 +424,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/04/动态代理两种方法/" rel="next" title="动态代理两种方法">
-                <i class="fa fa-chevron-left"></i> 动态代理两种方法
+              <a href="/2018/01/26/Kafka基本组件/" rel="next" title="Kafka基本组件">
+                <i class="fa fa-chevron-left"></i> Kafka基本组件
               </a>
             
           </div>
@@ -455,8 +434,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/05/Spring-AOP理解/" rel="prev" title="Spring AOP理解">
-                Spring AOP理解 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/02/01/Mysql中int字段显示宽度/" rel="prev" title="Mysql中int字段显示宽度">
+                Mysql中int字段显示宽度 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
