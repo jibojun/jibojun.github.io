@@ -102,20 +102,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Bojun Ji&#39;s notes">
-<meta property="og:url" content="http://yoursite.com/tags/类加载/index.html">
+  <meta name="description" content="mysql有四种char类型：char,vchar,nchar和nvchar。 char与vchar的区别在于char是定长而vchar是变长，共同点是都是非unicode。 char(a)中的a在mysql 4以及以前中代表最大字节数，而5开始代表字符数。超过这个长度的将被截断，对于char如果不满长度则会右边开始填充空格存储。 如果前面带n的数据类型则是unicode的。nchar和nvch">
+<meta name="keywords" content="关系型数据库,Mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql中char相关类型">
+<meta property="og:url" content="http://yoursite.com/2018/02/02/Mysql中char相关类型/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
+<meta property="og:description" content="mysql有四种char类型：char,vchar,nchar和nvchar。 char与vchar的区别在于char是定长而vchar是变长，共同点是都是非unicode。 char(a)中的a在mysql 4以及以前中代表最大字节数，而5开始代表字符数。超过这个长度的将被截断，对于char如果不满长度则会右边开始填充空格存储。 如果前面带n的数据类型则是unicode的。nchar和nvch">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-09-02T10:35:14.563Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bojun Ji&#39;s notes">
+<meta name="twitter:title" content="mysql中char相关类型">
+<meta name="twitter:description" content="mysql有四种char类型：char,vchar,nchar和nvchar。 char与vchar的区别在于char是定长而vchar是变长，共同点是都是非unicode。 char(a)中的a在mysql 4以及以前中代表最大字节数，而5开始代表字符数。超过这个长度的将被截断，对于char如果不满长度则会右边开始填充空格存储。 如果前面带n的数据类型则是unicode的。nchar和nvch">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/类加载/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/02/02/Mysql中char相关类型/"/>
 
 
 
@@ -125,7 +130,7 @@
   };
 </script>
 
-  <title>Tag: 类加载 | Bojun Ji's notes</title>
+  <title>mysql中char相关类型 | Bojun Ji's notes</title>
   
 
 
@@ -172,7 +177,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -253,131 +258,229 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block tag">
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>类加载<small>Tag</small>
-        </h1>
-      </div>
-
-      
-        
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/02/Mysql中char相关类型/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bojun Ji's notes">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/03/21/反射Class-forName-与ClassLoader-loadClass-区别/" itemprop="url">
-              
-                <span itemprop="name">反射Class.forName()与ClassLoader.loadClass()区别</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">mysql中char相关类型
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-21T02:34:24+08:00"
-              content="2018-03-21" >
-          03-21
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
 
-    </header>
-  </article>
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-02-02 03:14:18" itemprop="dateCreated datePublished" datetime="2018-02-02T03:14:18+08:00">2018-02-02</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-09-02 18:35:14" itemprop="dateModified" datetime="2018-09-02T18:35:14+08:00">2018-09-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/关系型数据库/" itemprop="url" rel="index"><span itemprop="name">关系型数据库</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/09/打破双亲委托模型方法/" itemprop="url">
-              
-                <span itemprop="name">打破双亲委托模型方法</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-09T00:15:12+08:00"
-              content="2018-03-09" >
-          03-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/08/Java类加载和双亲委托模型/" itemprop="url">
-              
-                <span itemprop="name">Java类加载和双亲委托模型</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-08T23:30:47+08:00"
-              content="2018-03-08" >
-          03-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <ol>
+<li>mysql有四种char类型：char,vchar,nchar和nvchar。</li>
+<li>char与vchar的区别在于char是定长而vchar是变长，共同点是都是非unicode。</li>
+<li>char(a)中的a在mysql 4以及以前中代表最大字节数，而5开始代表字符数。超过这个长度的将被截断，对于char如果不满长度则会右边开始填充空格存储。</li>
+<li>如果前面带n的数据类型则是unicode的。nchar和nvchar就是对应于unicode编码的char和vchar。</li>
+<li>实际业务场景中，如果这一列确定定长，例如手机号码，身份证号码，位数确定，则可以使用char，存储效率更高。</li>
+<li>对于不定长的列，例如城市名，则使用vchar。</li>
+<li>如果一列中需要会既有中文的行，也有英文的行。为了多语言环境字符集兼容，则需要UNICODE，英文字符也是2个字节存储，避免了问题。此时根据定长和变长选用nchar和nvchar。</li>
+</ol>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/关系型数据库/" rel="tag"># 关系型数据库</a>
+          
+            <a href="/tags/Mysql/" rel="tag"># Mysql</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/01/Mysql中int字段显示宽度/" rel="next" title="Mysql中int字段显示宽度">
+                <i class="fa fa-chevron-left"></i> Mysql中int字段显示宽度
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/05/JDK1-8-stream代替for循环/" rel="prev" title="JDK1.8 stream代替for循环">
+                JDK1.8 stream代替for循环 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -730,6 +833,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
 
   
 
