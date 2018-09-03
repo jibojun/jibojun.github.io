@@ -102,20 +102,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Bojun Ji&#39;s notes">
-<meta property="og:url" content="http://yoursite.com/tags/BIO/index.html">
+  <meta name="description" content="组合索引即为多列索引。 假设一条SQL为select * from table where a=1 and b=2，假设a列和b列上都有单列索引，此时执行计划中会取一个索引（一般是结果集较小的）出中间结果再筛选符合另一个条件的。 组合索引既为针对这种情况，如果以这两列组合，则可以直接命中。 组合索引中遵循最左优先，最左的列也被叫做前缀，例如（a,b,c）索引等与a单列索引+（a,b）组合加(a,">
+<meta name="keywords" content="关系型数据库,Mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql中组合索引">
+<meta property="og:url" content="http://yoursite.com/2018/03/03/Mysql中组合索引/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
+<meta property="og:description" content="组合索引即为多列索引。 假设一条SQL为select * from table where a=1 and b=2，假设a列和b列上都有单列索引，此时执行计划中会取一个索引（一般是结果集较小的）出中间结果再筛选符合另一个条件的。 组合索引既为针对这种情况，如果以这两列组合，则可以直接命中。 组合索引中遵循最左优先，最左的列也被叫做前缀，例如（a,b,c）索引等与a单列索引+（a,b）组合加(a,">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-09-03T15:00:57.255Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bojun Ji&#39;s notes">
+<meta name="twitter:title" content="Mysql中组合索引">
+<meta name="twitter:description" content="组合索引即为多列索引。 假设一条SQL为select * from table where a=1 and b=2，假设a列和b列上都有单列索引，此时执行计划中会取一个索引（一般是结果集较小的）出中间结果再筛选符合另一个条件的。 组合索引既为针对这种情况，如果以这两列组合，则可以直接命中。 组合索引中遵循最左优先，最左的列也被叫做前缀，例如（a,b,c）索引等与a单列索引+（a,b）组合加(a,">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/BIO/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/03/Mysql中组合索引/"/>
 
 
 
@@ -125,7 +130,7 @@
   };
 </script>
 
-  <title>Tag: BIO | Bojun Ji's notes</title>
+  <title>Mysql中组合索引 | Bojun Ji's notes</title>
   
 
 
@@ -172,7 +177,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -253,75 +258,232 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>BIO<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/03/Mysql中组合索引/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bojun Ji's notes">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/04/17/BIO-NIO特点，简单比较/" itemprop="url">
-              
-                <span itemprop="name">BIO, NIO特点，简单比较</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Mysql中组合索引
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-17T00:04:31+08:00"
-              content="2018-04-17" >
-          04-17
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
 
-    </header>
-  </article>
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-03-03 22:20:35" itemprop="dateCreated datePublished" datetime="2018-03-03T22:20:35+08:00">2018-03-03</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-09-03 23:00:57" itemprop="dateModified" datetime="2018-09-03T23:00:57+08:00">2018-09-03</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/关系型数据库/" itemprop="url" rel="index"><span itemprop="name">关系型数据库</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ol>
+<li>组合索引即为多列索引。</li>
+<li>假设一条SQL为select * from table where a=1 and b=2，假设a列和b列上都有单列索引，此时执行计划中会取一个索引（一般是结果集较小的）出中间结果再筛选符合另一个条件的。</li>
+<li>组合索引既为针对这种情况，如果以这两列组合，则可以直接命中。</li>
+<li>组合索引中遵循最左优先，最左的列也被叫做前缀，例如（a,b,c）索引等与a单列索引+（a,b）组合加(a,b,c)组合。</li>
+<li>组合索引有独特的命中规则，假设查询where中涉及所有组合索引列且为and，则命中。or或条件则无法命中，因为等与符合两列条件结果叠加。</li>
+<li>where条件涉及部分列，但涉及前缀索引列（左边的），则可以触发组合索引。</li>
+<li>不涉及前缀索引列，则无法触发，比如上面例子中查询涉及b和c列，但不涉及a列。</li>
+<li>需要注意查询只用到一个索引。</li>
+<li>对于组合索引，应当将每次都涉及查询条件的列作为组合索引中前缀列，增加组合索引的命中几率。</li>
+<li>无论单列还是组合索引，都需要避免where中对列进行运算，例如聚合，这样无法命中索引，导致全表扫描。</li>
+</ol>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/关系型数据库/" rel="tag"># 关系型数据库</a>
+          
+            <a href="/tags/Mysql/" rel="tag"># Mysql</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/03/CAS操作和乐观锁思想/" rel="next" title="CAS操作和乐观锁思想">
+                <i class="fa fa-chevron-left"></i> CAS操作和乐观锁思想
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/04/静态代理/" rel="prev" title="静态代理">
+                静态代理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -674,6 +836,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
 
   
 
