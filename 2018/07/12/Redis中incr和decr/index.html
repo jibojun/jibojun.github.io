@@ -102,20 +102,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Bojun Ji&#39;s notes">
-<meta property="og:url" content="http://yoursite.com/categories/Java并发编程/index.html">
+  <meta name="description" content="incr和decr是redis中自增和自减的命令。 大致分为2类方法，incr/decr会增减1，incrby/decrby会增加，减少方法的第二个传参。 返回值是此条KEY上新设的值。 redis本身只有5种数据类型，并没有int,double之类，此类存储都是用string，然后转换处理。 /**  * INCRBY work just like {@link #incr(String) I">
+<meta name="keywords" content="Redis,分布式缓存">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis中incr和decr">
+<meta property="og:url" content="http://yoursite.com/2018/07/12/Redis中incr和decr/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
+<meta property="og:description" content="incr和decr是redis中自增和自减的命令。 大致分为2类方法，incr/decr会增减1，incrby/decrby会增加，减少方法的第二个传参。 返回值是此条KEY上新设的值。 redis本身只有5种数据类型，并没有int,double之类，此类存储都是用string，然后转换处理。 /**  * INCRBY work just like {@link #incr(String) I">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-09-16T11:41:40.747Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bojun Ji&#39;s notes">
+<meta name="twitter:title" content="Redis中incr和decr">
+<meta name="twitter:description" content="incr和decr是redis中自增和自减的命令。 大致分为2类方法，incr/decr会增减1，incrby/decrby会增加，减少方法的第二个传参。 返回值是此条KEY上新设的值。 redis本身只有5种数据类型，并没有int,double之类，此类存储都是用string，然后转换处理。 /**  * INCRBY work just like {@link #incr(String) I">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/Java并发编程/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/12/Redis中incr和decr/"/>
 
 
 
@@ -125,7 +130,7 @@
   };
 </script>
 
-  <title>Category: Java并发编程 | Bojun Ji's notes</title>
+  <title>Redis中incr和decr | Bojun Ji's notes</title>
   
 
 
@@ -172,7 +177,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -253,472 +258,275 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block category">
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Java并发编程<small>Category</small>
-        </h1>
-      </div>
-
-      
-        
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/12/Redis中incr和decr/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bojun Ji's notes">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/06/16/ThreadLocal原理和内存泄漏问题/" itemprop="url">
-              
-                <span itemprop="name">ThreadLocal原理和内存泄漏问题</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Redis中incr和decr
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-06-16T00:48:55+08:00"
-              content="2018-06-16" >
-          06-16
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
 
-    </header>
-  </article>
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-07-12 23:21:39" itemprop="dateCreated datePublished" datetime="2018-07-12T23:21:39+08:00">2018-07-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-09-16 19:41:40" itemprop="dateModified" datetime="2018-09-16T19:41:40+08:00">2018-09-16</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/06/05/ThreadLocal使用/" itemprop="url">
-              
-                <span itemprop="name">ThreadLocal使用</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-06-05T23:00:43+08:00"
-              content="2018-06-05" >
-          06-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/06/01/线程池awiatTermination/" itemprop="url">
-              
-                <span itemprop="name">线程池awaitTermination</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-06-01T15:56:15+08:00"
-              content="2018-06-01" >
-          06-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/06/01/线程池终止shutDown和shutDownNow/" itemprop="url">
-              
-                <span itemprop="name">线程池终止shutDown和shutDownNow</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-06-01T15:54:00+08:00"
-              content="2018-06-01" >
-          06-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/22/synchronized对象锁和类锁/" itemprop="url">
-              
-                <span itemprop="name">synchronized对象锁和类锁</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-22T23:54:04+08:00"
-              content="2018-05-22" >
-          05-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/21/Semaphore使用/" itemprop="url">
-              
-                <span itemprop="name">Semaphore使用</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-21T00:10:47+08:00"
-              content="2018-05-21" >
-          05-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/17/线程池的状态/" itemprop="url">
-              
-                <span itemprop="name">线程池的状态</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-17T17:50:09+08:00"
-              content="2018-05-17" >
-          05-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/16/CyclicBarrier使用/" itemprop="url">
-              
-                <span itemprop="name">CyclicBarrier使用</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-16T23:29:53+08:00"
-              content="2018-05-16" >
-          05-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/16/Executors五种线程池/" itemprop="url">
-              
-                <span itemprop="name">Executors五种线程池</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-16T01:10:45+08:00"
-              content="2018-05-16" >
-          05-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/15/线程池任务提交execute-submit方法比较/" itemprop="url">
-              
-                <span itemprop="name">线程池任务提交execute,submit方法比较</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-15T00:37:14+08:00"
-              content="2018-05-15" >
-          05-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/14/ThreadPoolExecutor参数和线程池任务执行逻辑/" itemprop="url">
-              
-                <span itemprop="name">ThreadPoolExecutor参数和线程池任务执行逻辑</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-14T00:17:48+08:00"
-              content="2018-05-14" >
-          05-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/16/CountDownLatch使用和原理/" itemprop="url">
-              
-                <span itemprop="name">CountdownLatch使用和原理</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-16T19:33:51+08:00"
-              content="2018-04-16" >
-          04-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/10/wait-sleep-yeild方法区别/" itemprop="url">
-              
-                <span itemprop="name">wait, sleep, yeild方法区别</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-10T02:49:57+08:00"
-              content="2018-04-10" >
-          04-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/05/自旋锁的可重入改造/" itemprop="url">
-              
-                <span itemprop="name">自旋锁的可重入改造</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-05T16:45:10+08:00"
-              content="2018-04-05" >
-          04-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/03/自旋锁以及不可重入时死锁问题/" itemprop="url">
-              
-                <span itemprop="name">自旋锁以及不可重入时死锁问题</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-03T22:45:10+08:00"
-              content="2018-04-03" >
-          04-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <ol>
+<li>incr和decr是redis中自增和自减的命令。</li>
+<li>大致分为2类方法，incr/decr会增减1，incrby/decrby会增加，减少方法的第二个传参。</li>
+<li>返回值是此条KEY上新设的值。</li>
+<li><p>redis本身只有5种数据类型，并没有int,double之类，此类存储都是用string，然后转换处理。</p>
+<pre><code>/**
+ * INCRBY work just like {@link #incr(String) INCR} but instead to increment by 1 the increment is
+ * integer.
+ * &lt;p&gt;
+ * INCR commands are limited to 64 bit signed integers.
+ * &lt;p&gt;
+ * Note: this is actually a string operation, that is, in Redis there are not &quot;integer&quot; types.
+ * Simply the string stored at the key is parsed as a base 10 64 bit signed integer, incremented,
+ * and then converted back as a string.
+ * &lt;p&gt;
+ * Time complexity: O(1)
+ * @see #incr(String)
+ * @see #decr(String)
+ * @see #decrBy(String, long)
+ * @param key
+ * @param integer
+ * @return Integer reply, this commands will reply with the new value of key after the increment.
+ */
+public Long incrBy(final String key, final long integer) {
+  checkIsInMultiOrPipeline();
+  client.incrBy(key, integer);
+  return client.getIntegerReply();
+}
+
+/**
+ * INCRBYFLOAT
+ * &lt;p&gt;
+ * INCRBYFLOAT commands are limited to double precision floating point values.
+ * &lt;p&gt;
+ * Note: this is actually a string operation, that is, in Redis there are not &quot;double&quot; types.
+ * Simply the string stored at the key is parsed as a base double precision floating point value,
+ * incremented, and then converted back as a string. There is no DECRYBYFLOAT but providing a
+ * negative value will work as expected.
+ * &lt;p&gt;
+ * Time complexity: O(1)
+ * @param key
+ * @param value
+ * @return Double reply, this commands will reply with the new value of key after the increment.
+ */
+public Double incrByFloat(final String key, final double value) {
+  checkIsInMultiOrPipeline();
+  client.incrByFloat(key, value);
+  String dval = client.getBulkReply();
+  return (dval != null ? new Double(dval) : null);
+}
+</code></pre></li>
+<li><p>incr/decr有多种应用场景，因为redis单线程以及此2命令原子性的特点，偏向高并发下的计数场景：</p>
+<ol>
+<li>拦截：例如短时间内限制一个用户的访问次数，可以用唯一标识此用户的信息（例如token获取的user id）来作为key，限制的次数作为value的数值，按限制时间段设置key的超时时间，因为方法操作后会返回新的值，所以可以判断是否为0。</li>
+<li>高并发去场景下的订单生成，订单号生成服务一般使用数据库里表，一列记录表名，一列记录当前的ID，每次获取ID然后+1。在高并发场景下，也可以用redis来生成订单号，首先redis是单线程，可以保证高并发情况下执行的顺序性。然后incr是一个原子操作，incr可以自增1并返回这个新的值作为订单号。</li>
+<li>高并发场景下库存等数值计算，例如火车票抢票，大量请求进入，判断逻辑简单来说可以认为是减少库存看是否抢到票，使用redis decrBy来减少库存可以避免并发问题，并且实现相关业务逻辑。</li>
+</ol>
+</li>
+</ol>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Redis/" rel="tag"># Redis</a>
+          
+            <a href="/tags/分布式缓存/" rel="tag"># 分布式缓存</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/11/redis分布式锁实现学习/" rel="next" title="redis分布式锁实现学习">
+                <i class="fa fa-chevron-left"></i> redis分布式锁实现学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/categories/Java并发编程/page/2/">2</a><a class="extend next" rel="next" href="/categories/Java并发编程/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -1071,6 +879,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
 
   
 
