@@ -110,7 +110,7 @@
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
 <meta property="og:description" content="incr和decr是redis中自增和自减的命令。 大致分为2类方法，incr/decr会增减1，incrby/decrby会增加，减少方法的第二个传参。 返回值是此条KEY上新设的值。 redis本身只有5种数据类型，并没有int,double之类，此类存储都是用string，然后转换处理。 /**  * INCRBY work just like {@link #incr(String) I">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-09-16T11:41:40.747Z">
+<meta property="og:updated_time" content="2018-09-16T16:36:36.410Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis中incr和decr">
 <meta name="twitter:description" content="incr和decr是redis中自增和自减的命令。 大致分为2类方法，incr/decr会增减1，incrby/decrby会增加，减少方法的第二个传参。 返回值是此条KEY上新设的值。 redis本身只有5种数据类型，并没有int,double之类，此类存储都是用string，然后转换处理。 /**  * INCRBY work just like {@link #incr(String) I">
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-09-16 19:41:40" itemprop="dateModified" datetime="2018-09-16T19:41:40+08:00">2018-09-16</time>
+                <time title="Modified: 2018-09-17 00:36:36" itemprop="dateModified" datetime="2018-09-17T00:36:36+08:00">2018-09-17</time>
               
             
           </span>
@@ -451,7 +451,7 @@ public Double incrByFloat(final String key, final double value) {
 <ol>
 <li>拦截：例如短时间内限制一个用户的访问次数，可以用唯一标识此用户的信息（例如token获取的user id）来作为key，限制的次数作为value的数值，按限制时间段设置key的超时时间，因为方法操作后会返回新的值，所以可以判断是否为0。</li>
 <li>高并发去场景下的订单生成，订单号生成服务一般使用数据库里表，一列记录表名，一列记录当前的ID，每次获取ID然后+1。在高并发场景下，也可以用redis来生成订单号，首先redis是单线程，可以保证高并发情况下执行的顺序性。然后incr是一个原子操作，incr可以自增1并返回这个新的值作为订单号。</li>
-<li>高并发场景下库存等数值计算，例如火车票抢票，大量请求进入，判断逻辑简单来说可以认为是减少库存看是否抢到票，使用redis decrBy来减少库存可以避免并发问题，并且实现相关业务逻辑。</li>
+<li>高并发场景下库存等数值计算，例如火车票抢票，大量请求进入，判断逻辑简单来说可以认为是减少库存看是否抢到票，使用redis decrBy来减少库存可以避免并发问题，并且配合事务/乐观锁可实现相关业务逻辑，解决一些问题例如超库存卖出。</li>
 </ol>
 </li>
 </ol>
