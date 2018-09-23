@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="堆内存大小=年轻代（Xmn参数）+老年代 Sun官方推荐年轻代大约占整个堆大小的3分之一，例如可以配Xmx为8G，Xmn设3G 根据Java performance一书，有以下推荐配置：  根据老年代每次full gc后还存活的长生存对象大小来确定 Xms,Xmx设为full gc后存活对象大小的3到4倍 XX:PermSize和XX:MaxPermSize控制非堆内存的初始大小和最大值，为存活对">
-<meta name="keywords" content="JVM">
+  <meta name="description" content="redis中事务功能需要显式开启，开启为multi Transaction transaction = jedis.multi()；  提交事务为exec,exec返回一个集合，为每个命令的返回值，命令未执行则为空，可以以此判断 List&amp;lt;Object&amp;gt; result = transaction.exec();  使用discard命令可以取消事务  实际使用中一般配置watch监听">
+<meta name="keywords" content="Redis,分布式缓存">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JVM内存推荐配置">
-<meta property="og:url" content="http://yoursite.com/2017/09/28/JVM内存推荐配置 copy/index.html">
+<meta property="og:title" content="Redis中事务使用">
+<meta property="og:url" content="http://yoursite.com/2018/07/17/Redis中事务使用/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="堆内存大小=年轻代（Xmn参数）+老年代 Sun官方推荐年轻代大约占整个堆大小的3分之一，例如可以配Xmx为8G，Xmn设3G 根据Java performance一书，有以下推荐配置：  根据老年代每次full gc后还存活的长生存对象大小来确定 Xms,Xmx设为full gc后存活对象大小的3到4倍 XX:PermSize和XX:MaxPermSize控制非堆内存的初始大小和最大值，为存活对">
+<meta property="og:description" content="redis中事务功能需要显式开启，开启为multi Transaction transaction = jedis.multi()；  提交事务为exec,exec返回一个集合，为每个命令的返回值，命令未执行则为空，可以以此判断 List&amp;lt;Object&amp;gt; result = transaction.exec();  使用discard命令可以取消事务  实际使用中一般配置watch监听">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-07-28T18:59:03.792Z">
+<meta property="og:updated_time" content="2018-09-23T18:37:36.203Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JVM内存推荐配置">
-<meta name="twitter:description" content="堆内存大小=年轻代（Xmn参数）+老年代 Sun官方推荐年轻代大约占整个堆大小的3分之一，例如可以配Xmx为8G，Xmn设3G 根据Java performance一书，有以下推荐配置：  根据老年代每次full gc后还存活的长生存对象大小来确定 Xms,Xmx设为full gc后存活对象大小的3到4倍 XX:PermSize和XX:MaxPermSize控制非堆内存的初始大小和最大值，为存活对">
+<meta name="twitter:title" content="Redis中事务使用">
+<meta name="twitter:description" content="redis中事务功能需要显式开启，开启为multi Transaction transaction = jedis.multi()；  提交事务为exec,exec返回一个集合，为每个命令的返回值，命令未执行则为空，可以以此判断 List&amp;lt;Object&amp;gt; result = transaction.exec();  使用discard命令可以取消事务  实际使用中一般配置watch监听">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/09/28/JVM内存推荐配置 copy/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/17/Redis中事务使用/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>JVM内存推荐配置 | Bojun Ji's notes</title>
+  <title>Redis中事务使用 | Bojun Ji's notes</title>
   
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/28/JVM内存推荐配置 copy/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/17/Redis中事务使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -295,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JVM内存推荐配置
+          <h1 class="post-title" itemprop="name headline">Redis中事务使用
               
             
           </h1>
@@ -320,7 +320,7 @@
                 
               
 
-              <time title="Created: 2017-09-28 18:35:15" itemprop="dateCreated datePublished" datetime="2017-09-28T18:35:15+08:00">2017-09-28</time>
+              <time title="Created: 2018-07-17 01:00:03" itemprop="dateCreated datePublished" datetime="2018-07-17T01:00:03+08:00">2018-07-17</time>
             
 
             
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-07-29 02:59:03" itemprop="dateModified" datetime="2018-07-29T02:59:03+08:00">2018-07-29</time>
+                <time title="Modified: 2018-09-24 02:37:36" itemprop="dateModified" datetime="2018-09-24T02:37:36+08:00">2018-09-24</time>
               
             
           </span>
@@ -354,7 +354,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JVM/" itemprop="url" rel="index"><span itemprop="name">JVM</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a></span>
 
                 
                 
@@ -396,17 +396,28 @@
       
 
       
-        <p>堆内存大小=年轻代（Xmn参数）+老年代</p>
-<p>Sun官方推荐年轻代大约占整个堆大小的3分之一，例如可以配Xmx为8G，Xmn设3G</p>
-<p>根据Java performance一书，有以下推荐配置：</p>
-<ol>
-<li>根据老年代每次full gc后还存活的长生存对象大小来确定</li>
-<li>Xms,Xmx设为full gc后存活对象大小的3到4倍</li>
-<li>XX:PermSize和XX:MaxPermSize控制非堆内存的初始大小和最大值，为存活对象的1.2到1.5倍</li>
-<li>Xmn年轻代大小，为存活对象的1到1.5倍</li>
-<li>因为整个堆为存货对象3到4倍，年轻代为了1到1.5倍，年轻代的整体占比接近于Sun推荐的八分之三。</li>
+        <ol>
+<li><p>redis中事务功能需要显式开启，开启为multi</p>
+<pre><code>Transaction transaction = jedis.multi()；
+</code></pre></li>
+<li><p>提交事务为exec,exec返回一个集合，为每个命令的返回值，命令未执行则为空，可以以此判断</p>
+<pre><code>List&lt;Object&gt; result = transaction.exec();
+</code></pre></li>
+<li><p>使用discard命令可以取消事务</p>
+</li>
+<li><p>实际使用中一般配置watch监听</p>
+<p> jedis例子：</p>
+<pre><code>public String watch(final String... keys) {
+  client.watch(keys);
+  return client.getStatusCodeReply();
+}
+</code></pre></li>
+<li><p>开启事务前可以watch一条或者多条key，事务执行过程中如果key对应的value修改，则事务中的命令不会执行</p>
+</li>
+<li>redis事务和关系型数据库事务有区别，并不包含回滚功能</li>
+<li>multi调用后，命令会进入事务队列，等到exec命令调用时再按顺序执行</li>
+<li>watch监听在exec调用时会被取消，也可以使用unwatch手动取消（值达不到要求的情况）</li>
 </ol>
-<p>具体配置时需要根据应用或者服务的业务场景确定响应，吞吐量等优先级，是否需要减少full gc次数等条件，来配置年轻代和老年代的大小。</p>
 
       
     </div>
@@ -427,7 +438,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/JVM/" rel="tag"># JVM</a>
+            <a href="/tags/Redis/" rel="tag"># Redis</a>
+          
+            <a href="/tags/分布式缓存/" rel="tag"># 分布式缓存</a>
           
         </div>
       
@@ -440,8 +453,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/28/JVM内存设置基本参数/" rel="next" title="JVM内存设置基本参数">
-                <i class="fa fa-chevron-left"></i> JVM内存设置基本参数
+              <a href="/2018/07/12/Redis中incr和decr/" rel="next" title="Redis中incr和decr">
+                <i class="fa fa-chevron-left"></i> Redis中incr和decr
               </a>
             
           </div>
@@ -449,10 +462,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/09/29/垃圾收集器种类和搭配/" rel="prev" title="垃圾收集器种类和搭配">
-                垃圾收集器种类和搭配 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
