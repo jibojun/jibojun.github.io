@@ -103,7 +103,7 @@
 
 
   <meta name="description" content="JDK1.5-1.7中，ConcurrentHashMap主要思想都是分段锁，默认16个分段（segment），既并发度1。写操作put,remove,clear会加锁，但一般情况下只会加在数据所在的segment上，不影响别的。 有一种情况会导致所有segment被锁，segment里有count变量（volatile）存自己分段有多少个元素，简单来说所有分段数组的count字段相加就是整个ma">
-<meta name="keywords" content="Map,Java并发编程">
+<meta name="keywords" content="Java并发编程,Map">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ConcurrentHashMap的size方法和Segment全锁场景">
 <meta property="og:url" content="http://yoursite.com/2018/02/13/ConcurrentHashMap的size方法和Segment全锁场景/index.html">
@@ -449,9 +449,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Map/" rel="tag"># Map</a>
-          
             <a href="/tags/Java并发编程/" rel="tag"># Java并发编程</a>
+          
+            <a href="/tags/Map/" rel="tag"># Map</a>
           
         </div>
       
@@ -541,7 +541,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">103</span>
+                    <span class="site-state-item-count">104</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

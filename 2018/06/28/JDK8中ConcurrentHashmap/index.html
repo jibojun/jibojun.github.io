@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="HashMap的基本存储结构是数组，key经过hashcode等方法（后面跟高位和取模运算）计算后获取数组中的索引位置放入。所以本质是一个哈希桶数组。 hash冲突时，既不同的项计算出的哈希值相同，此时数组存储的对象会变为链表。既拉链法解决冲突。 哈希冲突的频率和数组大小有关，很小的数组就算拥有好的哈希算法也难以分散，所以采用负载因子0.75扩容的机制来在空间和时间当中做了一个平衡 JDK1.8">
+  <meta name="description" content="JDK8中ConcurrentHashmap改变了分段锁的设计，换为使用底层CAS与Sychronized锁的实现。 处理hash冲突方式与JDK8中hashmap一致，也是冲突厉害（链表过长）则转为红黑树。 并发级别既数组大小为16，默认负载因子和hashmap一样0.75。 最小树化TABLE大小为64（2次扩容后，每次2倍），链表树化阈值8，红黑树转链表（扩容时）阈值为6。这些与JDK8中">
 <meta name="keywords" content="Map">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JDK1.8中hashmap">
-<meta property="og:url" content="http://yoursite.com/2018/05/08/JDK1-8中hashmap/index.html">
+<meta property="og:title" content="JDK8中ConcurrentHashmap">
+<meta property="og:url" content="http://yoursite.com/2018/06/28/JDK8中ConcurrentHashmap/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="HashMap的基本存储结构是数组，key经过hashcode等方法（后面跟高位和取模运算）计算后获取数组中的索引位置放入。所以本质是一个哈希桶数组。 hash冲突时，既不同的项计算出的哈希值相同，此时数组存储的对象会变为链表。既拉链法解决冲突。 哈希冲突的频率和数组大小有关，很小的数组就算拥有好的哈希算法也难以分散，所以采用负载因子0.75扩容的机制来在空间和时间当中做了一个平衡 JDK1.8">
+<meta property="og:description" content="JDK8中ConcurrentHashmap改变了分段锁的设计，换为使用底层CAS与Sychronized锁的实现。 处理hash冲突方式与JDK8中hashmap一致，也是冲突厉害（链表过长）则转为红黑树。 并发级别既数组大小为16，默认负载因子和hashmap一样0.75。 最小树化TABLE大小为64（2次扩容后，每次2倍），链表树化阈值8，红黑树转链表（扩容时）阈值为6。这些与JDK8中">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-08-08T15:47:15.166Z">
+<meta property="og:updated_time" content="2018-09-27T17:01:35.400Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JDK1.8中hashmap">
-<meta name="twitter:description" content="HashMap的基本存储结构是数组，key经过hashcode等方法（后面跟高位和取模运算）计算后获取数组中的索引位置放入。所以本质是一个哈希桶数组。 hash冲突时，既不同的项计算出的哈希值相同，此时数组存储的对象会变为链表。既拉链法解决冲突。 哈希冲突的频率和数组大小有关，很小的数组就算拥有好的哈希算法也难以分散，所以采用负载因子0.75扩容的机制来在空间和时间当中做了一个平衡 JDK1.8">
+<meta name="twitter:title" content="JDK8中ConcurrentHashmap">
+<meta name="twitter:description" content="JDK8中ConcurrentHashmap改变了分段锁的设计，换为使用底层CAS与Sychronized锁的实现。 处理hash冲突方式与JDK8中hashmap一致，也是冲突厉害（链表过长）则转为红黑树。 并发级别既数组大小为16，默认负载因子和hashmap一样0.75。 最小树化TABLE大小为64（2次扩容后，每次2倍），链表树化阈值8，红黑树转链表（扩容时）阈值为6。这些与JDK8中">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/08/JDK1-8中hashmap/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/28/JDK8中ConcurrentHashmap/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>JDK1.8中hashmap | Bojun Ji's notes</title>
+  <title>JDK8中ConcurrentHashmap | Bojun Ji's notes</title>
   
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/08/JDK1-8中hashmap/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/28/JDK8中ConcurrentHashmap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -295,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JDK1.8中hashmap
+          <h1 class="post-title" itemprop="name headline">JDK8中ConcurrentHashmap
               
             
           </h1>
@@ -320,7 +320,7 @@
                 
               
 
-              <time title="Created: 2018-05-08 00:21:38" itemprop="dateCreated datePublished" datetime="2018-05-08T00:21:38+08:00">2018-05-08</time>
+              <time title="Created: 2018-06-28 00:05:15" itemprop="dateCreated datePublished" datetime="2018-06-28T00:05:15+08:00">2018-06-28</time>
             
 
             
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-08-08 23:47:15" itemprop="dateModified" datetime="2018-08-08T23:47:15+08:00">2018-08-08</time>
+                <time title="Modified: 2018-09-28 01:01:35" itemprop="dateModified" datetime="2018-09-28T01:01:35+08:00">2018-09-28</time>
               
             
           </span>
@@ -397,80 +397,282 @@
 
       
         <ol>
-<li>HashMap的基本存储结构是数组，key经过hashcode等方法（后面跟高位和取模运算）计算后获取数组中的索引位置放入。所以本质是一个哈希桶数组。</li>
-<li>hash冲突时，既不同的项计算出的哈希值相同，此时数组存储的对象会变为链表。既拉链法解决冲突。</li>
-<li>哈希冲突的频率和数组大小有关，很小的数组就算拥有好的哈希算法也难以分散，所以采用负载因子0.75扩容的机制来在空间和时间当中做了一个平衡</li>
-<li>JDK1.8中对HashMap做的改动是当哈希冲突较厉害，数组一个项中链表超过8个时就会转为红黑树结构存储。</li>
-<li>单链表结构的主要问题，是在哈希冲突厉害时，链表很长，如果要访问后面节点元素则需要通过前面元素往后遍历。</li>
-<li>红黑树牺牲了严格的高度平衡性，部分平衡，三次旋转内可达到平衡，而达到了查询，插入，删除 o(log2n)时间复杂度的性能。</li>
-</ol>
+<li>JDK8中ConcurrentHashmap改变了分段锁的设计，换为使用底层CAS与Sychronized锁的实现。</li>
+<li>处理hash冲突方式与JDK8中hashmap一致，也是冲突厉害（链表过长）则转为红黑树。</li>
+<li>并发级别既数组大小为16，默认负载因子和hashmap一样0.75。</li>
+<li><p>最小树化TABLE大小为64（2次扩容后，每次2倍），链表树化阈值8，红黑树转链表（扩容时）阈值为6。这些与JDK8中hashmap一致。</p>
 <pre><code>    /**
  * The bin count threshold for using a tree rather than list for a
  * bin.  Bins are converted to trees when adding an element to a
  * bin with at least this many nodes. The value must be greater
- * than 2 and should be at least 8 to mesh with assumptions in
+ * than 2, and should be at least 8 to mesh with assumptions in
  * tree removal about conversion back to plain bins upon
  * shrinkage.
  */
 static final int TREEIFY_THRESHOLD = 8;
 
 /**
- * Implements Map.put and related methods
- *
- * @param hash hash for key
- * @param key the key
- * @param value the value to put
- * @param onlyIfAbsent if true, don&apos;t change existing value
- * @param evict if false, the table is in creation mode.
- * @return previous value, or null if none
+ * The bin count threshold for untreeifying a (split) bin during a
+ * resize operation. Should be less than TREEIFY_THRESHOLD, and at
+ * most 6 to mesh with shrinkage detection under removal.
  */
-final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
-               boolean evict) {
-    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;
-    if ((tab = table) == null || (n = tab.length) == 0)
-        n = (tab = resize()).length;
-    if ((p = tab[i = (n - 1) &amp; hash]) == null)
-        tab[i] = newNode(hash, key, value, null);
-    else {
-        Node&lt;K,V&gt; e; K k;
-        //key存在，则覆盖
-        if (p.hash == hash &amp;&amp;
-            ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))
-            e = p;
-        //这里判断是不是红黑树节点
-        else if (p instanceof TreeNode)
-            e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);
-        //链表节点
+static final int UNTREEIFY_THRESHOLD = 6;
+
+/**
+ * The smallest table capacity for which bins may be treeified.
+ * (Otherwise the table is resized if too many nodes in a bin.)
+ * The value should be at least 4 * TREEIFY_THRESHOLD to avoid
+ * conflicts between resizing and treeification thresholds.
+ */
+static final int MIN_TREEIFY_CAPACITY = 64;
+</code></pre></li>
+<li>具体数组初始化是懒加载，第一次put时才加载，构造方法里只是做了一些基本赋值，例如map容量。</li>
+<li><p>第一次put会初始化Node的数组</p>
+<pre><code>    /**
+ * Maps the specified key to the specified value in this table.
+ * Neither the key nor the value can be null.
+ *
+ * &lt;p&gt;The value can be retrieved by calling the {@code get} method
+ * with a key that is equal to the original key.
+ *
+ * @param key key with which the specified value is to be associated
+ * @param value value to be associated with the specified key
+ * @return the previous value associated with {@code key}, or
+ *         {@code null} if there was no mapping for {@code key}
+ * @throws NullPointerException if the specified key or value is null
+ */
+public V put(K key, V value) {
+    return putVal(key, value, false);
+}
+
+/** Implementation for put and putIfAbsent */
+final V putVal(K key, V value, boolean onlyIfAbsent) {
+    if (key == null || value == null) throw new NullPointerException();
+    int hash = spread(key.hashCode());
+    int binCount = 0;
+    for (Node&lt;K,V&gt;[] tab = table;;) {
+        Node&lt;K,V&gt; f; int n, i, fh;
+        if (tab == null || (n = tab.length) == 0)
+            tab = initTable();
+        else if ((f = tabAt(tab, i = (n - 1) &amp; hash)) == null) {
+            if (casTabAt(tab, i, null,
+                         new Node&lt;K,V&gt;(hash, key, value, null)))
+                break;                   // no lock when adding to empty bin
+        }
+        else if ((fh = f.hash) == MOVED)
+            tab = helpTransfer(tab, f);
         else {
-            for (int binCount = 0; ; ++binCount) {
-                if ((e = p.next) == null) {
-                    p.next = newNode(hash, key, value, null);
-                    //转换红黑树
-                    if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st
-                        treeifyBin(tab, hash);
-                    break;
+            V oldVal = null;
+            synchronized (f) {
+                if (tabAt(tab, i) == f) {
+                    if (fh &gt;= 0) {
+                        binCount = 1;
+                        for (Node&lt;K,V&gt; e = f;; ++binCount) {
+                            K ek;
+                            if (e.hash == hash &amp;&amp;
+                                ((ek = e.key) == key ||
+                                 (ek != null &amp;&amp; key.equals(ek)))) {
+                                oldVal = e.val;
+                                if (!onlyIfAbsent)
+                                    e.val = value;
+                                break;
+                            }
+                            Node&lt;K,V&gt; pred = e;
+                            if ((e = e.next) == null) {
+                                pred.next = new Node&lt;K,V&gt;(hash, key,
+                                                          value, null);
+                                break;
+                            }
+                        }
+                    }
+                    else if (f instanceof TreeBin) {
+                        Node&lt;K,V&gt; p;
+                        binCount = 2;
+                        if ((p = ((TreeBin&lt;K,V&gt;)f).putTreeVal(hash, key,
+                                                       value)) != null) {
+                            oldVal = p.val;
+                            if (!onlyIfAbsent)
+                                p.val = value;
+                        }
+                    }
                 }
-                if (e.hash == hash &amp;&amp;
-                    ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
-                    break;
-                p = e;
+            }
+            if (binCount != 0) {
+                if (binCount &gt;= TREEIFY_THRESHOLD)
+                    treeifyBin(tab, i);
+                if (oldVal != null)
+                    return oldVal;
+                break;
             }
         }
-        if (e != null) { // existing mapping for key
-            V oldValue = e.value;
-            if (!onlyIfAbsent || oldValue == null)
-                e.value = value;
-            afterNodeAccess(e);
-            return oldValue;
+    }
+    addCount(1L, binCount);
+    return null;
+</code></pre></li>
+<li>初始化数组用了sizeCtl变量,-1代表正在初始化，-N代表N-1个线程在扩容。比较关键一点是这个变量是volatile，线程间可见，一个线程在初始化则这里为-1，其他线程会得知这个线程在初始化，保证了线程安全。</li>
+</ol>
+<pre><code>    /**
+ * Table initialization and resizing control.  When negative, the
+ * table is being initialized or resized: -1 for initialization,
+ * else -(1 + the number of active resizing threads).  Otherwise,
+ * when table is null, holds the initial table size to use upon
+ * creation, or 0 for default. After initialization, holds the
+ * next element count value upon which to resize the table.
+ */
+private transient volatile int sizeCtl;
+
+    ...
+        /**
+     * Initializes table, using the size recorded in sizeCtl.
+     */
+    private final Node&lt;K,V&gt;[] initTable() {
+        Node&lt;K,V&gt;[] tab; int sc;
+        while ((tab = table) == null || tab.length == 0) {
+            if ((sc = sizeCtl) &lt; 0)
+                Thread.yield(); // lost initialization race; just spin
+            else if (U.compareAndSwapInt(this, SIZECTL, sc, -1)) {
+                try {
+                    if ((tab = table) == null || tab.length == 0) {
+                        int n = (sc &gt; 0) ? sc : DEFAULT_CAPACITY;
+                        @SuppressWarnings(&quot;unchecked&quot;)
+                        Node&lt;K,V&gt;[] nt = (Node&lt;K,V&gt;[])new Node&lt;?,?&gt;[n];
+                        table = tab = nt;
+                        sc = n - (n &gt;&gt;&gt; 2);
+                    }
+                } finally {
+                    sizeCtl = sc;
+                }
+                break;
+            }
+        }
+        return tab;
+    }  
+</code></pre><ol start="8">
+<li><p>table[i]无节点则直接cas插入（近似于乐观锁，当读出的值与预期值相同时更新）一个Node作为链表头节点（这里可以看到给CAS的预期值是NULL），没有加锁。</p>
+<pre><code>    static final &lt;K,V&gt; boolean casTabAt(Node&lt;K,V&gt;[] tab, int i,
+                                    Node&lt;K,V&gt; c, Node&lt;K,V&gt; v) {
+    return U.compareAndSwapObject(tab, ((long)i &lt;&lt; ASHIFT) + ABASE, c, v);
+}    
+</code></pre></li>
+<li><p>如果正在扩容，则帮助扩容返回新扩容后数组。</p>
+</li>
+<li>如果不是以上两种情况则加锁，证明需要在已有的链表或者红黑树后加节点。此处直接用了优化的sychronized。</li>
+<li>可以看出最后会判断桶中节点数，大于8则红黑树处理。和hashmap一致，如果整个数组小于64则调用tryPresize方法先去扩容数组，到达这个大小（64）则转红黑树。</li>
+<li><p>get方法正常情况下仍然没有加锁，和以前一样是弱一致性的。单红黑树e.find()方法中需要获取锁。</p>
+<pre><code>   /**
+* Returns the value to which the specified key is mapped,
+* or {@code null} if this map contains no mapping for the key.
+*
+* &lt;p&gt;More formally, if this map contains a mapping from a key
+* {@code k} to a value {@code v} such that {@code key.equals(k)},
+* then this method returns {@code v}; otherwise it returns
+* {@code null}.  (There can be at most one such mapping.)
+*
+* @throws NullPointerException if the specified key is null
+*/
+</code></pre><p>   public V get(Object key) {</p>
+<pre><code>Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; e, p; int n, eh; K ek;
+int h = spread(key.hashCode());
+if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp;
+    (e = tabAt(tab, (n - 1) &amp; h)) != null) {
+    if ((eh = e.hash) == h) {
+        if ((ek = e.key) == key || (ek != null &amp;&amp; key.equals(ek)))
+            return e.val;
+    }
+    else if (eh &lt; 0)
+        return (p = e.find(h, key)) != null ? p.val : null;
+    while ((e = e.next) != null) {
+        if (e.hash == h &amp;&amp;
+            ((ek = e.key) == key || (ek != null &amp;&amp; key.equals(ek))))
+            return e.val;
+    }
+}
+return null;
+</code></pre><p>   }</p>
+</li>
+<li>扩容会在putVal时addCount方法判断，并且会更新sizeCtl变量。</li>
+<li>tryPresize扩容方法会在转红黑树或putAll大量元素时调用。</li>
+<li><p>移除操作与put类似，也需要检查帮助扩容返回新数组。</p>
+<pre><code>/**
+ * Implementation for the four public remove/replace methods:
+ * Replaces node value with v, conditional upon match of cv if
+ * non-null.  If resulting value is null, delete.
+ */
+final V replaceNode(Object key, V value, Object cv) {
+    int hash = spread(key.hashCode());
+    for (Node&lt;K,V&gt;[] tab = table;;) {
+        Node&lt;K,V&gt; f; int n, i, fh;
+        if (tab == null || (n = tab.length) == 0 ||
+            (f = tabAt(tab, i = (n - 1) &amp; hash)) == null)
+            break;
+        else if ((fh = f.hash) == MOVED)
+            tab = helpTransfer(tab, f);
+        else {
+            V oldVal = null;
+            boolean validated = false;
+            synchronized (f) {
+                if (tabAt(tab, i) == f) {
+                    if (fh &gt;= 0) {
+                        validated = true;
+                        for (Node&lt;K,V&gt; e = f, pred = null;;) {
+                            K ek;
+                            if (e.hash == hash &amp;&amp;
+                                ((ek = e.key) == key ||
+                                 (ek != null &amp;&amp; key.equals(ek)))) {
+                                V ev = e.val;
+                                if (cv == null || cv == ev ||
+                                    (ev != null &amp;&amp; cv.equals(ev))) {
+                                    oldVal = ev;
+                                    if (value != null)
+                                        e.val = value;
+                                    else if (pred != null)
+                                        pred.next = e.next;
+                                    else
+                                        setTabAt(tab, i, e.next);
+                                }
+                                break;
+                            }
+                            pred = e;
+                            if ((e = e.next) == null)
+                                break;
+                        }
+                    }
+                    else if (f instanceof TreeBin) {
+                        validated = true;
+                        TreeBin&lt;K,V&gt; t = (TreeBin&lt;K,V&gt;)f;
+                        TreeNode&lt;K,V&gt; r, p;
+                        if ((r = t.root) != null &amp;&amp;
+                            (p = r.findTreeNode(hash, key, null)) != null) {
+                            V pv = p.val;
+                            if (cv == null || cv == pv ||
+                                (pv != null &amp;&amp; cv.equals(pv))) {
+                                oldVal = pv;
+                                if (value != null)
+                                    p.val = value;
+                                else if (t.removeTreeNode(p))
+                                    setTabAt(tab, i, untreeify(t.first));
+                            }
+                        }
+                    }
+                }
+            }
+            if (validated) {
+                if (oldVal != null) {
+                    if (value == null)
+                        addCount(-1L, -1);
+                    return oldVal;
+                }
+                break;
+            }
         }
     }
-    ++modCount;
-    if (++size &gt; threshold)
-        resize();
-    afterNodeInsertion(evict);
     return null;
 }
-</code></pre>
+</code></pre></li>
+<li><p>所以JDK8中主要使用了sychonized+CAS来保证并发线程安全，和8中hashmap一样在冲突厉害时采用红黑树优化查询性能。    </p>
+</li>
+</ol>
+
       
     </div>
 
@@ -503,8 +705,8 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/05/nio主要类和用法/" rel="next" title="nio主要类和用法">
-                <i class="fa fa-chevron-left"></i> nio主要类和用法
+              <a href="/2018/06/22/netty学习-channel和channelfuture/" rel="next" title="netty学习:channel和channelfuture">
+                <i class="fa fa-chevron-left"></i> netty学习:channel和channelfuture
               </a>
             
           </div>
@@ -513,8 +715,8 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/10/dubbo使用实例/" rel="prev" title="dubbo使用实例">
-                dubbo使用实例 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/07/02/JDK8的metaspace/" rel="prev" title="JDK8的metaspace">
+                JDK8的metaspace <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
