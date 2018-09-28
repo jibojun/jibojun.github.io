@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="Java ExecutorService线程池的关闭法有shutDown和shutDownNow两种。它们主要有以下特点和区别：  shutDown只是先把线程池变成SHUTDOWN状态，shutDownNow则会直接变成STOP状态。 shutDown不接受新任务（再提交则会进入reject），但老任务仍会执行，等待已有任务全部执行完毕。而shutDownNow则会尝试停止现有任务。 但是shu">
-<meta name="keywords" content="Java并发编程">
+  <meta name="description" content="分区Partition是指将一个主题topic在物理上划分为多个分区。 每个分区会有自己的文件夹，以topic名+partition index为名字。 文件夹中存有分区消息.log格式以及索引。 分区接口是Partitioner，需要实现其中partition方法，返回值为分区码。  /**  Partitioner Interface*/ public interface Partition">
+<meta name="keywords" content="Kafka,消息队列">
 <meta property="og:type" content="article">
-<meta property="og:title" content="线程池终止shutDown和shutDownNow">
-<meta property="og:url" content="http://yoursite.com/2018/06/01/线程池终止shutDown和shutDownNow/index.html">
+<meta property="og:title" content="kafka中分区">
+<meta property="og:url" content="http://yoursite.com/2018/03/28/kafka中分区/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="Java ExecutorService线程池的关闭法有shutDown和shutDownNow两种。它们主要有以下特点和区别：  shutDown只是先把线程池变成SHUTDOWN状态，shutDownNow则会直接变成STOP状态。 shutDown不接受新任务（再提交则会进入reject），但老任务仍会执行，等待已有任务全部执行完毕。而shutDownNow则会尝试停止现有任务。 但是shu">
+<meta property="og:description" content="分区Partition是指将一个主题topic在物理上划分为多个分区。 每个分区会有自己的文件夹，以topic名+partition index为名字。 文件夹中存有分区消息.log格式以及索引。 分区接口是Partitioner，需要实现其中partition方法，返回值为分区码。  /**  Partitioner Interface*/ public interface Partition">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-06-17T09:49:14.408Z">
+<meta property="og:updated_time" content="2018-09-28T16:35:59.803Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="线程池终止shutDown和shutDownNow">
-<meta name="twitter:description" content="Java ExecutorService线程池的关闭法有shutDown和shutDownNow两种。它们主要有以下特点和区别：  shutDown只是先把线程池变成SHUTDOWN状态，shutDownNow则会直接变成STOP状态。 shutDown不接受新任务（再提交则会进入reject），但老任务仍会执行，等待已有任务全部执行完毕。而shutDownNow则会尝试停止现有任务。 但是shu">
+<meta name="twitter:title" content="kafka中分区">
+<meta name="twitter:description" content="分区Partition是指将一个主题topic在物理上划分为多个分区。 每个分区会有自己的文件夹，以topic名+partition index为名字。 文件夹中存有分区消息.log格式以及索引。 分区接口是Partitioner，需要实现其中partition方法，返回值为分区码。  /**  Partitioner Interface*/ public interface Partition">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/06/01/线程池终止shutDown和shutDownNow/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/28/kafka中分区/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>线程池终止shutDown和shutDownNow | Bojun Ji's notes</title>
+  <title>kafka中分区 | Bojun Ji's notes</title>
   
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/01/线程池终止shutDown和shutDownNow/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/28/kafka中分区/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -295,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">线程池终止shutDown和shutDownNow
+          <h1 class="post-title" itemprop="name headline">kafka中分区
               
             
           </h1>
@@ -320,7 +320,7 @@
                 
               
 
-              <time title="Created: 2018-06-01 15:54:00" itemprop="dateCreated datePublished" datetime="2018-06-01T15:54:00+08:00">2018-06-01</time>
+              <time title="Created: 2018-03-28 01:03:51" itemprop="dateCreated datePublished" datetime="2018-03-28T01:03:51+08:00">2018-03-28</time>
             
 
             
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-06-17 17:49:14" itemprop="dateModified" datetime="2018-06-17T17:49:14+08:00">2018-06-17</time>
+                <time title="Modified: 2018-09-29 00:35:59" itemprop="dateModified" datetime="2018-09-29T00:35:59+08:00">2018-09-29</time>
               
             
           </span>
@@ -354,7 +354,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java并发编程/" itemprop="url" rel="index"><span itemprop="name">Java并发编程</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Kafka/" itemprop="url" rel="index"><span itemprop="name">Kafka</span></a></span>
 
                 
                 
@@ -396,114 +396,100 @@
       
 
       
-        <p>Java ExecutorService线程池的关闭法有shutDown和shutDownNow两种。它们主要有以下特点和区别：</p>
-<ol>
-<li>shutDown只是先把线程池变成SHUTDOWN状态，shutDownNow则会直接变成STOP状态。</li>
-<li>shutDown不接受新任务（再提交则会进入reject），但老任务仍会执行，等待已有任务全部执行完毕。而shutDownNow则会尝试停止现有任务。</li>
-<li>但是shutDownNow也不能保证一定停止，因为它用得是中断方法：interrupt()，需要在sleep等特定条件下才能中断线程。</li>
-<li>关闭方法可以配合awaitTermination方法一起用，awaitTermination可以阻塞，并且到了超时时间会检查，线程池已经关闭返回true，否则false。</li>
-<li>因为其实4种提供的线程池底层都是ThreadPoolExecutor类，这两个代码可以去这个类中看。</li>
+        <ol>
+<li>分区Partition是指将一个主题topic在物理上划分为多个分区。</li>
+<li>每个分区会有自己的文件夹，以topic名+partition index为名字。</li>
+<li>文件夹中存有分区消息.log格式以及索引。</li>
+<li><p>分区接口是Partitioner，需要实现其中partition方法，返回值为分区码。</p>
+<p> /**</p>
+<ul>
+<li><p>Partitioner Interface<br>*/</p>
+<p>public interface Partitioner extends Configurable, Closeable {</p>
+<pre><code>/**
+ * Compute the partition for the given record.
+ *
+ * @param topic The topic name
+ * @param key The key to partition on (or null if no key)
+ * @param keyBytes The serialized key to partition on( or null if no key)
+ * @param value The value to partition on or null
+ * @param valueBytes The serialized value to partition on or null
+ * @param cluster The current cluster metadata
+ */
+public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster);
+
+/**
+ * This is called when partitioner is closed.
+ */
+public void close();
+</code></pre><p> }    </p>
+</li>
+</ul>
+</li>
+<li>kafka消息分区类似于DB分库，    可以采用某一条key作为关键值做处理，最后取模需要分区的数量。</li>
+<li>创建topic时可以设置分区数量，一般为broker数量的整数倍。</li>
+<li>每个分区里的消息只能一个consumer group中一个consumer来消费，要多消费，广播的话只能其他消费组中的消费者继续消费。</li>
+<li>kafka消费的消息仍然会持久化，但不永久保存，除了时间以外，分区文件大小也可以作为策略删除消息数据。</li>
+<li>同一个消费组的线程可以多线程消费分区消息，线程数量需要和分区数量保持一致，否则浪费消费端的线程，消费时需要先获取分区，再遍历每个区。分区决定了消费端的并行度。</li>
+<li><p>kafka java客户端自带了默认的分区实现：</p>
+<pre><code>/**
+ * The default partitioning strategy:
+ * &lt;ul&gt;
+ * &lt;li&gt;If a partition is specified in the record, use it
+ * &lt;li&gt;If no partition is specified but a key is present choose a partition based on a hash of the key
+ * &lt;li&gt;If no partition or key is present choose a partition in a round-robin fashion
+ */
+public class DefaultPartitioner implements Partitioner {
+
+private final ConcurrentMap&lt;String, AtomicInteger&gt; topicCounterMap = new ConcurrentHashMap&lt;&gt;();
+
+public void configure(Map&lt;String, ?&gt; configs) {}
+
+/**
+ * Compute the partition for the given record.
+ *
+ * @param topic The topic name
+ * @param key The key to partition on (or null if no key)
+ * @param keyBytes serialized key to partition on (or null if no key)
+ * @param value The value to partition on or null
+ * @param valueBytes serialized value to partition on or null
+ * @param cluster The current cluster metadata
+ */
+public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster) {
+    List&lt;PartitionInfo&gt; partitions = cluster.partitionsForTopic(topic);
+    int numPartitions = partitions.size();
+    if (keyBytes == null) {
+        int nextValue = nextValue(topic);
+        List&lt;PartitionInfo&gt; availablePartitions = cluster.availablePartitionsForTopic(topic);
+        if (availablePartitions.size() &gt; 0) {
+            int part = Utils.toPositive(nextValue) % availablePartitions.size();
+            return availablePartitions.get(part).partition();
+        } else {
+            // no partitions are available, give a non-available partition
+            return Utils.toPositive(nextValue) % numPartitions;
+        }
+    } else {
+        // hash the keyBytes to choose a partition
+        return Utils.toPositive(Utils.murmur2(keyBytes)) % numPartitions;
+    }
+}
+
+private int nextValue(String topic) {
+    AtomicInteger counter = topicCounterMap.get(topic);
+    if (null == counter) {
+        counter = new AtomicInteger(ThreadLocalRandom.current().nextInt());
+        AtomicInteger currentCounter = topicCounterMap.putIfAbsent(topic, counter);
+        if (currentCounter != null) {
+            counter = currentCounter;
+        }
+    }
+    return counter.getAndIncrement();
+}
+
+public void close() {}
+</code></pre><p>}</p>
+</li>
 </ol>
-<p>shutDown方法：</p>
-<pre><code>    /**
- * Initiates an orderly shutdown in which previously submitted
- * tasks are executed, but no new tasks will be accepted.
- * Invocation has no additional effect if already shut down.
- *
- * &lt;p&gt;This method does not wait for previously submitted tasks to
- * complete execution.  Use {@link #awaitTermination awaitTermination}
- * to do that.
- *
- * @throws SecurityException {@inheritDoc}
- */
-public void shutdown() {
-    final ReentrantLock mainLock = this.mainLock;
-    mainLock.lock();
-    try {
-        checkShutdownAccess();
-        advanceRunState(SHUTDOWN);
-        interruptIdleWorkers();
-        onShutdown(); // hook for ScheduledThreadPoolExecutor
-    } finally {
-        mainLock.unlock();
-    }
-    tryTerminate();
-}
 
-   /**
- * Transitions to TERMINATED state if either (SHUTDOWN and pool
- * and queue empty) or (STOP and pool empty).  If otherwise
- * eligible to terminate but workerCount is nonzero, interrupts an
- * idle worker to ensure that shutdown signals propagate. This
- * method must be called following any action that might make
- * termination possible -- reducing worker count or removing tasks
- * from the queue during shutdown. The method is non-private to
- * allow access from ScheduledThreadPoolExecutor.
- */
-final void tryTerminate() {
-    for (;;) {
-        int c = ctl.get();
-        if (isRunning(c) ||
-            runStateAtLeast(c, TIDYING) ||
-            (runStateOf(c) == SHUTDOWN &amp;&amp; ! workQueue.isEmpty()))
-            return;
-        if (workerCountOf(c) != 0) { // Eligible to terminate
-            interruptIdleWorkers(ONLY_ONE);
-            return;
-        }
-
-        final ReentrantLock mainLock = this.mainLock;
-        mainLock.lock();
-        try {
-            if (ctl.compareAndSet(c, ctlOf(TIDYING, 0))) {
-                try {
-                    terminated();
-                } finally {
-                    ctl.set(ctlOf(TERMINATED, 0));
-                    termination.signalAll();
-                }
-                return;
-            }
-        } finally {
-            mainLock.unlock();
-        }
-        // else retry on failed CAS
-    }
-}
-</code></pre><p>ShutDownNow方法：</p>
-<pre><code>    /**
- * Attempts to stop all actively executing tasks, halts the
- * processing of waiting tasks, and returns a list of the tasks
- * that were awaiting execution. These tasks are drained (removed)
- * from the task queue upon return from this method.
- *
- * &lt;p&gt;This method does not wait for actively executing tasks to
- * terminate.  Use {@link #awaitTermination awaitTermination} to
- * do that.
- *
- * &lt;p&gt;There are no guarantees beyond best-effort attempts to stop
- * processing actively executing tasks.  This implementation
- * cancels tasks via {@link Thread#interrupt}, so any task that
- * fails to respond to interrupts may never terminate.
- *
- * @throws SecurityException {@inheritDoc}
- */
-public List&lt;Runnable&gt; shutdownNow() {
-    List&lt;Runnable&gt; tasks;
-    final ReentrantLock mainLock = this.mainLock;
-    mainLock.lock();
-    try {
-        checkShutdownAccess();
-        advanceRunState(STOP);
-        interruptWorkers();
-        tasks = drainQueue();
-    } finally {
-        mainLock.unlock();
-    }
-    tryTerminate();
-    return tasks;
-}    
-</code></pre>
       
     </div>
 
@@ -523,7 +509,9 @@ public List&lt;Runnable&gt; shutdownNow() {
       
         <div class="post-tags">
           
-            <a href="/tags/Java并发编程/" rel="tag"># Java并发编程</a>
+            <a href="/tags/Kafka/" rel="tag"># Kafka</a>
+          
+            <a href="/tags/消息队列/" rel="tag"># 消息队列</a>
           
         </div>
       
@@ -536,8 +524,8 @@ public List&lt;Runnable&gt; shutdownNow() {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/26/mybatis多数据源切换/" rel="next" title="mybatis多数据源切换">
-                <i class="fa fa-chevron-left"></i> mybatis多数据源切换
+              <a href="/2018/03/26/redis缓存更新策略/" rel="next" title="redis缓存更新策略">
+                <i class="fa fa-chevron-left"></i> redis缓存更新策略
               </a>
             
           </div>
@@ -546,8 +534,8 @@ public List&lt;Runnable&gt; shutdownNow() {
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/06/01/线程池awiatTermination/" rel="prev" title="线程池awaitTermination">
-                线程池awaitTermination <i class="fa fa-chevron-right"></i>
+              <a href="/2018/04/03/自旋锁以及不可重入时死锁问题/" rel="prev" title="自旋锁以及不可重入时死锁问题">
+                自旋锁以及不可重入时死锁问题 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
