@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.2.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.2.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="转载：https://www.aliyun.com/jiaocheng/799354.html 摘要：1、前言阅读优秀的开源框架是程序员进步的一种捷径。希望自己能坚持下去。有个好头也有个好的结尾。这部分先讲讲dubbo最核心的设计思想。微内核插件式开发。这种思想贯穿了他的整个项目。在讲微内核之前,可能先要讲讲java的SPI。其实dubbo就是在SPI设计思想基础上进行了升级。2、什么是SPISP">
+<meta name="keywords" content="Dubbo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SPI微内核设计（转载）">
+<meta property="og:url" content="http://yoursite.com/2018/05/04/SPI微内核设计（转载）/index.html">
+<meta property="og:site_name" content="Bojun Ji&#39;s notes">
+<meta property="og:description" content="转载：https://www.aliyun.com/jiaocheng/799354.html 摘要：1、前言阅读优秀的开源框架是程序员进步的一种捷径。希望自己能坚持下去。有个好头也有个好的结尾。这部分先讲讲dubbo最核心的设计思想。微内核插件式开发。这种思想贯穿了他的整个项目。在讲微内核之前,可能先要讲讲java的SPI。其实dubbo就是在SPI设计思想基础上进行了升级。2、什么是SPISP">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-10-04T08:25:14.678Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SPI微内核设计（转载）">
+<meta name="twitter:description" content="转载：https://www.aliyun.com/jiaocheng/799354.html 摘要：1、前言阅读优秀的开源框架是程序员进步的一种捷径。希望自己能坚持下去。有个好头也有个好的结尾。这部分先讲讲dubbo最核心的设计思想。微内核插件式开发。这种思想贯穿了他的整个项目。在讲微内核之前,可能先要讲讲java的SPI。其实dubbo就是在SPI设计思想基础上进行了升级。2、什么是SPISP">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/04/SPI微内核设计（转载）/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>SPI微内核设计（转载） | Bojun Ji's notes</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Bojun Ji's notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">仅做个人笔记用途！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/04/SPI微内核设计（转载）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bojun Ji's notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SPI微内核设计（转载）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-05-04 16:23:24" itemprop="dateCreated datePublished" datetime="2018-05-04T16:23:24+08:00">2018-05-04</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-10-04 16:25:14" itemprop="dateModified" datetime="2018-10-04T16:25:14+08:00">2018-10-04</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Dubbo/" itemprop="url" rel="index"><span itemprop="name">Dubbo</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>转载：<br><a href="https://www.aliyun.com/jiaocheng/799354.html" target="_blank" rel="noopener">https://www.aliyun.com/jiaocheng/799354.html</a></p>
+<p>摘要：1、前言阅读优秀的开源框架是程序员进步的一种捷径。希望自己能坚持下去。有个好头也有个好的结尾。这部分先讲讲dubbo最核心的设计思想。微内核插件式开发。这种思想贯穿了他的整个项目。在讲微内核之前,可能先要讲讲java的SPI。其实dubbo就是在SPI设计思想基础上进行了升级。2、什么是SPISPI全称ServiceProviderInterface。字面上理解是面向接口提供服务。他很好的诠释了面向接口编程,以及OCP原则等。大家都知道,我们在模块化编程的时候,往往模块之间是</p>
+<p>1、前言<br>阅读优秀的开源框架是程序员进步的一种捷径。希望自己能坚持下去。有个好头也有个好的结尾。这部分先讲讲dubbo最核心的设计思想。微内核插件式开发。这种思想贯穿了他的整个项目。在讲微内核之前,可能先要讲讲java的SPI。其实dubbo就是在SPI设计思想基础上进行了升级。</p>
+<p>2、什么是SPI<br>SPI全称Service Provider Interface。字面上理解是面向接口提供服务。他很好的诠释了面向接口编程,以及OCP原则等。大家都知道,我们在模块化编程的时候,往往模块之间是基于接口编程的。例如A模块需要使用一种服务,但具体实现交由第三方实现。那么A会定义出一个接口让B去实现,但是A在实例化这个接口的实现时,往往需要硬编码B的一种实现。这就会导致B如果换了实现方式,又或者A想使用C的实现方式,那么需要修改A的实例化代码去支持实现的修改切换。在OCP原则里,这种修改是需要避免的。所以我们需要一种实现发现机制。在实例化时不应该硬编码一种实现,而是为接口提供一种实现发现机制,然后把实例化这部分功能移到A模块之外。这种思想跟IOC很像。我们在用Spring的时候,就是把对象的装配交给了Spring处理,这样层于层之间才正真达到了面向接口编程。</p>
+<p>3、SPI实现思想<br>假如A模块设计定义了一个接口。当B实现了这个接口之后,需要在B的jar包的META-INF/services/目录里添加一个文件,这个文件名字就是A定义的这个接口的全路径名,内容就是B实现接口的类的全路径名。此时,如果A需要使用B的实现,引入B的jar包。然后A可以使用java.util.ServiceLoader去发现这个实现,并实例化后返回给A。这样A在使用这个实现时,只是用定义好的接口引用了该实现,不用去硬编码这个实现。如果有一天需要替换B的实现,我们只要引入别的第三方jar,根本不用修改A的代码。</p>
+<p>4、看例子说话<br>例如A模块定义了一个接口,如下:</p>
+<p>public interface DemoApi {<br>String sayHello(String name);<br>}<br>然后B实现这个接口,如下:</p>
+<p>public class DemoApiImpl1 implements DemoApi {<br>public String sayHello(String name) {<br>return name + “你好,我是DemoApiImpl1实现”;<br>}<br>}<br>假如我们不用SPI设计思想去设计程序,那么我在A模块中要需要下面这样去使用DemoApi接口,这个问题就来了,我在设计A模块的时候,需要去依赖B模块,而且哪天我想替换B模块的实现,我还得动A模块的代码,重新new一个别的实现。其实A模块只需要使用DemoApi接口的服务,至于这个接口的具体实现根本不需要关心,更不需要事先依赖某种实现。</p>
+<p>public static void main(String args[]) {<br>DemoApi demoApi = new DemoApiImpl1();<br>demoApi.sayHello(“xuanner”);<br>}<br>那么,我们来改进一下,使用SPI来编码使用DemoApi接口的服务,如下:</p>
+<p>public static void main(String args[]) {<br>ServiceLoader serviceLoader = ServiceLoader.load(DemoApi.class);<br>Iterator iterator = serviceLoader.iterator();<br>System.out.println(“可以遍历多种可能存在的实现”);<br>while (iterator.hasNext()) {<br>DemoApi demoApi = iterator.next();<br>demoApi.sayHello(“xuanner”)<br>}<br>}<br>当然,B模块在实现之后需要在他的JAR包的META-INF/services/目录下放一个配置文件,看如下图:</p>
+<p>Dubbo源码分析－微内核插件式开发（SPI介绍）_Java</p>
+<p>里面的内容是实现类的全路径,如下:</p>
+<p>com.xuan.spidemo.impl1.DemoApiImpl1<br>当A模块需要B的实现的时候,只要进入B的JAR,ServiceLoader就会在JAR下找到对应接口的实现,然后实例化返回提供给A使用,如果有一天我们需要替换用C去实现,那么只要C实现代码后,同样在他的JAR下放上面的配置文件即可。</p>
+<p>5、举例现有的优秀实现<br>其中java.sql.Driver的实现就就是基于使用了SPI。还有commons-logging日志系统。也是有基于SPI实现的,我只简单的摘录了几个相关的片段,只不过他好像不是使用了ServiceLoader类去寻找实现,而是自己实现加载文件的。</p>
+<p>protected static final String SERVICE_ID =<br>“META-INF/services/org.apache.commons.logging.LogFactory”;<br>if (factory == null) {<br>if (isDiagnosticsEnabled()) {<br>logDiagnostic(“[LOOKUP] Looking for a resource file of name [“ + SERVICE_ID +<br>“] to define the LogFactory subclass to use…”);<br>}<br>try {<br>final InputStream is = getResourceAsStream(contextClassLoader, SERVICE_ID);<br>if( is != null ) {<br>// This code is needed by EBCDIC and other strange systems.<br>// It’s a fix for bugs reported in xerces<br>BufferedReader rd;<br>try {<br>rd = new BufferedReader(new InputStreamReader(is, “UTF-8”));<br>} catch (java.io.UnsupportedEncodingException e) {<br>rd = new BufferedReader(new InputStreamReader(is));<br>} </p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Dubbo/" rel="tag"># Dubbo</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/02/redis持久化方式/" rel="next" title="redis持久化方式">
+                <i class="fa fa-chevron-left"></i> redis持久化方式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/05/nio主要类和用法/" rel="prev" title="nio主要类和用法">
+                nio主要类和用法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">108</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">42</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.2.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="Total Visitors">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="Total Views">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.2.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.2.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.2.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
