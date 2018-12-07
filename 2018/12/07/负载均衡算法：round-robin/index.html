@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.2.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.2.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="round robin是一种轮询无状态调度算法，一个一个分配直到机器最大数目再以此循环，dubbo自带的四种负载均衡策略中有相关实现。新版中代码已修改，不使用之前权重相同以及权重不同2种情况分开处理的方式（最后都是用currentSequence值取模机器数）。  /**  * Round robin load balance.  */ public class RoundRobinLoadBa">
+<meta name="keywords" content="Dubbo,loac balance">
+<meta property="og:type" content="article">
+<meta property="og:title" content="负载均衡算法：round robin">
+<meta property="og:url" content="http://yoursite.com/2018/12/07/负载均衡算法：round-robin/index.html">
+<meta property="og:site_name" content="Bojun Ji&#39;s notes">
+<meta property="og:description" content="round robin是一种轮询无状态调度算法，一个一个分配直到机器最大数目再以此循环，dubbo自带的四种负载均衡策略中有相关实现。新版中代码已修改，不使用之前权重相同以及权重不同2种情况分开处理的方式（最后都是用currentSequence值取模机器数）。  /**  * Round robin load balance.  */ public class RoundRobinLoadBa">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-12-07T15:58:50.804Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="负载均衡算法：round robin">
+<meta name="twitter:description" content="round robin是一种轮询无状态调度算法，一个一个分配直到机器最大数目再以此循环，dubbo自带的四种负载均衡策略中有相关实现。新版中代码已修改，不使用之前权重相同以及权重不同2种情况分开处理的方式（最后都是用currentSequence值取模机器数）。  /**  * Round robin load balance.  */ public class RoundRobinLoadBa">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/12/07/负载均衡算法：round-robin/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>负载均衡算法：round robin | Bojun Ji's notes</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Bojun Ji's notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">仅做个人笔记用途！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/07/负载均衡算法：round-robin/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bojun Ji's notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">负载均衡算法：round robin
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-07 21:50:27 / Modified: 23:58:50" itemprop="dateCreated datePublished" datetime="2018-12-07T21:50:27+08:00">2018-12-07</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Dubbo/" itemprop="url" rel="index"><span itemprop="name">Dubbo</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ol>
+<li>round robin是一种轮询无状态调度算法，一个一个分配直到机器最大数目再以此循环，dubbo自带的四种负载均衡策略中有相关实现。新版中代码已修改，不使用之前权重相同以及权重不同2种情况分开处理的方式（最后都是用currentSequence值取模机器数）。</li>
+</ol>
+<pre><code>/**
+ * Round robin load balance.
+ */
+public class RoundRobinLoadBalance extends AbstractLoadBalance {
+    public static final String NAME = &quot;roundrobin&quot;;
+
+    private static int RECYCLE_PERIOD = 60000;
+
+    protected static class WeightedRoundRobin {
+        private int weight;
+        private AtomicLong current = new AtomicLong(0);
+        private long lastUpdate;
+        public int getWeight() {
+            return weight;
+        }
+        public void setWeight(int weight) {
+            this.weight = weight;
+            current.set(0);
+        }
+        public long increaseCurrent() {
+            return current.addAndGet(weight);
+        }
+        public void sel(int total) {
+            current.addAndGet(-1 * total);
+        }
+        public long getLastUpdate() {
+            return lastUpdate;
+        }
+        public void setLastUpdate(long lastUpdate) {
+            this.lastUpdate = lastUpdate;
+        }
+    }
+
+    private ConcurrentMap&lt;String, ConcurrentMap&lt;String, WeightedRoundRobin&gt;&gt; methodWeightMap = new ConcurrentHashMap&lt;String, ConcurrentMap&lt;String, WeightedRoundRobin&gt;&gt;();
+    private AtomicBoolean updateLock = new AtomicBoolean();
+
+    /**
+     * get invoker addr list cached for specified invocation
+     * &lt;p&gt;
+     * &lt;b&gt;for unit test only&lt;/b&gt;
+     * 
+     * @param invokers
+     * @param invocation
+     * @return
+     */
+    protected &lt;T&gt; Collection&lt;String&gt; getInvokerAddrList(List&lt;Invoker&lt;T&gt;&gt; invokers, Invocation invocation) {
+        String key = invokers.get(0).getUrl().getServiceKey() + &quot;.&quot; + invocation.getMethodName();
+        Map&lt;String, WeightedRoundRobin&gt; map = methodWeightMap.get(key);
+        if (map != null) {
+            return map.keySet();
+        }
+        return null;
+    }
+
+    @Override
+    protected &lt;T&gt; Invoker&lt;T&gt; doSelect(List&lt;Invoker&lt;T&gt;&gt; invokers, URL url, Invocation invocation) {
+        String key = invokers.get(0).getUrl().getServiceKey() + &quot;.&quot; + invocation.getMethodName();
+        ConcurrentMap&lt;String, WeightedRoundRobin&gt; map = methodWeightMap.get(key);
+        if (map == null) {
+            methodWeightMap.putIfAbsent(key, new ConcurrentHashMap&lt;String, WeightedRoundRobin&gt;());
+            map = methodWeightMap.get(key);
+        }
+        int totalWeight = 0;
+        long maxCurrent = Long.MIN_VALUE;
+        long now = System.currentTimeMillis();
+        Invoker&lt;T&gt; selectedInvoker = null;
+        WeightedRoundRobin selectedWRR = null;
+        for (Invoker&lt;T&gt; invoker : invokers) {
+            String identifyString = invoker.getUrl().toIdentityString();
+            WeightedRoundRobin weightedRoundRobin = map.get(identifyString);
+            int weight = getWeight(invoker, invocation);
+            if (weight &lt; 0) {
+                weight = 0;
+            }
+            if (weightedRoundRobin == null) {
+                weightedRoundRobin = new WeightedRoundRobin();
+                weightedRoundRobin.setWeight(weight);
+                map.putIfAbsent(identifyString, weightedRoundRobin);
+                weightedRoundRobin = map.get(identifyString);
+            }
+            if (weight != weightedRoundRobin.getWeight()) {
+                //weight changed
+                weightedRoundRobin.setWeight(weight);
+            }
+            long cur = weightedRoundRobin.increaseCurrent();
+            weightedRoundRobin.setLastUpdate(now);
+            if (cur &gt; maxCurrent) {
+                maxCurrent = cur;
+                selectedInvoker = invoker;
+                selectedWRR = weightedRoundRobin;
+            }
+            totalWeight += weight;
+        }
+        if (!updateLock.get() &amp;&amp; invokers.size() != map.size()) {
+            if (updateLock.compareAndSet(false, true)) {
+                try {
+                    // copy -&gt; modify -&gt; update reference
+                    ConcurrentMap&lt;String, WeightedRoundRobin&gt; newMap = new ConcurrentHashMap&lt;String, WeightedRoundRobin&gt;();
+                    newMap.putAll(map);
+                    Iterator&lt;Entry&lt;String, WeightedRoundRobin&gt;&gt; it = newMap.entrySet().iterator();
+                    while (it.hasNext()) {
+                        Entry&lt;String, WeightedRoundRobin&gt; item = it.next();
+                        if (now - item.getValue().getLastUpdate() &gt; RECYCLE_PERIOD) {
+                            it.remove();
+                        }
+                    }
+                    methodWeightMap.put(key, newMap);
+                } finally {
+                    updateLock.set(false);
+                }
+            }
+        }
+        if (selectedInvoker != null) {
+            selectedWRR.sel(totalWeight);
+            return selectedInvoker;
+        }
+        // should not happen here
+        return invokers.get(0);
+    }
+
+}
+</code></pre><ol start="2">
+<li>主要内容在doSelect方法中，这是一个抽象方法，各个负载均衡子类具体实现。</li>
+<li><p>key是服务名与调用接口方法名组合</p>
+<pre><code>String key = invokers.get(0).getUrl().getServiceKey() + &quot;.&quot; + invocation.getMethodName();
+</code></pre></li>
+<li><p>使用key从方法权重map中获取这个方法对应的map。</p>
+</li>
+<li><p>然后遍历所有机器，使用url当key，从之前获取的map中再取出如下权重对象。包含权重，当前调用次数，上次更新时间。</p>
+<pre><code>    protected static class WeightedRoundRobin {
+    private int weight;
+    private AtomicLong current = new AtomicLong(0);
+    private long lastUpdate;
+    public int getWeight() {
+        return weight;
+    }
+    public void setWeight(int weight) {
+        this.weight = weight;
+        current.set(0);
+    }
+    public long increaseCurrent() {
+        return current.addAndGet(weight);
+    }
+    public void sel(int total) {
+        current.addAndGet(-1 * total);
+    }
+    public long getLastUpdate() {
+        return lastUpdate;
+    }
+    public void setLastUpdate(long lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+}    
+</code></pre></li>
+<li><p>如果没对象则新建对象存入map，并且再次获取权重以防权重配置有改变。</p>
+<pre><code>    if (weightedRoundRobin == null) {
+    weightedRoundRobin = new WeightedRoundRobin();
+    weightedRoundRobin.setWeight(weight);
+    map.putIfAbsent(identifyString, weightedRoundRobin);
+    weightedRoundRobin = map.get(identifyString);
+}
+if (weight != weightedRoundRobin.getWeight()) {
+    //weight changed
+    weightedRoundRobin.setWeight(weight);
+}
+</code></pre></li>
+<li><p>每一次遍历到current自增（并不是选中才自增），如果是当前最大的，则替换选择的机器为这个最大的，最后累加权重。简单来说就是选cur最大的。</p>
+<pre><code>    long cur = weightedRoundRobin.increaseCurrent();
+weightedRoundRobin.setLastUpdate(now);
+if (cur &gt; maxCurrent) {
+    maxCurrent = cur;
+    selectedInvoker = invoker;
+    selectedWRR = weightedRoundRobin;
+}
+totalWeight += weight;
+</code></pre></li>
+<li><p>updateLock是一个原子bool型变量，代表更新锁，true是锁住，false是不锁。此处有一个recycle period，60S。这里会比较当前时间和上次更新时间差，如果大于60S，则会从MAP里移除掉，做这些更新时，将updateLock设为true。</p>
+<pre><code>    if (!updateLock.get() &amp;&amp; invokers.size() != map.size()) {
+    if (updateLock.compareAndSet(false, true)) {
+        try {
+            // copy -&gt; modify -&gt; update reference
+            ConcurrentMap&lt;String, WeightedRoundRobin&gt; newMap = new ConcurrentHashMap&lt;String, WeightedRoundRobin&gt;();
+            newMap.putAll(map);
+            Iterator&lt;Entry&lt;String, WeightedRoundRobin&gt;&gt; it = newMap.entrySet().iterator();
+            while (it.hasNext()) {
+                Entry&lt;String, WeightedRoundRobin&gt; item = it.next();
+                if (now - item.getValue().getLastUpdate() &gt; RECYCLE_PERIOD) {
+                    it.remove();
+                }
+            }
+            methodWeightMap.put(key, newMap);
+        } finally {
+            updateLock.set(false);
+        }
+    }
+}    
+</code></pre></li>
+<li><p>获取前面选到的机器，sel方法代表选中，就是让cur减去总权重。假设2台机器，权重分别为1，2，总权重3，第一次选取时cur都为1，选了第一台机器，选取后第一台的cur变为了1-3=-2。第二次调用后，第一台的cur是-1，第二台的是2，选中第二台，选中后cur变为2-3=-1，两台机器又变成均等，下次会选中第一台，达到轮询效果。</p>
+<pre><code>    if (selectedInvoker != null) {
+    selectedWRR.sel(totalWeight);
+    return selectedInvoker;
+}
+
+        public void sel(int total) {
+    current.addAndGet(-1 * total);
+}    
+</code></pre></li>
+<li><p>托底代码取第一个机器，正常情况并不可能走到这里。</p>
+<pre><code>    // should not happen here
+return invokers.get(0);  
+</code></pre></li>
+<li><p>RR感觉针对的是集群中服务器性能相同的情况，假设有2台机器，则会按照1，2，1，2的顺序派发请求，假设2服务器性能较弱，处理缓慢，但2台机器获得请求量相同，2服务器则会挤压请求，处理缓慢。  </p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Dubbo/" rel="tag"># Dubbo</a>
+          
+            <a href="/tags/loac-balance/" rel="tag"># loac balance</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/28/Springboot中替换HTTP请求序列化器为fastjson注意点/" rel="next" title="Springboot中替换HTTP请求序列化器为fastjson注意点">
+                <i class="fa fa-chevron-left"></i> Springboot中替换HTTP请求序列化器为fastjson注意点
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">112</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.2.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="Total Visitors">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="Total Views">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.2.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.2.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.2.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
