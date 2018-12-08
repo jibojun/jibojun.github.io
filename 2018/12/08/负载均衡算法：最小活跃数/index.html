@@ -102,20 +102,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Bojun Ji&#39;s notes">
-<meta property="og:url" content="http://yoursite.com/tags/Servlet/index.html">
+  <meta name="description" content="活跃数指的是服务器处理请求时间，最小活跃数策略目的就是选取最小活跃数的机器，也就是处理快的机器，分配给这个机器更多的请求，达到负载均衡的效果。 首先需要获取所有最小活跃数的机器，可能有多台相同的。同时需要判断是否每台机器权重一样，因为多台活跃数相同时，需要根据权重选择。     // Filter out all the least active invokers for (int i = 0;">
+<meta name="keywords" content="Dubbo,loac balance">
+<meta property="og:type" content="article">
+<meta property="og:title" content="负载均衡算法：最小活跃数">
+<meta property="og:url" content="http://yoursite.com/2018/12/08/负载均衡算法：最小活跃数/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
+<meta property="og:description" content="活跃数指的是服务器处理请求时间，最小活跃数策略目的就是选取最小活跃数的机器，也就是处理快的机器，分配给这个机器更多的请求，达到负载均衡的效果。 首先需要获取所有最小活跃数的机器，可能有多台相同的。同时需要判断是否每台机器权重一样，因为多台活跃数相同时，需要根据权重选择。     // Filter out all the least active invokers for (int i = 0;">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-12-08T16:21:37.903Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bojun Ji&#39;s notes">
+<meta name="twitter:title" content="负载均衡算法：最小活跃数">
+<meta name="twitter:description" content="活跃数指的是服务器处理请求时间，最小活跃数策略目的就是选取最小活跃数的机器，也就是处理快的机器，分配给这个机器更多的请求，达到负载均衡的效果。 首先需要获取所有最小活跃数的机器，可能有多台相同的。同时需要判断是否每台机器权重一样，因为多台活跃数相同时，需要根据权重选择。     // Filter out all the least active invokers for (int i = 0;">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/Servlet/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/12/08/负载均衡算法：最小活跃数/"/>
 
 
 
@@ -125,7 +130,7 @@
   };
 </script>
 
-  <title>Tag: Servlet | Bojun Ji's notes</title>
+  <title>负载均衡算法：最小活跃数 | Bojun Ji's notes</title>
   
 
 
@@ -172,7 +177,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -253,75 +258,283 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Servlet<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/08/负载均衡算法：最小活跃数/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bojun Ji's notes">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/06/11/filter与interceptor/" itemprop="url">
-              
-                <span itemprop="name">filter，servlet,interceptor执行顺序</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">负载均衡算法：最小活跃数
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-06-11T00:09:47+08:00"
-              content="2018-06-11" >
-          06-11
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
 
-    </header>
-  </article>
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-08 23:08:44" itemprop="dateCreated datePublished" datetime="2018-12-08T23:08:44+08:00">2018-12-08</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-12-09 00:21:37" itemprop="dateModified" datetime="2018-12-09T00:21:37+08:00">2018-12-09</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Dubbo/" itemprop="url" rel="index"><span itemprop="name">Dubbo</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ol>
+<li>活跃数指的是服务器处理请求时间，最小活跃数策略目的就是选取最小活跃数的机器，也就是处理快的机器，分配给这个机器更多的请求，达到负载均衡的效果。</li>
+<li><p>首先需要获取所有最小活跃数的机器，可能有多台相同的。同时需要判断是否每台机器权重一样，因为多台活跃数相同时，需要根据权重选择。</p>
+<pre><code>    // Filter out all the least active invokers
+for (int i = 0; i &lt; length; i++) {
+    Invoker&lt;T&gt; invoker = invokers.get(i);
+    // Get the active number of the invoke
+    int active = RpcStatus.getStatus(invoker.getUrl(), invocation.getMethodName()).getActive();
+    // Get the weight of the invoke configuration. The default value is 100.
+    int afterWarmup = getWeight(invoker, invocation);
+    // If it is the first invoker or the active number of the invoker is less than the current least active number
+    if (leastActive == -1 || active &lt; leastActive) {
+        // Reset the active number of the current invoker to the least active number
+        leastActive = active;
+        // Reset the number of least active invokers
+        leastCount = 1;
+        // Put the first least active invoker first in leastIndexs
+        leastIndexes[0] = i;
+        // Reset totalWeight
+        totalWeight = afterWarmup;
+        // Record the weight the first least active invoker
+        firstWeight = afterWarmup;
+        // Each invoke has the same weight (only one invoker here)
+        sameWeight = true;
+        // If current invoker&apos;s active value equals with leaseActive, then accumulating.
+    } else if (active == leastActive) {
+        // Record the index of the least active invoker in leastIndexs order
+        leastIndexes[leastCount++] = i;
+        // Accumulate the total weight of the least active invoker
+        totalWeight += afterWarmup;
+        // If every invoker has the same weight?
+        if (sameWeight &amp;&amp; i &gt; 0
+                &amp;&amp; afterWarmup != firstWeight) {
+            sameWeight = false;
+        }
+    }
+}
+</code></pre></li>
+<li><p>如果只有一台最小活跃数的，直接选择这个</p>
+<pre><code>    // Choose an invoker from all the least active invokers
+if (leastCount == 1) {
+    // If we got exactly one invoker having the least active value, return this invoker directly.
+    return invokers.get(leastIndexes[0]);
+}
+</code></pre></li>
+<li><p>如果有多台机器最小活跃数相同，且权重不同，仍然用总权重取随机数法，挑第一个权重大于这个随机数的。</p>
+<pre><code>    if (!sameWeight &amp;&amp; totalWeight &gt; 0) {
+    // If (not every invoker has the same weight &amp; at least one invoker&apos;s weight&gt;0), select randomly based on 
+    // totalWeight.
+    int offsetWeight = ThreadLocalRandom.current().nextInt(totalWeight) + 1;
+    // Return a invoker based on the random value.
+    for (int i = 0; i &lt; leastCount; i++) {
+        int leastIndex = leastIndexes[i];
+        offsetWeight -= getWeight(invokers.get(leastIndex), invocation);
+        if (offsetWeight &lt;= 0) {
+            return invokers.get(leastIndex);
+        }
+    }
+}   
+</code></pre></li>
+<li><p>如果有多台最小活跃数相同，且权重都相同的，直接随机选取。</p>
+<pre><code>    // If all invokers have the same weight value or totalWeight=0, return evenly.
+return invokers.get(leastIndexes[ThreadLocalRandom.current().nextInt(leastCount)]); 
+</code></pre></li>
+<li><p>这种策略适合服务器硬件，性能有差距时，快的服务器将收到更多请求，慢的相对少，以此达到均衡。    </p>
+</li>
+</ol>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Dubbo/" rel="tag"># Dubbo</a>
+          
+            <a href="/tags/loac-balance/" rel="tag"># loac balance</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/08/负载均衡算法：random/" rel="next" title="负载均衡算法：random">
+                <i class="fa fa-chevron-left"></i> 负载均衡算法：random
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -676,6 +889,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
 
   
 
