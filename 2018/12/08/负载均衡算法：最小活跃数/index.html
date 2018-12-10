@@ -102,18 +102,18 @@
 
 
 
-  <meta name="description" content="活跃数指的是服务器处理请求时间，最小活跃数策略目的就是选取最小活跃数的机器，也就是处理快的机器，分配给这个机器更多的请求，达到负载均衡的效果。采取的方法是有一个active filter处理调用，每次调用开始+1，完成-1，活跃数就是一个处理差值，快的机器则会保持一个较小的值，慢的机器因为会挤压，处理的慢，活跃数较大。  ActiveLimitFilter上下文中配置filter(也可@serv">
+  <meta name="description" content="活跃数指的是服务器处理请求时间，最小活跃数策略目的就是选取最小活跃数的机器，也就是处理快的机器，分配给这个机器更多的请求，达到负载均衡的效果。采取的方法是有一个active filter处理调用，每次调用开始+1，完成-1，活跃数就是一个处理差值，快的机器则会保持一个较小的值，慢的机器因为会挤压，处理的慢，活跃数较大。  ActiveLimitFilter上下文中配置filter： &amp;lt;du">
 <meta name="keywords" content="Dubbo,loac balance">
 <meta property="og:type" content="article">
 <meta property="og:title" content="负载均衡算法：最小活跃数">
 <meta property="og:url" content="http://yoursite.com/2018/12/08/负载均衡算法：最小活跃数/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="活跃数指的是服务器处理请求时间，最小活跃数策略目的就是选取最小活跃数的机器，也就是处理快的机器，分配给这个机器更多的请求，达到负载均衡的效果。采取的方法是有一个active filter处理调用，每次调用开始+1，完成-1，活跃数就是一个处理差值，快的机器则会保持一个较小的值，慢的机器因为会挤压，处理的慢，活跃数较大。  ActiveLimitFilter上下文中配置filter(也可@serv">
+<meta property="og:description" content="活跃数指的是服务器处理请求时间，最小活跃数策略目的就是选取最小活跃数的机器，也就是处理快的机器，分配给这个机器更多的请求，达到负载均衡的效果。采取的方法是有一个active filter处理调用，每次调用开始+1，完成-1，活跃数就是一个处理差值，快的机器则会保持一个较小的值，慢的机器因为会挤压，处理的慢，活跃数较大。  ActiveLimitFilter上下文中配置filter： &amp;lt;du">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-12-10T15:59:24.996Z">
+<meta property="og:updated_time" content="2018-12-10T16:00:48.022Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="负载均衡算法：最小活跃数">
-<meta name="twitter:description" content="活跃数指的是服务器处理请求时间，最小活跃数策略目的就是选取最小活跃数的机器，也就是处理快的机器，分配给这个机器更多的请求，达到负载均衡的效果。采取的方法是有一个active filter处理调用，每次调用开始+1，完成-1，活跃数就是一个处理差值，快的机器则会保持一个较小的值，慢的机器因为会挤压，处理的慢，活跃数较大。  ActiveLimitFilter上下文中配置filter(也可@serv">
+<meta name="twitter:description" content="活跃数指的是服务器处理请求时间，最小活跃数策略目的就是选取最小活跃数的机器，也就是处理快的机器，分配给这个机器更多的请求，达到负载均衡的效果。采取的方法是有一个active filter处理调用，每次调用开始+1，完成-1，活跃数就是一个处理差值，快的机器则会保持一个较小的值，慢的机器因为会挤压，处理的慢，活跃数较大。  ActiveLimitFilter上下文中配置filter： &amp;lt;du">
 
 
 
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-12-10 23:59:24" itemprop="dateModified" datetime="2018-12-10T23:59:24+08:00">2018-12-10</time>
+                <time title="Modified: 2018-12-11 00:00:48" itemprop="dateModified" datetime="2018-12-11T00:00:48+08:00">2018-12-11</time>
               
             
           </span>
@@ -399,8 +399,10 @@
         <ol>
 <li>活跃数指的是服务器处理请求时间，最小活跃数策略目的就是选取最小活跃数的机器，也就是处理快的机器，分配给这个机器更多的请求，达到负载均衡的效果。采取的方法是有一个active filter处理调用，每次调用开始+1，完成-1，活跃数就是一个处理差值，快的机器则会保持一个较小的值，慢的机器因为会挤压，处理的慢，活跃数较大。</li>
 </ol>
-<p>ActiveLimitFilter上下文中配置filter(也可@service中配置)：</p>
+<p>ActiveLimitFilter上下文中配置filter：</p>
 <pre><code>&lt;dubbo:service interface=&quot;test.TestService&quot; protocol=&quot;in,out&quot; ref = &quot;testService&quot; loadbalance=&quot;leastactive&quot; filter=&quot;activelimit&quot;/&gt;
+</code></pre><p>注解中配置：</p>
+<pre><code>@Service(timeout = 1500,retries = 3, loadbalance = &quot;leastActive&quot;, filter=&quot;activeLimit&quot;)
 </code></pre><p>filter中加减：</p>
 <pre><code>    try {
     long begin = System.currentTimeMillis();
