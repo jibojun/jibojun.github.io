@@ -102,18 +102,18 @@
 
 
 
-  <meta name="description" content="活跃数指的是服务器处理请求时间，最小活跃数策略目的就是选取最小活跃数的机器，也就是处理快的机器，分配给这个机器更多的请求，达到负载均衡的效果。 首先需要获取所有最小活跃数的机器，可能有多台相同的。同时需要判断是否每台机器权重一样，因为多台活跃数相同时，需要根据权重选择。     // Filter out all the least active invokers for (int i = 0;">
+  <meta name="description" content="活跃数指的是服务器处理请求时间，最小活跃数策略目的就是选取最小活跃数的机器，也就是处理快的机器，分配给这个机器更多的请求，达到负载均衡的效果。采取的方法是有一个active filter处理调用，每次调用开始+1，完成-1，活跃数就是一个处理差值，快的机器则会保持一个较小的值，慢的机器因为会挤压，处理的慢，活跃数较大。  ActiveLimitFilter上下文中配置filter(也可@serv">
 <meta name="keywords" content="Dubbo,loac balance">
 <meta property="og:type" content="article">
 <meta property="og:title" content="负载均衡算法：最小活跃数">
 <meta property="og:url" content="http://yoursite.com/2018/12/08/负载均衡算法：最小活跃数/index.html">
 <meta property="og:site_name" content="Bojun Ji&#39;s notes">
-<meta property="og:description" content="活跃数指的是服务器处理请求时间，最小活跃数策略目的就是选取最小活跃数的机器，也就是处理快的机器，分配给这个机器更多的请求，达到负载均衡的效果。 首先需要获取所有最小活跃数的机器，可能有多台相同的。同时需要判断是否每台机器权重一样，因为多台活跃数相同时，需要根据权重选择。     // Filter out all the least active invokers for (int i = 0;">
+<meta property="og:description" content="活跃数指的是服务器处理请求时间，最小活跃数策略目的就是选取最小活跃数的机器，也就是处理快的机器，分配给这个机器更多的请求，达到负载均衡的效果。采取的方法是有一个active filter处理调用，每次调用开始+1，完成-1，活跃数就是一个处理差值，快的机器则会保持一个较小的值，慢的机器因为会挤压，处理的慢，活跃数较大。  ActiveLimitFilter上下文中配置filter(也可@serv">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-12-08T16:21:37.903Z">
+<meta property="og:updated_time" content="2018-12-10T15:59:24.996Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="负载均衡算法：最小活跃数">
-<meta name="twitter:description" content="活跃数指的是服务器处理请求时间，最小活跃数策略目的就是选取最小活跃数的机器，也就是处理快的机器，分配给这个机器更多的请求，达到负载均衡的效果。 首先需要获取所有最小活跃数的机器，可能有多台相同的。同时需要判断是否每台机器权重一样，因为多台活跃数相同时，需要根据权重选择。     // Filter out all the least active invokers for (int i = 0;">
+<meta name="twitter:description" content="活跃数指的是服务器处理请求时间，最小活跃数策略目的就是选取最小活跃数的机器，也就是处理快的机器，分配给这个机器更多的请求，达到负载均衡的效果。采取的方法是有一个active filter处理调用，每次调用开始+1，完成-1，活跃数就是一个处理差值，快的机器则会保持一个较小的值，慢的机器因为会挤压，处理的慢，活跃数较大。  ActiveLimitFilter上下文中配置filter(也可@serv">
 
 
 
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-12-09 00:21:37" itemprop="dateModified" datetime="2018-12-09T00:21:37+08:00">2018-12-09</time>
+                <time title="Modified: 2018-12-10 23:59:24" itemprop="dateModified" datetime="2018-12-10T23:59:24+08:00">2018-12-10</time>
               
             
           </span>
@@ -397,7 +397,72 @@
 
       
         <ol>
-<li>活跃数指的是服务器处理请求时间，最小活跃数策略目的就是选取最小活跃数的机器，也就是处理快的机器，分配给这个机器更多的请求，达到负载均衡的效果。</li>
+<li>活跃数指的是服务器处理请求时间，最小活跃数策略目的就是选取最小活跃数的机器，也就是处理快的机器，分配给这个机器更多的请求，达到负载均衡的效果。采取的方法是有一个active filter处理调用，每次调用开始+1，完成-1，活跃数就是一个处理差值，快的机器则会保持一个较小的值，慢的机器因为会挤压，处理的慢，活跃数较大。</li>
+</ol>
+<p>ActiveLimitFilter上下文中配置filter(也可@service中配置)：</p>
+<pre><code>&lt;dubbo:service interface=&quot;test.TestService&quot; protocol=&quot;in,out&quot; ref = &quot;testService&quot; loadbalance=&quot;leastactive&quot; filter=&quot;activelimit&quot;/&gt;
+</code></pre><p>filter中加减：</p>
+<pre><code>    try {
+    long begin = System.currentTimeMillis();
+    RpcStatus.beginCount(url, methodName);
+    try {
+        Result result = invoker.invoke(invocation);
+        RpcStatus.endCount(url, methodName, System.currentTimeMillis() - begin, true);
+        return result;
+    } catch (RuntimeException t) {
+        RpcStatus.endCount(url, methodName, System.currentTimeMillis() - begin, false);
+        throw t;
+    }
+} finally {
+    if (max &gt; 0) {
+        synchronized (count) {
+            count.notify();
+        }
+    }
+}
+</code></pre><p>beginCount方法，活跃数+1：</p>
+<pre><code>    /**
+ * @param url
+ */
+public static void beginCount(URL url, String methodName) {
+    beginCount(getStatus(url));
+    beginCount(getStatus(url, methodName));
+}
+
+private static void beginCount(RpcStatus status) {
+    status.active.incrementAndGet();
+}
+</code></pre><p>endCount方法，活跃数-1：</p>
+<pre><code>    /**
+ * @param url
+ * @param elapsed
+ * @param succeeded
+ */
+public static void endCount(URL url, String methodName, long elapsed, boolean succeeded) {
+    endCount(getStatus(url), elapsed, succeeded);
+    endCount(getStatus(url, methodName), elapsed, succeeded);
+}
+
+private static void endCount(RpcStatus status, long elapsed, boolean succeeded) {
+    status.active.decrementAndGet();
+    status.total.incrementAndGet();
+    status.totalElapsed.addAndGet(elapsed);
+    if (status.maxElapsed.get() &lt; elapsed) {
+        status.maxElapsed.set(elapsed);
+    }
+    if (succeeded) {
+        if (status.succeededMaxElapsed.get() &lt; elapsed) {
+            status.succeededMaxElapsed.set(elapsed);
+        }
+    } else {
+        status.failed.incrementAndGet();
+        status.failedElapsed.addAndGet(elapsed);
+        if (status.failedMaxElapsed.get() &lt; elapsed) {
+            status.failedMaxElapsed.set(elapsed);
+        }
+    }
+}    
+</code></pre><ol start="2">
 <li><p>首先需要获取所有最小活跃数的机器，可能有多台相同的。同时需要判断是否每台机器权重一样，因为多台活跃数相同时，需要根据权重选择。</p>
 <pre><code>    // Filter out all the least active invokers
 for (int i = 0; i &lt; length; i++) {
